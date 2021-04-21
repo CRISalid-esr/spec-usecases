@@ -1,0 +1,324 @@
+<pre class='metadata'>
+Title: COAR Notify / Orchestrator use cases
+Shortname: orchestrator
+Level: 2
+Status: LS
+Editor: Patrick Hochstenbach, UGent, patrick.hochstenbach@ugent.be
+Markup Shorthands: markdown yes
+Abstract:
+
+</pre>
+
+<p>
+<class class="note">
+In this document all the COAR Notify examples are listed as main sections with a
+short description of the use-cases annotated with possible local implementation notes.
+</class>
+</p>
+
+<p>
+<class class="note">
+In each main section is divided in subsections to provide examples how a Mellon/Orchestrator setup
+might respond to incoming and outgoing notification messages.
+</class>
+</p>
+
+# Scenario 1 : Author requests review with possible endorsement (via overlay journal)
+
+From [COAR](https://notify.coar-repositories.org/scenarios/1/):
+<i>The corresponding author requests a review from an overlay journal for one of their papers, held in a repository. The overlay journal notifies the repository of any successful reviews and endorsements.</i>
+
+<class class="note">
+The *repository* is interpreted as the **Data Pod** in the examples below.
+</class>
+
+<img src="images/scenario-1.svg" width="80%">
+
+- The **Maintainer** starts a review process at a *Journal* website
+    - It is not specified how this process should be started
+    - It is assumed that the journal website knows or discovers the location of the Scholarly inbox of the maintainer
+- The **Journal** starts a review workflow and sends after a while an `Announce` AS2 notification to the (Scholarly) **Inbox**
+of the **Data Pod**
+    - The `Announce` contains as `object` a link to the published review
+    - The `Announce` contains as `object` a link to an artefact on the data pod
+    - It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the journal
+    - The scholarly inbox MAY be the main inbox of the data pod or a specialized inbox created for the orchestrator
+    - The data pod may MAY shape validation mechanisms in place and return HTTP 4** codes when an unknown
+    notification shape was submitted to the inbox
+- The **Journal** starts an endorsement workflow and sends an `Announce` AS2 notification to the (Scholarly) **Inbox**
+    - In the use cases below, it is assumed that the same assumptions can be made
+      for any `Announce` notification that is send by a Journal
+
+## Orchestrator reads the inbox of a data pod and updates an event log
+
+<img src="images/scenario-1-a.svg" width="80%">
+
+- The **Orchestrator** polls the (scholarly) **Inbox** of the **Data Pod**
+- The **Orchestrator** lists incoming notifications
+    - The orchestrator MAY filter the inbox list for resource shapes
+    - The orchestrator MAY ignore untrusted , invalid notifications
+    - The orchestrator MAY filter out notifications about resources that don't exist (anymore) in the data pod
+    - The orchestrator SHALL processes each notification only once
+    - The orchestrator MAY only have read permission to the inbox
+    - In a shared inbox scenario, multiple applications plus the maintainer MAY want to act on incoming notifications
+- The **Orchestrator** selected the notification it wants to process
+- The **Orchestrator** updates the **Artefact Lifecycle Event Log** with the notification
+    - The orchestrator MAY store a processed version of the `Announce` notification in the event log
+    - The stored notification `@id` MUST be unique in all event logs of the data pod
+    - The event update time SHALL be the time of writing the event log resource
+    - The artefact lifecycle event log SHALL be public readable
+
+Issue: What are the requirement on the shape of the event log.
+
+Issue: An orchestrator that is triggered by an update to the data pod artefacts by some other mechanism is left out of this discussion.
+
+## A client App reads the event log and updates the artefact
+
+<img src="images/scenario-1-b.svg" width="80%">
+
+- The **App** polls the **Artefact Lifecycle Event Log** of the **Data Pod**
+     - The app knows that the event log is a trusted append only resource for relevant notifications
+       that should be processed
+         - The app doesn't need to redo the work of the orchestrator to clean the data pod (scholarly) inbox
+     - The app MAY filter the event log for shapes
+     - The app MAY filter out self-referencing notifications
+         - This is for cases where any update to the data pod could trigger an event log update
+- The **App** list new events events not yet processed
+- The **App** discovers the `Announce` event
+- The **App** is configured by the maintainer to automatically update the artefact metadata with a review link
+     - The app MAY send a notification to the Scholarly inbox to update the orchestrator of this fact
+
+## A maintainer uses the dashboard to read the event log and updates the artefacts
+
+<img src="images/scenario-1-c.svg" width="80%">
+
+- The **Maintainer** opens the (Scholarly) **Dashboard** and list new events
+    - The dashboard knows that the event log is a trusted append only resource for relevant notifications
+      that should be processed
+        - The dashboard doesn't need to redo the work of the orchestrator to clean the data pod (scholarly) inbox
+    - The dashboard MAY filter the event log for shapes
+    - The dashboard MAY filter out self-referencing notifications
+        - This is for cases where any update to the data pod could trigger an event log update
+- The **Maintainer** discovers the `Announce` event
+- The **Dashboard** suggest to update the artefact metadata in the **Data Pod** with the review link
+- The **Maintainer** approves and the **Dashboard** updates the artefact metadata
+
+## The orchstrator use policies to update service hubs
+
+<img src="images/scenario-1-d.svg" width="80%">
+
+- The **Orchestrator** has a policy to update a range of **Service Hubs**
+    - This can be the same Orchestrator that processes the inbox or an institutional orchestrator
+    - The orchestrator uses the event log as a trusted append only resource for relevant Notifications
+      that should be processed
+- The **Orchestrator** can poll a local event log
+- The **Orchestrator** discovers the `Announce` event
+- The **Orchestrator** matches the notification to a set of policies and notifies relevant services
+
+# Scenario 2: Author requests review with possible endorsement (via repository)
+
+From [COAR](https://notify.coar-repositories.org/scenarios/2/):
+<i>Initiated by the corresponding author, a repository requests a review for one of its resources from a trusted review service. No acknowledgement is sent by the overlay journal, but it notifies the repository of any successful reviews and endorsements.</i>
+
+<class class="note">
+The *repository* is interpreted as the **Data Pod** in the examples below.
+</class>
+
+<img src="images/scenario-2.svg" width="80%">
+
+- In the **Dashboard** a **Maintainer** initiated a request for review using an `Offer` AS2 notification to the inbox of the **Journal**
+    - The journal SHALL respond with a HTTP 200 or 202 to the `Offer`
+    - The journal MAY validate the `Offer` and return 4** error messages
+    - The `Offer` MUST contain the location of the (Scholarly) Inbox at the Data Pod
+    - The Dashboard MAY send a carbon copy of the Offer to the (Scholarly) Inbox
+    - The AS2 notifications MAY need signatures or other security measures that establish a trusted communication between the Dashboard and the Journal
+- The **Journal** website starts a review workflow and sends after a while an `Announce` AS2 notification to the (Scholarly) **Inbox**
+of the **Data Pod**
+    - The `Announce` contains as `object` a link to the published review
+    - The `Announce` contains as `object` a link to an artefact on the data pod
+    - It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the journal
+    - The scholarly inbox MAY be the main inbox of the data pod or a specialized inbox created for the orchestrator
+    - The data pod may MAY shape validation mechanisms in place and return HTTP 4** codes when an unknown
+    notification shape was submitted to the inbox
+- The **Journal** starts an endorsement workflow and sends an `Announce` AS2 notification to the (Scholarly) **Inbox**
+    - In the use cases below, it is assumed that the same assumptions can be made
+      for any `Announce` notification that is send by a Journal
+
+## Orchestrator reads the inbox of a data pod and updates an event log
+
+<img src="images/scenario-2-a.svg" width="80%">
+
+- The **Dashoard** sends a trigger to the **Orchestrator** to send an `Offer` AS2 Notification to the **Journal**
+- The **Orchestrator** polls the (scholarly) **Inbox** of the **Data Pod**
+- The **Orchestrator** lists incoming notifications
+    - The orchestrator MAY filter the inbox list for resource shapes
+    - The orchestrator MAY ignore untrusted , invalid notifications
+    - The orchestrator MAY filter out notifications about resources that don't exist (anymore) in the data pod
+    - The orchestrator SHALL processes each notification only once
+    - The orchestrator MAY only have read permission to the inbox
+    - In a shared inbox scenario, multiple applications plus the maintainer MAY want to act on incoming notifications
+- The **Orchestrator** selected the notification it wants to process
+    - The orchstrator MAY ignore `Offer` notifications if they are found in the inbox
+        - It MAY be a policy of the maintainer not to add local `Offer` requests to the event log
+- The **Orchestrator** updates the **Artefact Lifecycle Event Log** with the notification
+    - The orchestrator MAY store a processed version of the `Announce` notification in the event log
+    - The stored notification `@id` MUST be unique in all event logs of the data pod
+    - The event update time SHALL be the time of writing the event log resource
+    - The artefact lifecycle event log SHALL be public readable
+- The **Orchestrator** can poll a local event log
+- The **Orchestrator** discovers the `Announce` event
+- The **Orchestrator** matches the notification to a set of policies and notifies relevant services
+
+# Scenario 3 : Overlay Journal Announces Review and Endorsement of Pre-print to Aggregator
+
+From [COAR](https://notify.coar-repositories.org/scenarios/3/):
+<i>An overlay journal announces that it has reviewed and endorsed a pre-print to a 'downstream' aggregation service.</i>
+
+<img src="images/scenario-3.svg" width="80%">
+
+- The **Journal** completes a review workflow and sends an `Announce` AS2 notification to the inbox of an **Aggregator**
+- The **Journal** completes a endorsement workflow and sends an `Announce` AS2 notification to the inbox of an **Aggregator**
+
+## Pod doesn't receive a notification
+
+- The **Orchestrator** stays idle
+
+# Scenario 4 : Overlay Journal Endorses Pre-print (Initiated by Author)
+
+From [COAR](https://notify.coar-repositories.org/scenarios/4/):
+<i>An author initiates a process for review and endorsement of their pre-print by filling in a form on the journal system. The information submitted includes the repository URI of the pre-print, a citeable PID (if available) and a link to the file.</i>
+
+<class class="note">
+The *repository* is interpreted as the **Data Pod** in the examples below.
+</class>
+
+<img src="images/scenario-4.svg" width="80%">
+
+- The **Maintainer** starts a endorsement process at a *Journal* website
+    - It is not specified how this process should be started
+    - It is assumed that the journal website knows or discovers the location of the Scholarly inbox of the maintainer
+- The **Journal** starts a endorsement workflow and sends after a while an `Announce` AS2 notification to the (Scholarly) **Inbox**
+of the **Data Pod**
+    - The `Announce` contains as `object` a link to the published review
+    - The `Announce` contains as `object` a link to an artefact on the data pod
+    - It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the journal
+    - The scholarly inbox MAY be the main inbox of the data pod or a specialized inbox created for the orchestrator
+    - The data pod may MAY shape validation mechanisms in place and return HTTP 4** codes when an unknown
+    notification shape was submitted to the inbox
+
+## See Scenario 1
+
+- The possible use cases for the **Orchestrator** in Scenario 4 are equivalent to
+[Scenario 1](#scenario-1--author-requests-review-with-possible-endorsement-via-overlay-journal)
+
+# Scenario 5: Repository requests review (on behalf of corresponding author)
+
+From [COAR](https://notify.coar-repositories.org/scenarios/5/):
+*Initiated by the corresponding author, a repository requests a review for one of its resources from a trusted review service.*
+
+<class class="note">
+The *repository* is interpreted as the **Data Pod** in the examples below.
+</class>
+
+<img src="images/scenario-5.svg" width="80%">
+
+- The **Maintainer** starts via the **Dashboard** a review process by sending an `Offer` AS2 notification to a **Journal**
+- The **Journal** review workflow evaluates the offer and sends an `Accept` AS2 to the **Inbox** of the **Data Pod**
+- The **Journal** review workflows creates a review and sends an `Announce` AS2 to the **Inbox** of the **Data Pod**
+
+## See Scenario 2
+
+- The possible use cases for the **Orchestrator** in Scenario 2 are functionally equivalent to
+[Scenario 2](#scenario-2-author-requests-review-with-possible-endorsement-via-repository)
+
+# Scenario 6: Author submits to overlay journal using repository to host resource and reviews
+
+From [COAR](https://notify.coar-repositories.org/scenarios/6/):
+*The corresponding author submits a paper to an overlay journal. The journal deposits the paper in a repository and arranges reviews. The reviews are deposited in the repository.*
+
+<class class="note">
+In the examples below the repository is interpreted as **Service Hub**. The repository MAY request
+from a **Maintainer** a review for a manuscript.
+</class>
+
+<img src="images/scenario-6.svg" width="80%">
+
+- The **Journal** request that a **Repository** ingests a manuscript by sending an `Offer` AS2 notification
+- The **Repository** ingest workflow accepts the manuscript and sends an `Accounce` AS2 notification to the **Journal**
+- Reviewer are invited to submit reviews the the **Repository**
+    - How this is done is not specified
+- The **Repository** notifies the **Journal** of a new review by sending an `Announce` AS2 notification
+- The **Journal** starts an endorsement workflow and notifies the **Repository** with an `Announce` AS notification on success
+
+## Repository request review from maintainer. Orchestrator is triggered to send out AS2 notifications
+
+<img src="images/scenario-6-a.svg" width="80%">
+
+<class class="note">
+This scenario investigates how a reviewer can be invited to submit a review for a manuscript
+in a **Repository**.
+</class>
+
+- The **Repository** discovers the (Scholarly) Inbox of a **Maintainer**
+- The **Repository** invites a **Maintainer** to submit a review by sending an `Offer` AS2 notification
+- The **Maintainer** is notified about the offer
+    - This can be done in many ways:
+        - The orchestrator does actions to notify the maintainer about the offer (e.g. sending an email)
+        - The dashboard polls the (scholarly)inbox and presents tasks to the maintainer
+- The **Maintainer** accepts the task in the **Dashboard**
+- The **Dashboard** sends a trigger to the **Orchestrator** to accept the Offer
+- The **Orchestrator** updates the **Event Log**
+- The **Orchestrator** sends an `Accept` AS2 notification to the **Repository**
+- The **Maintainer** submits via the **Dashboard** a review
+- The **Dashboard** send a trigger to the **Orchestrator** to announce the review
+- The **Orchestrator** updates the **Event Log**
+- The **Orchestrator** sends an `Announce` AS2 notification to the **Repository**
+
+# Scenario 7: Review Service Announces Review of Pre-print to Aggregator
+
+From [COAR](https://notify.coar-repositories.org/scenarios/7/):
+<i>A review service announces that it has reviewed and endorsed a pre-print to a 'downstream' aggregation service.</i>
+
+<img src="images/scenario-7.svg" width="80%">
+
+- A **Review Service** publishes a review and endorsement
+- A **Review Service** sends an `Announce` AS2 notification to an **Aggregator**
+
+## Pod doesn't receive a notification
+
+- The **Orchestrator** stays idle
+
+# Scenario 8: Review Service Announces Review of Pre-print to Repository
+
+From [COAR](https://notify.coar-repositories.org/scenarios/7/):
+<i>A review service announces that it has reviewed and endorsed a pre-print to the repository.</i>
+
+<class class="note">
+The *repository* is interpreted as the **Data Pod** in the examples below.
+</class>
+
+<img src="images/scenario-8.svg" width="80%">
+
+- A **Review Service** publishes a review and endorsement
+- A **Review Service** sends an `Announce` AS2 notification to (Scholarly) **Inbox** of the **Data Pod**
+
+## See Scenario 1
+
+- The possible use cases for the **Orchestrator** in Scenario 8 are functionally equivalent to
+[Scenario 1](#scenario-1--author-requests-review-with-possible-endorsement-via-overlay-journal)
+
+# Scenario 9: Author requests reviews from review service, via repository
+
+From [COAR](https://notify.coar-repositories.org/scenarios/9/):
+<i>A review service announces that it has reviewed and endorsed a pre-print to the repository.</i>
+
+<img src="images/scenario-9.svg" width="80%">
+
+<class class="note">
+The *repository* is interpreted as the **Data Pod** in the examples below.
+</class>
+
+## See Scenario 2
+
+- The possible use cases for the **Orchestrator** in Scenario 9 are functionally equivalent to
+[Scenario 2](#scenario-2-author-requests-review-with-possible-endorsement-via-repository)

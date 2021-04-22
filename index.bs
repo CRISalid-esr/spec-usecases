@@ -1,8 +1,9 @@
 <pre class='metadata'>
 Title: COAR Notify / Orchestrator use cases
 Shortname: orchestrator
-Level: 2
-Status: LS
+Level: 1
+Status: DREAM
+Status Text: Oh bot
 Editor: Patrick Hochstenbach, UGent, patrick.hochstenbach@ugent.be
 Markup Shorthands: markdown yes
 Abstract:
@@ -28,26 +29,34 @@ might respond to incoming and outgoing notification messages.
 From [COAR](https://notify.coar-repositories.org/scenarios/1/):
 <i>The corresponding author requests a review from an overlay journal for one of their papers, held in a repository. The overlay journal notifies the repository of any successful reviews and endorsements.</i>
 
+<p>
 <class class="note">
 The *repository* is interpreted as the **Data Pod** in the examples below.
 </class>
+</p>
+
+<p>
+<class class="note">
+The *journal* is interpreted as the **Certification Service** in the examples below.
+</class>
+</p>
 
 <img src="images/scenario-1.svg" width="80%">
 
-- The **Maintainer** starts a review process at a *Journal* website
+- The **Maintainer** starts a review process at a *Certification Service*
     - It is not specified how this process should be started
-    - It is assumed that the journal website knows or discovers the location of the Scholarly inbox of the maintainer
-- The **Journal** starts a review workflow and sends after a while an `Announce` AS2 notification to the (Scholarly) **Inbox**
+    - It is assumed that the certification service knows or discovers the location of the Scholarly inbox of the maintainer
+- The **Certification Service** starts a review workflow and sends after a while an `Announce` AS2 notification to the (Scholarly) **Inbox**
 of the **Data Pod**
     - The `Announce` contains as `object` a link to the published review
     - The `Announce` contains as `object` a link to an artefact on the data pod
-    - It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the journal
+    - It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the certification service
     - The scholarly inbox MAY be the main inbox of the data pod or a specialized inbox created for the orchestrator
     - The data pod may MAY shape validation mechanisms in place and return HTTP 4** codes when an unknown
     notification shape was submitted to the inbox
-- The **Journal** starts an endorsement workflow and sends an `Announce` AS2 notification to the (Scholarly) **Inbox**
+- The **Certification Service** starts an endorsement workflow and sends an `Announce` AS2 notification to the (Scholarly) **Inbox**
     - In the use cases below, it is assumed that the same assumptions can be made
-      for any `Announce` notification that is send by a Journal
+      for any `Announce` notification that is send by a certification service
 
 ## Orchestrator reads the inbox of a data pod and updates an event log
 
@@ -120,35 +129,43 @@ Issue: An orchestrator that is triggered by an update to the data pod artefacts 
 From [COAR](https://notify.coar-repositories.org/scenarios/2/):
 <i>Initiated by the corresponding author, a repository requests a review for one of its resources from a trusted review service. No acknowledgement is sent by the overlay journal, but it notifies the repository of any successful reviews and endorsements.</i>
 
+<p>
 <class class="note">
 The *repository* is interpreted as the **Data Pod** in the examples below.
 </class>
+</p>
+
+<p>
+<class class="note">
+The *journal* is interpreted as the **Certification Service** in the examples below.
+</class>
+</p>
 
 <img src="images/scenario-2.svg" width="80%">
 
-- In the **Dashboard** a **Maintainer** initiated a request for review using an `Offer` AS2 notification to the inbox of the **Journal**
-    - The journal SHALL respond with a HTTP 200 or 202 to the `Offer`
-    - The journal MAY validate the `Offer` and return 4** error messages
+- In the **Dashboard** a **Maintainer** initiated a request for review using an `Offer` AS2 notification to the inbox of the **Certification Service**
+    - The certification service SHALL respond with a HTTP 200 or 202 to the `Offer`
+    - The certification service MAY validate the `Offer` and return 4** error messages
     - The `Offer` MUST contain the location of the (Scholarly) Inbox at the Data Pod
     - The Dashboard MAY send a carbon copy of the Offer to the (Scholarly) Inbox
-    - The AS2 notifications MAY need signatures or other security measures that establish a trusted communication between the Dashboard and the Journal
-- The **Journal** website starts a review workflow and sends after a while an `Announce` AS2 notification to the (Scholarly) **Inbox**
+    - The AS2 notifications MAY need signatures or other security measures that establish a trusted communication between the Dashboard and the Certificaton Service
+- The **Certification Service** starts a review workflow and sends after a while an `Announce` AS2 notification to the (Scholarly) **Inbox**
 of the **Data Pod**
     - The `Announce` contains as `object` a link to the published review
     - The `Announce` contains as `object` a link to an artefact on the data pod
-    - It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the journal
+    - It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the certification service
     - The scholarly inbox MAY be the main inbox of the data pod or a specialized inbox created for the orchestrator
     - The data pod may MAY shape validation mechanisms in place and return HTTP 4** codes when an unknown
     notification shape was submitted to the inbox
-- The **Journal** starts an endorsement workflow and sends an `Announce` AS2 notification to the (Scholarly) **Inbox**
+- The **Certification Service** starts an endorsement workflow and sends an `Announce` AS2 notification to the (Scholarly) **Inbox**
     - In the use cases below, it is assumed that the same assumptions can be made
-      for any `Announce` notification that is send by a Journal
+      for any `Announce` notification that is send by a certification service
 
 ## Orchestrator reads the inbox of a data pod and updates an event log
 
 <img src="images/scenario-2-a.svg" width="80%">
 
-- The **Dashoard** sends a trigger to the **Orchestrator** to send an `Offer` AS2 Notification to the **Journal**
+- The **Dashoard** sends a trigger to the **Orchestrator** to send an `Offer` AS2 Notification to the **Certification Service**
 - The **Orchestrator** polls the (scholarly) **Inbox** of the **Data Pod**
 - The **Orchestrator** lists incoming notifications
     - The orchestrator MAY filter the inbox list for resource shapes
@@ -174,10 +191,22 @@ of the **Data Pod**
 From [COAR](https://notify.coar-repositories.org/scenarios/3/):
 <i>An overlay journal announces that it has reviewed and endorsed a pre-print to a 'downstream' aggregation service.</i>
 
+<p>
+<class class="note">
+The *journal* is interpreted as the **Certification Service** in the examples below.
+</class>
+</p>
+
+<p>
+<class class="note">
+The *aggregator* is interpreted as the **Awareness Service** in the examples below.
+</class>
+</p>
+
 <img src="images/scenario-3.svg" width="80%">
 
-- The **Journal** completes a review workflow and sends an `Announce` AS2 notification to the inbox of an **Aggregator**
-- The **Journal** completes a endorsement workflow and sends an `Announce` AS2 notification to the inbox of an **Aggregator**
+- The **Certification Service** completes a review workflow and sends an `Announce` AS2 notification to the inbox of the **Awareness Service**
+- The **Certification Service** completes a endorsement workflow and sends an `Announce` AS2 notification to the inbox of the **Awareness Service**
 
 ## Pod doesn't receive a notification
 
@@ -188,20 +217,28 @@ From [COAR](https://notify.coar-repositories.org/scenarios/3/):
 From [COAR](https://notify.coar-repositories.org/scenarios/4/):
 <i>An author initiates a process for review and endorsement of their pre-print by filling in a form on the journal system. The information submitted includes the repository URI of the pre-print, a citeable PID (if available) and a link to the file.</i>
 
+<p>
 <class class="note">
 The *repository* is interpreted as the **Data Pod** in the examples below.
 </class>
+</p>
+
+<p>
+<class class="note">
+The *journal* is interpreted as the **Certification Service** in the examples below.
+</class>
+</p>
 
 <img src="images/scenario-4.svg" width="80%">
 
-- The **Maintainer** starts a endorsement process at a *Journal* website
+- The **Maintainer** starts a endorsement process at a **Certification Service**
     - It is not specified how this process should be started
-    - It is assumed that the journal website knows or discovers the location of the Scholarly inbox of the maintainer
-- The **Journal** starts a endorsement workflow and sends after a while an `Announce` AS2 notification to the (Scholarly) **Inbox**
+    - It is assumed that the certification service knows or discovers the location of the (Scholarly) inbox of the maintainer
+- The **Certification Service** starts a endorsement workflow and sends after a while an `Announce` AS2 notification to the (Scholarly) **Inbox**
 of the **Data Pod**
     - The `Announce` contains as `object` a link to the published review
     - The `Announce` contains as `object` a link to an artefact on the data pod
-    - It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the journal
+    - It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the certification service
     - The scholarly inbox MAY be the main inbox of the data pod or a specialized inbox created for the orchestrator
     - The data pod may MAY shape validation mechanisms in place and return HTTP 4** codes when an unknown
     notification shape was submitted to the inbox
@@ -216,15 +253,23 @@ of the **Data Pod**
 From [COAR](https://notify.coar-repositories.org/scenarios/5/):
 *Initiated by the corresponding author, a repository requests a review for one of its resources from a trusted review service.*
 
+<p>
 <class class="note">
 The *repository* is interpreted as the **Data Pod** in the examples below.
 </class>
+</p>
+
+<p>
+<class class="note">
+The *journal* is interpreted as the **Certification Service** in the examples below.
+</class>
+</p>
 
 <img src="images/scenario-5.svg" width="80%">
 
-- The **Maintainer** starts via the **Dashboard** a review process by sending an `Offer` AS2 notification to a **Journal**
-- The **Journal** review workflow evaluates the offer and sends an `Accept` AS2 to the **Inbox** of the **Data Pod**
-- The **Journal** review workflows creates a review and sends an `Announce` AS2 to the **Inbox** of the **Data Pod**
+- The **Maintainer** starts via the **Dashboard** a review process by sending an `Offer` AS2 notification to a **Certification Service**
+- The **Certification Service** review workflow evaluates the offer and sends an `Accept` AS2 to the **Inbox** of the **Data Pod**
+- The **Certification Service** review workflows creates a review and sends an `Announce` AS2 to the **Inbox** of the **Data Pod**
 
 ## See Scenario 2
 
@@ -236,31 +281,44 @@ The *repository* is interpreted as the **Data Pod** in the examples below.
 From [COAR](https://notify.coar-repositories.org/scenarios/6/):
 *The corresponding author submits a paper to an overlay journal. The journal deposits the paper in a repository and arranges reviews. The reviews are deposited in the repository.*
 
+<p>
 <class class="note">
-In the examples below the repository is interpreted as **Service Hub**. The repository MAY request
-from a **Maintainer** a review for a manuscript.
+In the examples below the repository is interpreted as **Registration Service**.
 </class>
+<p>
+
+<p>
+<class class="note">
+The repository MAY request from a **Maintainer** a review for a manuscript.
+</class>
+<p>
+
+<p>
+<class class="note">
+The *journal* is interpreted as the **Certification Service** in the examples below.
+</class>
+</p>
 
 <img src="images/scenario-6.svg" width="80%">
 
-- The **Journal** request that a **Repository** ingests a manuscript by sending an `Offer` AS2 notification
-- The **Repository** ingest workflow accepts the manuscript and sends an `Accounce` AS2 notification to the **Journal**
-- Reviewer are invited to submit reviews the the **Repository**
+- The **Certification Service** request that a **Registration Service** ingests a manuscript by sending an `Offer` AS2 notification
+- The **Registration Servic** ingest workflow accepts the manuscript and sends an `Accounce` AS2 notification to the **Certification Service**
+- Reviewer are invited to submit reviews the the **Registration Service**
     - How this is done is not specified
-- The **Repository** notifies the **Journal** of a new review by sending an `Announce` AS2 notification
-- The **Journal** starts an endorsement workflow and notifies the **Repository** with an `Announce` AS notification on success
+- The **Registration Service** notifies the **Certification Service** of a new review by sending an `Announce` AS2 notification
+- The **Certification Service** starts an endorsement workflow and notifies the **Registration Service** with an `Announce` AS notification on success
 
-## Repository request review from maintainer. Orchestrator is triggered to send out AS2 notifications
+## Registration Service request review from maintainer. Orchestrator is triggered to send out AS2 notifications
 
 <img src="images/scenario-6-a.svg" width="80%">
 
 <class class="note">
 This scenario investigates how a reviewer can be invited to submit a review for a manuscript
-in a **Repository**.
+in a **Registration Service**.
 </class>
 
-- The **Repository** discovers the (Scholarly) Inbox of a **Maintainer**
-- The **Repository** invites a **Maintainer** to submit a review by sending an `Offer` AS2 notification
+- The **Registration Service** discovers the (Scholarly) Inbox of a **Maintainer**
+- The **Registration Service** invites a **Maintainer** to submit a review by sending an `Offer` AS2 notification
 - The **Maintainer** is notified about the offer
     - This can be done in many ways:
         - The orchestrator does actions to notify the maintainer about the offer (e.g. sending an email)
@@ -268,21 +326,33 @@ in a **Repository**.
 - The **Maintainer** accepts the task in the **Dashboard**
 - The **Dashboard** sends a trigger to the **Orchestrator** to accept the Offer
 - The **Orchestrator** updates the **Event Log**
-- The **Orchestrator** sends an `Accept` AS2 notification to the **Repository**
+- The **Orchestrator** sends an `Accept` AS2 notification to the **Registration Service**
 - The **Maintainer** submits via the **Dashboard** a review
 - The **Dashboard** send a trigger to the **Orchestrator** to announce the review
 - The **Orchestrator** updates the **Event Log**
-- The **Orchestrator** sends an `Announce` AS2 notification to the **Repository**
+- The **Orchestrator** sends an `Announce` AS2 notification to the **Registration Service**
 
 # Scenario 7: Review Service Announces Review of Pre-print to Aggregator
 
 From [COAR](https://notify.coar-repositories.org/scenarios/7/):
 <i>A review service announces that it has reviewed and endorsed a pre-print to a 'downstream' aggregation service.</i>
 
+<p>
+<class class="note">
+The *review service* is interpreted as the **Certification Service** in the examples below.
+</class>
+</p>
+
+<p>
+<class class="note">
+The *aggregator* is interpreted as the **Awareness Service** in the examples below.
+</class>
+</p>
+
 <img src="images/scenario-7.svg" width="80%">
 
-- A **Review Service** publishes a review and endorsement
-- A **Review Service** sends an `Announce` AS2 notification to an **Aggregator**
+- A **Certification Service*** publishes a review and endorsement
+- A **Certification Service*** sends an `Announce` AS2 notification to an **Awareness Service**
 
 ## Pod doesn't receive a notification
 
@@ -297,10 +367,16 @@ From [COAR](https://notify.coar-repositories.org/scenarios/7/):
 The *repository* is interpreted as the **Data Pod** in the examples below.
 </class>
 
+<p>
+<class class="note">
+The *review service* is interpreted as the **Certification Service** in the examples below.
+</class>
+</p>
+
 <img src="images/scenario-8.svg" width="80%">
 
-- A **Review Service** publishes a review and endorsement
-- A **Review Service** sends an `Announce` AS2 notification to (Scholarly) **Inbox** of the **Data Pod**
+- A **Certification Service** publishes a review and endorsement
+- A **Certification Service** sends an `Announce` AS2 notification to (Scholarly) **Inbox** of the **Data Pod**
 
 ## See Scenario 1
 
@@ -312,11 +388,24 @@ The *repository* is interpreted as the **Data Pod** in the examples below.
 From [COAR](https://notify.coar-repositories.org/scenarios/9/):
 <i>A review service announces that it has reviewed and endorsed a pre-print to the repository.</i>
 
-<img src="images/scenario-9.svg" width="80%">
-
+<p>
 <class class="note">
 The *repository* is interpreted as the **Data Pod** in the examples below.
 </class>
+</p>
+
+<p>
+<class class="note">
+The *review service* is interpreted as the **Certification Service** in the examples below.
+</class>
+</p>
+
+<img src="images/scenario-9.svg" width="80%">
+
+- In the **Dashboard** a **Maintainer** initiated a request for review using an `Offer` AS2 notification to the inbox of the **Certification Service**
+- The **Certification Service** starts a review workflow and sends after a while an `Announce` AS2 notification to the (Scholarly) **Inbox**
+of the **Data Pod**
+- The **Certification Service** starts an endorsement workflow and sends an `Announce` AS2 notification to the (Scholarly) **Inbox**
 
 ## See Scenario 2
 

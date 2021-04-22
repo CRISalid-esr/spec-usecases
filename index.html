@@ -1876,7 +1876,7 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">COAR Notify / Orchestrator use cases</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Standard, <time class="dt-updated" datetime="2021-04-21">21 April 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-04-22">22 April 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Issue Tracking:
@@ -1888,7 +1888,7 @@ dfn > a.self-link::before      { content: "#"; }
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 21 April 2021,
+In addition, as of 22 April 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1932,7 +1932,7 @@ Parts of this work may be from another specification document.  If so, those par
     <li>
      <a href="#scenario-6-author-submits-to-overlay-journal-using-repository-to-host-resource-and-reviews"><span class="secno">6</span> <span class="content">Scenario 6: Author submits to overlay journal using repository to host resource and reviews</span></a>
      <ol class="toc">
-      <li><a href="#repository-request-review-from-maintainer-orchestrator-is-triggered-to-send-out-as2-notifications"><span class="secno">6.1</span> <span class="content">Repository request review from maintainer. Orchestrator is triggered to send out AS2 notifications</span></a>
+      <li><a href="#registration-service-request-review-from-maintainer-orchestrator-is-triggered-to-send-out-as2-notifications"><span class="secno">6.1</span> <span class="content">Registration Service request review from maintainer. Orchestrator is triggered to send out AS2 notifications</span></a>
      </ol>
     <li>
      <a href="#scenario-7-review-service-announces-review-of-pre-print-to-aggregator"><span class="secno">7</span> <span class="content">Scenario 7: Review Service Announces Review of Pre-print to Aggregator</span></a>
@@ -1969,26 +1969,31 @@ might respond to incoming and outgoing notification messages. </class>
    </p>
    <h2 class="heading settled" data-level="1" id="scenario-1--author-requests-review-with-possible-endorsement-via-overlay-journal"><span class="secno">1. </span><span class="content">Scenario 1 : Author requests review with possible endorsement (via overlay journal)</span><a class="self-link" href="#scenario-1--author-requests-review-with-possible-endorsement-via-overlay-journal"></a></h2>
    <p>From <a href="https://notify.coar-repositories.org/scenarios/1/">COAR</a>: <i>The corresponding author requests a review from an overlay journal for one of their papers, held in a repository. The overlay journal notifies the repository of any successful reviews and endorsements.</i></p>
-   <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
+   <p>
+    <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
+   </p>
+   <p>
+    <class class="note"> The <em>journal</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
+   </p>
    <p><img src="images/scenario-1.svg" width="80%"></p>
    <ul>
     <li data-md>
-     <p>The <strong>Maintainer</strong> starts a review process at a <em>Journal</em> website</p>
+     <p>The <strong>Maintainer</strong> starts a review process at a <em>Certification Service</em></p>
      <ul>
       <li data-md>
        <p>It is not specified how this process should be started</p>
       <li data-md>
-       <p>It is assumed that the journal website knows or discovers the location of the Scholarly inbox of the maintainer</p>
+       <p>It is assumed that the certification service knows or discovers the location of the Scholarly inbox of the maintainer</p>
      </ul>
     <li data-md>
-     <p>The <strong>Journal</strong> starts a review workflow and sends after a while an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
+     <p>The <strong>Certification Service</strong> starts a review workflow and sends after a while an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
      <ul>
       <li data-md>
        <p>The <code>Announce</code> contains as <code>object</code> a link to the published review</p>
       <li data-md>
        <p>The <code>Announce</code> contains as <code>object</code> a link to an artefact on the data pod</p>
       <li data-md>
-       <p>It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the journal</p>
+       <p>It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the certification service</p>
       <li data-md>
        <p>The scholarly inbox MAY be the main inbox of the data pod or a specialized inbox created for the orchestrator</p>
       <li data-md>
@@ -1996,11 +2001,11 @@ might respond to incoming and outgoing notification messages. </class>
 notification shape was submitted to the inbox</p>
      </ul>
     <li data-md>
-     <p>The <strong>Journal</strong> starts an endorsement workflow and sends an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong></p>
+     <p>The <strong>Certification Service</strong> starts an endorsement workflow and sends an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong></p>
      <ul>
       <li data-md>
        <p>In the use cases below, it is assumed that the same assumptions can be made
-  for any <code>Announce</code> notification that is send by a Journal</p>
+  for any <code>Announce</code> notification that is send by a certification service</p>
      </ul>
    </ul>
    <h3 class="heading settled" data-level="1.1" id="orchestrator-reads-the-inbox-of-a-data-pod-and-updates-an-event-log"><span class="secno">1.1. </span><span class="content">Orchestrator reads the inbox of a data pod and updates an event log</span><a class="self-link" href="#orchestrator-reads-the-inbox-of-a-data-pod-and-updates-an-event-log"></a></h3>
@@ -2124,32 +2129,37 @@ notification shape was submitted to the inbox</p>
    </ul>
    <h2 class="heading settled" data-level="2" id="scenario-2-author-requests-review-with-possible-endorsement-via-repository"><span class="secno">2. </span><span class="content">Scenario 2: Author requests review with possible endorsement (via repository)</span><a class="self-link" href="#scenario-2-author-requests-review-with-possible-endorsement-via-repository"></a></h2>
    <p>From <a href="https://notify.coar-repositories.org/scenarios/2/">COAR</a>: <i>Initiated by the corresponding author, a repository requests a review for one of its resources from a trusted review service. No acknowledgement is sent by the overlay journal, but it notifies the repository of any successful reviews and endorsements.</i></p>
-   <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
+   <p>
+    <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
+   </p>
+   <p>
+    <class class="note"> The <em>journal</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
+   </p>
    <p><img src="images/scenario-2.svg" width="80%"></p>
    <ul>
     <li data-md>
-     <p>In the <strong>Dashboard</strong> a <strong>Maintainer</strong> initiated a request for review using an <code>Offer</code> AS2 notification to the inbox of the <strong>Journal</strong></p>
+     <p>In the <strong>Dashboard</strong> a <strong>Maintainer</strong> initiated a request for review using an <code>Offer</code> AS2 notification to the inbox of the <strong>Certification Service</strong></p>
      <ul>
       <li data-md>
-       <p>The journal SHALL respond with a HTTP 200 or 202 to the <code>Offer</code></p>
+       <p>The certification service SHALL respond with a HTTP 200 or 202 to the <code>Offer</code></p>
       <li data-md>
-       <p>The journal MAY validate the <code>Offer</code> and return 4** error messages</p>
+       <p>The certification service MAY validate the <code>Offer</code> and return 4** error messages</p>
       <li data-md>
        <p>The <code>Offer</code> MUST contain the location of the (Scholarly) Inbox at the Data Pod</p>
       <li data-md>
        <p>The Dashboard MAY send a carbon copy of the Offer to the (Scholarly) Inbox</p>
       <li data-md>
-       <p>The AS2 notifications MAY need signatures or other security measures that establish a trusted communication between the Dashboard and the Journal</p>
+       <p>The AS2 notifications MAY need signatures or other security measures that establish a trusted communication between the Dashboard and the Certificaton Service</p>
      </ul>
     <li data-md>
-     <p>The <strong>Journal</strong> website starts a review workflow and sends after a while an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
+     <p>The <strong>Certification Service</strong> starts a review workflow and sends after a while an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
      <ul>
       <li data-md>
        <p>The <code>Announce</code> contains as <code>object</code> a link to the published review</p>
       <li data-md>
        <p>The <code>Announce</code> contains as <code>object</code> a link to an artefact on the data pod</p>
       <li data-md>
-       <p>It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the journal</p>
+       <p>It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the certification service</p>
       <li data-md>
        <p>The scholarly inbox MAY be the main inbox of the data pod or a specialized inbox created for the orchestrator</p>
       <li data-md>
@@ -2157,18 +2167,18 @@ notification shape was submitted to the inbox</p>
 notification shape was submitted to the inbox</p>
      </ul>
     <li data-md>
-     <p>The <strong>Journal</strong> starts an endorsement workflow and sends an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong></p>
+     <p>The <strong>Certification Service</strong> starts an endorsement workflow and sends an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong></p>
      <ul>
       <li data-md>
        <p>In the use cases below, it is assumed that the same assumptions can be made
-  for any <code>Announce</code> notification that is send by a Journal</p>
+  for any <code>Announce</code> notification that is send by a certification service</p>
      </ul>
    </ul>
    <h3 class="heading settled" data-level="2.1" id="orchestrator-reads-the-inbox-of-a-data-pod-and-updates-an-event-log①"><span class="secno">2.1. </span><span class="content">Orchestrator reads the inbox of a data pod and updates an event log</span><a class="self-link" href="#orchestrator-reads-the-inbox-of-a-data-pod-and-updates-an-event-log①"></a></h3>
    <p><img src="images/scenario-2-a.svg" width="80%"></p>
    <ul>
     <li data-md>
-     <p>The <strong>Dashoard</strong> sends a trigger to the <strong>Orchestrator</strong> to send an <code>Offer</code> AS2 Notification to the <strong>Journal</strong></p>
+     <p>The <strong>Dashoard</strong> sends a trigger to the <strong>Orchestrator</strong> to send an <code>Offer</code> AS2 Notification to the <strong>Certification Service</strong></p>
     <li data-md>
      <p>The <strong>Orchestrator</strong> polls the (scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
     <li data-md>
@@ -2218,12 +2228,18 @@ notification shape was submitted to the inbox</p>
    </ul>
    <h2 class="heading settled" data-level="3" id="scenario-3--overlay-journal-announces-review-and-endorsement-of-pre-print-to-aggregator"><span class="secno">3. </span><span class="content">Scenario 3 : Overlay Journal Announces Review and Endorsement of Pre-print to Aggregator</span><a class="self-link" href="#scenario-3--overlay-journal-announces-review-and-endorsement-of-pre-print-to-aggregator"></a></h2>
    <p>From <a href="https://notify.coar-repositories.org/scenarios/3/">COAR</a>: <i>An overlay journal announces that it has reviewed and endorsed a pre-print to a <a class="property" data-link-type="propdesc">downstream</a> aggregation service.</i></p>
+   <p>
+    <class class="note"> The <em>journal</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
+   </p>
+   <p>
+    <class class="note"> The <em>aggregator</em> is interpreted as the <strong>Awareness Service</strong> in the examples below. </class>
+   </p>
    <p><img src="images/scenario-3.svg" width="80%"></p>
    <ul>
     <li data-md>
-     <p>The <strong>Journal</strong> completes a review workflow and sends an <code>Announce</code> AS2 notification to the inbox of an <strong>Aggregator</strong></p>
+     <p>The <strong>Certification Service</strong> completes a review workflow and sends an <code>Announce</code> AS2 notification to the inbox of the <strong>Awareness Service</strong></p>
     <li data-md>
-     <p>The <strong>Journal</strong> completes a endorsement workflow and sends an <code>Announce</code> AS2 notification to the inbox of an <strong>Aggregator</strong></p>
+     <p>The <strong>Certification Service</strong> completes a endorsement workflow and sends an <code>Announce</code> AS2 notification to the inbox of the <strong>Awareness Service</strong></p>
    </ul>
    <h3 class="heading settled" data-level="3.1" id="pod-doesnt-receive-a-notification"><span class="secno">3.1. </span><span class="content">Pod doesn’t receive a notification</span><a class="self-link" href="#pod-doesnt-receive-a-notification"></a></h3>
    <ul>
@@ -2232,26 +2248,31 @@ notification shape was submitted to the inbox</p>
    </ul>
    <h2 class="heading settled" data-level="4" id="scenario-4--overlay-journal-endorses-pre-print-initiated-by-author"><span class="secno">4. </span><span class="content">Scenario 4 : Overlay Journal Endorses Pre-print (Initiated by Author)</span><a class="self-link" href="#scenario-4--overlay-journal-endorses-pre-print-initiated-by-author"></a></h2>
    <p>From <a href="https://notify.coar-repositories.org/scenarios/4/">COAR</a>: <i>An author initiates a process for review and endorsement of their pre-print by filling in a form on the journal system. The information submitted includes the repository URI of the pre-print, a citeable PID (if available) and a link to the file.</i></p>
-   <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
+   <p>
+    <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
+   </p>
+   <p>
+    <class class="note"> The <em>journal</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
+   </p>
    <p><img src="images/scenario-4.svg" width="80%"></p>
    <ul>
     <li data-md>
-     <p>The <strong>Maintainer</strong> starts a endorsement process at a <em>Journal</em> website</p>
+     <p>The <strong>Maintainer</strong> starts a endorsement process at a <strong>Certification Service</strong></p>
      <ul>
       <li data-md>
        <p>It is not specified how this process should be started</p>
       <li data-md>
-       <p>It is assumed that the journal website knows or discovers the location of the Scholarly inbox of the maintainer</p>
+       <p>It is assumed that the certification service knows or discovers the location of the (Scholarly) inbox of the maintainer</p>
      </ul>
     <li data-md>
-     <p>The <strong>Journal</strong> starts a endorsement workflow and sends after a while an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
+     <p>The <strong>Certification Service</strong> starts a endorsement workflow and sends after a while an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
      <ul>
       <li data-md>
        <p>The <code>Announce</code> contains as <code>object</code> a link to the published review</p>
       <li data-md>
        <p>The <code>Announce</code> contains as <code>object</code> a link to an artefact on the data pod</p>
       <li data-md>
-       <p>It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the journal</p>
+       <p>It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the certification service</p>
       <li data-md>
        <p>The scholarly inbox MAY be the main inbox of the data pod or a specialized inbox created for the orchestrator</p>
       <li data-md>
@@ -2266,15 +2287,20 @@ notification shape was submitted to the inbox</p>
    </ul>
    <h2 class="heading settled" data-level="5" id="scenario-5-repository-requests-review-on-behalf-of-corresponding-author"><span class="secno">5. </span><span class="content">Scenario 5: Repository requests review (on behalf of corresponding author)</span><a class="self-link" href="#scenario-5-repository-requests-review-on-behalf-of-corresponding-author"></a></h2>
    <p>From <a href="https://notify.coar-repositories.org/scenarios/5/">COAR</a>: <em>Initiated by the corresponding author, a repository requests a review for one of its resources from a trusted review service.</em></p>
-   <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
+   <p>
+    <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
+   </p>
+   <p>
+    <class class="note"> The <em>journal</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
+   </p>
    <p><img src="images/scenario-5.svg" width="80%"></p>
    <ul>
     <li data-md>
-     <p>The <strong>Maintainer</strong> starts via the <strong>Dashboard</strong> a review process by sending an <code>Offer</code> AS2 notification to a <strong>Journal</strong></p>
+     <p>The <strong>Maintainer</strong> starts via the <strong>Dashboard</strong> a review process by sending an <code>Offer</code> AS2 notification to a <strong>Certification Service</strong></p>
     <li data-md>
-     <p>The <strong>Journal</strong> review workflow evaluates the offer and sends an <code>Accept</code> AS2 to the <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
+     <p>The <strong>Certification Service</strong> review workflow evaluates the offer and sends an <code>Accept</code> AS2 to the <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
     <li data-md>
-     <p>The <strong>Journal</strong> review workflows creates a review and sends an <code>Announce</code> AS2 to the <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
+     <p>The <strong>Certification Service</strong> review workflows creates a review and sends an <code>Announce</code> AS2 to the <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
    </ul>
    <h3 class="heading settled" data-level="5.1" id="see-scenario-2"><span class="secno">5.1. </span><span class="content">See Scenario 2</span><a class="self-link" href="#see-scenario-2"></a></h3>
    <ul>
@@ -2283,34 +2309,43 @@ notification shape was submitted to the inbox</p>
    </ul>
    <h2 class="heading settled" data-level="6" id="scenario-6-author-submits-to-overlay-journal-using-repository-to-host-resource-and-reviews"><span class="secno">6. </span><span class="content">Scenario 6: Author submits to overlay journal using repository to host resource and reviews</span><a class="self-link" href="#scenario-6-author-submits-to-overlay-journal-using-repository-to-host-resource-and-reviews"></a></h2>
    <p>From <a href="https://notify.coar-repositories.org/scenarios/6/">COAR</a>: <em>The corresponding author submits a paper to an overlay journal. The journal deposits the paper in a repository and arranges reviews. The reviews are deposited in the repository.</em></p>
-   <class class="note"> In the examples below the repository is interpreted as <strong>Service Hub</strong>. The repository MAY request
-from a <strong>Maintainer</strong> a review for a manuscript. </class>
+   <p>
+    <class class="note"> In the examples below the repository is interpreted as <strong>Registration Service</strong>. </class>
+   </p>
+   <p></p>
+   <p>
+    <class class="note"> The repository MAY request from a <strong>Maintainer</strong> a review for a manuscript. </class>
+   </p>
+   <p></p>
+   <p>
+    <class class="note"> The <em>journal</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
+   </p>
    <p><img src="images/scenario-6.svg" width="80%"></p>
    <ul>
     <li data-md>
-     <p>The <strong>Journal</strong> request that a <strong>Repository</strong> ingests a manuscript by sending an <code>Offer</code> AS2 notification</p>
+     <p>The <strong>Certification Service</strong> request that a <strong>Registration Service</strong> ingests a manuscript by sending an <code>Offer</code> AS2 notification</p>
     <li data-md>
-     <p>The <strong>Repository</strong> ingest workflow accepts the manuscript and sends an <code>Accounce</code> AS2 notification to the <strong>Journal</strong></p>
+     <p>The <strong>Registration Servic</strong> ingest workflow accepts the manuscript and sends an <code>Accounce</code> AS2 notification to the <strong>Certification Service</strong></p>
     <li data-md>
-     <p>Reviewer are invited to submit reviews the the <strong>Repository</strong></p>
+     <p>Reviewer are invited to submit reviews the the <strong>Registration Service</strong></p>
      <ul>
       <li data-md>
        <p>How this is done is not specified</p>
      </ul>
     <li data-md>
-     <p>The <strong>Repository</strong> notifies the <strong>Journal</strong> of a new review by sending an <code>Announce</code> AS2 notification</p>
+     <p>The <strong>Registration Service</strong> notifies the <strong>Certification Service</strong> of a new review by sending an <code>Announce</code> AS2 notification</p>
     <li data-md>
-     <p>The <strong>Journal</strong> starts an endorsement workflow and notifies the <strong>Repository</strong> with an <code>Announce</code> AS notification on success</p>
+     <p>The <strong>Certification Service</strong> starts an endorsement workflow and notifies the <strong>Registration Service</strong> with an <code>Announce</code> AS notification on success</p>
    </ul>
-   <h3 class="heading settled" data-level="6.1" id="repository-request-review-from-maintainer-orchestrator-is-triggered-to-send-out-as2-notifications"><span class="secno">6.1. </span><span class="content">Repository request review from maintainer. Orchestrator is triggered to send out AS2 notifications</span><a class="self-link" href="#repository-request-review-from-maintainer-orchestrator-is-triggered-to-send-out-as2-notifications"></a></h3>
+   <h3 class="heading settled" data-level="6.1" id="registration-service-request-review-from-maintainer-orchestrator-is-triggered-to-send-out-as2-notifications"><span class="secno">6.1. </span><span class="content">Registration Service request review from maintainer. Orchestrator is triggered to send out AS2 notifications</span><a class="self-link" href="#registration-service-request-review-from-maintainer-orchestrator-is-triggered-to-send-out-as2-notifications"></a></h3>
    <p><img src="images/scenario-6-a.svg" width="80%"></p>
    <class class="note"> This scenario investigates how a reviewer can be invited to submit a review for a manuscript
-in a <strong>Repository</strong>. </class>
+in a <strong>Registration Service</strong>. </class>
    <ul>
     <li data-md>
-     <p>The <strong>Repository</strong> discovers the (Scholarly) Inbox of a <strong>Maintainer</strong></p>
+     <p>The <strong>Registration Service</strong> discovers the (Scholarly) Inbox of a <strong>Maintainer</strong></p>
     <li data-md>
-     <p>The <strong>Repository</strong> invites a <strong>Maintainer</strong> to submit a review by sending an <code>Offer</code> AS2 notification</p>
+     <p>The <strong>Registration Service</strong> invites a <strong>Maintainer</strong> to submit a review by sending an <code>Offer</code> AS2 notification</p>
     <li data-md>
      <p>The <strong>Maintainer</strong> is notified about the offer</p>
      <ul>
@@ -2330,7 +2365,7 @@ in a <strong>Repository</strong>. </class>
     <li data-md>
      <p>The <strong>Orchestrator</strong> updates the <strong>Event Log</strong></p>
     <li data-md>
-     <p>The <strong>Orchestrator</strong> sends an <code>Accept</code> AS2 notification to the <strong>Repository</strong></p>
+     <p>The <strong>Orchestrator</strong> sends an <code>Accept</code> AS2 notification to the <strong>Registration Service</strong></p>
     <li data-md>
      <p>The <strong>Maintainer</strong> submits via the <strong>Dashboard</strong> a review</p>
     <li data-md>
@@ -2338,16 +2373,22 @@ in a <strong>Repository</strong>. </class>
     <li data-md>
      <p>The <strong>Orchestrator</strong> updates the <strong>Event Log</strong></p>
     <li data-md>
-     <p>The <strong>Orchestrator</strong> sends an <code>Announce</code> AS2 notification to the <strong>Repository</strong></p>
+     <p>The <strong>Orchestrator</strong> sends an <code>Announce</code> AS2 notification to the <strong>Registration Service</strong></p>
    </ul>
    <h2 class="heading settled" data-level="7" id="scenario-7-review-service-announces-review-of-pre-print-to-aggregator"><span class="secno">7. </span><span class="content">Scenario 7: Review Service Announces Review of Pre-print to Aggregator</span><a class="self-link" href="#scenario-7-review-service-announces-review-of-pre-print-to-aggregator"></a></h2>
    <p>From <a href="https://notify.coar-repositories.org/scenarios/7/">COAR</a>: <i>A review service announces that it has reviewed and endorsed a pre-print to a <a class="property" data-link-type="propdesc">downstream</a> aggregation service.</i></p>
+   <p>
+    <class class="note"> The <em>review service</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
+   </p>
+   <p>
+    <class class="note"> The <em>aggregator</em> is interpreted as the <strong>Awareness Service</strong> in the examples below. </class>
+   </p>
    <p><img src="images/scenario-7.svg" width="80%"></p>
    <ul>
     <li data-md>
-     <p>A <strong>Review Service</strong> publishes a review and endorsement</p>
+     <p>A <strong>Certification Service</strong>* publishes a review and endorsement</p>
     <li data-md>
-     <p>A <strong>Review Service</strong> sends an <code>Announce</code> AS2 notification to an <strong>Aggregator</strong></p>
+     <p>A <strong>Certification Service</strong>* sends an <code>Announce</code> AS2 notification to an <strong>Awareness Service</strong></p>
    </ul>
    <h3 class="heading settled" data-level="7.1" id="pod-doesnt-receive-a-notification①"><span class="secno">7.1. </span><span class="content">Pod doesn’t receive a notification</span><a class="self-link" href="#pod-doesnt-receive-a-notification①"></a></h3>
    <ul>
@@ -2357,12 +2398,15 @@ in a <strong>Repository</strong>. </class>
    <h2 class="heading settled" data-level="8" id="scenario-8-review-service-announces-review-of-pre-print-to-repository"><span class="secno">8. </span><span class="content">Scenario 8: Review Service Announces Review of Pre-print to Repository</span><a class="self-link" href="#scenario-8-review-service-announces-review-of-pre-print-to-repository"></a></h2>
    <p>From <a href="https://notify.coar-repositories.org/scenarios/7/">COAR</a>: <i>A review service announces that it has reviewed and endorsed a pre-print to the repository.</i></p>
    <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
+   <p>
+    <class class="note"> The <em>review service</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
+   </p>
    <p><img src="images/scenario-8.svg" width="80%"></p>
    <ul>
     <li data-md>
-     <p>A <strong>Review Service</strong> publishes a review and endorsement</p>
+     <p>A <strong>Certification Service</strong> publishes a review and endorsement</p>
     <li data-md>
-     <p>A <strong>Review Service</strong> sends an <code>Announce</code> AS2 notification to (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
+     <p>A <strong>Certification Service</strong> sends an <code>Announce</code> AS2 notification to (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
    </ul>
    <h3 class="heading settled" data-level="8.1" id="see-scenario-1①"><span class="secno">8.1. </span><span class="content">See Scenario 1</span><a class="self-link" href="#see-scenario-1①"></a></h3>
    <ul>
@@ -2371,8 +2415,21 @@ in a <strong>Repository</strong>. </class>
    </ul>
    <h2 class="heading settled" data-level="9" id="scenario-9-author-requests-reviews-from-review-service-via-repository"><span class="secno">9. </span><span class="content">Scenario 9: Author requests reviews from review service, via repository</span><a class="self-link" href="#scenario-9-author-requests-reviews-from-review-service-via-repository"></a></h2>
    <p>From <a href="https://notify.coar-repositories.org/scenarios/9/">COAR</a>: <i>A review service announces that it has reviewed and endorsed a pre-print to the repository.</i></p>
+   <p>
+    <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
+   </p>
+   <p>
+    <class class="note"> The <em>review service</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
+   </p>
    <p><img src="images/scenario-9.svg" width="80%"></p>
-   <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
+   <ul>
+    <li data-md>
+     <p>In the <strong>Dashboard</strong> a <strong>Maintainer</strong> initiated a request for review using an <code>Offer</code> AS2 notification to the inbox of the <strong>Certification Service</strong></p>
+    <li data-md>
+     <p>The <strong>Certification Service</strong> starts a review workflow and sends after a while an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
+    <li data-md>
+     <p>The <strong>Certification Service</strong> starts an endorsement workflow and sends an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong></p>
+   </ul>
    <h3 class="heading settled" data-level="9.1" id="see-scenario-2①"><span class="secno">9.1. </span><span class="content">See Scenario 2</span><a class="self-link" href="#see-scenario-2①"></a></h3>
    <ul>
     <li data-md>

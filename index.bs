@@ -303,7 +303,7 @@ The *journal* is interpreted as the **Certification Service** in the examples be
 
 - The **Certification Service** request that a **Registration Service** ingests a manuscript by sending an `Offer` AS2 notification
 - The **Registration Servic** ingest workflow accepts the manuscript and sends an `Accounce` AS2 notification to the **Certification Service**
-- Reviewer are invited to submit reviews the the **Registration Service**
+- Reviewers are invited to submit reviews to the **Registration Service**
     - How this is done is not specified
 - The **Registration Service** notifies the **Certification Service** of a new review by sending an `Announce` AS2 notification
 - The **Certification Service** starts an endorsement workflow and notifies the **Registration Service** with an `Announce` AS notification on success

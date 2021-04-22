@@ -1,3 +1,7 @@
+## Live
+
+[Rendered Version](https://mellonscholarlycommunication.github.io/coar-usecases/)
+
 ## Generate HTML
 
 HTML is generated using the [Bikeshed preprocessor](https://tabatkins.github.io/bikeshed/).

@@ -1,7 +1,7 @@
 <!doctype html><html lang="en">
  <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-  <title>COAR Notify / Orchestrator use cases</title>
+  <title>Mellon Orchestrator use cases</title>
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 <style data-fill-with="stylesheet">/******************************************************************************
  *                   Style sheet for the W3C specifications                   *
@@ -1689,6 +1689,47 @@ figcaption {
 figcaption:not(.no-marker)::before {
     content: "Figure " counter(figure) " ";
 }</style>
+<style>/* style-dfn-panel */
+
+:root {
+    --dfnpanel-bg: #ddd;
+    --dfnpanel-text: var(--text);
+}
+.dfn-panel {
+    position: absolute;
+    z-index: 35;
+    height: auto;
+    width: -webkit-fit-content;
+    width: fit-content;
+    max-width: 300px;
+    max-height: 500px;
+    overflow: auto;
+    padding: 0.5em 0.75em;
+    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+    background: var(--dfnpanel-bg);
+    color: var(--dfnpanel-text);
+    border: outset 0.2em;
+}
+.dfn-panel:not(.on) { display: none; }
+.dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
+.dfn-panel > b { display: block; }
+.dfn-panel a { color: var(--dfnpanel-text); }
+.dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+.dfn-panel > b + b { margin-top: 0.25em; }
+.dfn-panel ul { padding: 0; }
+.dfn-panel li { list-style: inside; }
+.dfn-panel.activated {
+    display: inline-block;
+    position: fixed;
+    left: .5em;
+    bottom: 2em;
+    margin: 0 auto;
+    max-width: calc(100vw - 1.5em - .4em - .5em);
+    max-height: 30vh;
+}
+
+.dfn-paneled { cursor: pointer; }
+</style>
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1875,14 +1916,18 @@ dfn > a.self-link::before      { content: "#"; }
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"></p>
-   <h1 class="p-name no-ref" id="title">COAR Notify / Orchestrator use cases</h1>
+   <h1 class="p-name no-ref" id="title">Mellon Orchestrator use cases</h1>
    <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-04-27">27 April 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Issue Tracking:
      <dd><a href="#issues-index">Inline In Spec</a>
-     <dt class="editor">Editor:
-     <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:patrick.hochstenbach@ugent.be">Patrick Hochstenbach</a> (<span class="p-org org">UGent</span>)
+     <dt class="editor">Editors:
+     <dd class="editor p-author h-card vcard"><span class="p-name fn">Patrick Hochstenbach</span>
+     <dd class="editor p-author h-card vcard"><span class="p-name fn">Ruben Dedecker</span>
+     <dd class="editor p-author h-card vcard"><span class="p-name fn">Miel Vander Sande</span>
+     <dd class="editor p-author h-card vcard"><span class="p-name fn">Jeroen Werbrouck</span>
+     <dd class="editor p-author h-card vcard"><span class="p-name fn">Herbert Van de Sompel</span>
     </dl>
    </div>
    <div data-fill-with="warning"></div>
@@ -1896,60 +1941,23 @@ Parts of this work may be from another specification document.  If so, those par
   </div>
   <div class="p-summary" data-fill-with="abstract">
    <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
+   <p>TODO</p>
   </div>
   <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
-    <li>
-     <a href="#scenario-1--author-requests-review-with-possible-endorsement-via-overlay-journal"><span class="secno">1</span> <span class="content">Scenario 1 : Author requests review with possible endorsement (via overlay journal)</span></a>
-     <ol class="toc">
-      <li><a href="#orchestrator-reads-the-inbox-of-a-data-pod-and-updates-an-event-log"><span class="secno">1.1</span> <span class="content">Orchestrator reads the inbox of a data pod and updates an event log</span></a>
-      <li><a href="#a-client-app-reads-the-event-log-and-updates-the-artefact"><span class="secno">1.2</span> <span class="content">A client App reads the event log and updates the artefact</span></a>
-      <li><a href="#a-maintainer-uses-the-dashboard-to-read-the-event-log-and-updates-the-artefacts"><span class="secno">1.3</span> <span class="content">A maintainer uses the dashboard to read the event log and updates the artefacts</span></a>
-      <li><a href="#the-orchstrator-use-policies-to-update-service-hubs"><span class="secno">1.4</span> <span class="content">The orchstrator use policies to update service hubs</span></a>
-     </ol>
-    <li>
-     <a href="#scenario-2-author-requests-review-with-possible-endorsement-via-repository"><span class="secno">2</span> <span class="content">Scenario 2: Author requests review with possible endorsement (via repository)</span></a>
-     <ol class="toc">
-      <li><a href="#orchestrator-reads-the-inbox-of-a-data-pod-and-updates-an-event-log①"><span class="secno">2.1</span> <span class="content">Orchestrator reads the inbox of a data pod and updates an event log</span></a>
-     </ol>
-    <li>
-     <a href="#scenario-3--overlay-journal-announces-review-and-endorsement-of-pre-print-to-aggregator"><span class="secno">3</span> <span class="content">Scenario 3 : Overlay Journal Announces Review and Endorsement of Pre-print to Aggregator</span></a>
-     <ol class="toc">
-      <li><a href="#pod-doesnt-receive-a-notification"><span class="secno">3.1</span> <span class="content">Pod doesn’t receive a notification</span></a>
-     </ol>
-    <li>
-     <a href="#scenario-4--overlay-journal-endorses-pre-print-initiated-by-author"><span class="secno">4</span> <span class="content">Scenario 4 : Overlay Journal Endorses Pre-print (Initiated by Author)</span></a>
-     <ol class="toc">
-      <li><a href="#see-scenario-1"><span class="secno">4.1</span> <span class="content">See Scenario 1</span></a>
-     </ol>
-    <li>
-     <a href="#scenario-5-repository-requests-review-on-behalf-of-corresponding-author"><span class="secno">5</span> <span class="content">Scenario 5: Repository requests review (on behalf of corresponding author)</span></a>
-     <ol class="toc">
-      <li><a href="#see-scenario-2"><span class="secno">5.1</span> <span class="content">See Scenario 2</span></a>
-     </ol>
-    <li>
-     <a href="#scenario-6-author-submits-to-overlay-journal-using-repository-to-host-resource-and-reviews"><span class="secno">6</span> <span class="content">Scenario 6: Author submits to overlay journal using repository to host resource and reviews</span></a>
-     <ol class="toc">
-      <li><a href="#registration-service-request-review-from-maintainer-orchestrator-is-triggered-to-send-out-as2-notifications"><span class="secno">6.1</span> <span class="content">Registration Service request review from maintainer. Orchestrator is triggered to send out AS2 notifications</span></a>
-     </ol>
-    <li>
-     <a href="#scenario-7-review-service-announces-review-of-pre-print-to-aggregator"><span class="secno">7</span> <span class="content">Scenario 7: Review Service Announces Review of Pre-print to Aggregator</span></a>
-     <ol class="toc">
-      <li><a href="#pod-doesnt-receive-a-notification①"><span class="secno">7.1</span> <span class="content">Pod doesn’t receive a notification</span></a>
-     </ol>
-    <li>
-     <a href="#scenario-8-review-service-announces-review-of-pre-print-to-repository"><span class="secno">8</span> <span class="content">Scenario 8: Review Service Announces Review of Pre-print to Repository</span></a>
-     <ol class="toc">
-      <li><a href="#see-scenario-1①"><span class="secno">8.1</span> <span class="content">See Scenario 1</span></a>
-     </ol>
-    <li>
-     <a href="#scenario-9-author-requests-reviews-from-review-service-via-repository"><span class="secno">9</span> <span class="content">Scenario 9: Author requests reviews from review service, via repository</span></a>
-     <ol class="toc">
-      <li><a href="#see-scenario-2①"><span class="secno">9.1</span> <span class="content">See Scenario 2</span></a>
-     </ol>
+    <li><a href="#mellon-orchestrator-use-cases"><span class="secno">1</span> <span class="content">Mellon Orchestrator use cases</span></a>
+    <li><a href="#glossary"><span class="secno">2</span> <span class="content">Glossary</span></a>
+    <li><a href="#difference-between-the-dashboard-app-and-orchestrator"><span class="secno">3</span> <span class="content">Difference between the Dashboard, App and orchestrator</span></a>
+    <li><a href="#maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">4</span> <span class="content">Maintainer announces a (finished) artefact in the Data Pod</span></a>
+    <li><a href="#maintainer-offers-an-artefact-to-a-certification-service"><span class="secno">5</span> <span class="content">Maintainer offers an artefact to a certification service</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
+    <li>
+     <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
+     <ol class="toc">
+      <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
+     </ol>
     <li>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
@@ -1959,482 +1967,138 @@ Parts of this work may be from another specification document.  If so, those par
    </ol>
   </nav>
   <main>
-   <p>
-    <class class="note"> In this document all the COAR Notify examples are listed as main sections with a
-short description of the use-cases annotated with possible local implementation notes. </class>
-   </p>
-   <p>
-    <class class="note"> In each main section is divided in subsections to provide examples how a Mellon/Orchestrator setup
-might respond to incoming and outgoing notification messages. </class>
-   </p>
-   <h2 class="heading settled" data-level="1" id="scenario-1--author-requests-review-with-possible-endorsement-via-overlay-journal"><span class="secno">1. </span><span class="content">Scenario 1 : Author requests review with possible endorsement (via overlay journal)</span><a class="self-link" href="#scenario-1--author-requests-review-with-possible-endorsement-via-overlay-journal"></a></h2>
-   <p>From <a href="https://notify.coar-repositories.org/scenarios/1/">COAR</a>: <i>The corresponding author requests a review from an overlay journal for one of their papers, held in a repository. The overlay journal notifies the repository of any successful reviews and endorsements.</i></p>
-   <p>
-    <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
-   </p>
-   <p>
-    <class class="note"> The <em>journal</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
-   </p>
-   <p><img src="images/scenario-1.svg" width="80%"></p>
+   <h2 class="heading settled" data-level="1" id="mellon-orchestrator-use-cases"><span class="secno">1. </span><span class="content">Mellon Orchestrator use cases</span><a class="self-link" href="#mellon-orchestrator-use-cases"></a></h2>
+   <h2 class="heading settled" data-level="2" id="glossary"><span class="secno">2. </span><span class="content">Glossary</span><a class="self-link" href="#glossary"></a></h2>
+   <p>Copied from <a href="https://erfgoedpod.github.io/orchestrator/">Orchestrator for a decentralized Digital Heritage Network</a>:</p>
+   <dl>
+    <dt data-md><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="actor">Actor</dfn>
+    <dd data-md>
+     <p>A entity (person, application or service) that participates in the network.</p>
+    <dt data-md><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="human-agent">Human Agent</dfn>
+    <dd data-md>
+     <p>A person that operates directly as an <a data-link-type="dfn" href="#actor" id="ref-for-actor">Actor</a> on the network.</p>
+    <dt data-md><dfn data-dfn-type="dfn" data-export id="autonomous-agent">Autonomous Agent<a class="self-link" href="#autonomous-agent"></a></dfn>
+    <dd data-md>
+     <p>An intelligent software instance that operates on an <a data-link-type="dfn" href="#actor" id="ref-for-actor①">Actor</a>'s behalf but without any interference of that <a data-link-type="dfn" href="#actor" id="ref-for-actor②">Actor</a>.</p>
+    <dt data-md><dfn data-dfn-type="dfn" data-export id="maintainer">Maintainer<a class="self-link" href="#maintainer"></a></dfn>
+    <dd data-md>
+     <p>A <a data-link-type="dfn" href="#human-agent" id="ref-for-human-agent">Human Agent</a> that can manually perform actions (see <a href="#actions"></a>) on the network using a <a data-link-type="dfn" href="#dashboard" id="ref-for-dashboard">Dashboard</a> application.</p>
+    <dd data-md>
+     <p>Usually a person employed by an organisation (e.g., a Cultural Heritage Institution) to maintain data and datasets owned by that organisation.</p>
+    <dt data-md><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="data-pod">Data Pod</dfn>
+    <dd data-md>
+     <p>As defined by <span>[solid-protocol]</span>, a <a href="https://solidproject.org/TR/protocol#data-pod">Data Pod</a> is a place for storing documents, with mechanisms for controlling who can access what.</p>
+    <dt data-md><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="inbox">Inbox</dfn>
+    <dd data-md>
+     <p>An <a data-link-type="biblio" href="#biblio-ldp">[LDP]</a> resource where others can POST Linked Data Notifications <a data-link-type="biblio" href="#biblio-ldn">[LDN]</a> in order to notify the actor of a change an artefact’s lifecycle.</p>
+    <dt data-md><dfn data-dfn-type="dfn" data-noexport id="artefact-lifecycle-event-log">Artefact Lifecycle Event Log<a class="self-link" href="#artefact-lifecycle-event-log"></a></dfn>
+    <dd data-md>
+     <p>An HTTP resource served by an actor (e.g., as a resource in the <a data-link-type="dfn" href="#data-pod" id="ref-for-data-pod">Data Pod</a>) that represents a log of occurred lifecycle events related to artefacts known by the actor.</p>
+    <dd data-md>
+     <p>Artefacts are considered known when they reside in the actor’s <a data-link-type="dfn" href="#data-pod" id="ref-for-data-pod①">Data Pod</a> or if the actor has been made aware via <a data-link-type="biblio" href="#biblio-ldn">[LDN]</a>.</p>
+    <dt data-md><dfn data-dfn-type="dfn" data-export id="service-hub">Service Hub<a class="self-link" href="#service-hub"></a></dfn>
+    <dd data-md>
+     <p>An <a data-link-type="dfn" href="#actor" id="ref-for-actor③">Actor</a> that provides a service to other actors in the network. It is a <a href="https://solidproject.org/TR/protocol#solid-app">Solid app</a> and serves an <a data-link-type="dfn" href="#inbox" id="ref-for-inbox">Inbox</a>.</p>
+    <dt data-md><dfn data-dfn-type="dfn" data-export id="policy">Policy<a class="self-link" href="#policy"></a></dfn>
+    <dd data-md>
+     <p>A set of machine-readable business rules that instruct the <a data-link-type="dfn" href="#orchestrator" id="ref-for-orchestrator">Orchestrator</a> on what actions to take in response to a trigger such as incoming notifications, perceived changes in the data, or manual invocation by an <a data-link-type="dfn" href="#actor" id="ref-for-actor④">Actor</a>.</p>
+    <dt data-md><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="dashboard">Dashboard</dfn>
+    <dd data-md>
+     <p>A user application and <a href="https://solidproject.org/TR/protocol#solid-app">Solid app</a> that enables users to interact with the contents of the <a data-link-type="dfn" href="#data-pod" id="ref-for-data-pod②">Data Pod</a>, the <a data-link-type="dfn" href="#orchestrator" id="ref-for-orchestrator①">Orchestrator</a>, or other <a data-link-type="dfn" href="#actor" id="ref-for-actor⑤">Actors</a> in the Digital Heritage Network.</p>
+   </dl>
+   <p>New added terminology:</p>
+   <dl>
+    <dt data-md><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="orchestrator">Orchestrator</dfn>
+    <dd data-md>
+     <p>An Orchestrator is an Autonomous Agent dedicated to a single Data Pod, Service Hub, or any other actor hosting the Artefact Lifecycle Event Log and a Inbox resources. It interprets and executes business rules described in a policy. The Orchestrator watches the Inbox for possible triggers, while it records the actions it takes to the to the Artefact Lifecycle Event Log.</p>
+    <dt data-md><dfn data-dfn-type="dfn" data-export id="app">App<a class="self-link" href="#app"></a></dfn>
+    <dd data-md>
+     <p>An App is an Automomous Agent dedicated to a single Data Pod can write to the Data Pod unsupervised by the Human Actor and is not limited to the Inbox or Artefact Lifecycle Event Log.</p>
+   </dl>
+   <p class="issue" id="issue-1551ac7d"><a class="self-link" href="#issue-1551ac7d"></a> Need a better name for the App</p>
+   <h2 class="heading settled" data-level="3" id="difference-between-the-dashboard-app-and-orchestrator"><span class="secno">3. </span><span class="content">Difference between the Dashboard, App and orchestrator</span><a class="self-link" href="#difference-between-the-dashboard-app-and-orchestrator"></a></h2>
+   <p>In the following discussion three agents communicate with the <strong>Data Pod</strong> with more or less privileges: the <strong>Orchestrator</strong>,
+the <strong>Dashboard</strong> and the <strong>App</strong>. While in real applications these agents could overlap or might not be required at all (in
+some cases), in this document they are treated as separate entities to help the discussion. Some reasons why
+these Actors could be treated as separate entities:</p>
    <ul>
     <li data-md>
-     <p>The <strong>Maintainer</strong> starts a review process at a <em>Certification Service</em></p>
+     <p>privileges needed to access the <strong>Data Pod</strong></p>
+    <li data-md>
+     <p>requirements needed receive direct feedback from a <strong>Human Agent</strong></p>
+    <li data-md>
+     <p>requirements needed be always available <strong>online</strong></p>
+    <li data-md>
+     <p>requirements needed to understand the <strong>Scholarly Communication Notification protocol</strong> and <strong>Policies</strong></p>
+   </ul>
+   <p>In this light:</p>
+   <dl>
+    <dt data-md>App
+    <dd data-md>
+     <p>The App is a headless Autonomous Agent that doesn’t need a Human Agent to execute write operations on the Data Pod.
+It is a trusted application for the Maintainer that could in principle update any artifact on the Data Pod. This application
+could run as a background service on the computer of the maintainer and is online as long as the computer is connected
+to a network.</p>
+    <dt data-md>Dashboard
+    <dd data-md>
+     <p>The Dashboard is an Agent that responds to feedback from an Human Agent. Typically this Dashboard runs in a browser
+can be in an online or offline modus when a browser is running on the computer of the maintainer with one of the browser
+tabs opened with the dashboard application.</p>
+    <dt data-md>Orchestrator
+    <dd data-md>
+     <p>The Orchestrator is an Autonomous Agent that can read the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong> and append to
+the <strong>Artefact Lifecycle Event Log</strong>. The <strong>Orchestrator</strong> also communicates with the Scholar Community network using
+the <strong>Scholarly Communication Notification protocol</strong> implementing <strong>Policies</strong>.</p>
+   </dl>
+   <p><img src="images/mellon-orchestrator-solar.svg" width="40%"></p>
+   <p>The three Actors can be seen as a mini solar system with <strong>Data Pod</strong> as the Sun. The <strong>App</strong> is a fully trusted agent that runs very near to
+the data pod (in level of trust). The <strong>Orchestrator</strong> has very limited access rights to the data pod. The main
+task of the Orchestrator is to update the event log and execute policies in order to talk the Scholarly Communication Notification
+protocol (read/send messages from/to the corrrect Service Hubs).
+The <strong>Dashboard</strong> sits in between, it has control over the <strong>Data Pod</strong> but might (always) need user input to update the pod.</p>
+   <p>The network below demonstrates the CRUD privileges imagined for the different actors in this document:</p>
+   <p><img src="images/mellon-crud.svg" width="80%"></p>
+   <h2 class="heading settled" data-level="4" id="maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">4. </span><span class="content">Maintainer announces a (finished) artefact in the Data Pod</span><a class="self-link" href="#maintainer-announces-a-finished-artefact-in-the-data-pod"></a></h2>
+   <p><img src="images/mellon-scenario-1.svg" width="80%"></p>
+   <ul>
+    <li data-md>
+     <p>The <strong>Maintainer</strong> decides, after a lot of work, that one artefact on the <strong>Data Pod</strong> is ready to be
+shared with the world</p>
+    <li data-md>
+     <p>The <strong>Maintainer</strong> uses the <strong>Dashboard</strong> to send an <code>Announce</code> Notification to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
+    <li data-md>
+     <p>The <strong>Orchestrator</strong> polls the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong> and discovers the <code>Announce</code> from the <strong>Maintainer</strong></p>
      <ul>
       <li data-md>
-       <p>It is not specified how this process should be started</p>
-      <li data-md>
-       <p>It is assumed that the certification service knows or discovers the location of the Scholarly inbox of the maintainer</p>
+       <p>We assume that the <strong>Orchestrator</strong> has capabilities to filter out all trusted notifications from the <strong>Inbox</strong> (validation,
+signatures, shape matching, etc etc)</p>
      </ul>
     <li data-md>
-     <p>The <strong>Certification Service</strong> starts a review workflow and sends after a while an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
+     <p>The <strong>Orchestrator</strong> updates the <strong>Lifecycle Event Log</strong></p>
+    <li data-md>
+     <p>The <strong>Orchestrator</strong> has a list of <strong>Policies</strong> what to do when a new <code>Announce</code> of a specific type arrives and
+sends one or more AS2 notifications to one or more <strong>Service Hubs</strong> accordingly</p>
+   </ul>
+   <h2 class="heading settled" data-level="5" id="maintainer-offers-an-artefact-to-a-certification-service"><span class="secno">5. </span><span class="content">Maintainer offers an artefact to a certification service</span><a class="self-link" href="#maintainer-offers-an-artefact-to-a-certification-service"></a></h2>
+   <p><img src="images/mellon-scenario-2.svg" width="80%"></p>
+   <ul>
+    <li data-md>
+     <p>The <strong>Maintainer</strong> decides to send one artefact to an <strong>Certificaton Service</strong> to request a review</p>
+    <li data-md>
+     <p>The <strong>Maintainer</strong> prepares in the <strong>Dashboard</strong> the required metadata and sends an <code>Offer</code> Notification
+to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
+    <li data-md>
+     <p>The <strong>Orchestrator</strong> polls the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong> and discovers the <code>Offer</code> from the <strong>Maintainer</strong></p>
+    <li data-md>
+     <p>The <strong>Orchestrator</strong> updates the <strong>Lifecycle Event Log</strong></p>
+    <li data-md>
+     <p>The <strong>Orchestrator</strong> sends the <code>Offer</code> to the <strong>Certifiction Service</strong></p>
      <ul>
       <li data-md>
-       <p>The <code>Announce</code> contains as <code>object</code> a link to the published review</p>
-      <li data-md>
-       <p>The <code>Announce</code> contains as <code>object</code> a link to an artefact on the data pod</p>
-      <li data-md>
-       <p>It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the certification service</p>
-      <li data-md>
-       <p>The scholarly inbox MAY be the main inbox of the data pod or a specialized inbox created for the orchestrator</p>
-      <li data-md>
-       <p>The data pod may MAY shape validation mechanisms in place and return HTTP 4** codes when an unknown
-notification shape was submitted to the inbox</p>
-     </ul>
-    <li data-md>
-     <p>The <strong>Certification Service</strong> starts an endorsement workflow and sends an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong></p>
-     <ul>
-      <li data-md>
-       <p>In the use cases below, it is assumed that the same assumptions can be made
-  for any <code>Announce</code> notification that is send by a certification service</p>
+       <p>With <code>@id</code> the network location of the event log <code>https://bob.pod.org/events/cb7b1aed</code></p>
      </ul>
    </ul>
-   <h3 class="heading settled" data-level="1.1" id="orchestrator-reads-the-inbox-of-a-data-pod-and-updates-an-event-log"><span class="secno">1.1. </span><span class="content">Orchestrator reads the inbox of a data pod and updates an event log</span><a class="self-link" href="#orchestrator-reads-the-inbox-of-a-data-pod-and-updates-an-event-log"></a></h3>
-   <p><img src="images/scenario-1-a.svg" width="80%"></p>
-   <ul>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> polls the (scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> lists incoming notifications</p>
-     <ul>
-      <li data-md>
-       <p>The orchestrator MAY filter the inbox list for resource shapes</p>
-      <li data-md>
-       <p>The orchestrator MAY ignore untrusted , invalid notifications</p>
-      <li data-md>
-       <p>The orchestrator MAY filter out notifications about resources that don’t exist (anymore) in the data pod</p>
-      <li data-md>
-       <p>The orchestrator SHALL processes each notification only once</p>
-      <li data-md>
-       <p>The orchestrator MAY only have read permission to the inbox</p>
-      <li data-md>
-       <p>In a shared inbox scenario, multiple applications plus the maintainer MAY want to act on incoming notifications</p>
-     </ul>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> selected the notification it wants to process</p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> updates the <strong>Artefact Lifecycle Event Log</strong> with the notification</p>
-     <ul>
-      <li data-md>
-       <p>The orchestrator MAY store a processed version of the <code>Announce</code> notification in the event log</p>
-      <li data-md>
-       <p>The stored notification <code>@id</code> MUST be unique in all event logs of the data pod</p>
-      <li data-md>
-       <p>The event update time SHALL be the time of writing the event log resource</p>
-      <li data-md>
-       <p>The artefact lifecycle event log SHALL be public readable</p>
-     </ul>
-   </ul>
-   <p class="issue" id="issue-c06b7c2b"><a class="self-link" href="#issue-c06b7c2b"></a> What are the requirement on the shape of the event log.</p>
-   <p class="issue" id="issue-3bd7beae"><a class="self-link" href="#issue-3bd7beae"></a> An orchestrator that is triggered by an update to the data pod artefacts by some other mechanism is left out of this discussion.</p>
-   <h3 class="heading settled" data-level="1.2" id="a-client-app-reads-the-event-log-and-updates-the-artefact"><span class="secno">1.2. </span><span class="content">A client App reads the event log and updates the artefact</span><a class="self-link" href="#a-client-app-reads-the-event-log-and-updates-the-artefact"></a></h3>
-   <p><img src="images/scenario-1-b.svg" width="80%"></p>
-   <ul>
-    <li data-md>
-     <p>The <strong>App</strong> polls the <strong>Artefact Lifecycle Event Log</strong> of the <strong>Data Pod</strong></p>
-     <ul>
-      <li data-md>
-       <p>The app knows that the event log is a trusted append only resource for relevant notifications
-   that should be processed</p>
-       <ul>
-        <li data-md>
-         <p>The app doesn’t need to redo the work of the orchestrator to clean the data pod (scholarly) inbox</p>
-       </ul>
-      <li data-md>
-       <p>The app MAY filter the event log for shapes</p>
-      <li data-md>
-       <p>The app MAY filter out self-referencing notifications</p>
-       <ul>
-        <li data-md>
-         <p>This is for cases where any update to the data pod could trigger an event log update</p>
-       </ul>
-     </ul>
-    <li data-md>
-     <p>The <strong>App</strong> list new events events not yet processed</p>
-    <li data-md>
-     <p>The <strong>App</strong> discovers the <code>Announce</code> event</p>
-    <li data-md>
-     <p>The <strong>App</strong> is configured by the maintainer to automatically update the artefact metadata with a review link</p>
-     <ul>
-      <li data-md>
-       <p>The app MAY send a notification to the Scholarly inbox to update the orchestrator of this fact</p>
-     </ul>
-   </ul>
-   <h3 class="heading settled" data-level="1.3" id="a-maintainer-uses-the-dashboard-to-read-the-event-log-and-updates-the-artefacts"><span class="secno">1.3. </span><span class="content">A maintainer uses the dashboard to read the event log and updates the artefacts</span><a class="self-link" href="#a-maintainer-uses-the-dashboard-to-read-the-event-log-and-updates-the-artefacts"></a></h3>
-   <p><img src="images/scenario-1-c.svg" width="80%"></p>
-   <ul>
-    <li data-md>
-     <p>The <strong>Maintainer</strong> opens the (Scholarly) <strong>Dashboard</strong> and list new events</p>
-     <ul>
-      <li data-md>
-       <p>The dashboard knows that the event log is a trusted append only resource for relevant notifications
-  that should be processed</p>
-       <ul>
-        <li data-md>
-         <p>The dashboard doesn’t need to redo the work of the orchestrator to clean the data pod (scholarly) inbox</p>
-       </ul>
-      <li data-md>
-       <p>The dashboard MAY filter the event log for shapes</p>
-      <li data-md>
-       <p>The dashboard MAY filter out self-referencing notifications</p>
-       <ul>
-        <li data-md>
-         <p>This is for cases where any update to the data pod could trigger an event log update</p>
-       </ul>
-     </ul>
-    <li data-md>
-     <p>The <strong>Maintainer</strong> discovers the <code>Announce</code> event</p>
-    <li data-md>
-     <p>The <strong>Dashboard</strong> suggest to update the artefact metadata in the <strong>Data Pod</strong> with the review link</p>
-    <li data-md>
-     <p>The <strong>Maintainer</strong> approves and the <strong>Dashboard</strong> updates the artefact metadata</p>
-   </ul>
-   <h3 class="heading settled" data-level="1.4" id="the-orchstrator-use-policies-to-update-service-hubs"><span class="secno">1.4. </span><span class="content">The orchstrator use policies to update service hubs</span><a class="self-link" href="#the-orchstrator-use-policies-to-update-service-hubs"></a></h3>
-   <p><img src="images/scenario-1-d.svg" width="80%"></p>
-   <ul>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> has a policy to update a range of <strong>Service Hubs</strong></p>
-     <ul>
-      <li data-md>
-       <p>This can be the same Orchestrator that processes the inbox or an institutional orchestrator</p>
-      <li data-md>
-       <p>The orchestrator uses the event log as a trusted append only resource for relevant Notifications
-  that should be processed</p>
-     </ul>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> can poll a local event log</p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> discovers the <code>Announce</code> event</p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> matches the notification to a set of policies and notifies relevant services</p>
-   </ul>
-   <h2 class="heading settled" data-level="2" id="scenario-2-author-requests-review-with-possible-endorsement-via-repository"><span class="secno">2. </span><span class="content">Scenario 2: Author requests review with possible endorsement (via repository)</span><a class="self-link" href="#scenario-2-author-requests-review-with-possible-endorsement-via-repository"></a></h2>
-   <p>From <a href="https://notify.coar-repositories.org/scenarios/2/">COAR</a>: <i>Initiated by the corresponding author, a repository requests a review for one of its resources from a trusted review service. No acknowledgement is sent by the overlay journal, but it notifies the repository of any successful reviews and endorsements.</i></p>
-   <p>
-    <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
-   </p>
-   <p>
-    <class class="note"> The <em>journal</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
-   </p>
-   <p><img src="images/scenario-2.svg" width="80%"></p>
-   <ul>
-    <li data-md>
-     <p>In the <strong>Dashboard</strong> a <strong>Maintainer</strong> initiated a request for review using an <code>Offer</code> AS2 notification to the inbox of the <strong>Certification Service</strong></p>
-     <ul>
-      <li data-md>
-       <p>The certification service SHALL respond with a HTTP 200 or 202 to the <code>Offer</code></p>
-      <li data-md>
-       <p>The certification service MAY validate the <code>Offer</code> and return 4** error messages</p>
-      <li data-md>
-       <p>The <code>Offer</code> MUST contain the location of the (Scholarly) Inbox at the Data Pod</p>
-      <li data-md>
-       <p>The Dashboard MAY send a carbon copy of the Offer to the (Scholarly) Inbox</p>
-      <li data-md>
-       <p>The AS2 notifications MAY need signatures or other security measures that establish a trusted communication between the Dashboard and the Certificaton Service</p>
-     </ul>
-    <li data-md>
-     <p>The <strong>Certification Service</strong> starts a review workflow and sends after a while an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
-     <ul>
-      <li data-md>
-       <p>The <code>Announce</code> contains as <code>object</code> a link to the published review</p>
-      <li data-md>
-       <p>The <code>Announce</code> contains as <code>object</code> a link to an artefact on the data pod</p>
-      <li data-md>
-       <p>It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the certification service</p>
-      <li data-md>
-       <p>The scholarly inbox MAY be the main inbox of the data pod or a specialized inbox created for the orchestrator</p>
-      <li data-md>
-       <p>The data pod may MAY shape validation mechanisms in place and return HTTP 4** codes when an unknown
-notification shape was submitted to the inbox</p>
-     </ul>
-    <li data-md>
-     <p>The <strong>Certification Service</strong> starts an endorsement workflow and sends an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong></p>
-     <ul>
-      <li data-md>
-       <p>In the use cases below, it is assumed that the same assumptions can be made
-  for any <code>Announce</code> notification that is send by a certification service</p>
-     </ul>
-   </ul>
-   <h3 class="heading settled" data-level="2.1" id="orchestrator-reads-the-inbox-of-a-data-pod-and-updates-an-event-log①"><span class="secno">2.1. </span><span class="content">Orchestrator reads the inbox of a data pod and updates an event log</span><a class="self-link" href="#orchestrator-reads-the-inbox-of-a-data-pod-and-updates-an-event-log①"></a></h3>
-   <p><img src="images/scenario-2-a.svg" width="80%"></p>
-   <ul>
-    <li data-md>
-     <p>The <strong>Dashoard</strong> sends a trigger to the <strong>Orchestrator</strong> to send an <code>Offer</code> AS2 Notification to the <strong>Certification Service</strong></p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> polls the (scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> lists incoming notifications</p>
-     <ul>
-      <li data-md>
-       <p>The orchestrator MAY filter the inbox list for resource shapes</p>
-      <li data-md>
-       <p>The orchestrator MAY ignore untrusted , invalid notifications</p>
-      <li data-md>
-       <p>The orchestrator MAY filter out notifications about resources that don’t exist (anymore) in the data pod</p>
-      <li data-md>
-       <p>The orchestrator SHALL processes each notification only once</p>
-      <li data-md>
-       <p>The orchestrator MAY only have read permission to the inbox</p>
-      <li data-md>
-       <p>In a shared inbox scenario, multiple applications plus the maintainer MAY want to act on incoming notifications</p>
-     </ul>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> selected the notification it wants to process</p>
-     <ul>
-      <li data-md>
-       <p>The orchstrator MAY ignore <code>Offer</code> notifications if they are found in the inbox</p>
-       <ul>
-        <li data-md>
-         <p>It MAY be a policy of the maintainer not to add local <code>Offer</code> requests to the event log</p>
-       </ul>
-     </ul>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> updates the <strong>Artefact Lifecycle Event Log</strong> with the notification</p>
-     <ul>
-      <li data-md>
-       <p>The orchestrator MAY store a processed version of the <code>Announce</code> notification in the event log</p>
-      <li data-md>
-       <p>The stored notification <code>@id</code> MUST be unique in all event logs of the data pod</p>
-      <li data-md>
-       <p>The event update time SHALL be the time of writing the event log resource</p>
-      <li data-md>
-       <p>The artefact lifecycle event log SHALL be public readable</p>
-     </ul>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> can poll a local event log</p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> discovers the <code>Announce</code> event</p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> matches the notification to a set of policies and notifies relevant services</p>
-   </ul>
-   <h2 class="heading settled" data-level="3" id="scenario-3--overlay-journal-announces-review-and-endorsement-of-pre-print-to-aggregator"><span class="secno">3. </span><span class="content">Scenario 3 : Overlay Journal Announces Review and Endorsement of Pre-print to Aggregator</span><a class="self-link" href="#scenario-3--overlay-journal-announces-review-and-endorsement-of-pre-print-to-aggregator"></a></h2>
-   <p>From <a href="https://notify.coar-repositories.org/scenarios/3/">COAR</a>: <i>An overlay journal announces that it has reviewed and endorsed a pre-print to a <a class="property" data-link-type="propdesc">downstream</a> aggregation service.</i></p>
-   <p>
-    <class class="note"> The <em>journal</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
-   </p>
-   <p>
-    <class class="note"> The <em>aggregator</em> is interpreted as the <strong>Awareness Service</strong> in the examples below. </class>
-   </p>
-   <p><img src="images/scenario-3.svg" width="80%"></p>
-   <ul>
-    <li data-md>
-     <p>The <strong>Certification Service</strong> completes a review workflow and sends an <code>Announce</code> AS2 notification to the inbox of the <strong>Awareness Service</strong></p>
-    <li data-md>
-     <p>The <strong>Certification Service</strong> completes a endorsement workflow and sends an <code>Announce</code> AS2 notification to the inbox of the <strong>Awareness Service</strong></p>
-   </ul>
-   <h3 class="heading settled" data-level="3.1" id="pod-doesnt-receive-a-notification"><span class="secno">3.1. </span><span class="content">Pod doesn’t receive a notification</span><a class="self-link" href="#pod-doesnt-receive-a-notification"></a></h3>
-   <ul>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> stays idle</p>
-   </ul>
-   <h2 class="heading settled" data-level="4" id="scenario-4--overlay-journal-endorses-pre-print-initiated-by-author"><span class="secno">4. </span><span class="content">Scenario 4 : Overlay Journal Endorses Pre-print (Initiated by Author)</span><a class="self-link" href="#scenario-4--overlay-journal-endorses-pre-print-initiated-by-author"></a></h2>
-   <p>From <a href="https://notify.coar-repositories.org/scenarios/4/">COAR</a>: <i>An author initiates a process for review and endorsement of their pre-print by filling in a form on the journal system. The information submitted includes the repository URI of the pre-print, a citeable PID (if available) and a link to the file.</i></p>
-   <p>
-    <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
-   </p>
-   <p>
-    <class class="note"> The <em>journal</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
-   </p>
-   <p><img src="images/scenario-4.svg" width="80%"></p>
-   <ul>
-    <li data-md>
-     <p>The <strong>Maintainer</strong> starts a endorsement process at a <strong>Certification Service</strong></p>
-     <ul>
-      <li data-md>
-       <p>It is not specified how this process should be started</p>
-      <li data-md>
-       <p>It is assumed that the certification service knows or discovers the location of the (Scholarly) inbox of the maintainer</p>
-     </ul>
-    <li data-md>
-     <p>The <strong>Certification Service</strong> starts a endorsement workflow and sends after a while an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
-     <ul>
-      <li data-md>
-       <p>The <code>Announce</code> contains as <code>object</code> a link to the published review</p>
-      <li data-md>
-       <p>The <code>Announce</code> contains as <code>object</code> a link to an artefact on the data pod</p>
-      <li data-md>
-       <p>It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the certification service</p>
-      <li data-md>
-       <p>The scholarly inbox MAY be the main inbox of the data pod or a specialized inbox created for the orchestrator</p>
-      <li data-md>
-       <p>The data pod may MAY shape validation mechanisms in place and return HTTP 4** codes when an unknown
-notification shape was submitted to the inbox</p>
-     </ul>
-   </ul>
-   <h3 class="heading settled" data-level="4.1" id="see-scenario-1"><span class="secno">4.1. </span><span class="content">See Scenario 1</span><a class="self-link" href="#see-scenario-1"></a></h3>
-   <ul>
-    <li data-md>
-     <p>The possible use cases for the <strong>Orchestrator</strong> in Scenario 4 are equivalent to <a href="#scenario-1--author-requests-review-with-possible-endorsement-via-overlay-journal">Scenario 1</a></p>
-   </ul>
-   <h2 class="heading settled" data-level="5" id="scenario-5-repository-requests-review-on-behalf-of-corresponding-author"><span class="secno">5. </span><span class="content">Scenario 5: Repository requests review (on behalf of corresponding author)</span><a class="self-link" href="#scenario-5-repository-requests-review-on-behalf-of-corresponding-author"></a></h2>
-   <p>From <a href="https://notify.coar-repositories.org/scenarios/5/">COAR</a>: <em>Initiated by the corresponding author, a repository requests a review for one of its resources from a trusted review service.</em></p>
-   <p>
-    <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
-   </p>
-   <p>
-    <class class="note"> The <em>journal</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
-   </p>
-   <p><img src="images/scenario-5.svg" width="80%"></p>
-   <ul>
-    <li data-md>
-     <p>The <strong>Maintainer</strong> starts via the <strong>Dashboard</strong> a review process by sending an <code>Offer</code> AS2 notification to a <strong>Certification Service</strong></p>
-    <li data-md>
-     <p>The <strong>Certification Service</strong> review workflow evaluates the offer and sends an <code>Accept</code> AS2 to the <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
-    <li data-md>
-     <p>The <strong>Certification Service</strong> review workflows creates a review and sends an <code>Announce</code> AS2 to the <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
-   </ul>
-   <h3 class="heading settled" data-level="5.1" id="see-scenario-2"><span class="secno">5.1. </span><span class="content">See Scenario 2</span><a class="self-link" href="#see-scenario-2"></a></h3>
-   <ul>
-    <li data-md>
-     <p>The possible use cases for the <strong>Orchestrator</strong> in Scenario 2 are functionally equivalent to <a href="#scenario-2-author-requests-review-with-possible-endorsement-via-repository">Scenario 2</a></p>
-   </ul>
-   <h2 class="heading settled" data-level="6" id="scenario-6-author-submits-to-overlay-journal-using-repository-to-host-resource-and-reviews"><span class="secno">6. </span><span class="content">Scenario 6: Author submits to overlay journal using repository to host resource and reviews</span><a class="self-link" href="#scenario-6-author-submits-to-overlay-journal-using-repository-to-host-resource-and-reviews"></a></h2>
-   <p>From <a href="https://notify.coar-repositories.org/scenarios/6/">COAR</a>: <em>The corresponding author submits a paper to an overlay journal. The journal deposits the paper in a repository and arranges reviews. The reviews are deposited in the repository.</em></p>
-   <p>
-    <class class="note"> In the examples below the repository is interpreted as <strong>Registration Service</strong>. </class>
-   </p>
-   <p></p>
-   <p>
-    <class class="note"> The repository MAY request from a <strong>Maintainer</strong> a review for a manuscript. </class>
-   </p>
-   <p></p>
-   <p>
-    <class class="note"> The <em>journal</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
-   </p>
-   <p><img src="images/scenario-6.svg" width="80%"></p>
-   <ul>
-    <li data-md>
-     <p>The <strong>Certification Service</strong> request that a <strong>Registration Service</strong> ingests a manuscript by sending an <code>Offer</code> AS2 notification</p>
-    <li data-md>
-     <p>The <strong>Registration Servic</strong> ingest workflow accepts the manuscript and sends an <code>Accounce</code> AS2 notification to the <strong>Certification Service</strong></p>
-    <li data-md>
-     <p>Reviewers are invited to submit reviews to the <strong>Registration Service</strong></p>
-     <ul>
-      <li data-md>
-       <p>How this is done is not specified</p>
-     </ul>
-    <li data-md>
-     <p>The <strong>Registration Service</strong> notifies the <strong>Certification Service</strong> of a new review by sending an <code>Announce</code> AS2 notification</p>
-    <li data-md>
-     <p>The <strong>Certification Service</strong> starts an endorsement workflow and notifies the <strong>Registration Service</strong> with an <code>Announce</code> AS notification on success</p>
-   </ul>
-   <h3 class="heading settled" data-level="6.1" id="registration-service-request-review-from-maintainer-orchestrator-is-triggered-to-send-out-as2-notifications"><span class="secno">6.1. </span><span class="content">Registration Service request review from maintainer. Orchestrator is triggered to send out AS2 notifications</span><a class="self-link" href="#registration-service-request-review-from-maintainer-orchestrator-is-triggered-to-send-out-as2-notifications"></a></h3>
-   <p><img src="images/scenario-6-a.svg" width="80%"></p>
-   <class class="note"> This scenario investigates how a reviewer can be invited to submit a review for a manuscript
-in a <strong>Registration Service</strong>. </class>
-   <ul>
-    <li data-md>
-     <p>The <strong>Registration Service</strong> discovers the (Scholarly) Inbox of a <strong>Maintainer</strong></p>
-    <li data-md>
-     <p>The <strong>Registration Service</strong> invites a <strong>Maintainer</strong> to submit a review by sending an <code>Offer</code> AS2 notification</p>
-    <li data-md>
-     <p>The <strong>Maintainer</strong> is notified about the offer</p>
-     <ul>
-      <li data-md>
-       <p>This can be done in many ways:</p>
-       <ul>
-        <li data-md>
-         <p>The orchestrator does actions to notify the maintainer about the offer (e.g. sending an email)</p>
-        <li data-md>
-         <p>The dashboard polls the (scholarly)inbox and presents tasks to the maintainer</p>
-       </ul>
-     </ul>
-    <li data-md>
-     <p>The <strong>Maintainer</strong> accepts the task in the <strong>Dashboard</strong></p>
-    <li data-md>
-     <p>The <strong>Dashboard</strong> sends a trigger to the <strong>Orchestrator</strong> to accept the Offer</p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> updates the <strong>Event Log</strong></p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> sends an <code>Accept</code> AS2 notification to the <strong>Registration Service</strong></p>
-    <li data-md>
-     <p>The <strong>Maintainer</strong> submits via the <strong>Dashboard</strong> a review</p>
-    <li data-md>
-     <p>The <strong>Dashboard</strong> send a trigger to the <strong>Orchestrator</strong> to announce the review</p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> updates the <strong>Event Log</strong></p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> sends an <code>Announce</code> AS2 notification to the <strong>Registration Service</strong></p>
-   </ul>
-   <h2 class="heading settled" data-level="7" id="scenario-7-review-service-announces-review-of-pre-print-to-aggregator"><span class="secno">7. </span><span class="content">Scenario 7: Review Service Announces Review of Pre-print to Aggregator</span><a class="self-link" href="#scenario-7-review-service-announces-review-of-pre-print-to-aggregator"></a></h2>
-   <p>From <a href="https://notify.coar-repositories.org/scenarios/7/">COAR</a>: <i>A review service announces that it has reviewed and endorsed a pre-print to a <a class="property" data-link-type="propdesc">downstream</a> aggregation service.</i></p>
-   <p>
-    <class class="note"> The <em>review service</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
-   </p>
-   <p>
-    <class class="note"> The <em>aggregator</em> is interpreted as the <strong>Awareness Service</strong> in the examples below. </class>
-   </p>
-   <p><img src="images/scenario-7.svg" width="80%"></p>
-   <ul>
-    <li data-md>
-     <p>A <strong>Certification Service</strong>* publishes a review and endorsement</p>
-    <li data-md>
-     <p>A <strong>Certification Service</strong>* sends an <code>Announce</code> AS2 notification to an <strong>Awareness Service</strong></p>
-   </ul>
-   <h3 class="heading settled" data-level="7.1" id="pod-doesnt-receive-a-notification①"><span class="secno">7.1. </span><span class="content">Pod doesn’t receive a notification</span><a class="self-link" href="#pod-doesnt-receive-a-notification①"></a></h3>
-   <ul>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> stays idle</p>
-   </ul>
-   <h2 class="heading settled" data-level="8" id="scenario-8-review-service-announces-review-of-pre-print-to-repository"><span class="secno">8. </span><span class="content">Scenario 8: Review Service Announces Review of Pre-print to Repository</span><a class="self-link" href="#scenario-8-review-service-announces-review-of-pre-print-to-repository"></a></h2>
-   <p>From <a href="https://notify.coar-repositories.org/scenarios/7/">COAR</a>: <i>A review service announces that it has reviewed and endorsed a pre-print to the repository.</i></p>
-   <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
-   <p>
-    <class class="note"> The <em>review service</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
-   </p>
-   <p><img src="images/scenario-8.svg" width="80%"></p>
-   <ul>
-    <li data-md>
-     <p>A <strong>Certification Service</strong> publishes a review and endorsement</p>
-    <li data-md>
-     <p>A <strong>Certification Service</strong> sends an <code>Announce</code> AS2 notification to (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
-   </ul>
-   <h3 class="heading settled" data-level="8.1" id="see-scenario-1①"><span class="secno">8.1. </span><span class="content">See Scenario 1</span><a class="self-link" href="#see-scenario-1①"></a></h3>
-   <ul>
-    <li data-md>
-     <p>The possible use cases for the <strong>Orchestrator</strong> in Scenario 8 are functionally equivalent to <a href="#scenario-1--author-requests-review-with-possible-endorsement-via-overlay-journal">Scenario 1</a></p>
-   </ul>
-   <h2 class="heading settled" data-level="9" id="scenario-9-author-requests-reviews-from-review-service-via-repository"><span class="secno">9. </span><span class="content">Scenario 9: Author requests reviews from review service, via repository</span><a class="self-link" href="#scenario-9-author-requests-reviews-from-review-service-via-repository"></a></h2>
-   <p>From <a href="https://notify.coar-repositories.org/scenarios/9/">COAR</a>: <i>A review service announces that it has reviewed and endorsed a pre-print to the repository.</i></p>
-   <p>
-    <class class="note"> The <em>repository</em> is interpreted as the <strong>Data Pod</strong> in the examples below. </class>
-   </p>
-   <p>
-    <class class="note"> The <em>review service</em> is interpreted as the <strong>Certification Service</strong> in the examples below. </class>
-   </p>
-   <p><img src="images/scenario-9.svg" width="80%"></p>
-   <ul>
-    <li data-md>
-     <p>In the <strong>Dashboard</strong> a <strong>Maintainer</strong> initiated a request for review using an <code>Offer</code> AS2 notification to the inbox of the <strong>Certification Service</strong></p>
-    <li data-md>
-     <p>The <strong>Certification Service</strong> starts a review workflow and sends after a while an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
-    <li data-md>
-     <p>The <strong>Certification Service</strong> starts an endorsement workflow and sends an <code>Announce</code> AS2 notification to the (Scholarly) <strong>Inbox</strong></p>
-   </ul>
-   <h3 class="heading settled" data-level="9.1" id="see-scenario-2①"><span class="secno">9.1. </span><span class="content">See Scenario 2</span><a class="self-link" href="#see-scenario-2①"></a></h3>
-   <ul>
-    <li data-md>
-     <p>The possible use cases for the <strong>Orchestrator</strong> in Scenario 9 are functionally equivalent to <a href="#scenario-2-author-requests-review-with-possible-endorsement-via-repository">Scenario 2</a></p>
-   </ul>
+   <p class="issue" id="issue-99502658"><a class="self-link" href="#issue-99502658"></a> This all assumes that the Certification service doesn’t send a 4** (for any reason, metadata, privileges, etc)</p>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -2582,14 +2246,126 @@ in a <strong>Registration Service</strong>. </class>
 
 })();
 </script>
+  <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
+  <ul class="index">
+   <li><a href="#actor">Actor</a><span>, in §2</span>
+   <li><a href="#app">App</a><span>, in §2</span>
+   <li><a href="#artefact-lifecycle-event-log">Artefact Lifecycle Event Log</a><span>, in §2</span>
+   <li><a href="#autonomous-agent">Autonomous Agent</a><span>, in §2</span>
+   <li><a href="#dashboard">Dashboard</a><span>, in §2</span>
+   <li><a href="#data-pod">Data Pod</a><span>, in §2</span>
+   <li><a href="#human-agent">Human Agent</a><span>, in §2</span>
+   <li><a href="#inbox">Inbox</a><span>, in §2</span>
+   <li><a href="#maintainer">Maintainer</a><span>, in §2</span>
+   <li><a href="#orchestrator">Orchestrator</a><span>, in §2</span>
+   <li><a href="#policy">Policy</a><span>, in §2</span>
+   <li><a href="#service-hub">Service Hub</a><span>, in §2</span>
+  </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
+   <dt id="biblio-ldn">[LDN]
+   <dd>Sarven Capadisli; Amy Guy. <a href="https://www.w3.org/TR/ldn/">Linked Data Notifications</a>. 2 May 2017. REC. URL: <a href="https://www.w3.org/TR/ldn/">https://www.w3.org/TR/ldn/</a>
+   <dt id="biblio-ldp">[LDP]
+   <dd>Steve Speicher; John Arwe; Ashok Malhotra. <a href="https://www.w3.org/TR/ldp/">Linked Data Platform 1.0</a>. 26 February 2015. REC. URL: <a href="https://www.w3.org/TR/ldp/">https://www.w3.org/TR/ldp/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
-   <div class="issue"> What are the requirement on the shape of the event log.<a href="#issue-c06b7c2b"> ↵ </a></div>
-   <div class="issue"> An orchestrator that is triggered by an update to the data pod artefacts by some other mechanism is left out of this discussion.<a href="#issue-3bd7beae"> ↵ </a></div>
+   <div class="issue"> Need a better name for the App<a href="#issue-1551ac7d"> ↵ </a></div>
+   <div class="issue"> This all assumes that the Certification service doesn’t send a 4** (for any reason, metadata, privileges, etc)<a href="#issue-99502658"> ↵ </a></div>
   </div>
+  <aside class="dfn-panel" data-for="actor">
+   <b><a href="#actor">#actor</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-actor">2. Glossary</a> <a href="#ref-for-actor①">(2)</a> <a href="#ref-for-actor②">(3)</a> <a href="#ref-for-actor③">(4)</a> <a href="#ref-for-actor④">(5)</a> <a href="#ref-for-actor⑤">(6)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="human-agent">
+   <b><a href="#human-agent">#human-agent</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-human-agent">2. Glossary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="data-pod">
+   <b><a href="#data-pod">#data-pod</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-data-pod">2. Glossary</a> <a href="#ref-for-data-pod①">(2)</a> <a href="#ref-for-data-pod②">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="inbox">
+   <b><a href="#inbox">#inbox</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-inbox">2. Glossary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dashboard">
+   <b><a href="#dashboard">#dashboard</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dashboard">2. Glossary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="orchestrator">
+   <b><a href="#orchestrator">#orchestrator</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-orchestrator">2. Glossary</a> <a href="#ref-for-orchestrator①">(2)</a>
+   </ul>
+  </aside>
+<script>/* script-dfn-panel */
+
+document.body.addEventListener("click", function(e) {
+    var queryAll = function(sel) { return [].slice.call(document.querySelectorAll(sel)); }
+    // Find the dfn element or panel, if any, that was clicked on.
+    var el = e.target;
+    var target;
+    var hitALink = false;
+    while(el.parentElement) {
+        if(el.tagName == "A") {
+            // Clicking on a link in a <dfn> shouldn't summon the panel
+            hitALink = true;
+        }
+        if(el.classList.contains("dfn-paneled")) {
+            target = "dfn";
+            break;
+        }
+        if(el.classList.contains("dfn-panel")) {
+            target = "dfn-panel";
+            break;
+        }
+        el = el.parentElement;
+    }
+    if(target != "dfn-panel") {
+        // Turn off any currently "on" or "activated" panels.
+        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(function(el){
+            el.classList.remove("on");
+            el.classList.remove("activated");
+        });
+    }
+    if(target == "dfn" && !hitALink) {
+        // open the panel
+        var dfnPanel = document.querySelector(".dfn-panel[data-for='" + el.id + "']");
+        if(dfnPanel) {
+            dfnPanel.classList.add("on");
+            var rect = el.getBoundingClientRect();
+            dfnPanel.style.left = window.scrollX + rect.right + 5 + "px";
+            dfnPanel.style.top = window.scrollY + rect.top + "px";
+            var panelRect = dfnPanel.getBoundingClientRect();
+            var panelWidth = panelRect.right - panelRect.left;
+            if(panelRect.right > document.body.scrollWidth && (rect.left - (panelWidth + 5)) > 0) {
+                // Reposition, because the panel is overflowing
+                dfnPanel.style.left = window.scrollX + rect.left - (panelWidth + 5) + "px";
+            }
+        } else {
+            console.log("Couldn't find .dfn-panel[data-for='" + el.id + "']");
+        }
+    } else if(target == "dfn-panel") {
+        // Switch it to "activated" state, which pins it.
+        el.classList.add("activated");
+        el.style.left = null;
+        el.style.top = null;
+    }
+
+});
+</script>

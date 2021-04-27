@@ -1,0 +1,119 @@
+<pre class='metadata'>
+Title: Mellon Orchestrator use cases
+Shortname: orchestrator
+Level: 2
+Status: DREAM
+Editor: Patrick Hochstenbach
+Editor: Ruben Dedecker
+Editor: Miel Vander Sande
+Editor: Jeroen Werbrouck
+Editor: Herbert Van de Sompel
+Markup Shorthands: markdown yes
+Abstract: TODO
+</pre>
+
+# Mellon Orchestrator use cases
+
+# Glossary
+
+Copied from [Orchestrator for a decentralized Digital Heritage Network](https://erfgoedpod.github.io/orchestrator/):
+
+: <dfn export>Actor</dfn>
+:: A entity (person, application or service) that participates in the network.
+: <dfn export>Human Agent</dfn>
+:: A person that operates directly as an [=Actor=] on the network.
+: <dfn export>Autonomous Agent</dfn>
+:: An intelligent software instance that operates on an [=Actor=]'s behalf but without any interference of that [=Actor=].
+: <dfn export>Maintainer</dfn>
+:: A [=Human Agent=] that can manually perform actions (see [[#actions]]) on the network using a [=Dashboard=] application.
+:: Usually a person employed by an organisation (e.g., a Cultural Heritage Institution) to maintain data and datasets owned by that organisation.
+: <dfn export>Data Pod</dfn>
+:: As defined by [[solid-protocol]], a <a href="https://solidproject.org/TR/protocol#data-pod">Data Pod</a> is a place for storing documents, with mechanisms for controlling who can access what.
+: <dfn>Inbox</dfn>
+:: An [[!LDP]] resource where others can POST Linked Data Notifications [[!LDN]] in order to notify the actor of a change an artefact's lifecycle.
+: <dfn>Artefact Lifecycle Event Log</dfn>
+:: An HTTP resource served by an actor (e.g., as a resource in the [=Data Pod=]) that represents a log of occurred lifecycle events related to artefacts known by the actor.
+:: Artefacts are considered known when they reside in the actor's [=Data Pod=] or if the actor has been made aware via [[!LDN]].
+: <dfn export>Service Hub</dfn>
+:: An [=Actor=] that provides a service to other actors in the network. It is a <a href="https://solidproject.org/TR/protocol#solid-app">Solid app</a> and serves an [=Inbox=].
+: <dfn export>Policy</dfn>
+:: A set of machine-readable business rules that instruct the [=Orchestrator=] on what actions to take in response to a trigger such as incoming notifications, perceived changes in the data, or manual invocation by an [=Actor=].
+: <dfn export>Dashboard</dfn>
+:: A user application and <a href="https://solidproject.org/TR/protocol#solid-app">Solid app</a> that enables users to interact with the contents of the [=Data Pod=], the [=Orchestrator=], or other [=Actors=] in the Digital Heritage Network.
+
+New added terminology:
+
+: <dfn export>Orchestrator</dfn>
+:: An Orchestrator is an Autonomous Agent dedicated to a single Data Pod, Service Hub, or any other actor hosting the Artefact Lifecycle Event Log and a Inbox resources. It interprets and executes business rules described in a policy. The Orchestrator watches the Inbox for possible triggers, while it records the actions it takes to the to the Artefact Lifecycle Event Log.
+: <dfn export>App</dfn>
+:: An App is an Automomous Agent dedicated to a single Data Pod can write to the Data Pod unsupervised by the Human Actor and is not limited to the Inbox or Artefact Lifecycle Event Log.
+
+Issue: Need a better name for the App
+
+# Difference between the Dashboard, App and orchestrator
+
+In the following discussion three agents communicate with the **Data Pod** with more or less privileges: the **Orchestrator**,
+the **Dashboard** and the **App**. While in real applications these agents could overlap or might not be required at all (in
+some cases), in this document they are treated as separate entities to help the discussion. Some reasons why
+these Actors could be treated as separate entities:
+
+- privileges needed to access the **Data Pod**
+- requirements needed receive direct feedback from a **Human Agent**
+- requirements needed be always available **online**
+- requirements needed to understand the **Scholarly Communication Notification protocol** and **Policies**
+
+In this light:
+
+: App
+:: The App is a headless Autonomous Agent that doesn't need a Human Agent to execute write operations on the Data Pod.
+It is a trusted application for the Maintainer that could in principle update any artifact on the Data Pod. This application
+could run as a background service on the computer of the maintainer and is online as long as the computer is connected
+to a network.
+: Dashboard
+:: The Dashboard is an Agent that responds to feedback from an Human Agent. Typically this Dashboard runs in a browser
+can be in an online or offline modus when a browser is running on the computer of the maintainer with one of the browser
+tabs opened with the dashboard application.
+: Orchestrator
+:: The Orchestrator is an Autonomous Agent that can read the (Scholarly) **Inbox** of the **Data Pod** and append to
+the **Artefact Lifecycle Event Log**. The **Orchestrator** also communicates with the Scholar Community network using
+the **Scholarly Communication Notification protocol** implementing **Policies**.
+
+<img src="images/mellon-orchestrator-solar.svg" width="40%">
+
+The three Actors can be seen as a mini solar system with **Data Pod** as the Sun. The **App** is a fully trusted agent that runs very near to
+the data pod (in level of trust). The **Orchestrator** has very limited access rights to the data pod. The main
+task of the Orchestrator is to update the event log and execute policies in order to talk the Scholarly Communication Notification
+protocol (read/send messages from/to the corrrect Service Hubs).
+The **Dashboard** sits in between, it has control over the **Data Pod** but might (always) need user input to update the pod.
+
+The network below demonstrates the CRUD privileges imagined for the different actors in this document:
+
+<img src="images/mellon-crud.svg" width="80%">
+
+# Maintainer announces a (finished) artefact in the Data Pod
+
+<img src="images/mellon-scenario-1.svg" width="80%">
+
+- The **Maintainer** decides, after a lot of work, that one artefact on the **Data Pod** is ready to be
+shared with the world
+- The **Maintainer** uses the **Dashboard** to send an `Announce` Notification to the (Scholarly) **Inbox** of the **Data Pod**
+- The **Orchestrator** polls the (Scholarly) **Inbox** of the **Data Pod** and discovers the `Announce` from the **Maintainer**
+    - We assume that the **Orchestrator** has capabilities to filter out all trusted notifications from the **Inbox** (validation,
+    signatures, shape matching, etc etc)
+- The **Orchestrator** updates the **Lifecycle Event Log**
+- The **Orchestrator** has a list of **Policies** what to do when a new `Announce` of a specific type arrives and
+sends one or more AS2 notifications to one or more **Service Hubs** accordingly
+
+# Maintainer offers an artefact to a certification service
+
+<img src="images/mellon-scenario-2.svg" width="80%">
+
+- The **Maintainer** decides to send one artefact to an **Certificaton Service** to request a review
+- The **Maintainer** prepares in the **Dashboard** the required metadata and sends an `Offer` Notification
+to the (Scholarly) **Inbox** of the **Data Pod**
+- The **Orchestrator** polls the (Scholarly) **Inbox** of the **Data Pod** and discovers the `Offer` from the **Maintainer**
+- The **Orchestrator** updates the **Lifecycle Event Log**
+- The **Orchestrator** sends the `Offer` to the **Certifiction Service**
+    - With `@id` the network location of the event log `https://bob.pod.org/events/cb7b1aed`
+
+Issue: This all assumes that the Certification service doesn't send a 4** (for any reason, metadata, privileges, etc)

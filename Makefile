@@ -2,7 +2,7 @@ help:
 	@echo "Generate HTML from a Bikeshed source document:"
 	@echo "  make dist    Generate HTML in dist directory"
 
-PAGES = index.html
+PAGES = index.html mellon-scenario.html
 
 dist: $(PAGES)
 

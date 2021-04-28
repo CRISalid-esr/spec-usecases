@@ -116,7 +116,7 @@ sends one or more AS2 notifications to one or more **Service Hubs** accordingly
 
 Issue: This all assumes that the ServiceHub service doesn't send a 4** (for any reason, metadata, privileges, etc)
 
-# Maintainer notifies the pod about an offer to be sent for certification
+# Maintainer notifies the pod about an Offer for certification
 
 <img src="images/mellon-scenario-2.svg" width="80%">
 
@@ -136,13 +136,50 @@ copy of that offer to the Service Hub and other (Scholarly) Service Hubs that ne
 </div>
 
 <div class="note">
-One scenario could for instance be that after receiving an Offer, the Certification service invites the Maintainer
+One scenario could for instance be that after receiving an Offer, the Certification Service invites the Maintainer
 by an email or any out of band method to follow an elaborate registration process where the metadata in the original
 Offer provides a reference and track record of the Offer event, artefacts involved and (Scholar) Inboxes to use for
 further updates to the Scholarly Record.
 </div>
 
 <div class="note">
-An other scenario could be that the Certification service provides a Shape of metadata that is needed for its service
+An other scenario could be that the Certification Service provides a Shape of metadata that is needed for its service
 and the Dashboard can already fill in a complete Offer with all required fields. How this is done is out of scope.
+</div>
+
+<div class="note">
+The Certification Service process can have its own (public) Event Log where the Offer is appended.
+</div>
+
+# A Certification server sends an Accept to the Data Pod
+
+<img src="images/mellon-scenario-3.svg" width="80%">
+
+- The **Certification Service** received in a previous step in some way an Offer to review an
+artefact on the **Data Pod**
+- After careful analysis the **Certification Service** decides to start the review process and sends
+an `Accept` to the (Scholarly) **Inbox** of the **Data Pod** as confirmation of this process
+- The **Orchestrator** polls the (Scholarly) **Inbox** of the **Data Pod** and discovers the `Accept` from the **Certification Service**
+- The **Orchestrator** updates the **Lifecycle Event Log** with the `Accept`
+    - The Orchestrator could check if the `Accept` matches an `Offer` in its own Event Log
+    - In the general case it could happen that an unsolicited `Accept` appears in the Event Log (without a direct
+    link to an `Offer` in the Data Pod). It is assumed that the Orchestrator only deals with factual notifications
+    of event it receives and not do any post-hoc reconstruction of Scholarly Communication events: **don't mess
+    with the scholarly record principle**.
+
+# A Certification server sends an Reject to the Data Pod
+
+<img src="images/mellon-scenario-4.svg" width="80%">
+
+- The **Certification Service** received in a previous step in some way an Offer to review an
+artefact on the **Data Pod**
+- After careful analysis the **Certification Service** decides that the artefact is out of scope and
+send a `Reject` to the (Scholarly) **Inbox** of the **Data Pod** as result of this decision.
+- The **Orchestrator** polls the (Scholarly) **Inbox** of the **Data Pod** and discovers the `Reject` from the **Certification Service**
+- The **Orchestrator** updates the **Lifecycle Event Log** with the `Reject`
+
+<div class="note">
+In this scenario the notifications are sent by the Certificaton Service to provide a machine readable event of a rejection.
+The Certification Service could send friendly emails to the researcher in out of band channels, but also decides to send
+a Reject notification to the Data Pod because it knows there is a Scholarly **Inbox** available.
 </div>

@@ -129,7 +129,7 @@ to the (Scholarly) **Inbox** of the **Data Pod**
     - With `@id` the network location of the event log `https://bob.pod.org/events/cb7b1aed`
 
 <div class="note">
-Note that we didn't specify how the Offer should be structured, what metadata requirements are needed
+Note that we don't specify how the Offer should be structured in context of the metadata requirements that are needed
 to start a certification process at the Service Hub, nor how any validation, error handling is done. The purpose
 of sending the Offer to the Data Pod is to update the Scholarly Record (the Event Log) and send a
 copy of that offer to the Service Hub and other (Scholarly) Service Hubs that need to be updated of this event.
@@ -140,4 +140,9 @@ One scenario could for instance be that after receiving an Offer, the Certificat
 by an email or any out of band method to follow an elaborate registration process where the metadata in the original
 Offer provides a reference and track record of the Offer event, artefacts involved and (Scholar) Inboxes to use for
 further updates to the Scholarly Record.
+</div>
+
+<div class="note">
+An other scenario could be that the Certification service provides a Shape of metadata that is needed for its service
+and the Dashboard can already fill in a complete Offer with all required fields. How this is done is out of scope.
 </div>

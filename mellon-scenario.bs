@@ -80,15 +80,25 @@ the **Scholarly Communication Notification protocol** implementing **Policies**.
 
 <img src="images/mellon-orchestrator-solar.svg" width="40%">
 
-The three Actors can be seen as a mini solar system with **Data Pod** as the Sun. The **App** is a fully trusted agent that runs very near to
+The three Actors can be seen as a mini solar system with the **Data Pod** as the Sun. The **App** is a fully trusted agent that runs very near to
 the data pod (in level of trust). The **Orchestrator** has very limited access rights to the data pod. The main
 task of the Orchestrator is to update the event log and execute policies in order to talk the Scholarly Communication Notification
 protocol (read/send messages from/to the corrrect Service Hubs).
 The **Dashboard** sits in between, it has control over the **Data Pod** but might (always) need user input to update the pod.
 
-The network below demonstrates the CRUD privileges imagined for the different actors in this document:
+The networks below demonstrates the CRUD privileges imagined for the different actors in this document. The first
+network demonstrates a typical Solid setup where the Dashboard is a single page application that has direct access
+to the Data Pod and the App is more a background process running in the same computer as the Maintainer.
 
-<img src="images/mellon-crud.svg" width="80%">
+<div><img src="images/mellon-crud-app.svg" width="80%"></div>
+<i>CRUD operations in case the DashBoard is single-page application and the App a background task</i>
+
+The second network demonstrates a more classic setup with a browser Dashboard controlled by a server App which uses a
+Data Pod as backend storage.
+
+<div><img src="images/mellon-crud.svg" width="80%"></div>
+<i>CRUD operations in case the Dashoard and App is a classic client/server application</i>
+
 
 # Maintainer announces a (finished) artefact in the Data Pod
 
@@ -104,7 +114,9 @@ shared with the world
 - The **Orchestrator** has a list of **Policies** what to do when a new `Announce` of a specific type arrives and
 sends one or more AS2 notifications to one or more **Service Hubs** accordingly
 
-# Maintainer offers an artefact to a certification service
+Issue: This all assumes that the ServiceHub service doesn't send a 4** (for any reason, metadata, privileges, etc)
+
+# Maintainer notifies the pod about an offer to be sent for certification
 
 <img src="images/mellon-scenario-2.svg" width="80%">
 
@@ -113,7 +125,19 @@ sends one or more AS2 notifications to one or more **Service Hubs** accordingly
 to the (Scholarly) **Inbox** of the **Data Pod**
 - The **Orchestrator** polls the (Scholarly) **Inbox** of the **Data Pod** and discovers the `Offer` from the **Maintainer**
 - The **Orchestrator** updates the **Lifecycle Event Log**
-- The **Orchestrator** sends the `Offer` to the **Certifiction Service**
+- The **Orchestrator** sends the `Offer` to the **Certification Service**
     - With `@id` the network location of the event log `https://bob.pod.org/events/cb7b1aed`
 
-Issue: This all assumes that the Certification service doesn't send a 4** (for any reason, metadata, privileges, etc)
+<div class="note">
+Note that we didn't specify how the Offer should be structured, what metadata requirements are needed
+to start a certification process at the Service Hub, nor how any validation, error handling is done. The purpose
+of sending the Offer to the Data Pod is to update the Scholarly Record (the Event Log) and send a
+copy of that offer to the Service Hub and other (Scholarly) Service Hubs that need to be updated of this event.
+</div>
+
+<div class="note">
+One scenario could for instance be that after receiving an Offer, the Certification service invites the Maintainer
+by an email or any out of band method to follow an elaborate registration process where the metadata in the original
+Offer provides a reference and track record of the Offer event, artefacts involved and (Scholar) Inboxes to use for
+further updates to the Scholarly Record.
+</div>

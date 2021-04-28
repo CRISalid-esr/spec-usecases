@@ -1917,7 +1917,7 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Mellon Orchestrator use cases</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-04-27">27 April 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-04-28">28 April 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Issue Tracking:
@@ -1933,7 +1933,7 @@ dfn > a.self-link::before      { content: "#"; }
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 27 April 2021,
+In addition, as of 28 April 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1951,7 +1951,7 @@ Parts of this work may be from another specification document.  If so, those par
     <li><a href="#glossary"><span class="secno">2</span> <span class="content">Glossary</span></a>
     <li><a href="#difference-between-the-dashboard-app-and-orchestrator"><span class="secno">3</span> <span class="content">Difference between the Dashboard, App and orchestrator</span></a>
     <li><a href="#maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">4</span> <span class="content">Maintainer announces a (finished) artefact in the Data Pod</span></a>
-    <li><a href="#maintainer-offers-an-artefact-to-a-certification-service"><span class="secno">5</span> <span class="content">Maintainer offers an artefact to a certification service</span></a>
+    <li><a href="#maintainer-notifies-the-pod-about-an-offer-to-be-sent-for-certification"><span class="secno">5</span> <span class="content">Maintainer notifies the pod about an offer to be sent for certification</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -2051,13 +2051,20 @@ the <strong>Artefact Lifecycle Event Log</strong>. The <strong>Orchestrator</str
 the <strong>Scholarly Communication Notification protocol</strong> implementing <strong>Policies</strong>.</p>
    </dl>
    <p><img src="images/mellon-orchestrator-solar.svg" width="40%"></p>
-   <p>The three Actors can be seen as a mini solar system with <strong>Data Pod</strong> as the Sun. The <strong>App</strong> is a fully trusted agent that runs very near to
+   <p>The three Actors can be seen as a mini solar system with the <strong>Data Pod</strong> as the Sun. The <strong>App</strong> is a fully trusted agent that runs very near to
 the data pod (in level of trust). The <strong>Orchestrator</strong> has very limited access rights to the data pod. The main
 task of the Orchestrator is to update the event log and execute policies in order to talk the Scholarly Communication Notification
 protocol (read/send messages from/to the corrrect Service Hubs).
 The <strong>Dashboard</strong> sits in between, it has control over the <strong>Data Pod</strong> but might (always) need user input to update the pod.</p>
-   <p>The network below demonstrates the CRUD privileges imagined for the different actors in this document:</p>
-   <p><img src="images/mellon-crud.svg" width="80%"></p>
+   <p>The networks below demonstrates the CRUD privileges imagined for the different actors in this document. The first
+network demonstrates a typical Solid setup where the Dashboard is a single page application that has direct access
+to the Data Pod and the App is more a background process running in the same computer as the Maintainer.</p>
+   <div><img src="images/mellon-crud-app.svg" width="80%"></div>
+    <i>CRUD operations in case the DashBoard is single-page application and the App a background task</i> 
+   <p>The second network demonstrates a more classic setup with a browser Dashboard controlled by a server App which uses a
+Data Pod as backend storage.</p>
+   <div><img src="images/mellon-crud.svg" width="80%"></div>
+    <i>CRUD operations in case the Dashoard and App is a classic client/server application</i> 
    <h2 class="heading settled" data-level="4" id="maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">4. </span><span class="content">Maintainer announces a (finished) artefact in the Data Pod</span><a class="self-link" href="#maintainer-announces-a-finished-artefact-in-the-data-pod"></a></h2>
    <p><img src="images/mellon-scenario-1.svg" width="80%"></p>
    <ul>
@@ -2079,7 +2086,8 @@ signatures, shape matching, etc etc)</p>
      <p>The <strong>Orchestrator</strong> has a list of <strong>Policies</strong> what to do when a new <code>Announce</code> of a specific type arrives and
 sends one or more AS2 notifications to one or more <strong>Service Hubs</strong> accordingly</p>
    </ul>
-   <h2 class="heading settled" data-level="5" id="maintainer-offers-an-artefact-to-a-certification-service"><span class="secno">5. </span><span class="content">Maintainer offers an artefact to a certification service</span><a class="self-link" href="#maintainer-offers-an-artefact-to-a-certification-service"></a></h2>
+   <p class="issue" id="issue-e66a7ca7"><a class="self-link" href="#issue-e66a7ca7"></a> This all assumes that the ServiceHub service doesn’t send a 4** (for any reason, metadata, privileges, etc)</p>
+   <h2 class="heading settled" data-level="5" id="maintainer-notifies-the-pod-about-an-offer-to-be-sent-for-certification"><span class="secno">5. </span><span class="content">Maintainer notifies the pod about an offer to be sent for certification</span><a class="self-link" href="#maintainer-notifies-the-pod-about-an-offer-to-be-sent-for-certification"></a></h2>
    <p><img src="images/mellon-scenario-2.svg" width="80%"></p>
    <ul>
     <li data-md>
@@ -2092,13 +2100,20 @@ to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
     <li data-md>
      <p>The <strong>Orchestrator</strong> updates the <strong>Lifecycle Event Log</strong></p>
     <li data-md>
-     <p>The <strong>Orchestrator</strong> sends the <code>Offer</code> to the <strong>Certifiction Service</strong></p>
+     <p>The <strong>Orchestrator</strong> sends the <code>Offer</code> to the <strong>Certification Service</strong></p>
      <ul>
       <li data-md>
        <p>With <code>@id</code> the network location of the event log <code>https://bob.pod.org/events/cb7b1aed</code></p>
      </ul>
    </ul>
-   <p class="issue" id="issue-99502658"><a class="self-link" href="#issue-99502658"></a> This all assumes that the Certification service doesn’t send a 4** (for any reason, metadata, privileges, etc)</p>
+   <div class="note" role="note"> Note that we didn’t specify how the Offer should be structured, what metadata requirements are needed
+to start a certification process at the Service Hub, nor how any validation, error handling is done. The purpose
+of sending the Offer to the Data Pod is to update the Scholarly Record (the Event Log) and send a
+copy of that offer to the Service Hub and other (Scholarly) Service Hubs that need to be updated of this event. </div>
+   <div class="note" role="note"> One scenario could for instance be that after receiving an Offer, the Certification service invites the Maintainer
+by an email or any out of band method to follow an elaborate registration process where the metadata in the original
+Offer provides a reference and track record of the Offer event, artefacts involved and (Scholar) Inboxes to use for
+further updates to the Scholarly Record. </div>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -2275,7 +2290,7 @@ to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
    <div class="issue"> Need a better name for the App<a href="#issue-1551ac7d"> ↵ </a></div>
-   <div class="issue"> This all assumes that the Certification service doesn’t send a 4** (for any reason, metadata, privileges, etc)<a href="#issue-99502658"> ↵ </a></div>
+   <div class="issue"> This all assumes that the ServiceHub service doesn’t send a 4** (for any reason, metadata, privileges, etc)<a href="#issue-e66a7ca7"> ↵ </a></div>
   </div>
   <aside class="dfn-panel" data-for="actor">
    <b><a href="#actor">#actor</a></b><b>Referenced in:</b>

@@ -50,7 +50,7 @@ New added terminology:
 
 Issue: Need a better name for the App
 
-# Difference between the Dashboard, App and orchestrator
+# Difference between the Dashboard, App and Orchestrator
 
 In the following discussion three agents communicate with the **Data Pod** with more or less privileges: the **Orchestrator**,
 the **Dashboard** and the **App**. While in real applications these agents could overlap or might not be required at all (in
@@ -99,8 +99,9 @@ Data Pod as backend storage.
 <div><img src="images/mellon-crud.svg" width="80%"></div>
 <i>CRUD operations in case the Dashoard and App is a classic client/server application</i>
 
+# Context COAR
 
-# Maintainer announces a (finished) artefact in the Data Pod
+## Maintainer announces a (finished) artefact in the Data Pod
 
 <img src="images/mellon-scenario-1.svg" width="80%">
 
@@ -116,7 +117,7 @@ sends one or more AS2 notifications to one or more **Service Hubs** accordingly
 
 Issue: This all assumes that the ServiceHub service doesn't send a 4** (for any reason, metadata, privileges, etc)
 
-# Maintainer notifies the pod about an Offer for certification
+## Maintainer notifies the pod about an Offer for certification
 
 <img src="images/mellon-scenario-2.svg" width="80%">
 
@@ -151,35 +152,51 @@ and the Dashboard can already fill in a complete Offer with all required fields.
 The Certification Service process can have its own (public) Event Log where the Offer is appended.
 </div>
 
-# A Certification server sends an Accept to the Data Pod
+## A Service Hub sends notifications to the Data Pod
+
+A **Service Hub** can send many types of notifications to the Data Hub. In some cases these
+notifications can be in response to a previous `Offer` notification sent out to a Service Hub. In other
+cases these notifications appear "unsolicited" in the (Scholarly) **Inbox** of the **Data Pod**.
+Well, at least "unsolicited" from the view point of the **Orchestrator** that can't find a
+matching `Offer` in the *Event Log*.
+
+It is assumed that the **Orchestrator** will not try any post-hoc reconstruction of Scholarly Communication events
+and follows a principle of only storing *factual notifications* in the **Event Log**.
 
 <img src="images/mellon-scenario-3.svg" width="80%">
 
-- The **Certification Service** received in a previous step in some way an Offer to review an
-artefact on the **Data Pod**
-- After careful analysis the **Certification Service** decides to start the review process and sends
-an `Accept` to the (Scholarly) **Inbox** of the **Data Pod** as confirmation of this process
-- The **Orchestrator** polls the (Scholarly) **Inbox** of the **Data Pod** and discovers the `Accept` from the **Certification Service**
-- The **Orchestrator** updates the **Lifecycle Event Log** with the `Accept`
-    - The Orchestrator could check if the `Accept` matches an `Offer` in its own Event Log
-    - In the general case it could happen that an unsolicited `Accept` appears in the Event Log (without a direct
-    link to an `Offer` in the Data Pod). It is assumed that the Orchestrator only deals with factual notifications
-    of event it receives and not do any post-hoc reconstruction of Scholarly Communication events: **don't mess
-    with the scholarly record principle**.
+In general, the **Orchestrator** follows the same basic processing rules to update the **Event Log** when a
+notification arrives:
 
-# A Certification server sends an Reject to the Data Pod
-
-<img src="images/mellon-scenario-4.svg" width="80%">
-
-- The **Certification Service** received in a previous step in some way an Offer to review an
-artefact on the **Data Pod**
-- After careful analysis the **Certification Service** decides that the artefact is out of scope and
-send a `Reject` to the (Scholarly) **Inbox** of the **Data Pod** as result of this decision.
-- The **Orchestrator** polls the (Scholarly) **Inbox** of the **Data Pod** and discovers the `Reject` from the **Certification Service**
-- The **Orchestrator** updates the **Lifecycle Event Log** with the `Reject`
+- The **Service Hub** sends to the (Schoraly) **Inbox** of the **Data Pod** an update of an event in the
+form of an AS2 notification
+    - These notifications could refer to a previously notification that was sent out to a **Service Hub**
+    - These notifications could be a response to an out-of-band communication with the **Service Hub**
+    - These notifications could be a singular event (e.g. one of the artefacts on the **Data Pod** was reviewed)
+- The **Orchestrator** polls the (Scholarly) **Inbox** of the **Data Pod** and discovers the AS2 notification from the **Certification Service**
+- The **Orchestrator** updates the **Lifecycle Event Log** with the AS2 notification
 
 <div class="note">
-In this scenario the notifications are sent by the Certificaton Service to provide a machine readable event of a rejection.
-The Certification Service could send friendly emails to the researcher in out of band channels, but also decides to send
-a Reject notification to the Data Pod because it knows there is a Scholarly **Inbox** available.
+There can be other types of communication between the Service Hub and a researcher. For instance, when
+a request for a review is rejected with a `Reject` notification, the Service Hub might also send a friendly
+email to the researcher. The Service Hub knows of the (Scholarly) **Inbox** existence and sends a
+machine readable version of a rejection event.
 </div>
+
+### Service Hub Notifications
+
+#### Accept
+
+The **Service Hub** will send an `Accept` notification to accept an offer made in a previous notification.
+An `Accept` without a matching `Offer` should result in an invalid notification.
+
+#### Reject
+
+The **Service Hub** will send an `Reject` notification to reject an offer made in a previous notification.
+An `Reject` without a matching `Offer` should result in an invalid notification.
+
+#### Announce
+
+This pattern is used by the **Service Hub** to announce the outcome of an activity, sometimes (but not always) linking an original
+resource to a new, related resource. The `Accounce` can be in response to a previous notification
+but doesn't need to.

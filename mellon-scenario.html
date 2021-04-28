@@ -1949,11 +1949,24 @@ Parts of this work may be from another specification document.  If so, those par
    <ol class="toc" role="directory">
     <li><a href="#mellon-orchestrator-use-cases"><span class="secno">1</span> <span class="content">Mellon Orchestrator use cases</span></a>
     <li><a href="#glossary"><span class="secno">2</span> <span class="content">Glossary</span></a>
-    <li><a href="#difference-between-the-dashboard-app-and-orchestrator"><span class="secno">3</span> <span class="content">Difference between the Dashboard, App and orchestrator</span></a>
-    <li><a href="#maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">4</span> <span class="content">Maintainer announces a (finished) artefact in the Data Pod</span></a>
-    <li><a href="#maintainer-notifies-the-pod-about-an-offer-for-certification"><span class="secno">5</span> <span class="content">Maintainer notifies the pod about an Offer for certification</span></a>
-    <li><a href="#a-certification-server-sends-an-accept-to-the-data-pod"><span class="secno">6</span> <span class="content">A Certification server sends an Accept to the Data Pod</span></a>
-    <li><a href="#a-certification-server-sends-an-reject-to-the-data-pod"><span class="secno">7</span> <span class="content">A Certification server sends an Reject to the Data Pod</span></a>
+    <li><a href="#difference-between-the-dashboard-app-and-orchestrator"><span class="secno">3</span> <span class="content">Difference between the Dashboard, App and Orchestrator</span></a>
+    <li>
+     <a href="#context-coar"><span class="secno">4</span> <span class="content">Context COAR</span></a>
+     <ol class="toc">
+      <li><a href="#maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">4.1</span> <span class="content">Maintainer announces a (finished) artefact in the Data Pod</span></a>
+      <li><a href="#maintainer-notifies-the-pod-about-an-offer-for-certification"><span class="secno">4.2</span> <span class="content">Maintainer notifies the pod about an Offer for certification</span></a>
+      <li>
+       <a href="#a-service-hub-sends-notifications-to-the-data-pod"><span class="secno">4.3</span> <span class="content">A Service Hub sends notifications to the Data Pod</span></a>
+       <ol class="toc">
+        <li>
+         <a href="#service-hub-notifications"><span class="secno">4.3.1</span> <span class="content">Service Hub Notifications</span></a>
+         <ol class="toc">
+          <li><a href="#accept"><span class="secno">4.3.1.1</span> <span class="content">Accept</span></a>
+          <li><a href="#reject"><span class="secno">4.3.1.2</span> <span class="content">Reject</span></a>
+          <li><a href="#announce"><span class="secno">4.3.1.3</span> <span class="content">Announce</span></a>
+         </ol>
+       </ol>
+     </ol>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -2018,7 +2031,7 @@ Parts of this work may be from another specification document.  If so, those par
      <p>An App is an Automomous Agent dedicated to a single Data Pod can write to the Data Pod unsupervised by the Human Actor and is not limited to the Inbox or Artefact Lifecycle Event Log.</p>
    </dl>
    <p class="issue" id="issue-1551ac7d"><a class="self-link" href="#issue-1551ac7d"></a> Need a better name for the App</p>
-   <h2 class="heading settled" data-level="3" id="difference-between-the-dashboard-app-and-orchestrator"><span class="secno">3. </span><span class="content">Difference between the Dashboard, App and orchestrator</span><a class="self-link" href="#difference-between-the-dashboard-app-and-orchestrator"></a></h2>
+   <h2 class="heading settled" data-level="3" id="difference-between-the-dashboard-app-and-orchestrator"><span class="secno">3. </span><span class="content">Difference between the Dashboard, App and Orchestrator</span><a class="self-link" href="#difference-between-the-dashboard-app-and-orchestrator"></a></h2>
    <p>In the following discussion three agents communicate with the <strong>Data Pod</strong> with more or less privileges: the <strong>Orchestrator</strong>,
 the <strong>Dashboard</strong> and the <strong>App</strong>. While in real applications these agents could overlap or might not be required at all (in
 some cases), in this document they are treated as separate entities to help the discussion. Some reasons why
@@ -2067,7 +2080,8 @@ to the Data Pod and the App is more a background process running in the same com
 Data Pod as backend storage.</p>
    <div><img src="images/mellon-crud.svg" width="80%"></div>
     <i>CRUD operations in case the Dashoard and App is a classic client/server application</i> 
-   <h2 class="heading settled" data-level="4" id="maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">4. </span><span class="content">Maintainer announces a (finished) artefact in the Data Pod</span><a class="self-link" href="#maintainer-announces-a-finished-artefact-in-the-data-pod"></a></h2>
+   <h2 class="heading settled" data-level="4" id="context-coar"><span class="secno">4. </span><span class="content">Context COAR</span><a class="self-link" href="#context-coar"></a></h2>
+   <h3 class="heading settled" data-level="4.1" id="maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">4.1. </span><span class="content">Maintainer announces a (finished) artefact in the Data Pod</span><a class="self-link" href="#maintainer-announces-a-finished-artefact-in-the-data-pod"></a></h3>
    <p><img src="images/mellon-scenario-1.svg" width="80%"></p>
    <ul>
     <li data-md>
@@ -2089,7 +2103,7 @@ signatures, shape matching, etc etc)</p>
 sends one or more AS2 notifications to one or more <strong>Service Hubs</strong> accordingly</p>
    </ul>
    <p class="issue" id="issue-e66a7ca7"><a class="self-link" href="#issue-e66a7ca7"></a> This all assumes that the ServiceHub service doesn’t send a 4** (for any reason, metadata, privileges, etc)</p>
-   <h2 class="heading settled" data-level="5" id="maintainer-notifies-the-pod-about-an-offer-for-certification"><span class="secno">5. </span><span class="content">Maintainer notifies the pod about an Offer for certification</span><a class="self-link" href="#maintainer-notifies-the-pod-about-an-offer-for-certification"></a></h2>
+   <h3 class="heading settled" data-level="4.2" id="maintainer-notifies-the-pod-about-an-offer-for-certification"><span class="secno">4.2. </span><span class="content">Maintainer notifies the pod about an Offer for certification</span><a class="self-link" href="#maintainer-notifies-the-pod-about-an-offer-for-certification"></a></h3>
    <p><img src="images/mellon-scenario-2.svg" width="80%"></p>
    <ul>
     <li data-md>
@@ -2119,46 +2133,49 @@ further updates to the Scholarly Record. </div>
    <div class="note" role="note"> An other scenario could be that the Certification Service provides a Shape of metadata that is needed for its service
 and the Dashboard can already fill in a complete Offer with all required fields. How this is done is out of scope. </div>
    <div class="note" role="note"> The Certification Service process can have its own (public) Event Log where the Offer is appended. </div>
-   <h2 class="heading settled" data-level="6" id="a-certification-server-sends-an-accept-to-the-data-pod"><span class="secno">6. </span><span class="content">A Certification server sends an Accept to the Data Pod</span><a class="self-link" href="#a-certification-server-sends-an-accept-to-the-data-pod"></a></h2>
+   <h3 class="heading settled" data-level="4.3" id="a-service-hub-sends-notifications-to-the-data-pod"><span class="secno">4.3. </span><span class="content">A Service Hub sends notifications to the Data Pod</span><a class="self-link" href="#a-service-hub-sends-notifications-to-the-data-pod"></a></h3>
+   <p>A <strong>Service Hub</strong> can send many types of notifications to the Data Hub. In some cases these
+notifications can be in response to a previous <code>Offer</code> notification sent out to a Service Hub. In other
+cases these notifications appear "unsolicited" in the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong>.
+Well, at least "unsolicited" from the view point of the <strong>Orchestrator</strong> that can’t find a
+matching <code>Offer</code> in the <em>Event Log</em>.</p>
+   <p>It is assumed that the <strong>Orchestrator</strong> will not try any post-hoc reconstruction of Scholarly Communication events
+and follows a principle of only storing <em>factual notifications</em> in the <strong>Event Log</strong>.</p>
    <p><img src="images/mellon-scenario-3.svg" width="80%"></p>
+   <p>In general, the <strong>Orchestrator</strong> follows the same basic processing rules to update the <strong>Event Log</strong> when a
+notification arrives:</p>
    <ul>
     <li data-md>
-     <p>The <strong>Certification Service</strong> received in a previous step in some way an Offer to review an
-artefact on the <strong>Data Pod</strong></p>
-    <li data-md>
-     <p>After careful analysis the <strong>Certification Service</strong> decides to start the review process and sends
-an <code>Accept</code> to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong> as confirmation of this process</p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> polls the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong> and discovers the <code>Accept</code> from the <strong>Certification Service</strong></p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> updates the <strong>Lifecycle Event Log</strong> with the <code>Accept</code></p>
+     <p>The <strong>Service Hub</strong> sends to the (Schoraly) <strong>Inbox</strong> of the <strong>Data Pod</strong> an update of an event in the
+form of an AS2 notification</p>
      <ul>
       <li data-md>
-       <p>The Orchestrator could check if the <code>Accept</code> matches an <code>Offer</code> in its own Event Log</p>
+       <p>These notifications could refer to a previously notification that was sent out to a <strong>Service Hub</strong></p>
       <li data-md>
-       <p>In the general case it could happen that an unsolicited <code>Accept</code> appears in the Event Log (without a direct
-link to an <code>Offer</code> in the Data Pod). It is assumed that the Orchestrator only deals with factual notifications
-of event it receives and not do any post-hoc reconstruction of Scholarly Communication events: <strong>don’t mess
-with the scholarly record principle</strong>.</p>
+       <p>These notifications could be a response to an out-of-band communication with the <strong>Service Hub</strong></p>
+      <li data-md>
+       <p>These notifications could be a singular event (e.g. one of the artefacts on the <strong>Data Pod</strong> was reviewed)</p>
      </ul>
+    <li data-md>
+     <p>The <strong>Orchestrator</strong> polls the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong> and discovers the AS2 notification from the <strong>Certification Service</strong></p>
+    <li data-md>
+     <p>The <strong>Orchestrator</strong> updates the <strong>Lifecycle Event Log</strong> with the AS2 notification</p>
    </ul>
-   <h2 class="heading settled" data-level="7" id="a-certification-server-sends-an-reject-to-the-data-pod"><span class="secno">7. </span><span class="content">A Certification server sends an Reject to the Data Pod</span><a class="self-link" href="#a-certification-server-sends-an-reject-to-the-data-pod"></a></h2>
-   <p><img src="images/mellon-scenario-4.svg" width="80%"></p>
-   <ul>
-    <li data-md>
-     <p>The <strong>Certification Service</strong> received in a previous step in some way an Offer to review an
-artefact on the <strong>Data Pod</strong></p>
-    <li data-md>
-     <p>After careful analysis the <strong>Certification Service</strong> decides that the artefact is out of scope and
-send a <code>Reject</code> to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong> as result of this decision.</p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> polls the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong> and discovers the <code>Reject</code> from the <strong>Certification Service</strong></p>
-    <li data-md>
-     <p>The <strong>Orchestrator</strong> updates the <strong>Lifecycle Event Log</strong> with the <code>Reject</code></p>
-   </ul>
-   <div class="note" role="note"> In this scenario the notifications are sent by the Certificaton Service to provide a machine readable event of a rejection.
-The Certification Service could send friendly emails to the researcher in out of band channels, but also decides to send
-a Reject notification to the Data Pod because it knows there is a Scholarly <strong>Inbox</strong> available. </div>
+   <div class="note" role="note"> There can be other types of communication between the Service Hub and a researcher. For instance, when
+a request for a review is rejected with a <code>Reject</code> notification, the Service Hub might also send a friendly
+email to the researcher. The Service Hub knows of the (Scholarly) <strong>Inbox</strong> existence and sends a
+machine readable version of a rejection event. </div>
+   <h4 class="heading settled" data-level="4.3.1" id="service-hub-notifications"><span class="secno">4.3.1. </span><span class="content">Service Hub Notifications</span><a class="self-link" href="#service-hub-notifications"></a></h4>
+   <h5 class="heading settled" data-level="4.3.1.1" id="accept"><span class="secno">4.3.1.1. </span><span class="content">Accept</span><a class="self-link" href="#accept"></a></h5>
+   <p>The <strong>Service Hub</strong> will send an <code>Accept</code> notification to accept an offer made in a previous notification.
+An <code>Accept</code> without a matching <code>Offer</code> should result in an invalid notification.</p>
+   <h5 class="heading settled" data-level="4.3.1.2" id="reject"><span class="secno">4.3.1.2. </span><span class="content">Reject</span><a class="self-link" href="#reject"></a></h5>
+   <p>The <strong>Service Hub</strong> will send an <code>Reject</code> notification to reject an offer made in a previous notification.
+An <code>Reject</code> without a matching <code>Offer</code> should result in an invalid notification.</p>
+   <h5 class="heading settled" data-level="4.3.1.3" id="announce"><span class="secno">4.3.1.3. </span><span class="content">Announce</span><a class="self-link" href="#announce"></a></h5>
+   <p>This pattern is used to announce the outcome of an activity, sometimes (but not always) linking an original
+resource to a new, related resource. The <code>Accounce</code> can be in response to a previous notification
+but doesn’t need to.</p>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>

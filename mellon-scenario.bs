@@ -147,9 +147,7 @@ could be needed to perform all required steps.
 Let's provide two examples how AS2 notifications can be sent out of the researcher environment
 and generate some communication patterns out of these examples.
 
-## Maintainer notifies world about a requires publication status update
-
-### Maintainer Announces a (finished) artefact in the Data Pod
+## Maintainer Announces a (finished) artefact in the Data Pod
 
 <img src="images/mellon-scenario-1.svg" width="80%">
 
@@ -165,7 +163,7 @@ sends one or more AS2 notifications to one or more **Service Hubs** accordingly
 
 Issue: This all assumes that the ServiceHub service doesn't send a 4** (for any reason, metadata, privileges, etc)
 
-### Maintainer Offers an artefact in the Data Pod to a Service Hub
+## Maintainer Offers an artefact in the Data Pod to a Service Hub
 
 <img src="images/mellon-scenario-2.svg" width="80%">
 
@@ -177,7 +175,7 @@ to the (Scholarly) **Inbox** of the **Data Pod**
 - The **Orchestrator** sends the `Offer` to the **Certification Service**
     - With `@id` the network location of the event log `https://bob.pod.org/events/cb7b1aed`
 
-### Possible Policies
+## Possible Policies
 
 Possible policies that can be available for these use cases (using a pseudo policy language).
 
@@ -198,11 +196,14 @@ Add only `Announce` and `Accept` notifications from the **Maintainer** to the **
 
 <div class="example">
 ```
-mellon:EventLogRecord
+mellon:AppendScholarlyRecord
+  a EventResource
+  a AppendResource
   when
     a Notification
         isFrom(Maintainer)
-        inset(Announce,Accept)
+        inSet(Announce,Accept)
+        isOfType(Article,Review,Dataset)
 
 ```
 </div>
@@ -212,7 +213,8 @@ and **Archiving Service**
 
 <div class="example">
 ```
-mellon:ForwardMessage
+mellon:ForwardToCatalog
+  a Notification
   rdfs:label "Register at my library catalog"
   target:
     id: http://my.institution.org
@@ -221,9 +223,10 @@ mellon:ForwardMessage
   when
     a Notification
         isFrom(Maintainer)
-        inset(Announce)
+        inSet(Announce)
 
-mellon:ForwardMessage
+mellon:ForwardToArchive
+  a Notification
   rdfs:label "Add to our archive"
   target:
     id: http://dataforever.edu
@@ -232,7 +235,7 @@ mellon:ForwardMessage
   when
     a Notification
         isFrom(Maintainer)
-        inset(Announce)
+        inSet(Announce)
 ```
 </div>
 
@@ -240,7 +243,8 @@ Forward a notification from a **Maintainer** with a `cc` (e.g. an Offer) to an e
 
 <div class="example">
 ```
-mellon:ForwardMessage
+mellon:ForwardCC
+  a Notification
   rdfs:label "Forward messages with a cc"
   target:
     id: @cc
@@ -252,44 +256,50 @@ mellon:ForwardMessage
 ```
 </div>
 
-### Orchestrator as LDN Sender
+## Orchestrator side effects
 
-Based on the **Policies*:
+Based on the **Policies**:
 
 - The **Orchestrator** polls the **Inbox** for new notifications
 - The **Orchestrator** matches every new notificaton against the **Policies**
-    - This will result in zero or more matched shapes
+    - This will result in zero or more matched policy shapes
     - When the Shape matches an `mellon:EventLogRecord` then a new EventLog is created
     - When the Shape matches an `mellon:ForwardMessage` then a new AS2 notification is sent.
 
 
 # Service Hub sends notifications to Data Pod
 
-A **Service Hub** can send many types of notifications to the Data Hub. In some cases these
-notifications can be in response to a previous `Offer` notification sent out to a Service Hub. In other
-cases these notifications appear "unsolicited" in the (Scholarly) **Inbox** of the **Data Pod**.
-Well, at least "unsolicited" from the view point of the **Orchestrator** that can't find a
-matching `Offer` in the *Event Log*.
+## Service Hub Announces a new resource about an artefact in the Data Pod
 
-It is assumed that the **Orchestrator** will not try any post-hoc reconstruction of Scholarly Communication events
-and follows a principle of only storing *factual notifications* in the **Event Log**.
+### Service Hub Announce is a response to a previous Offer
+
+For example, a **Maintainer** request that a journal reviews on of the publications
+that can be found on the **Data Pod**. In a previous step an `Offer` was send to
+to journal as **Certification Service**. In response to the `offer` the journal sends
+an `Announce` to the (Scholarly) **Inbox** of the **Data Pod**.
 
 <img src="images/mellon-scenario-3.svg" width="80%">
 
-In general, the **Orchestrator** follows the same basic processing rules to update the **Event Log** when a
-notification arrives:
-
-- The **Service Hub** sends to the (Schoraly) **Inbox** of the **Data Pod** an update of an event in the
-form of an AS2 notification
-    - These notifications could refer to a previously notification that was sent out to a **Service Hub**
-    - These notifications could be a response to an out-of-band communication with the **Service Hub**
-    - These notifications could be a singular event (e.g. one of the artefacts on the **Data Pod** was reviewed)
-- The **Orchestrator** polls the (Scholarly) **Inbox** of the **Data Pod** and discovers the AS2 notification from the **Certification Service**
+- The **Orchestrator** finds in the (Scholarly) **Inbox** of the **Data Pod** an `Announce` notification
+- The `Announce` contains an `inReplyTo` property to a previous `Offer`
+- The **Orchestrator** validates the `Offer` against the **Event Log**
 - The **Orchestrator** updates the **Lifecycle Event Log** with the AS2 notification
 
-<div class="note">
-There can be other types of communication between the Service Hub and a researcher. For instance, when
-a request for a review is rejected with a `Reject` notification, the Service Hub might also send a friendly
-email to the researcher. The Service Hub knows of the (Scholarly) **Inbox** existence and sends a
-machine readable version of a rejection event.
-</div>
+### Service Hub Announce is standalone
+
+For example, an overlay journal adds an article it found in an **Data Pod**, via the WebID
+of the author, the journals sends an `Announce` notification to the (Scholarly) **Inbox**
+of the **Data Pod**.
+
+<img src="images/mellon-scenario-4.svg" width="80%">
+
+- The **Orchestrator** finds in the (Scholarly) **Inbox** of the **Data Pod** an `Announce` notification
+- The `Announce` doens't an `inReplyTo` property to a previous `Offer`
+- The notification is ignored
+- The **Maintainer** finds via the **Dashboard** the standalone `Announce` in the (Scholarly) **Inbox**
+- The **Maintainer** sends an `Accept` with an `inReplyTo` to the `Announce` to the (Scholarly) **Inbox**
+- The **Orchestrator** finds both the old `Announce` notification and new `Accept` notification
+- The **Orchestrator** has a **Policy** that when both notifications match, the can be written
+to the **Lifecycle Event Log**
+
+## Possible Policies

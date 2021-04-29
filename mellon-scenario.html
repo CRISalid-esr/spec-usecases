@@ -1917,7 +1917,7 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Mellon Orchestrator use cases</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-04-28">28 April 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-04-29">29 April 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Issue Tracking:
@@ -1933,7 +1933,7 @@ dfn > a.self-link::before      { content: "#"; }
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 28 April 2021,
+In addition, as of 29 April 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1950,23 +1950,20 @@ Parts of this work may be from another specification document.  If so, those par
     <li><a href="#mellon-orchestrator-use-cases"><span class="secno">1</span> <span class="content">Mellon Orchestrator use cases</span></a>
     <li><a href="#glossary"><span class="secno">2</span> <span class="content">Glossary</span></a>
     <li><a href="#difference-between-the-dashboard-app-and-orchestrator"><span class="secno">3</span> <span class="content">Difference between the Dashboard, App and Orchestrator</span></a>
+    <li><a href="#as2-notifications"><span class="secno">4</span> <span class="content">AS2 Notifications</span></a>
+    <li><a href="#communication-in-and-out-the-researcher-environment"><span class="secno">5</span> <span class="content">Communication in and out the researcher environment</span></a>
     <li>
-     <a href="#context-coar"><span class="secno">4</span> <span class="content">Context COAR</span></a>
+     <a href="#data-pod-sends-notifications-to-a-service-hub"><span class="secno">6</span> <span class="content">Data Pod sends notifications to a Service Hub</span></a>
      <ol class="toc">
-      <li><a href="#maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">4.1</span> <span class="content">Maintainer announces a (finished) artefact in the Data Pod</span></a>
-      <li><a href="#maintainer-notifies-the-pod-about-an-offer-for-certification"><span class="secno">4.2</span> <span class="content">Maintainer notifies the pod about an Offer for certification</span></a>
       <li>
-       <a href="#a-service-hub-sends-notifications-to-the-data-pod"><span class="secno">4.3</span> <span class="content">A Service Hub sends notifications to the Data Pod</span></a>
+       <a href="#maintainer-notifies-world-about-a-requires-publication-status-update"><span class="secno">6.1</span> <span class="content">Maintainer notifies world about a requires publication status update</span></a>
        <ol class="toc">
-        <li>
-         <a href="#service-hub-notifications"><span class="secno">4.3.1</span> <span class="content">Service Hub Notifications</span></a>
-         <ol class="toc">
-          <li><a href="#accept"><span class="secno">4.3.1.1</span> <span class="content">Accept</span></a>
-          <li><a href="#reject"><span class="secno">4.3.1.2</span> <span class="content">Reject</span></a>
-          <li><a href="#announce"><span class="secno">4.3.1.3</span> <span class="content">Announce</span></a>
-         </ol>
+        <li><a href="#maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">6.1.1</span> <span class="content">Maintainer Announces a (finished) artefact in the Data Pod</span></a>
+        <li><a href="#maintainer-offers-an-artefact-in-the-data-pod-to-a-service-hub"><span class="secno">6.1.2</span> <span class="content">Maintainer Offers an artefact in the Data Pod to a Service Hub</span></a>
+        <li><a href="#policies"><span class="secno">6.1.3</span> <span class="content">Policies</span></a>
        </ol>
      </ol>
+    <li><a href="#service-hub-sends-notifications-to-data-pod"><span class="secno">7</span> <span class="content">Service Hub sends notifications to Data Pod</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -2080,8 +2077,48 @@ to the Data Pod and the App is more a background process running in the same com
 Data Pod as backend storage.</p>
    <div><img src="images/mellon-crud.svg" width="80%"></div>
     <i>CRUD operations in case the Dashoard and App is a classic client/server application</i> 
-   <h2 class="heading settled" data-level="4" id="context-coar"><span class="secno">4. </span><span class="content">Context COAR</span><a class="self-link" href="#context-coar"></a></h2>
-   <h3 class="heading settled" data-level="4.1" id="maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">4.1. </span><span class="content">Maintainer announces a (finished) artefact in the Data Pod</span><a class="self-link" href="#maintainer-announces-a-finished-artefact-in-the-data-pod"></a></h3>
+   <h2 class="heading settled" data-level="4" id="as2-notifications"><span class="secno">4. </span><span class="content">AS2 Notifications</span><a class="self-link" href="#as2-notifications"></a></h2>
+   <p>In the use case document we use 5 types AS2 notifications in line with the <a href="https://notify.coar-repositories.org/patterns/">COAR Notify</a> project.</p>
+   <dl>
+    <dt data-md><strong>Offer</strong>
+    <dd data-md>
+     <p>The <code>Offer</code> notification is used when one system offers one of its resources to
+an other system to conduct some activity.</p>
+    <dt data-md><strong>Undo</strong>
+    <dd data-md>
+     <p>The <code>Undo</code> notification is used to retract an offer made in a previous notification.</p>
+    <dt data-md><strong>Accept</strong>
+    <dd data-md>
+     <p>The <code>Accept</code> notification is a response to an <code>Offer</code> made in a previous notification.
+It indicates that the offer is accepted.</p>
+    <dt data-md><strong>Reject</strong>
+    <dd data-md>
+     <p>The <code>Reject</code> notificaion is a response to an <code>Offer</code> made in a previous notification.
+It indicates that the offer is rejected.</p>
+    <dt data-md><strong>Announce</strong>
+    <dd data-md>
+     <p>The <code>Announce</code> notification is used to announce the outcome of an activity: typically
+to announce the availability of a new (scholarly) artefact.</p>
+   </dl>
+   <h2 class="heading settled" data-level="5" id="communication-in-and-out-the-researcher-environment"><span class="secno">5. </span><span class="content">Communication in and out the researcher environment</span><a class="self-link" href="#communication-in-and-out-the-researcher-environment"></a></h2>
+   <p>A2 Notifications can be sent from the researcher environment to the service hub environment.
+For instace in a journal or review submission workflow notifications can be send to the
+service hub as machine readable updates of the scholarly record. In response the service hub
+enviroment can send A2 notifications back to the researcher environment.</p>
+   <p>From the viewpoint of the <strong>Orchestrator</strong> the primary goal for this AS2 Notifications is to
+update the scholarly record in the form of the <strong>Lifecycle Event Log</strong>. Updates
+to the <strong>Lifecycle Event Log</strong> can trigger new notifications sent out to the <strong>Service Hub</strong> environment. This triggers are described in <strong>Policies</strong>.</p>
+   <p>The AS2 notifications are used as announcements of activities by the researcher and the
+service hubs but are not meant to demand how these activities need to be done, nor to
+automate these activities.  For instance, when an <code>Offer</code> is sent to a Review Service
+we don’t envision that message contains all the steps to fully automate the submission process.
+It could contain enough metadata for simple workflows. In general out of band communication
+could be needed to perform all required steps.</p>
+   <h2 class="heading settled" data-level="6" id="data-pod-sends-notifications-to-a-service-hub"><span class="secno">6. </span><span class="content">Data Pod sends notifications to a Service Hub</span><a class="self-link" href="#data-pod-sends-notifications-to-a-service-hub"></a></h2>
+   <p>Let’s provide two examples how AS2 notifications can be sent out of the researcher environment
+and generate some communication patterns out of these examples.</p>
+   <h3 class="heading settled" data-level="6.1" id="maintainer-notifies-world-about-a-requires-publication-status-update"><span class="secno">6.1. </span><span class="content">Maintainer notifies world about a requires publication status update</span><a class="self-link" href="#maintainer-notifies-world-about-a-requires-publication-status-update"></a></h3>
+   <h4 class="heading settled" data-level="6.1.1" id="maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">6.1.1. </span><span class="content">Maintainer Announces a (finished) artefact in the Data Pod</span><a class="self-link" href="#maintainer-announces-a-finished-artefact-in-the-data-pod"></a></h4>
    <p><img src="images/mellon-scenario-1.svg" width="80%"></p>
    <ul>
     <li data-md>
@@ -2103,7 +2140,7 @@ signatures, shape matching, etc etc)</p>
 sends one or more AS2 notifications to one or more <strong>Service Hubs</strong> accordingly</p>
    </ul>
    <p class="issue" id="issue-e66a7ca7"><a class="self-link" href="#issue-e66a7ca7"></a> This all assumes that the ServiceHub service doesn’t send a 4** (for any reason, metadata, privileges, etc)</p>
-   <h3 class="heading settled" data-level="4.2" id="maintainer-notifies-the-pod-about-an-offer-for-certification"><span class="secno">4.2. </span><span class="content">Maintainer notifies the pod about an Offer for certification</span><a class="self-link" href="#maintainer-notifies-the-pod-about-an-offer-for-certification"></a></h3>
+   <h4 class="heading settled" data-level="6.1.2" id="maintainer-offers-an-artefact-in-the-data-pod-to-a-service-hub"><span class="secno">6.1.2. </span><span class="content">Maintainer Offers an artefact in the Data Pod to a Service Hub</span><a class="self-link" href="#maintainer-offers-an-artefact-in-the-data-pod-to-a-service-hub"></a></h4>
    <p><img src="images/mellon-scenario-2.svg" width="80%"></p>
    <ul>
     <li data-md>
@@ -2122,18 +2159,28 @@ to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
        <p>With <code>@id</code> the network location of the event log <code>https://bob.pod.org/events/cb7b1aed</code></p>
      </ul>
    </ul>
-   <div class="note" role="note"> Note that we don’t specify how the Offer should be structured in context of the metadata requirements that are needed
-to start a certification process at the Service Hub, nor how any validation, error handling is done. The purpose
-of sending the Offer to the Data Pod is to update the Scholarly Record (the Event Log) and send a
-copy of that offer to the Service Hub and other (Scholarly) Service Hubs that need to be updated of this event. </div>
-   <div class="note" role="note"> One scenario could for instance be that after receiving an Offer, the Certification Service invites the Maintainer
-by an email or any out of band method to follow an elaborate registration process where the metadata in the original
-Offer provides a reference and track record of the Offer event, artefacts involved and (Scholar) Inboxes to use for
-further updates to the Scholarly Record. </div>
-   <div class="note" role="note"> An other scenario could be that the Certification Service provides a Shape of metadata that is needed for its service
-and the Dashboard can already fill in a complete Offer with all required fields. How this is done is out of scope. </div>
-   <div class="note" role="note"> The Certification Service process can have its own (public) Event Log where the Offer is appended. </div>
-   <h3 class="heading settled" data-level="4.3" id="a-service-hub-sends-notifications-to-the-data-pod"><span class="secno">4.3. </span><span class="content">A Service Hub sends notifications to the Data Pod</span><a class="self-link" href="#a-service-hub-sends-notifications-to-the-data-pod"></a></h3>
+   <h4 class="heading settled" data-level="6.1.3" id="policies"><span class="secno">6.1.3. </span><span class="content">Policies</span><a class="self-link" href="#policies"></a></h4>
+   <p>Possible policies that can be available for these use cases (using a pseudo policy language)</p>
+   <p>Add only <code>Announce</code> and <code>Accept</code> notifictions from the <strong>Maintainer</strong> to the <strong>Event Log</strong></p>
+<pre>mellon:EventLogRecord
+  when
+    Notification
+        isFrom(Maintainer)
+        inset(Announce,Accept)
+
+</pre>
+   <p>Forward every <code>Announce</code> from the <strong>Maintainer</strong> to the instutional <strong>Registation Service</strong></p>
+<pre>mellon:ForwadMessage
+  target:
+    id: http://my.institution.org
+    ldp:inbox: http://my.institution.org/inbox
+    type: System
+  when
+    Notification
+        isFrom(Maintainer)
+        inset(Announce)
+</pre>
+   <h2 class="heading settled" data-level="7" id="service-hub-sends-notifications-to-data-pod"><span class="secno">7. </span><span class="content">Service Hub sends notifications to Data Pod</span><a class="self-link" href="#service-hub-sends-notifications-to-data-pod"></a></h2>
    <p>A <strong>Service Hub</strong> can send many types of notifications to the Data Hub. In some cases these
 notifications can be in response to a previous <code>Offer</code> notification sent out to a Service Hub. In other
 cases these notifications appear "unsolicited" in the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong>.
@@ -2165,17 +2212,6 @@ form of an AS2 notification</p>
 a request for a review is rejected with a <code>Reject</code> notification, the Service Hub might also send a friendly
 email to the researcher. The Service Hub knows of the (Scholarly) <strong>Inbox</strong> existence and sends a
 machine readable version of a rejection event. </div>
-   <h4 class="heading settled" data-level="4.3.1" id="service-hub-notifications"><span class="secno">4.3.1. </span><span class="content">Service Hub Notifications</span><a class="self-link" href="#service-hub-notifications"></a></h4>
-   <h5 class="heading settled" data-level="4.3.1.1" id="accept"><span class="secno">4.3.1.1. </span><span class="content">Accept</span><a class="self-link" href="#accept"></a></h5>
-   <p>The <strong>Service Hub</strong> will send an <code>Accept</code> notification to accept an offer made in a previous notification.
-An <code>Accept</code> without a matching <code>Offer</code> should result in an invalid notification.</p>
-   <h5 class="heading settled" data-level="4.3.1.2" id="reject"><span class="secno">4.3.1.2. </span><span class="content">Reject</span><a class="self-link" href="#reject"></a></h5>
-   <p>The <strong>Service Hub</strong> will send an <code>Reject</code> notification to reject an offer made in a previous notification.
-An <code>Reject</code> without a matching <code>Offer</code> should result in an invalid notification.</p>
-   <h5 class="heading settled" data-level="4.3.1.3" id="announce"><span class="secno">4.3.1.3. </span><span class="content">Announce</span><a class="self-link" href="#announce"></a></h5>
-   <p>This pattern is used by the <strong>Service Hub</strong> to announce the outcome of an activity, sometimes (but not always) linking an original
-resource to a new, related resource. The <code>Accounce</code> can be in response to a previous notification
-but doesn’t need to.</p>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>

@@ -99,9 +99,57 @@ Data Pod as backend storage.
 <div><img src="images/mellon-crud.svg" width="80%"></div>
 <i>CRUD operations in case the Dashoard and App is a classic client/server application</i>
 
-# Context COAR
+# AS2 Notifications
 
-## Maintainer announces a (finished) artefact in the Data Pod
+In the use case document we use 5 types AS2 notifications in line with the
+[COAR Notify](https://notify.coar-repositories.org/patterns/) project.
+
+: **Offer**
+:: The `Offer` notification is used when one system offers one of its resources to
+an other system to conduct some activity.
+
+: **Undo**
+:: The `Undo` notification is used to retract an offer made in a previous notification.
+
+: **Accept**
+:: The `Accept` notification is a response to an `Offer` made in a previous notification.
+It indicates that the offer is accepted.
+
+: **Reject**
+:: The `Reject` notificaion is a response to an `Offer` made in a previous notification.
+It indicates that the offer is rejected.
+
+: **Announce**
+:: The `Announce` notification is used to announce the outcome of an activity: typically
+to announce the availability of a new (scholarly) artefact.
+
+# Communication in and out the researcher environment
+
+A2 Notifications can be sent from the researcher environment to the service hub environment.
+For instace in a journal or review submission workflow notifications can be send to the
+service hub as machine readable updates of the scholarly record. In response the service hub
+enviroment can send A2 notifications back to the researcher environment.
+
+From the viewpoint of the **Orchestrator** the primary goal for this AS2 Notifications is to
+update the scholarly record in the form of the  **Lifecycle Event Log**. Updates
+to the  **Lifecycle Event Log** can trigger new notifications sent out to the **Service Hub**
+environment. This triggers are described in **Policies**.
+
+The AS2 notifications are used as announcements of activities by the researcher and the
+service hubs but are not meant to demand how these activities need to be done, nor to
+automate these activities.  For instance, when an `Offer` is sent to a Review Service
+we don't envision that message contains all the steps to fully automate the submission process.
+It could contain enough metadata for simple workflows. In general out of band communication
+could be needed to perform all required steps.
+
+# Data Pod sends notifications to a Service Hub
+
+Let's provide two examples how AS2 notifications can be sent out of the researcher environment
+and generate some communication patterns out of these examples.
+
+## Maintainer notifies world about a requires publication status update
+
+### Maintainer Announces a (finished) artefact in the Data Pod
 
 <img src="images/mellon-scenario-1.svg" width="80%">
 
@@ -117,7 +165,7 @@ sends one or more AS2 notifications to one or more **Service Hubs** accordingly
 
 Issue: This all assumes that the ServiceHub service doesn't send a 4** (for any reason, metadata, privileges, etc)
 
-## Maintainer notifies the pod about an Offer for certification
+### Maintainer Offers an artefact in the Data Pod to a Service Hub
 
 <img src="images/mellon-scenario-2.svg" width="80%">
 
@@ -129,30 +177,36 @@ to the (Scholarly) **Inbox** of the **Data Pod**
 - The **Orchestrator** sends the `Offer` to the **Certification Service**
     - With `@id` the network location of the event log `https://bob.pod.org/events/cb7b1aed`
 
-<div class="note">
-Note that we don't specify how the Offer should be structured in context of the metadata requirements that are needed
-to start a certification process at the Service Hub, nor how any validation, error handling is done. The purpose
-of sending the Offer to the Data Pod is to update the Scholarly Record (the Event Log) and send a
-copy of that offer to the Service Hub and other (Scholarly) Service Hubs that need to be updated of this event.
-</div>
+### Policies
 
-<div class="note">
-One scenario could for instance be that after receiving an Offer, the Certification Service invites the Maintainer
-by an email or any out of band method to follow an elaborate registration process where the metadata in the original
-Offer provides a reference and track record of the Offer event, artefacts involved and (Scholar) Inboxes to use for
-further updates to the Scholarly Record.
-</div>
+Possible policies that can be available for these use cases (using a pseudo policy language)
 
-<div class="note">
-An other scenario could be that the Certification Service provides a Shape of metadata that is needed for its service
-and the Dashboard can already fill in a complete Offer with all required fields. How this is done is out of scope.
-</div>
+Add only `Announce` and `Accept` notifictions from the **Maintainer** to the **Event Log**
 
-<div class="note">
-The Certification Service process can have its own (public) Event Log where the Offer is appended.
-</div>
+```
+mellon:EventLogRecord
+  when
+    Notification
+        isFrom(Maintainer)
+        inset(Announce,Accept)
 
-## A Service Hub sends notifications to the Data Pod
+```
+
+Forward every `Announce` from the **Maintainer** to the instutional **Registation Service**
+
+```
+mellon:ForwadMessage
+  target:
+    id: http://my.institution.org
+    ldp:inbox: http://my.institution.org/inbox
+    type: System
+  when
+    Notification
+        isFrom(Maintainer)
+        inset(Announce)
+```
+
+# Service Hub sends notifications to Data Pod
 
 A **Service Hub** can send many types of notifications to the Data Hub. In some cases these
 notifications can be in response to a previous `Offer` notification sent out to a Service Hub. In other
@@ -182,21 +236,3 @@ a request for a review is rejected with a `Reject` notification, the Service Hub
 email to the researcher. The Service Hub knows of the (Scholarly) **Inbox** existence and sends a
 machine readable version of a rejection event.
 </div>
-
-### Service Hub Notifications
-
-#### Accept
-
-The **Service Hub** will send an `Accept` notification to accept an offer made in a previous notification.
-An `Accept` without a matching `Offer` should result in an invalid notification.
-
-#### Reject
-
-The **Service Hub** will send an `Reject` notification to reject an offer made in a previous notification.
-An `Reject` without a matching `Offer` should result in an invalid notification.
-
-#### Announce
-
-This pattern is used by the **Service Hub** to announce the outcome of an activity, sometimes (but not always) linking an original
-resource to a new, related resource. The `Accounce` can be in response to a previous notification
-but doesn't need to.

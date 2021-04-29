@@ -246,10 +246,22 @@ mellon:ForwardMessage
     id: @cc
   when
     a Notification
+        isFrom(Maintainer)
         has(cc)
         notEqual(cc,Maintainer)
 ```
 </div>
+
+### Orchestrator as LDN Sender
+
+Based on the **Policies*:
+
+- The **Orchestrator** polls the **Inbox** for new notifications
+- The **Orchestrator** matches every new notificaton against the **Policies**
+    - This will result in zero or more matched shapes
+    - When the Shape matches an `mellon:EventLogRecord` then a new EventLog is created
+    - When the Shape matches an `mellon:ForwardMessage` then a new AS2 notification is sent.
+
 
 # Service Hub sends notifications to Data Pod
 

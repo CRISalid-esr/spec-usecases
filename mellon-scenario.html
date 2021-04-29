@@ -1961,6 +1961,7 @@ Parts of this work may be from another specification document.  If so, those par
         <li><a href="#maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">6.1.1</span> <span class="content">Maintainer Announces a (finished) artefact in the Data Pod</span></a>
         <li><a href="#maintainer-offers-an-artefact-in-the-data-pod-to-a-service-hub"><span class="secno">6.1.2</span> <span class="content">Maintainer Offers an artefact in the Data Pod to a Service Hub</span></a>
         <li><a href="#possible-policies"><span class="secno">6.1.3</span> <span class="content">Possible Policies</span></a>
+        <li><a href="#orchestrator-as-ldn-sender"><span class="secno">6.1.4</span> <span class="content">Orchestrator as LDN Sender</span></a>
        </ol>
      </ol>
     <li><a href="#service-hub-sends-notifications-to-data-pod"><span class="secno">7</span> <span class="content">Service Hub sends notifications to Data Pod</span></a>
@@ -2208,18 +2209,35 @@ mellon:ForwardMessage
 </pre>
    </div>
    <p>Forward a notification from a <strong>Maintainer</strong> with a <code>cc</code> (e.g. an Offer) to an external <em>Service Hubs</em>.</p>
-   <div class="example" id="example-a2c4ca21">
-    <a class="self-link" href="#example-a2c4ca21"></a> 
+   <div class="example" id="example-ebcc48f1">
+    <a class="self-link" href="#example-ebcc48f1"></a> 
 <pre>mellon:ForwardMessage
   rdfs:label "Forward messages with a cc"
   target:
     id: @cc
   when
     a Notification
+        isFrom(Maintainer)
         has(cc)
         notEqual(cc,Maintainer)
 </pre>
    </div>
+   <h4 class="heading settled" data-level="6.1.4" id="orchestrator-as-ldn-sender"><span class="secno">6.1.4. </span><span class="content">Orchestrator as LDN Sender</span><a class="self-link" href="#orchestrator-as-ldn-sender"></a></h4>
+   <p>Based on the *<em>Policies</em>:</p>
+   <ul>
+    <li data-md>
+     <p>The <strong>Orchestrator</strong> polls the <strong>Inbox</strong> for new notifications</p>
+    <li data-md>
+     <p>The <strong>Orchestrator</strong> matches every new notificaton against the <strong>Policies</strong></p>
+     <ul>
+      <li data-md>
+       <p>This will result in zero or more matched shapes</p>
+      <li data-md>
+       <p>When the Shape matches an <code>mellon:EventLogRecord</code> then a new EventLog is created</p>
+      <li data-md>
+       <p>When the Shape matches an <code>mellon:ForwardMessage</code> then a new AS2 notification is sent.</p>
+     </ul>
+   </ul>
    <h2 class="heading settled" data-level="7" id="service-hub-sends-notifications-to-data-pod"><span class="secno">7. </span><span class="content">Service Hub sends notifications to Data Pod</span><a class="self-link" href="#service-hub-sends-notifications-to-data-pod"></a></h2>
    <p>A <strong>Service Hub</strong> can send many types of notifications to the Data Hub. In some cases these
 notifications can be in response to a previous <code>Offer</code> notification sent out to a Service Hub. In other

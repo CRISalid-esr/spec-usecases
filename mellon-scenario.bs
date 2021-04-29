@@ -177,33 +177,59 @@ to the (Scholarly) **Inbox** of the **Data Pod**
 - The **Orchestrator** sends the `Offer` to the **Certification Service**
     - With `@id` the network location of the event log `https://bob.pod.org/events/cb7b1aed`
 
-### Policies
+### Possible Policies
 
-Possible policies that can be available for these use cases (using a pseudo policy language)
+Possible policies that can be available for these use cases (using a pseudo policy language).
 
-Add only `Announce` and `Accept` notifictions from the **Maintainer** to the **Event Log**
+Add only `Announce` and `Accept` notifications from the **Maintainer** to the **Event Log**
 
 ```
 mellon:EventLogRecord
   when
-    Notification
+    a Notification
         isFrom(Maintainer)
         inset(Announce,Accept)
 
 ```
 
-Forward every `Announce` from the **Maintainer** to the instutional **Registation Service**
+Forward every `Announce` from the **Maintainer** to the institutional **Registation Service**
+and **Archiving Service**
 
 ```
-mellon:ForwadMessage
+mellon:ForwardMessage
+  rdfs:label "Register at my library catalog"
   target:
     id: http://my.institution.org
     ldp:inbox: http://my.institution.org/inbox
     type: System
   when
-    Notification
+    a Notification
         isFrom(Maintainer)
         inset(Announce)
+
+mellon:ForwardMessage
+  rdfs:label "Add to our archive"
+  target:
+    id: http://dataforever.edu
+    ldp:inbox: http://dataforever.edu/submission/new/inbox
+    type: System
+  when
+    a Notification
+        isFrom(Maintainer)
+        inset(Announce)
+```
+
+Forward a notification from a **Maintainer** with a `cc` (e.g. an Offer) to an external *Service Hubs*.
+
+```
+mellon:ForwardMessage
+  rdfs:label "Forward messages with a cc"
+  target:
+    id: @cc
+  when
+    a Notification
+        has(cc)
+        notEqual(cc,Maintainer)
 ```
 
 # Service Hub sends notifications to Data Pod

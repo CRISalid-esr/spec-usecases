@@ -2161,7 +2161,18 @@ to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
    </ul>
    <h4 class="heading settled" data-level="6.1.3" id="possible-policies"><span class="secno">6.1.3. </span><span class="content">Possible Policies</span><a class="self-link" href="#possible-policies"></a></h4>
    <p>Possible policies that can be available for these use cases (using a pseudo policy language).</p>
+   <div class="example" id="example-4b682741">
+    <a class="self-link" href="#example-4b682741"></a> The pseudo policy language used there tries to match new Notifications to a Shape , constructing
+this shape with new properties, under specific conditions 
+<pre>&lt;SHAPE>
+  &lt;PROPERTIES>
+  when
+    &lt;CONDITIONS>
+</pre>
+   </div>
    <p>Add only <code>Announce</code> and <code>Accept</code> notifications from the <strong>Maintainer</strong> to the <strong>Event Log</strong></p>
+   <div class="example" id="example-d387f030">
+    <a class="self-link" href="#example-d387f030"></a> 
 <pre>mellon:EventLogRecord
   when
     a Notification
@@ -2169,7 +2180,10 @@ to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
         inset(Announce,Accept)
 
 </pre>
+   </div>
    <p>Forward every <code>Announce</code> from the <strong>Maintainer</strong> to the institutional <strong>Registation Service</strong> and <strong>Archiving Service</strong></p>
+   <div class="example" id="example-41478d12">
+    <a class="self-link" href="#example-41478d12"></a> 
 <pre>mellon:ForwardMessage
   rdfs:label "Register at my library catalog"
   target:
@@ -2192,7 +2206,10 @@ mellon:ForwardMessage
         isFrom(Maintainer)
         inset(Announce)
 </pre>
+   </div>
    <p>Forward a notification from a <strong>Maintainer</strong> with a <code>cc</code> (e.g. an Offer) to an external <em>Service Hubs</em>.</p>
+   <div class="example" id="example-a2c4ca21">
+    <a class="self-link" href="#example-a2c4ca21"></a> 
 <pre>mellon:ForwardMessage
   rdfs:label "Forward messages with a cc"
   target:
@@ -2202,6 +2219,7 @@ mellon:ForwardMessage
         has(cc)
         notEqual(cc,Maintainer)
 </pre>
+   </div>
    <h2 class="heading settled" data-level="7" id="service-hub-sends-notifications-to-data-pod"><span class="secno">7. </span><span class="content">Service Hub sends notifications to Data Pod</span><a class="self-link" href="#service-hub-sends-notifications-to-data-pod"></a></h2>
    <p>A <strong>Service Hub</strong> can send many types of notifications to the Data Hub. In some cases these
 notifications can be in response to a previous <code>Offer</code> notification sent out to a Service Hub. In other

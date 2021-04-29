@@ -181,8 +181,22 @@ to the (Scholarly) **Inbox** of the **Data Pod**
 
 Possible policies that can be available for these use cases (using a pseudo policy language).
 
+<div class="example">
+The pseudo policy language used there tries to match new Notifications to a Shape , constructing
+this shape with new properties, under specific conditions
+
+```
+<SHAPE>
+  <PROPERTIES>
+  when
+    <CONDITIONS>
+```
+
+</div>
+
 Add only `Announce` and `Accept` notifications from the **Maintainer** to the **Event Log**
 
+<div class="example">
 ```
 mellon:EventLogRecord
   when
@@ -191,10 +205,12 @@ mellon:EventLogRecord
         inset(Announce,Accept)
 
 ```
+</div>
 
 Forward every `Announce` from the **Maintainer** to the institutional **Registation Service**
 and **Archiving Service**
 
+<div class="example">
 ```
 mellon:ForwardMessage
   rdfs:label "Register at my library catalog"
@@ -218,9 +234,11 @@ mellon:ForwardMessage
         isFrom(Maintainer)
         inset(Announce)
 ```
+</div>
 
 Forward a notification from a **Maintainer** with a `cc` (e.g. an Offer) to an external *Service Hubs*.
 
+<div class="example">
 ```
 mellon:ForwardMessage
   rdfs:label "Forward messages with a cc"
@@ -231,6 +249,7 @@ mellon:ForwardMessage
         has(cc)
         notEqual(cc,Maintainer)
 ```
+</div>
 
 # Service Hub sends notifications to Data Pod
 

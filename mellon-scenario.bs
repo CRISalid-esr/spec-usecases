@@ -274,7 +274,7 @@ Based on the **Policies**:
 ### Service Hub Announce is a response to a previous Offer
 
 For example, a **Maintainer** request that a journal reviews on of the publications
-that can be found on the **Data Pod**. In a previous step an `Offer` was send to
+that can be found on the **Data Pod**. In a previous step an `Offer` was sent to
 to journal as **Certification Service**. In response to the `offer` the journal sends
 an `Announce` to the (Scholarly) **Inbox** of the **Data Pod**.
 
@@ -299,7 +299,7 @@ of the **Data Pod**.
 - The **Maintainer** finds via the **Dashboard** the standalone `Announce` in the (Scholarly) **Inbox**
 - The **Maintainer** sends an `Accept` with an `inReplyTo` to the `Announce` to the (Scholarly) **Inbox**
 - The **Orchestrator** finds both the old `Announce` notification and new `Accept` notification
-- The **Orchestrator** has a **Policy** that when both notifications match, the can be written
+- The **Orchestrator** has a **Policy** that when both notifications match, they can be written
 to the **Lifecycle Event Log**
 
 ## Possible Policies

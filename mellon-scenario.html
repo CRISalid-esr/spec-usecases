@@ -1917,7 +1917,7 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Mellon Orchestrator use cases</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-04-29">29 April 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-05-11">11 May 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Issue Tracking:
@@ -1933,7 +1933,7 @@ dfn > a.self-link::before      { content: "#"; }
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 29 April 2021,
+In addition, as of 11 May 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1950,26 +1950,25 @@ Parts of this work may be from another specification document.  If so, those par
     <li><a href="#mellon-orchestrator-use-cases"><span class="secno">1</span> <span class="content">Mellon Orchestrator use cases</span></a>
     <li><a href="#glossary"><span class="secno">2</span> <span class="content">Glossary</span></a>
     <li><a href="#difference-between-the-dashboard-app-and-orchestrator"><span class="secno">3</span> <span class="content">Difference between the Dashboard, App and Orchestrator</span></a>
-    <li><a href="#as2-notifications"><span class="secno">4</span> <span class="content">AS2 Notifications</span></a>
-    <li><a href="#communication-in-and-out-the-researcher-environment"><span class="secno">5</span> <span class="content">Communication in and out the researcher environment</span></a>
+    <li><a href="#communication-between-data-pod-and-scholarly-community-network"><span class="secno">4</span> <span class="content">Communication between Data Pod and Scholarly Community network</span></a>
     <li>
-     <a href="#data-pod-sends-notifications-to-a-service-hub"><span class="secno">6</span> <span class="content">Data Pod sends notifications to a Service Hub</span></a>
+     <a href="#data-pod-sends-notifications-to-a-service-hub"><span class="secno">5</span> <span class="content">Data Pod sends notifications to a Service Hub</span></a>
      <ol class="toc">
-      <li><a href="#maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">6.1</span> <span class="content">Maintainer Announces a (finished) artefact in the Data Pod</span></a>
-      <li><a href="#maintainer-offers-an-artefact-in-the-data-pod-to-a-service-hub"><span class="secno">6.2</span> <span class="content">Maintainer Offers an artefact in the Data Pod to a Service Hub</span></a>
-      <li><a href="#possible-policies"><span class="secno">6.3</span> <span class="content">Possible Policies</span></a>
-      <li><a href="#orchestrator-side-effects"><span class="secno">6.4</span> <span class="content">Orchestrator side effects</span></a>
+      <li><a href="#maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">5.1</span> <span class="content">Maintainer Announces a (finished) artefact in the Data Pod</span></a>
+      <li><a href="#maintainer-offers-an-artefact-in-the-data-pod-to-a-service-hub"><span class="secno">5.2</span> <span class="content">Maintainer Offers an artefact in the Data Pod to a Service Hub</span></a>
+      <li><a href="#possible-policies"><span class="secno">5.3</span> <span class="content">Possible Policies</span></a>
+      <li><a href="#orchestrator-side-effects"><span class="secno">5.4</span> <span class="content">Orchestrator side effects</span></a>
      </ol>
     <li>
-     <a href="#service-hub-sends-notifications-to-data-pod"><span class="secno">7</span> <span class="content">Service Hub sends notifications to Data Pod</span></a>
+     <a href="#service-hub-sends-notifications-to-data-pod"><span class="secno">6</span> <span class="content">Service Hub sends notifications to Data Pod</span></a>
      <ol class="toc">
       <li>
-       <a href="#service-hub-announces-a-new-resource-about-an-artefact-in-the-data-pod"><span class="secno">7.1</span> <span class="content">Service Hub Announces a new resource about an artefact in the Data Pod</span></a>
+       <a href="#service-hub-announces-a-new-resource-about-an-artefact-in-the-data-pod"><span class="secno">6.1</span> <span class="content">Service Hub Announces a new resource about an artefact in the Data Pod</span></a>
        <ol class="toc">
-        <li><a href="#service-hub-announce-is-a-response-to-a-previous-offer"><span class="secno">7.1.1</span> <span class="content">Service Hub Announce is a response to a previous Offer</span></a>
-        <li><a href="#service-hub-announce-is-standalone"><span class="secno">7.1.2</span> <span class="content">Service Hub Announce is standalone</span></a>
+        <li><a href="#service-hub-announce-is-a-response-to-a-previous-offer"><span class="secno">6.1.1</span> <span class="content">Service Hub Announce is a response to a previous Offer</span></a>
+        <li><a href="#service-hub-announce-is-standalone"><span class="secno">6.1.2</span> <span class="content">Service Hub Announce is standalone</span></a>
        </ol>
-      <li><a href="#possible-policies①"><span class="secno">7.2</span> <span class="content">Possible Policies</span></a>
+      <li><a href="#possible-policies①"><span class="secno">6.2</span> <span class="content">Possible Policies</span></a>
      </ol>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
@@ -1996,7 +1995,7 @@ Parts of this work may be from another specification document.  If so, those par
     <dt data-md><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="human-agent">Human Agent</dfn>
     <dd data-md>
      <p>A person that operates directly as an <a data-link-type="dfn" href="#actor" id="ref-for-actor">Actor</a> on the network.</p>
-    <dt data-md><dfn data-dfn-type="dfn" data-export id="autonomous-agent">Autonomous Agent<a class="self-link" href="#autonomous-agent"></a></dfn>
+    <dt data-md><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="autonomous-agent">Autonomous Agent</dfn>
     <dd data-md>
      <p>An intelligent software instance that operates on an <a data-link-type="dfn" href="#actor" id="ref-for-actor①">Actor</a>'s behalf but without any interference of that <a data-link-type="dfn" href="#actor" id="ref-for-actor②">Actor</a>.</p>
     <dt data-md><dfn data-dfn-type="dfn" data-export id="maintainer">Maintainer<a class="self-link" href="#maintainer"></a></dfn>
@@ -2010,15 +2009,15 @@ Parts of this work may be from another specification document.  If so, those par
     <dt data-md><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="inbox">Inbox</dfn>
     <dd data-md>
      <p>An <a data-link-type="biblio" href="#biblio-ldp">[LDP]</a> resource where others can POST Linked Data Notifications <a data-link-type="biblio" href="#biblio-ldn">[LDN]</a> in order to notify the actor of a change an artefact’s lifecycle.</p>
-    <dt data-md><dfn data-dfn-type="dfn" data-noexport id="artefact-lifecycle-event-log">Artefact Lifecycle Event Log<a class="self-link" href="#artefact-lifecycle-event-log"></a></dfn>
+    <dt data-md><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="artefact-lifecycle-event-log">Artefact Lifecycle Event Log</dfn>
     <dd data-md>
-     <p>An HTTP resource served by an actor (e.g., as a resource in the <a data-link-type="dfn" href="#data-pod" id="ref-for-data-pod">Data Pod</a>) that represents a log of occurred lifecycle events related to artefacts known by the actor.</p>
+     <p>An HTTP resource served by an actor (e.g., as a resource in the <a data-link-type="dfn" href="#data-pod" id="ref-for-data-pod">Data Pod</a>) that represents a log of lifecycle events that artefacts known by the actor were involved in..</p>
     <dd data-md>
      <p>Artefacts are considered known when they reside in the actor’s <a data-link-type="dfn" href="#data-pod" id="ref-for-data-pod①">Data Pod</a> or if the actor has been made aware via <a data-link-type="biblio" href="#biblio-ldn">[LDN]</a>.</p>
     <dt data-md><dfn data-dfn-type="dfn" data-export id="service-hub">Service Hub<a class="self-link" href="#service-hub"></a></dfn>
     <dd data-md>
      <p>An <a data-link-type="dfn" href="#actor" id="ref-for-actor③">Actor</a> that provides a service to other actors in the network. It is a <a href="https://solidproject.org/TR/protocol#solid-app">Solid app</a> and serves an <a data-link-type="dfn" href="#inbox" id="ref-for-inbox">Inbox</a>.</p>
-    <dt data-md><dfn data-dfn-type="dfn" data-export id="policy">Policy<a class="self-link" href="#policy"></a></dfn>
+    <dt data-md><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="policy">Policy</dfn>
     <dd data-md>
      <p>A set of machine-readable business rules that instruct the <a data-link-type="dfn" href="#orchestrator" id="ref-for-orchestrator">Orchestrator</a> on what actions to take in response to a trigger such as incoming notifications, perceived changes in the data, or manual invocation by an <a data-link-type="dfn" href="#actor" id="ref-for-actor④">Actor</a>.</p>
     <dt data-md><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="dashboard">Dashboard</dfn>
@@ -2027,16 +2026,21 @@ Parts of this work may be from another specification document.  If so, those par
    </dl>
    <p>New added terminology:</p>
    <dl>
+    <dt data-md><dfn data-dfn-type="dfn" data-export id="artefact">Artefact<a class="self-link" href="#artefact"></a></dfn>
+    <dd data-md>
+     <p>An HTTP resource on a <a data-link-type="dfn" href="#data-pod" id="ref-for-data-pod③">Data Pod</a> that the subject of (Scholarly) Communication (e.g. a publication,
+a review, a nanopublication, a dataset)</p>
     <dt data-md><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="orchestrator">Orchestrator</dfn>
     <dd data-md>
-     <p>An Orchestrator is an Autonomous Agent dedicated to a single Data Pod, Service Hub, or any other actor hosting the Artefact Lifecycle Event Log and a Inbox resources. It interprets and executes business rules described in a policy. The Orchestrator watches the Inbox for possible triggers, while it records the actions it takes to the to the Artefact Lifecycle Event Log.</p>
+     <p>An Orchestrator is an <a data-link-type="dfn" href="#autonomous-agent" id="ref-for-autonomous-agent">Autonomous Agent</a> dedicated to an <a data-link-type="dfn" href="#actor" id="ref-for-actor⑥">Actor</a> that hosts a <a data-link-type="dfn" href="#data-pod" id="ref-for-data-pod④">Data Pod</a> with associated <a data-link-type="dfn" href="#inbox" id="ref-for-inbox①">Inbox</a> and <a data-link-type="dfn" href="#artefact-lifecycle-event-log" id="ref-for-artefact-lifecycle-event-log">Artefact Lifecycle Event Log</a>. It interprets and executes business rules described in a <a data-link-type="dfn" href="#policy" id="ref-for-policy">Policy</a>.
+The Orchestrator watches the <a data-link-type="dfn" href="#inbox" id="ref-for-inbox②">Inbox</a> for possible triggers, records the actions it takes to the to the <a data-link-type="dfn" href="#artefact-lifecycle-event-log" id="ref-for-artefact-lifecycle-event-log①">Artefact Lifecycle Event Log</a>, and communications with other Actors.</p>
     <dt data-md><dfn data-dfn-type="dfn" data-export id="app">App<a class="self-link" href="#app"></a></dfn>
     <dd data-md>
-     <p>An App is an Automomous Agent dedicated to a single Data Pod can write to the Data Pod unsupervised by the Human Actor and is not limited to the Inbox or Artefact Lifecycle Event Log.</p>
+     <p>An App is an <a data-link-type="dfn" href="#autonomous-agent" id="ref-for-autonomous-agent①">Autonomous Agent</a> dedicated to an <a data-link-type="dfn" href="#actor" id="ref-for-actor⑦">Actor</a> that hosts a <a data-link-type="dfn" href="#data-pod" id="ref-for-data-pod⑤">Data Pod</a>. The App can write to the <a data-link-type="dfn" href="#data-pod" id="ref-for-data-pod⑥">Data Pod</a> unsupervised by the <a data-link-type="dfn" href="#human-agent" id="ref-for-human-agent①">Human Agent</a> and is not limited to the <a data-link-type="dfn" href="#inbox" id="ref-for-inbox③">Inbox</a> or <a data-link-type="dfn" href="#artefact-lifecycle-event-log" id="ref-for-artefact-lifecycle-event-log②">Artefact Lifecycle Event Log</a>.</p>
    </dl>
    <p class="issue" id="issue-1551ac7d"><a class="self-link" href="#issue-1551ac7d"></a> Need a better name for the App</p>
    <h2 class="heading settled" data-level="3" id="difference-between-the-dashboard-app-and-orchestrator"><span class="secno">3. </span><span class="content">Difference between the Dashboard, App and Orchestrator</span><a class="self-link" href="#difference-between-the-dashboard-app-and-orchestrator"></a></h2>
-   <p>In the following discussion three agents communicate with the <strong>Data Pod</strong> with more or less privileges: the <strong>Orchestrator</strong>,
+   <p>In the following discussion three agents communicate with the <strong>Data Pod</strong> with different privileges: the <strong>Orchestrator</strong>,
 the <strong>Dashboard</strong> and the <strong>App</strong>. While in real applications these agents could overlap or might not be required at all (in
 some cases), in this document they are treated as separate entities to help the discussion. Some reasons why
 these Actors could be treated as separate entities:</p>
@@ -2044,19 +2048,19 @@ these Actors could be treated as separate entities:</p>
     <li data-md>
      <p>privileges needed to access the <strong>Data Pod</strong></p>
     <li data-md>
-     <p>requirements needed receive direct feedback from a <strong>Human Agent</strong></p>
+     <p>requirements needed to receive direct feedback from a <strong>Human Agent</strong></p>
     <li data-md>
-     <p>requirements needed be always available <strong>online</strong></p>
+     <p>requirements needed to permanently be <strong>online</strong></p>
     <li data-md>
      <p>requirements needed to understand the <strong>Scholarly Communication Notification protocol</strong> and <strong>Policies</strong></p>
    </ul>
-   <p>In this light:</p>
+   <p>With this regard:</p>
    <dl>
     <dt data-md>App
     <dd data-md>
      <p>The App is a headless Autonomous Agent that doesn’t need a Human Agent to execute write operations on the Data Pod.
-It is a trusted application for the Maintainer that could in principle update any artifact on the Data Pod. This application
-could run as a background service on the computer of the maintainer and is online as long as the computer is connected
+It is a trusted application for the Maintainer <s>that could in principle update any artifact on the Data Pod</s>. This application
+could run as a background service on the computer of the maintainer and be online as long as the computer is connected
 to a network.</p>
     <dt data-md>Dashboard
     <dd data-md>
@@ -2066,7 +2070,7 @@ tabs opened with the dashboard application.</p>
     <dt data-md>Orchestrator
     <dd data-md>
      <p>The Orchestrator is an Autonomous Agent that can read the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong> and append to
-the <strong>Artefact Lifecycle Event Log</strong>. The <strong>Orchestrator</strong> also communicates with the Scholar Community network using
+the <strong>Artefact Lifecycle Event Log</strong>. Guided by policies expressed as business rules, the <strong>Orchestrator</strong> also communicates with the Scholar Community network using
 the <strong>Scholarly Communication Notification protocol</strong> implementing <strong>Policies</strong>.</p>
    </dl>
    <p><img src="images/mellon-orchestrator-solar.svg" width="40%"></p>
@@ -2074,18 +2078,36 @@ the <strong>Scholarly Communication Notification protocol</strong> implementing 
 the data pod (in level of trust). The <strong>Orchestrator</strong> has very limited access rights to the data pod. The main
 task of the Orchestrator is to update the event log and execute policies in order to talk the Scholarly Communication Notification
 protocol (read/send messages from/to the corrrect Service Hubs).
-The <strong>Dashboard</strong> sits in between, it has control over the <strong>Data Pod</strong> but might (always) need user input to update the pod.</p>
+The <strong>Dashboard</strong> sits in between, it has control over the <strong>Data Pod</strong> but might (always) need user input to update the pod.
+Communication between the App/DashBoard and the Orchestrator happens via the Data Pod’s Inbox.</p>
    <p>The networks below demonstrates the CRUD privileges imagined for the different actors in this document. The first
 network demonstrates a typical Solid setup where the Dashboard is a single page application that has direct access
 to the Data Pod and the App is more a background process running in the same computer as the Maintainer.</p>
    <div><img src="images/mellon-crud-app.svg" width="80%"></div>
     <i>CRUD operations in case the DashBoard is single-page application and the App a background task</i> 
+   <p class="issue" id="issue-dce4218e"><a class="self-link" href="#issue-dce4218e"></a> Are the Rules and Inbox necesearily part of the Data Pod or can they exist as separate resources?</p>
    <p>The second network demonstrates a more classic setup with a browser Dashboard controlled by a server App which uses a
 Data Pod as backend storage.</p>
    <div><img src="images/mellon-crud.svg" width="80%"></div>
     <i>CRUD operations in case the Dashoard and App is a classic client/server application</i> 
-   <h2 class="heading settled" data-level="4" id="as2-notifications"><span class="secno">4. </span><span class="content">AS2 Notifications</span><a class="self-link" href="#as2-notifications"></a></h2>
-   <p>In the use case document we use 5 types AS2 notifications in line with the <a href="https://notify.coar-repositories.org/patterns/">COAR Notify</a> project.</p>
+   <h2 class="heading settled" data-level="4" id="communication-between-data-pod-and-scholarly-community-network"><span class="secno">4. </span><span class="content">Communication between Data Pod and Scholarly Community network</span><a class="self-link" href="#communication-between-data-pod-and-scholarly-community-network"></a></h2>
+   <p>A2 Notifications can be sent from the researcher environment to <strong>Service Hub</strong> environments.
+For instance, in case of a request to review an artefact that resides in the <strong>Data Pod</strong>, an
+appropriate notification can be sent to a review <strong>Service Hub</strong>. The <strong>Service Hub</strong> can respond,
+for example, accepting or rejecting the review request, and, in the latter case, to relay
+the result of the review.</p>
+   <p>The <strong>Orchestrator</strong> sends notifications in response to triggers that result from the execution of
+Policies - implemented as business rules - that are associated with the <strong>Data Pod</strong>. The <strong>Orchestrator</strong> receives notifications in response to the ones it sent. The <strong>Orchestrator</strong> records information
+contained in both outgoing and incoming notifications in the <strong>Artefact Lifecycle Event Log</strong>.</p>
+   <p>The AS2 notifications are regarded as a high-level approach to automatically coordinate the distributed
+execution of the crucial functions of scholarly communication. The notifications merely ensure that the
+respective functions are in effect executed as prescribed by Policies, but do not attempt to
+automate the actual fullfilment of the function itself. For instance, when an <code>Offer</code> is sent to a Review Service
+we don’t envision that message contains all the steps to fully automate the submission process.
+It could contain enough metadata for simple workflows. In general out of band communication
+could be needed to perform all required steps.</p>
+   <p>All AS2 notifications are send to all <strong>Actors</strong> in the network in the form of <a href="https://www.w3.org/TR/ldn/">Linked Data Notifications</a>.</p>
+   <p>In this use case document we use 5 types AS2 notifications in line with the <a href="https://notify.coar-repositories.org/patterns/">COAR Notify</a> project.</p>
    <dl>
     <dt data-md><strong>Offer</strong>
     <dd data-md>
@@ -2107,29 +2129,14 @@ It indicates that the offer is rejected.</p>
      <p>The <code>Announce</code> notification is used to announce the outcome of an activity: typically
 to announce the availability of a new (scholarly) artefact.</p>
    </dl>
-   <h2 class="heading settled" data-level="5" id="communication-in-and-out-the-researcher-environment"><span class="secno">5. </span><span class="content">Communication in and out the researcher environment</span><a class="self-link" href="#communication-in-and-out-the-researcher-environment"></a></h2>
-   <p>A2 Notifications can be sent from the researcher environment to the service hub environment.
-For instace in a journal or review submission workflow notifications can be send to the
-service hub as machine readable updates of the scholarly record. In response the service hub
-enviroment can send A2 notifications back to the researcher environment.</p>
-   <p>From the viewpoint of the <strong>Orchestrator</strong> the primary goal for this AS2 Notifications is to
-update the scholarly record in the form of the <strong>Lifecycle Event Log</strong>. Updates
-to the <strong>Lifecycle Event Log</strong> can trigger new notifications sent out to the <strong>Service Hub</strong> environment. This triggers are described in <strong>Policies</strong>.</p>
-   <p>The AS2 notifications are used as announcements of activities by the researcher and the
-service hubs but are not meant to demand how these activities need to be done, nor to
-automate these activities.  For instance, when an <code>Offer</code> is sent to a Review Service
-we don’t envision that message contains all the steps to fully automate the submission process.
-It could contain enough metadata for simple workflows. In general out of band communication
-could be needed to perform all required steps.</p>
-   <h2 class="heading settled" data-level="6" id="data-pod-sends-notifications-to-a-service-hub"><span class="secno">6. </span><span class="content">Data Pod sends notifications to a Service Hub</span><a class="self-link" href="#data-pod-sends-notifications-to-a-service-hub"></a></h2>
+   <h2 class="heading settled" data-level="5" id="data-pod-sends-notifications-to-a-service-hub"><span class="secno">5. </span><span class="content">Data Pod sends notifications to a Service Hub</span><a class="self-link" href="#data-pod-sends-notifications-to-a-service-hub"></a></h2>
    <p>Let’s provide two examples how AS2 notifications can be sent out of the researcher environment
 and generate some communication patterns out of these examples.</p>
-   <h3 class="heading settled" data-level="6.1" id="maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">6.1. </span><span class="content">Maintainer Announces a (finished) artefact in the Data Pod</span><a class="self-link" href="#maintainer-announces-a-finished-artefact-in-the-data-pod"></a></h3>
+   <h3 class="heading settled" data-level="5.1" id="maintainer-announces-a-finished-artefact-in-the-data-pod"><span class="secno">5.1. </span><span class="content">Maintainer Announces a (finished) artefact in the Data Pod</span><a class="self-link" href="#maintainer-announces-a-finished-artefact-in-the-data-pod"></a></h3>
    <p><img src="images/mellon-scenario-1.svg" width="80%"></p>
    <ul>
     <li data-md>
-     <p>The <strong>Maintainer</strong> decides, after a lot of work, that one artefact on the <strong>Data Pod</strong> is ready to be
-shared with the world</p>
+     <p>The <strong>Maintainer</strong> decides, after a lot of work, that one artefact on the <strong>Data Pod</strong> is ready enter the scholarly realm</p>
     <li data-md>
      <p>The <strong>Maintainer</strong> uses the <strong>Dashboard</strong> to send an <code>Announce</code> Notification to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
     <li data-md>
@@ -2146,11 +2153,20 @@ signatures, shape matching, etc etc)</p>
 sends one or more AS2 notifications to one or more <strong>Service Hubs</strong> accordingly</p>
    </ul>
    <p class="issue" id="issue-e66a7ca7"><a class="self-link" href="#issue-e66a7ca7"></a> This all assumes that the ServiceHub service doesn’t send a 4** (for any reason, metadata, privileges, etc)</p>
-   <h3 class="heading settled" data-level="6.2" id="maintainer-offers-an-artefact-in-the-data-pod-to-a-service-hub"><span class="secno">6.2. </span><span class="content">Maintainer Offers an artefact in the Data Pod to a Service Hub</span><a class="self-link" href="#maintainer-offers-an-artefact-in-the-data-pod-to-a-service-hub"></a></h3>
+   <p class="issue" id="issue-63a5faeb"><a class="self-link" href="#issue-63a5faeb"></a> We need to determine what is required for an Orchestrator to be able to understand in which phase of an
+artefact lifecycle it is dealing with. Also we will need some kind of typology for an artefact type itself,
+eg paper, dataset, software, etc.</p>
+   <h3 class="heading settled" data-level="5.2" id="maintainer-offers-an-artefact-in-the-data-pod-to-a-service-hub"><span class="secno">5.2. </span><span class="content">Maintainer Offers an artefact in the Data Pod to a Service Hub</span><a class="self-link" href="#maintainer-offers-an-artefact-in-the-data-pod-to-a-service-hub"></a></h3>
    <p><img src="images/mellon-scenario-2.svg" width="80%"></p>
    <ul>
     <li data-md>
      <p>The <strong>Maintainer</strong> decides to send one artefact to an <strong>Certificaton Service</strong> to request a review</p>
+   </ul>
+   <p class="issue" id="issue-1a0a0c9f"><a class="self-link" href="#issue-1a0a0c9f"></a> Herbert: This would typically be triggered by a notification sent from the Orchestrator to the Inbox
+as a result of the execution of the Policy "once an artefact has entered the scholarly realm it should be certified".
+The Maintainer can then decide whether or not to request review and where. I think it would be good to add this
+to the pic as it nicely connects to the previous cases + illustrates policy</p>
+   <ul>
     <li data-md>
      <p>The <strong>Maintainer</strong> prepares in the <strong>Dashboard</strong> the required metadata and sends an <code>Offer</code> Notification
 to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
@@ -2165,7 +2181,7 @@ to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong></p>
        <p>With <code>@id</code> the network location of the event log <code>https://bob.pod.org/events/cb7b1aed</code></p>
      </ul>
    </ul>
-   <h3 class="heading settled" data-level="6.3" id="possible-policies"><span class="secno">6.3. </span><span class="content">Possible Policies</span><a class="self-link" href="#possible-policies"></a></h3>
+   <h3 class="heading settled" data-level="5.3" id="possible-policies"><span class="secno">5.3. </span><span class="content">Possible Policies</span><a class="self-link" href="#possible-policies"></a></h3>
    <p>Possible policies that can be available for these use cases (using a pseudo policy language).</p>
    <div class="example" id="example-4b682741">
     <a class="self-link" href="#example-4b682741"></a> The pseudo policy language used there tries to match new Notifications to a Shape , constructing
@@ -2233,11 +2249,11 @@ mellon:ForwardToArchive
         notEqual(cc,Maintainer)
 </pre>
    </div>
-   <h3 class="heading settled" data-level="6.4" id="orchestrator-side-effects"><span class="secno">6.4. </span><span class="content">Orchestrator side effects</span><a class="self-link" href="#orchestrator-side-effects"></a></h3>
+   <h3 class="heading settled" data-level="5.4" id="orchestrator-side-effects"><span class="secno">5.4. </span><span class="content">Orchestrator side effects</span><a class="self-link" href="#orchestrator-side-effects"></a></h3>
    <p>Based on the <strong>Policies</strong>:</p>
    <ul>
     <li data-md>
-     <p>The <strong>Orchestrator</strong> polls the <strong>Inbox</strong> for new notifications</p>
+     <p><s>The <strong>Orchestrator</strong> polls the <strong>Inbox</strong> for new notifications</s></p>
     <li data-md>
      <p>The <strong>Orchestrator</strong> matches every new notificaton against the <strong>Policies</strong></p>
      <ul>
@@ -2249,9 +2265,9 @@ mellon:ForwardToArchive
        <p>When the Shape matches an <code>mellon:ForwardMessage</code> then a new AS2 notification is sent.</p>
      </ul>
    </ul>
-   <h2 class="heading settled" data-level="7" id="service-hub-sends-notifications-to-data-pod"><span class="secno">7. </span><span class="content">Service Hub sends notifications to Data Pod</span><a class="self-link" href="#service-hub-sends-notifications-to-data-pod"></a></h2>
-   <h3 class="heading settled" data-level="7.1" id="service-hub-announces-a-new-resource-about-an-artefact-in-the-data-pod"><span class="secno">7.1. </span><span class="content">Service Hub Announces a new resource about an artefact in the Data Pod</span><a class="self-link" href="#service-hub-announces-a-new-resource-about-an-artefact-in-the-data-pod"></a></h3>
-   <h4 class="heading settled" data-level="7.1.1" id="service-hub-announce-is-a-response-to-a-previous-offer"><span class="secno">7.1.1. </span><span class="content">Service Hub Announce is a response to a previous Offer</span><a class="self-link" href="#service-hub-announce-is-a-response-to-a-previous-offer"></a></h4>
+   <h2 class="heading settled" data-level="6" id="service-hub-sends-notifications-to-data-pod"><span class="secno">6. </span><span class="content">Service Hub sends notifications to Data Pod</span><a class="self-link" href="#service-hub-sends-notifications-to-data-pod"></a></h2>
+   <h3 class="heading settled" data-level="6.1" id="service-hub-announces-a-new-resource-about-an-artefact-in-the-data-pod"><span class="secno">6.1. </span><span class="content">Service Hub Announces a new resource about an artefact in the Data Pod</span><a class="self-link" href="#service-hub-announces-a-new-resource-about-an-artefact-in-the-data-pod"></a></h3>
+   <h4 class="heading settled" data-level="6.1.1" id="service-hub-announce-is-a-response-to-a-previous-offer"><span class="secno">6.1.1. </span><span class="content">Service Hub Announce is a response to a previous Offer</span><a class="self-link" href="#service-hub-announce-is-a-response-to-a-previous-offer"></a></h4>
    <p>For example, a <strong>Maintainer</strong> request that a journal reviews on of the publications
 that can be found on the <strong>Data Pod</strong>. In a previous step an <code>Offer</code> was sent to
 to journal as <strong>Certification Service</strong>. In response to the <code>offer</code> the journal sends
@@ -2267,7 +2283,8 @@ an <code>Announce</code> to the (Scholarly) <strong>Inbox</strong> of the <stron
     <li data-md>
      <p>The <strong>Orchestrator</strong> updates the <strong>Lifecycle Event Log</strong> with the AS2 notification</p>
    </ul>
-   <h4 class="heading settled" data-level="7.1.2" id="service-hub-announce-is-standalone"><span class="secno">7.1.2. </span><span class="content">Service Hub Announce is standalone</span><a class="self-link" href="#service-hub-announce-is-standalone"></a></h4>
+   <p class="issue" id="issue-d5c06278"><a class="self-link" href="#issue-d5c06278"></a> Is this a verbatim copy of the AS2 notification or a processed version?</p>
+   <h4 class="heading settled" data-level="6.1.2" id="service-hub-announce-is-standalone"><span class="secno">6.1.2. </span><span class="content">Service Hub Announce is standalone</span><a class="self-link" href="#service-hub-announce-is-standalone"></a></h4>
    <p>For example, an overlay journal adds an article it found in an <strong>Data Pod</strong>, via the WebID
 of the author, the journals sends an <code>Announce</code> notification to the (Scholarly) <strong>Inbox</strong> of the <strong>Data Pod</strong>.</p>
    <p><img src="images/mellon-scenario-4.svg" width="80%"></p>
@@ -2277,7 +2294,8 @@ of the author, the journals sends an <code>Announce</code> notification to the (
     <li data-md>
      <p>The <code>Announce</code> doens’t an <code>inReplyTo</code> property to a previous <code>Offer</code></p>
     <li data-md>
-     <p>The notification is ignored</p>
+     <p>The <strong>Orchestrator</strong> ignores the notification but does not remove it from the <strong>Inbox</strong> because
+it pertains to the URI of a scholarly artefact in the <strong>Data Pod</strong>.</p>
     <li data-md>
      <p>The <strong>Maintainer</strong> finds via the <strong>Dashboard</strong> the standalone <code>Announce</code> in the (Scholarly) <strong>Inbox</strong></p>
     <li data-md>
@@ -2288,7 +2306,7 @@ of the author, the journals sends an <code>Announce</code> notification to the (
      <p>The <strong>Orchestrator</strong> has a <strong>Policy</strong> that when both notifications match, they can be written
 to the <strong>Lifecycle Event Log</strong></p>
    </ul>
-   <h3 class="heading settled" data-level="7.2" id="possible-policies①"><span class="secno">7.2. </span><span class="content">Possible Policies</span><a class="self-link" href="#possible-policies①"></a></h3>
+   <h3 class="heading settled" data-level="6.2" id="possible-policies①"><span class="secno">6.2. </span><span class="content">Possible Policies</span><a class="self-link" href="#possible-policies①"></a></h3>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -2441,6 +2459,7 @@ to the <strong>Lifecycle Event Log</strong></p>
   <ul class="index">
    <li><a href="#actor">Actor</a><span>, in §2</span>
    <li><a href="#app">App</a><span>, in §2</span>
+   <li><a href="#artefact">Artefact</a><span>, in §2</span>
    <li><a href="#artefact-lifecycle-event-log">Artefact Lifecycle Event Log</a><span>, in §2</span>
    <li><a href="#autonomous-agent">Autonomous Agent</a><span>, in §2</span>
    <li><a href="#dashboard">Dashboard</a><span>, in §2</span>
@@ -2465,30 +2484,57 @@ to the <strong>Lifecycle Event Log</strong></p>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
    <div class="issue"> Need a better name for the App<a href="#issue-1551ac7d"> ↵ </a></div>
+   <div class="issue"> Are the Rules and Inbox necesearily part of the Data Pod or can they exist as separate resources?<a href="#issue-dce4218e"> ↵ </a></div>
    <div class="issue"> This all assumes that the ServiceHub service doesn’t send a 4** (for any reason, metadata, privileges, etc)<a href="#issue-e66a7ca7"> ↵ </a></div>
+   <div class="issue"> We need to determine what is required for an Orchestrator to be able to understand in which phase of an
+artefact lifecycle it is dealing with. Also we will need some kind of typology for an artefact type itself,
+eg paper, dataset, software, etc.<a href="#issue-63a5faeb"> ↵ </a></div>
+   <div class="issue"> Herbert: This would typically be triggered by a notification sent from the Orchestrator to the Inbox
+as a result of the execution of the Policy "once an artefact has entered the scholarly realm it should be certified".
+The Maintainer can then decide whether or not to request review and where. I think it would be good to add this
+to the pic as it nicely connects to the previous cases + illustrates policy<a href="#issue-1a0a0c9f"> ↵ </a></div>
+   <div class="issue"> Is this a verbatim copy of the AS2 notification or a processed version?<a href="#issue-d5c06278"> ↵ </a></div>
   </div>
   <aside class="dfn-panel" data-for="actor">
    <b><a href="#actor">#actor</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-actor">2. Glossary</a> <a href="#ref-for-actor①">(2)</a> <a href="#ref-for-actor②">(3)</a> <a href="#ref-for-actor③">(4)</a> <a href="#ref-for-actor④">(5)</a> <a href="#ref-for-actor⑤">(6)</a>
+    <li><a href="#ref-for-actor">2. Glossary</a> <a href="#ref-for-actor①">(2)</a> <a href="#ref-for-actor②">(3)</a> <a href="#ref-for-actor③">(4)</a> <a href="#ref-for-actor④">(5)</a> <a href="#ref-for-actor⑤">(6)</a> <a href="#ref-for-actor⑥">(7)</a> <a href="#ref-for-actor⑦">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="human-agent">
    <b><a href="#human-agent">#human-agent</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-human-agent">2. Glossary</a>
+    <li><a href="#ref-for-human-agent">2. Glossary</a> <a href="#ref-for-human-agent①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="autonomous-agent">
+   <b><a href="#autonomous-agent">#autonomous-agent</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-autonomous-agent">2. Glossary</a> <a href="#ref-for-autonomous-agent①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="data-pod">
    <b><a href="#data-pod">#data-pod</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-data-pod">2. Glossary</a> <a href="#ref-for-data-pod①">(2)</a> <a href="#ref-for-data-pod②">(3)</a>
+    <li><a href="#ref-for-data-pod">2. Glossary</a> <a href="#ref-for-data-pod①">(2)</a> <a href="#ref-for-data-pod②">(3)</a> <a href="#ref-for-data-pod③">(4)</a> <a href="#ref-for-data-pod④">(5)</a> <a href="#ref-for-data-pod⑤">(6)</a> <a href="#ref-for-data-pod⑥">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="inbox">
    <b><a href="#inbox">#inbox</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-inbox">2. Glossary</a>
+    <li><a href="#ref-for-inbox">2. Glossary</a> <a href="#ref-for-inbox①">(2)</a> <a href="#ref-for-inbox②">(3)</a> <a href="#ref-for-inbox③">(4)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="artefact-lifecycle-event-log">
+   <b><a href="#artefact-lifecycle-event-log">#artefact-lifecycle-event-log</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-artefact-lifecycle-event-log">2. Glossary</a> <a href="#ref-for-artefact-lifecycle-event-log①">(2)</a> <a href="#ref-for-artefact-lifecycle-event-log②">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="policy">
+   <b><a href="#policy">#policy</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-policy">2. Glossary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dashboard">

@@ -32,7 +32,7 @@ Copied from [Orchestrator for a decentralized Digital Heritage Network](https://
 : <dfn>Inbox</dfn>
 :: An [[!LDP]] resource where others can POST Linked Data Notifications [[!LDN]] in order to notify the actor of a change an artefact's lifecycle.
 : <dfn>Artefact Lifecycle Event Log</dfn>
-:: An HTTP resource served by an actor (e.g., as a resource in the [=Data Pod=]) that represents a log of occurred lifecycle events related to artefacts known by the actor.
+:: An HTTP resource served by an actor (e.g., as a resource in the [=Data Pod=]) that represents a log of lifecycle events that artefacts known by the actor were involved in..
 :: Artefacts are considered known when they reside in the actor's [=Data Pod=] or if the actor has been made aware via [[!LDN]].
 : <dfn export>Service Hub</dfn>
 :: An [=Actor=] that provides a service to other actors in the network. It is a <a href="https://solidproject.org/TR/protocol#solid-app">Solid app</a> and serves an [=Inbox=].
@@ -43,31 +43,38 @@ Copied from [Orchestrator for a decentralized Digital Heritage Network](https://
 
 New added terminology:
 
+: <dfn export>Artefact</dfn>
+:: An HTTP resource on a [=Data Pod=] that the subject of (Scholarly) Communication (e.g. a publication,
+a review, a nanopublication, a dataset)
 : <dfn export>Orchestrator</dfn>
-:: An Orchestrator is an Autonomous Agent dedicated to a single Data Pod, Service Hub, or any other actor hosting the Artefact Lifecycle Event Log and a Inbox resources. It interprets and executes business rules described in a policy. The Orchestrator watches the Inbox for possible triggers, while it records the actions it takes to the to the Artefact Lifecycle Event Log.
+:: An Orchestrator is an [=Autonomous Agent=] dedicated to an [=Actor=] that hosts a [=Data Pod=] with associated
+[=Inbox=] and [=Artefact Lifecycle Event Log=]. It interprets and executes business rules described in a [=Policy=].
+The Orchestrator watches the [=Inbox=] for possible triggers, records the actions it takes to the to the
+[=Artefact Lifecycle Event Log=], and communications with other Actors.
 : <dfn export>App</dfn>
-:: An App is an Automomous Agent dedicated to a single Data Pod can write to the Data Pod unsupervised by the Human Actor and is not limited to the Inbox or Artefact Lifecycle Event Log.
+:: An App is an [=Autonomous Agent=] dedicated to an [=Actor=] that hosts a [=Data Pod=]. The App can write to the
+[=Data Pod=] unsupervised by the [=Human Agent=] and is not limited to the [=Inbox=] or [=Artefact Lifecycle Event Log=].
 
 Issue: Need a better name for the App
 
 # Difference between the Dashboard, App and Orchestrator
 
-In the following discussion three agents communicate with the **Data Pod** with more or less privileges: the **Orchestrator**,
+In the following discussion three agents communicate with the **Data Pod** with different privileges: the **Orchestrator**,
 the **Dashboard** and the **App**. While in real applications these agents could overlap or might not be required at all (in
 some cases), in this document they are treated as separate entities to help the discussion. Some reasons why
 these Actors could be treated as separate entities:
 
 - privileges needed to access the **Data Pod**
-- requirements needed receive direct feedback from a **Human Agent**
-- requirements needed be always available **online**
+- requirements needed to receive direct feedback from a **Human Agent**
+- requirements needed to permanently be **online**
 - requirements needed to understand the **Scholarly Communication Notification protocol** and **Policies**
 
-In this light:
+With this regard:
 
 : App
 :: The App is a headless Autonomous Agent that doesn't need a Human Agent to execute write operations on the Data Pod.
-It is a trusted application for the Maintainer that could in principle update any artifact on the Data Pod. This application
-could run as a background service on the computer of the maintainer and is online as long as the computer is connected
+It is a trusted application for the Maintainer <s>that could in principle update any artifact on the Data Pod</s>. This application
+could run as a background service on the computer of the maintainer and be online as long as the computer is connected
 to a network.
 : Dashboard
 :: The Dashboard is an Agent that responds to feedback from an Human Agent. Typically this Dashboard runs in a browser
@@ -75,7 +82,7 @@ can be in an online or offline modus when a browser is running on the computer o
 tabs opened with the dashboard application.
 : Orchestrator
 :: The Orchestrator is an Autonomous Agent that can read the (Scholarly) **Inbox** of the **Data Pod** and append to
-the **Artefact Lifecycle Event Log**. The **Orchestrator** also communicates with the Scholar Community network using
+the **Artefact Lifecycle Event Log**. Guided by policies expressed as business rules, the **Orchestrator** also communicates with the Scholar Community network using
 the **Scholarly Communication Notification protocol** implementing **Policies**.
 
 <img src="images/mellon-orchestrator-solar.svg" width="40%">
@@ -85,6 +92,7 @@ the data pod (in level of trust). The **Orchestrator** has very limited access r
 task of the Orchestrator is to update the event log and execute policies in order to talk the Scholarly Communication Notification
 protocol (read/send messages from/to the corrrect Service Hubs).
 The **Dashboard** sits in between, it has control over the **Data Pod** but might (always) need user input to update the pod.
+Communication between the App/DashBoard and the Orchestrator happens via the Data Pod's Inbox.
 
 The networks below demonstrates the CRUD privileges imagined for the different actors in this document. The first
 network demonstrates a typical Solid setup where the Dashboard is a single page application that has direct access
@@ -93,15 +101,38 @@ to the Data Pod and the App is more a background process running in the same com
 <div><img src="images/mellon-crud-app.svg" width="80%"></div>
 <i>CRUD operations in case the DashBoard is single-page application and the App a background task</i>
 
+Issue: Are the Rules and Inbox necesearily part of the Data Pod or can they exist as separate resources?
+
 The second network demonstrates a more classic setup with a browser Dashboard controlled by a server App which uses a
 Data Pod as backend storage.
 
 <div><img src="images/mellon-crud.svg" width="80%"></div>
 <i>CRUD operations in case the Dashoard and App is a classic client/server application</i>
 
-# AS2 Notifications
+# Communication between Data Pod and Scholarly Community network
 
-In the use case document we use 5 types AS2 notifications in line with the
+A2 Notifications can be sent from the researcher environment to **Service Hub** environments.
+For instance, in case of a request to review an artefact that resides in the **Data Pod**, an
+appropriate notification can be sent to a review **Service Hub**. The **Service Hub** can respond,
+for example, accepting or rejecting the review request, and, in the latter case, to relay
+the result of the review.
+
+The **Orchestrator** sends notifications in response to triggers that result from the execution of
+Policies - implemented as business rules - that are associated with the **Data Pod**. The **Orchestrator**
+receives notifications in response to the ones it sent. The **Orchestrator** records information
+contained in both outgoing and incoming notifications in the **Artefact Lifecycle Event Log**.
+
+The AS2 notifications are regarded as a high-level approach to automatically coordinate the distributed
+execution of the crucial functions of scholarly communication. The notifications merely ensure that the
+respective functions are in effect executed as prescribed by Policies, but do not attempt to
+automate the actual fullfilment of the function itself. For instance, when an `Offer` is sent to a Review Service
+we don't envision that message contains all the steps to fully automate the submission process.
+It could contain enough metadata for simple workflows. In general out of band communication
+could be needed to perform all required steps.
+
+All AS2 notifications are send to all **Actors** in the network in the form of [Linked Data Notifications](https://www.w3.org/TR/ldn/).
+
+In this use case document we use 5 types AS2 notifications in line with the
 [COAR Notify](https://notify.coar-repositories.org/patterns/) project.
 
 : **Offer**
@@ -123,25 +154,6 @@ It indicates that the offer is rejected.
 :: The `Announce` notification is used to announce the outcome of an activity: typically
 to announce the availability of a new (scholarly) artefact.
 
-# Communication in and out the researcher environment
-
-A2 Notifications can be sent from the researcher environment to the service hub environment.
-For instace in a journal or review submission workflow notifications can be send to the
-service hub as machine readable updates of the scholarly record. In response the service hub
-enviroment can send A2 notifications back to the researcher environment.
-
-From the viewpoint of the **Orchestrator** the primary goal for this AS2 Notifications is to
-update the scholarly record in the form of the  **Lifecycle Event Log**. Updates
-to the  **Lifecycle Event Log** can trigger new notifications sent out to the **Service Hub**
-environment. This triggers are described in **Policies**.
-
-The AS2 notifications are used as announcements of activities by the researcher and the
-service hubs but are not meant to demand how these activities need to be done, nor to
-automate these activities.  For instance, when an `Offer` is sent to a Review Service
-we don't envision that message contains all the steps to fully automate the submission process.
-It could contain enough metadata for simple workflows. In general out of band communication
-could be needed to perform all required steps.
-
 # Data Pod sends notifications to a Service Hub
 
 Let's provide two examples how AS2 notifications can be sent out of the researcher environment
@@ -151,8 +163,7 @@ and generate some communication patterns out of these examples.
 
 <img src="images/mellon-scenario-1.svg" width="80%">
 
-- The **Maintainer** decides, after a lot of work, that one artefact on the **Data Pod** is ready to be
-shared with the world
+- The **Maintainer** decides, after a lot of work, that one artefact on the **Data Pod** is ready enter the scholarly realm
 - The **Maintainer** uses the **Dashboard** to send an `Announce` Notification to the (Scholarly) **Inbox** of the **Data Pod**
 - The **Orchestrator** polls the (Scholarly) **Inbox** of the **Data Pod** and discovers the `Announce` from the **Maintainer**
     - We assume that the **Orchestrator** has capabilities to filter out all trusted notifications from the **Inbox** (validation,
@@ -163,11 +174,21 @@ sends one or more AS2 notifications to one or more **Service Hubs** accordingly
 
 Issue: This all assumes that the ServiceHub service doesn't send a 4** (for any reason, metadata, privileges, etc)
 
+Issue: We need to determine what is required for an Orchestrator to be able to understand in which phase of an
+artefact lifecycle it is dealing with. Also we will need some kind of typology for an artefact type itself,
+eg paper, dataset, software, etc.
+
 ## Maintainer Offers an artefact in the Data Pod to a Service Hub
 
 <img src="images/mellon-scenario-2.svg" width="80%">
 
 - The **Maintainer** decides to send one artefact to an **Certificaton Service** to request a review
+
+Issue: Herbert: This would typically be triggered by a notification sent from the Orchestrator to the Inbox
+as a result of the execution of the Policy "once an artefact has entered the scholarly realm it should be certified".
+The Maintainer can then decide whether or not to request review and where. I think it would be good to add this
+to the pic as it nicely connects to the previous cases + illustrates policy
+
 - The **Maintainer** prepares in the **Dashboard** the required metadata and sends an `Offer` Notification
 to the (Scholarly) **Inbox** of the **Data Pod**
 - The **Orchestrator** polls the (Scholarly) **Inbox** of the **Data Pod** and discovers the `Offer` from the **Maintainer**
@@ -260,7 +281,7 @@ mellon:ForwardCC
 
 Based on the **Policies**:
 
-- The **Orchestrator** polls the **Inbox** for new notifications
+- <s>The **Orchestrator** polls the **Inbox** for new notifications</s>
 - The **Orchestrator** matches every new notificaton against the **Policies**
     - This will result in zero or more matched policy shapes
     - When the Shape matches an `mellon:EventLogRecord` then a new EventLog is created
@@ -285,6 +306,8 @@ an `Announce` to the (Scholarly) **Inbox** of the **Data Pod**.
 - The **Orchestrator** validates the `Offer` against the **Event Log**
 - The **Orchestrator** updates the **Lifecycle Event Log** with the AS2 notification
 
+Issue: Is this a verbatim copy of the AS2 notification or a processed version?
+
 ### Service Hub Announce is standalone
 
 For example, an overlay journal adds an article it found in an **Data Pod**, via the WebID
@@ -295,7 +318,8 @@ of the **Data Pod**.
 
 - The **Orchestrator** finds in the (Scholarly) **Inbox** of the **Data Pod** an `Announce` notification
 - The `Announce` doens't an `inReplyTo` property to a previous `Offer`
-- The notification is ignored
+- The **Orchestrator** ignores the notification but does not remove it from the **Inbox** because
+it pertains to the URI of a scholarly artefact in the **Data Pod**.
 - The **Maintainer** finds via the **Dashboard** the standalone `Announce` in the (Scholarly) **Inbox**
 - The **Maintainer** sends an `Accept` with an `inReplyTo` to the `Announce` to the (Scholarly) **Inbox**
 - The **Orchestrator** finds both the old `Announce` notification and new `Accept` notification

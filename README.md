@@ -1,8 +1,8 @@
 ## Live
 
-[Rendered Coar Use Cases](https://mellonscholarlycommunication.github.io/coar-usecases/)
+[Rendered Coar Use Cases](https://mellonscholarlycommunication.github.io/spec-usecases/)
 
-[Rendered Mellon Use Cases](https://mellonscholarlycommunication.github.io/coar-usecases/mellon-scenario.html)
+[Rendered Mellon Use Cases](https://mellonscholarlycommunication.github.io/spec-usecases/mellon-scenario.html)
 
 ## Generate HTML
 

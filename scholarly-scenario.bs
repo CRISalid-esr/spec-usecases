@@ -1,0 +1,132 @@
+<pre class='metadata'>
+Title: Scholarly use cases
+Shortname: orchestrator
+Level: 2
+Status: DREAM
+Editor: Patrick Hochstenbach
+Markup Shorthands: markdown yes
+Abstract: TODO
+</pre>
+
+# Scholarly use cases 
+
+# Alice creates a scholary artefact
+
+- Alice logins into her dashboard
+- She creates a new artefact stub
+    - Adds some metadata:
+        - Title
+        - Author(s)
+            - as WebIds
+        - Subjects
+            - ontology based
+        - Abstract
+        - Status
+            - Private
+            - Public
+        - Status ..set of   
+            - [ ] Registered
+            - [ ] Certified
+            - [ ] Archived
+- The artefact will result in a new landing page on the pod
+    - With all the descriptive metadata
+    - With technical metadata
+        - Creation date
+        - Last update date
+        - Files
+            - Number of files
+            - Sizes
+            - Names
+            - Types
+    - It will trigger an `as:Create` about the artefact
+
+- Alice can upload one or more files for this artefact
+    - It will trigger an `as:Update` about the artefact
+
+- Alice can delete one or more files in this artefact
+    - It will trigger an `as:Update` about the artefact
+
+- Alice can edit the metadata for this artefact
+    - It will trigger an `up:Update` about the artefact
+
+- Alice can delete the artefact
+    - It will trigger an `as:Delete` about the artefact
+
+# Alice can send a notification to a ServiceHub
+
+- Alice can view the inbox and event log for an artefact
+- Alice can send a new notification for this artefact
+    - Select a target from a list
+    - Optional select a previous notification in case of an Undo
+    - Optional select a `as:cc` (co-author)
+    - Add a short note 
+        - mapped to `as:content`
+- It will trigger an:
+    - `as:Offer`
+    - `as:Undo`
+    - `as:Announce` 
+
+# Alice can see an overview of all notifications and events of her pod
+
+# Registration hub accepts services
+
+    - E.g. our institutional repository
+    - Implements automated responses with an orchestrator?
+    - Automatic accepts offers from known webids
+        - E.g. there is a phonebook of Institutional webids
+    - Automatic reject offers from unkown webids 
+    - Forwards accepted messages to a resgistration manager
+
+## Registration manager
+
+    - Sees an overview of accepted offers
+    - Can read the artefact URL
+    - Does some (semi-)manual work in the institutional repository to add the
+    artefact
+    - Can send a `as:Announce` response back to Alice
+        - Triggers an update of the registration event log
+        - Triggers resolving the matching `as:Accept`
+
+# Certification hub accepts services
+
+- See registration but now it results in a Peer Review
+- Certification manager can send a Notification to Bob for a peer review
+    - Triggers an `as:Offer`
+    - Bob can `as:Accept` or `as:Reject`
+    - Bob can `an:Announce` a Review
+- Certification manager can based on the received reviews decide to
+ create a general Reviers page 
+    - When the page is ready Alice is notified
+    - Triggers an `as:Announce`
+
+# Archivation hub accepts services
+
+- Archivation hub accepts `as:Offer` for archivation of data
+    - Triggers an `as:Accept`
+- Archivation will start 
+- When the archivation results in a new ArchivedUrl it will be sent 
+  to Alice
+  - Triggers an `as:Announce`
+
+# Orchestrator suggests Services
+
+- Based on status of the metadata
+- Based on univesity policies
+
+E.g.
+
+- *Library* request to Offer New registered artefacts to 
+    be registered at the institutional repository
+    - Can be automated
+- *Faculty* request to Offer New registerd artefacts to 
+    a faculty registry
+    - Can be automated
+- *University* request to Offer New registered artefacts to
+    a Data Management Plan service
+        E.g. https://dmponline.be
+    - Requires manual intervention by Alice
+- *Conference* request to Offer an artefact about a topic
+    - Requires manual intervation by Alice
+- *Discovery Hub* request to Offer new artefacts to be included
+    in the index    
+    - Can be automated

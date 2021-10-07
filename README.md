@@ -4,6 +4,8 @@
 
 [Rendered Mellon Use Cases](https://mellonscholarlycommunication.github.io/spec-usecases/mellon-scenario.html)
 
+[Renderend Scholarly Use Cases](https://mellonscholarlycommunication.github.io/spec-usecases/scholarly-scenario.html)
+
 ## Generate HTML
 
 HTML is generated using the [Bikeshed preprocessor](https://tabatkins.github.io/bikeshed/).

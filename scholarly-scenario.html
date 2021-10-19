@@ -2081,11 +2081,13 @@ Parts of this work may be from another specification document.  If so, those par
     <li data-md>
      <p>Registration agency is e.g. an institutional repository</p>
     <li data-md>
-     <p>Implements automated responses with an orchestrator?</p>
-    <li data-md>
-     <p>Automatic accepts offers</p>
-    <li data-md>
-     <p>Forwards accepted messages to a registration manager</p>
+     <p>The Registration orchestrator</p>
+     <ul>
+      <li data-md>
+       <p>Automatic accepts offers</p>
+      <li data-md>
+       <p>Forwards accepted messages to a registration manager</p>
+     </ul>
     <li data-md>
      <p>Registration manager adds a record in the collection system</p>
      <ul>
@@ -2100,14 +2102,25 @@ artefact</p>
        <p>Can send a <code>as:Announce</code> response back to Alice</p>
      </ul>
     <li data-md>
-     <p>At the side Alice the Alice inbox will trigger the Alice
-  Orchestrator to update the Event Log on the Alice Pod</p>
+     <p>The Registrator orchestrator</p>
+     <ul>
+      <li data-md>
+       <p>Forwards the notifiction to Alice</p>
+      <li data-md>
+       <p>Append to the Registrator Event Log</p>
+     </ul>
+    <li data-md>
+     <p>Alice’s Orchestrator will be triggered by the notification</p>
+     <ul>
+      <li data-md>
+       <p>Append to the Event Log of Alice</p>
+     </ul>
    </ul>
    <h2 class="heading settled" data-level="6" id="archivation-hub-accepts-services"><span class="secno">6. </span><span class="content">Archivation hub accepts services</span><a class="self-link" href="#archivation-hub-accepts-services"></a></h2>
    <p><img src="images/spec-usecases_scholarly_6.svg"></p>
    <ul>
     <li data-md>
-     <p>Archivation hub accepts <code>as:Offer</code> from Alice for archivation of data</p>
+     <p>Archivation orchestrator accepts <code>as:Offer</code> from Alice for archivation of data</p>
      <ul>
       <li data-md>
        <p>Triggers an <code>as:Accept</code></p>
@@ -2116,17 +2129,17 @@ artefact</p>
      <p>Alice’s Orchestrator will update the Event Log on Alice Pod based on
   this trigger</p>
     <li data-md>
-     <p>Archivation will start by Archivator Orchestrator</p>
+     <p>Archivation will be triggered by the Archivator Orchestrator:</p>
      <ul>
       <li data-md>
-       <p>The Archivator Orchestrator will download the artefact from Alice’s pod</p>
+       <p>Download the artefact from Alice’s pod</p>
       <li data-md>
-       <p>The Archivator Orchestrator will create a BagIt to upload in Meemoo</p>
+       <p>Create a BagIt to upload in Meemoo</p>
       <li data-md>
-       <p>The Archivator Orchestrator will poll Meemoo to see if the data is archived</p>
+       <p>Poll Meemoo to see if the data is archived</p>
      </ul>
     <li data-md>
-     <p>When the archivation results in a new ArchivedUrl it will
+     <p>When the archivation results in a new ArchivedUrl, the Archivator Orchestrator will
  trigger an <code>as:Announce</code> to Alice’s Pod</p>
     <li data-md>
      <p>Alice’s Orchestrator will update the Event Log on Alice Pod based

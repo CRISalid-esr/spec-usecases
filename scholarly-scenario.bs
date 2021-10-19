@@ -86,32 +86,34 @@ Abstract: TODO
 <img src="images/spec-usecases_scholarly_5.svg"/>
 
     - Registration agency is e.g. an institutional repository
-    - Implements automated responses with an orchestrator?
-    - Automatic accepts offers 
-    - Forwards accepted messages to a registration manager
+    - The Registration orchestrator 
+        - Automatic accepts offers 
+        - Forwards accepted messages to a registration manager
     - Registration manager adds a record in the collection system
         - Sees an overview of accepted offers
         - Can read the artefact URL
         - Does some (semi-)manual work in the institutional repository to add the
     artefact
         - Can send a `as:Announce` response back to Alice
-
-    - At the side Alice the Alice inbox will trigger the Alice 
-      Orchestrator to update the Event Log on the Alice Pod
+    - The Registrator orchestrator
+        - Forwards the notifiction to Alice
+        - Append to the Registrator Event Log 
+    - Alice's Orchestrator will be triggered by the notification
+        - Append to the Event Log of Alice
 
 # Archivation hub accepts services
 
 <img src="images/spec-usecases_scholarly_6.svg"/>
 
-- Archivation hub accepts `as:Offer` from Alice for archivation of data
+- Archivation orchestrator accepts `as:Offer` from Alice for archivation of data
     - Triggers an `as:Accept`
 - Alice's Orchestrator will update the Event Log on Alice Pod based on 
   this trigger
-- Archivation will start by Archivator Orchestrator
-    - The Archivator Orchestrator will download the artefact from Alice's pod
-    - The Archivator Orchestrator will create a BagIt to upload in Meemoo
-    - The Archivator Orchestrator will poll Meemoo to see if the data is archived
-- When the archivation results in a new ArchivedUrl it will 
+- Archivation will be triggered by the Archivator Orchestrator:
+    - Download the artefact from Alice's pod
+    - Create a BagIt to upload in Meemoo
+    - Poll Meemoo to see if the data is archived
+- When the archivation results in a new ArchivedUrl, the Archivator Orchestrator will 
  trigger an `as:Announce` to Alice's Pod
 
 - Alice's Orchestrator will update the Event Log on Alice Pod based 

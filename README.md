@@ -6,6 +6,8 @@
 
 [Renderend Scholarly Use Cases](https://mellonscholarlycommunication.github.io/spec-usecases/scholarly-scenario.html)
 
+[Renderend Erfgoed Use Cases](https://mellonscholarlycommunication.github.io/spec-usecases/demo-scenario.html)
+
 ## Generate HTML
 
 HTML is generated using the [Bikeshed preprocessor](https://tabatkins.github.io/bikeshed/).

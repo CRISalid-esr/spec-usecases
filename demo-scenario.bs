@@ -2,7 +2,7 @@
 Title: Demo scenario ErfgoedPod & ResearcherPod
 Shortname: demo
 Level: 1
-Status: LD
+Status: DREAM 
 URL: https://github.com/ErfgoedPod/demo
 Editor: Miel Vander Sande, [meemoo](https://meemoo.be), miel.vandersande@meemoo.be
 Abstract: A short description of your spec, one or two sentences.

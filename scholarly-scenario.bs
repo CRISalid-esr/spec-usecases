@@ -8,9 +8,9 @@ Markup Shorthands: markdown yes
 Abstract: TODO
 </pre>
 
-# Scholarly use cases 
-
 # Alice creates a scholary artefact
+
+<img src="images/spec-usecases_scholarly_1.svg"/>
 
 - Alice logins into her dashboard
 - She creates a new artefact stub
@@ -52,61 +52,70 @@ Abstract: TODO
 - Alice can delete the artefact
     - It will trigger an `as:Delete` about the artefact
 
+- Alice can say the artefact is ready for view
+    - It will trigger an `as:Announce` about the artefact
+    - It will trigger an update of the Alice's event log by her
+      orchestrator 
+      
+# Bob want to know about Alices artefacts
+
+<img src="images/spec-usecases_scholarly_2.svg"/>
+
+- Bob's orchestrator receives Announces from Alice's Event log
+- Bob's orchestrator sends an notification to Bob's inbox
+
 # Alice can send a notification to a ServiceHub
 
-- Alice can view the inbox and event log for an artefact
+<img src="images/spec-usecases_scholarly_3.svg"/>
+
+- Alice select an artefact 
 - Alice can send a new notification for this artefact
-    - Select a target from a list
-    - Optional select a previous notification in case of an Undo
-    - Optional select a `as:cc` (co-author)
-    - Add a short note 
+    - Select a ServiceHub target from a list
+        - The list of ServiceHub-s is available from a FOAF-registry file
+    - Optionally add a short note 
         - mapped to `as:content`
 - It will trigger an:
-    - `as:Offer`
-    - `as:Undo`
-    - `as:Announce` 
+    - `as:Offer` to the Service Hub target 
+- Alice's Orchestrator will append to the Event Log of the Alice pod
+- Alice's Orchestrator will forward the notification to the Service Hub
 
 # Alice can see an overview of all notifications and events of her pod
 
-# Registration hub accepts services
+# Registration hub accepts Offers from Alice
 
-    - E.g. our institutional repository
+<img src="images/spec-usecases_scholarly_5.svg"/>
+
+    - Registration agency is e.g. an institutional repository
     - Implements automated responses with an orchestrator?
-    - Automatic accepts offers from known webids
-        - E.g. there is a phonebook of Institutional webids
-    - Automatic reject offers from unkown webids 
-    - Forwards accepted messages to a resgistration manager
-
-## Registration manager
-
-    - Sees an overview of accepted offers
-    - Can read the artefact URL
-    - Does some (semi-)manual work in the institutional repository to add the
+    - Automatic accepts offers 
+    - Forwards accepted messages to a registration manager
+    - Registration manager adds a record in the collection system
+        - Sees an overview of accepted offers
+        - Can read the artefact URL
+        - Does some (semi-)manual work in the institutional repository to add the
     artefact
-    - Can send a `as:Announce` response back to Alice
-        - Triggers an update of the registration event log
-        - Triggers resolving the matching `as:Accept`
+        - Can send a `as:Announce` response back to Alice
 
-# Certification hub accepts services
-
-- See registration but now it results in a Peer Review
-- Certification manager can send a Notification to Bob for a peer review
-    - Triggers an `as:Offer`
-    - Bob can `as:Accept` or `as:Reject`
-    - Bob can `an:Announce` a Review
-- Certification manager can based on the received reviews decide to
- create a general Reviers page 
-    - When the page is ready Alice is notified
-    - Triggers an `as:Announce`
+    - At the side Alice the Alice inbox will trigger the Alice 
+      Orchestrator to update the Event Log on the Alice Pod
 
 # Archivation hub accepts services
 
-- Archivation hub accepts `as:Offer` for archivation of data
+<img src="images/spec-usecases_scholarly_6.svg"/>
+
+- Archivation hub accepts `as:Offer` from Alice for archivation of data
     - Triggers an `as:Accept`
-- Archivation will start 
-- When the archivation results in a new ArchivedUrl it will be sent 
-  to Alice
-  - Triggers an `as:Announce`
+- Alice's Orchestrator will update the Event Log on Alice Pod based on 
+  this trigger
+- Archivation will start by Archivator Orchestrator
+    - The Archivator Orchestrator will download the artefact from Alice's pod
+    - The Archivator Orchestrator will create a BagIt to upload in Meemoo
+    - The Archivator Orchestrator will poll Meemoo to see if the data is archived
+- When the archivation results in a new ArchivedUrl it will 
+ trigger an `as:Announce` to Alice's Pod
+
+- Alice's Orchestrator will update the Event Log on Alice Pod based 
+ on this trigger
 
 # Orchestrator suggests Services
 

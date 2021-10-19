@@ -1487,7 +1487,7 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version a210b7d86, updated Thu Sep 16 13:45:19 2021 -0700" name="generator">
+  <meta content="Bikeshed version d7036035b, updated Fri Oct 8 17:07:11 2021 -0700" name="generator">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1885,7 +1885,7 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Scholarly use cases</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-10-07">7 October 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-10-19">19 October 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt class="editor">Editor:
@@ -1895,7 +1895,7 @@ dfn > a.self-link::before      { content: "#"; }
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 7 October 2021,
+In addition, as of 19 October 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1909,18 +1909,13 @@ Parts of this work may be from another specification document.  If so, those par
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
-    <li><a href="#scholarly-use-cases"><span class="secno">1</span> <span class="content">Scholarly use cases</span></a>
-    <li><a href="#alice-creates-a-scholary-artefact"><span class="secno">2</span> <span class="content">Alice creates a scholary artefact</span></a>
+    <li><a href="#alice-creates-a-scholary-artefact"><span class="secno">1</span> <span class="content">Alice creates a scholary artefact</span></a>
+    <li><a href="#bob-want-to-know-about-alices-artefacts"><span class="secno">2</span> <span class="content">Bob want to know about Alices artefacts</span></a>
     <li><a href="#alice-can-send-a-notification-to-a-servicehub"><span class="secno">3</span> <span class="content">Alice can send a notification to a ServiceHub</span></a>
     <li><a href="#alice-can-see-an-overview-of-all-notifications-and-events-of-her-pod"><span class="secno">4</span> <span class="content">Alice can see an overview of all notifications and events of her pod</span></a>
-    <li>
-     <a href="#registration-hub-accepts-services"><span class="secno">5</span> <span class="content">Registration hub accepts services</span></a>
-     <ol class="toc">
-      <li><a href="#registration-manager"><span class="secno">5.1</span> <span class="content">Registration manager</span></a>
-     </ol>
-    <li><a href="#certification-hub-accepts-services"><span class="secno">6</span> <span class="content">Certification hub accepts services</span></a>
-    <li><a href="#archivation-hub-accepts-services"><span class="secno">7</span> <span class="content">Archivation hub accepts services</span></a>
-    <li><a href="#orchestrator-suggests-services"><span class="secno">8</span> <span class="content">Orchestrator suggests Services</span></a>
+    <li><a href="#registration-hub-accepts-offers-from-alice"><span class="secno">5</span> <span class="content">Registration hub accepts Offers from Alice</span></a>
+    <li><a href="#archivation-hub-accepts-services"><span class="secno">6</span> <span class="content">Archivation hub accepts services</span></a>
+    <li><a href="#orchestrator-suggests-services"><span class="secno">7</span> <span class="content">Orchestrator suggests Services</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
@@ -1930,8 +1925,8 @@ Parts of this work may be from another specification document.  If so, those par
    </ol>
   </nav>
   <main>
-   <h2 class="heading settled" data-level="1" id="scholarly-use-cases"><span class="secno">1. </span><span class="content">Scholarly use cases</span><a class="self-link" href="#scholarly-use-cases"></a></h2>
-   <h2 class="heading settled" data-level="2" id="alice-creates-a-scholary-artefact"><span class="secno">2. </span><span class="content">Alice creates a scholary artefact</span><a class="self-link" href="#alice-creates-a-scholary-artefact"></a></h2>
+   <h2 class="heading settled" data-level="1" id="alice-creates-a-scholary-artefact"><span class="secno">1. </span><span class="content">Alice creates a scholary artefact</span><a class="self-link" href="#alice-creates-a-scholary-artefact"></a></h2>
+   <p><img src="images/spec-usecases_scholarly_1.svg"></p>
    <ul>
     <li data-md>
      <p>Alice logins into her dashboard</p>
@@ -2029,22 +2024,40 @@ Parts of this work may be from another specification document.  If so, those par
       <li data-md>
        <p>It will trigger an <code>as:Delete</code> about the artefact</p>
      </ul>
+    <li data-md>
+     <p>Alice can say the artefact is ready for view</p>
+     <ul>
+      <li data-md>
+       <p>It will trigger an <code>as:Announce</code> about the artefact</p>
+      <li data-md>
+       <p>It will trigger an update of the Alice’s event log by her
+  orchestrator</p>
+     </ul>
    </ul>
-   <h2 class="heading settled" data-level="3" id="alice-can-send-a-notification-to-a-servicehub"><span class="secno">3. </span><span class="content">Alice can send a notification to a ServiceHub</span><a class="self-link" href="#alice-can-send-a-notification-to-a-servicehub"></a></h2>
+   <h2 class="heading settled" data-level="2" id="bob-want-to-know-about-alices-artefacts"><span class="secno">2. </span><span class="content">Bob want to know about Alices artefacts</span><a class="self-link" href="#bob-want-to-know-about-alices-artefacts"></a></h2>
+   <p><img src="images/spec-usecases_scholarly_2.svg"></p>
    <ul>
     <li data-md>
-     <p>Alice can view the inbox and event log for an artefact</p>
+     <p>Bob’s orchestrator receives Announces from Alice’s Event log</p>
+    <li data-md>
+     <p>Bob’s orchestrator sends an notification to Bob’s inbox</p>
+   </ul>
+   <h2 class="heading settled" data-level="3" id="alice-can-send-a-notification-to-a-servicehub"><span class="secno">3. </span><span class="content">Alice can send a notification to a ServiceHub</span><a class="self-link" href="#alice-can-send-a-notification-to-a-servicehub"></a></h2>
+   <p><img src="images/spec-usecases_scholarly_3.svg"></p>
+   <ul>
+    <li data-md>
+     <p>Alice select an artefact</p>
     <li data-md>
      <p>Alice can send a new notification for this artefact</p>
      <ul>
       <li data-md>
-       <p>Select a target from a list</p>
+       <p>Select a ServiceHub target from a list</p>
+       <ul>
+        <li data-md>
+         <p>The list of ServiceHub-s is available from a FOAF-registry file</p>
+       </ul>
       <li data-md>
-       <p>Optional select a previous notification in case of an Undo</p>
-      <li data-md>
-       <p>Optional select a <code>as:cc</code> (co-author)</p>
-      <li data-md>
-       <p>Add a short note</p>
+       <p>Optionally add a short note</p>
        <ul>
         <li data-md>
          <p>mapped to <code>as:content</code></p>
@@ -2054,90 +2067,72 @@ Parts of this work may be from another specification document.  If so, those par
      <p>It will trigger an:</p>
      <ul>
       <li data-md>
-       <p><code>as:Offer</code></p>
-      <li data-md>
-       <p><code>as:Undo</code></p>
-      <li data-md>
-       <p><code>as:Announce</code></p>
+       <p><code>as:Offer</code> to the Service Hub target</p>
      </ul>
+    <li data-md>
+     <p>Alice’s Orchestrator will append to the Event Log of the Alice pod</p>
+    <li data-md>
+     <p>Alice’s Orchestrator will forward the notification to the Service Hub</p>
    </ul>
    <h2 class="heading settled" data-level="4" id="alice-can-see-an-overview-of-all-notifications-and-events-of-her-pod"><span class="secno">4. </span><span class="content">Alice can see an overview of all notifications and events of her pod</span><a class="self-link" href="#alice-can-see-an-overview-of-all-notifications-and-events-of-her-pod"></a></h2>
-   <h2 class="heading settled" data-level="5" id="registration-hub-accepts-services"><span class="secno">5. </span><span class="content">Registration hub accepts services</span><a class="self-link" href="#registration-hub-accepts-services"></a></h2>
+   <h2 class="heading settled" data-level="5" id="registration-hub-accepts-offers-from-alice"><span class="secno">5. </span><span class="content">Registration hub accepts Offers from Alice</span><a class="self-link" href="#registration-hub-accepts-offers-from-alice"></a></h2>
+   <p><img src="images/spec-usecases_scholarly_5.svg"></p>
    <ul>
     <li data-md>
-     <p>E.g. our institutional repository</p>
+     <p>Registration agency is e.g. an institutional repository</p>
     <li data-md>
      <p>Implements automated responses with an orchestrator?</p>
     <li data-md>
-     <p>Automatic accepts offers from known webids</p>
+     <p>Automatic accepts offers</p>
+    <li data-md>
+     <p>Forwards accepted messages to a registration manager</p>
+    <li data-md>
+     <p>Registration manager adds a record in the collection system</p>
      <ul>
       <li data-md>
-       <p>E.g. there is a phonebook of Institutional webids</p>
-     </ul>
-    <li data-md>
-     <p>Automatic reject offers from unkown webids</p>
-    <li data-md>
-     <p>Forwards accepted messages to a resgistration manager</p>
-   </ul>
-   <h3 class="heading settled" data-level="5.1" id="registration-manager"><span class="secno">5.1. </span><span class="content">Registration manager</span><a class="self-link" href="#registration-manager"></a></h3>
-   <ul>
-    <li data-md>
-     <p>Sees an overview of accepted offers</p>
-    <li data-md>
-     <p>Can read the artefact URL</p>
-    <li data-md>
-     <p>Does some (semi-)manual work in the institutional repository to add the
+       <p>Sees an overview of accepted offers</p>
+      <li data-md>
+       <p>Can read the artefact URL</p>
+      <li data-md>
+       <p>Does some (semi-)manual work in the institutional repository to add the
 artefact</p>
-    <li data-md>
-     <p>Can send a <code>as:Announce</code> response back to Alice</p>
-     <ul>
       <li data-md>
-       <p>Triggers an update of the registration event log</p>
-      <li data-md>
-       <p>Triggers resolving the matching <code>as:Accept</code></p>
+       <p>Can send a <code>as:Announce</code> response back to Alice</p>
      </ul>
+    <li data-md>
+     <p>At the side Alice the Alice inbox will trigger the Alice
+  Orchestrator to update the Event Log on the Alice Pod</p>
    </ul>
-   <h2 class="heading settled" data-level="6" id="certification-hub-accepts-services"><span class="secno">6. </span><span class="content">Certification hub accepts services</span><a class="self-link" href="#certification-hub-accepts-services"></a></h2>
+   <h2 class="heading settled" data-level="6" id="archivation-hub-accepts-services"><span class="secno">6. </span><span class="content">Archivation hub accepts services</span><a class="self-link" href="#archivation-hub-accepts-services"></a></h2>
+   <p><img src="images/spec-usecases_scholarly_6.svg"></p>
    <ul>
     <li data-md>
-     <p>See registration but now it results in a Peer Review</p>
-    <li data-md>
-     <p>Certification manager can send a Notification to Bob for a peer review</p>
-     <ul>
-      <li data-md>
-       <p>Triggers an <code>as:Offer</code></p>
-      <li data-md>
-       <p>Bob can <code>as:Accept</code> or <code>as:Reject</code></p>
-      <li data-md>
-       <p>Bob can <code>an:Announce</code> a Review</p>
-     </ul>
-    <li data-md>
-     <p>Certification manager can based on the received reviews decide to
- create a general Reviers page</p>
-     <ul>
-      <li data-md>
-       <p>When the page is ready Alice is notified</p>
-      <li data-md>
-       <p>Triggers an <code>as:Announce</code></p>
-     </ul>
-   </ul>
-   <h2 class="heading settled" data-level="7" id="archivation-hub-accepts-services"><span class="secno">7. </span><span class="content">Archivation hub accepts services</span><a class="self-link" href="#archivation-hub-accepts-services"></a></h2>
-   <ul>
-    <li data-md>
-     <p>Archivation hub accepts <code>as:Offer</code> for archivation of data</p>
+     <p>Archivation hub accepts <code>as:Offer</code> from Alice for archivation of data</p>
      <ul>
       <li data-md>
        <p>Triggers an <code>as:Accept</code></p>
      </ul>
     <li data-md>
-     <p>Archivation will start</p>
+     <p>Alice’s Orchestrator will update the Event Log on Alice Pod based on
+  this trigger</p>
     <li data-md>
-     <p>When the archivation results in a new ArchivedUrl it will be sent
-  to Alice</p>
+     <p>Archivation will start by Archivator Orchestrator</p>
+     <ul>
+      <li data-md>
+       <p>The Archivator Orchestrator will download the artefact from Alice’s pod</p>
+      <li data-md>
+       <p>The Archivator Orchestrator will create a BagIt to upload in Meemoo</p>
+      <li data-md>
+       <p>The Archivator Orchestrator will poll Meemoo to see if the data is archived</p>
+     </ul>
     <li data-md>
-     <p>Triggers an <code>as:Announce</code></p>
+     <p>When the archivation results in a new ArchivedUrl it will
+ trigger an <code>as:Announce</code> to Alice’s Pod</p>
+    <li data-md>
+     <p>Alice’s Orchestrator will update the Event Log on Alice Pod based
+ on this trigger</p>
    </ul>
-   <h2 class="heading settled" data-level="8" id="orchestrator-suggests-services"><span class="secno">8. </span><span class="content">Orchestrator suggests Services</span><a class="self-link" href="#orchestrator-suggests-services"></a></h2>
+   <h2 class="heading settled" data-level="7" id="orchestrator-suggests-services"><span class="secno">7. </span><span class="content">Orchestrator suggests Services</span><a class="self-link" href="#orchestrator-suggests-services"></a></h2>
    <ul>
     <li data-md>
      <p>Based on status of the metadata</p>

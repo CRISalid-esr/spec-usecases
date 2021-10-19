@@ -1,5 +1,5 @@
 <pre class='metadata'>
-Title: ErfgoedPod demo scenarios
+Title: Demo scenario ErfgoedPod & ResearcherPod
 Shortname: demo
 Level: 1
 Status: LD
@@ -37,17 +37,21 @@ Scenario {#scenario}
 
 ### Solid Apps
 
-- <dfn>Solid CRS</dfn>: collection management system for small digital heritage organizations
-- <dfn>Scolarly Dashboard</dfn>: application to upload and describe publications
-- <dfn>Demo app</dfn>: 
+- <dfn>Solid CRS</dfn>: https://solid-crs.netwerkdigitaalerfgoed.nl/
+    - collection management system for small digital heritage organizations
+- <dfn>Scolarly Dashboard</dfn>: 
+    - application to upload and describe publications
+- <dfn>Demo app</dfn>: http://bellow2.ugent.be/public/
     - create, send and receive notifications between different pods and services
     - illustrate network
     - introspect event logs
 
 ### Orchestrators
 
-- [=Alice=] and [=Bob=] both have an [=Orchestrator=]
-    - the [=Orchestrator=] has an personal Inbox as API
+<dfn>Alice's Orchestrator</dfn>
+ - the [=Orchestrator=] has an personal Inbox as API
+<dfn>Bob's Orchestrator</dfn>
+ - the [=Orchestrator=] has an personal Inbox as API
     
 
 ### Service hubs
@@ -55,18 +59,40 @@ Scenario {#scenario}
 <dfn>Registry Service Hub</dfn>
 - wrapper service for the NDE [Dataset Registry](https://datasetregister.netwerkdigitaalerfgoed.nl/apidoc.php)
 
-
 <dfn>Archival Service Hub</dfn>
 - wrapper service for the meemoo UGent GREB archive
 
 
 ### Part 1: artefact creation 
 
+<div class="mermaid">
+sequenceDiagram
+    actor Bob
+    actor BO as Bob's orchestrator
+    actor BP as Bob's data pod
+    actor Alice
+    actor AP as Alice's data pod
+    actor AO as Alice's orchestrator
+    actor SCR as Solid CRS
+    actor SD as Dashboard
+    actor DA as Demo App
+    actor RSH as Registry Service Hub
+    actor ASH as Archival Service Hub
+
+    autonumber
+    Bob ->> CRS: logs in
+    Bob ->> CRS: creates collection
+    Bob ->>+ CRS: adds image with description to collection
+    Note right of CRS: New artefact created
+
+    CRS ->> BP: store new artefact
+    CRS ->> BP: post as:Create to inbox
+</div>
+
 #### Digital Heritage
 
-1. Bob logs into [Solid CRS](https://solid-crs.netwerkdigitaalerfgoed.nl/) with his Web ID
+1. Bob logs into [=Solid CRS=] with his Web ID
     - Bob chooses his data pod
-    - 
 2. Bob creates a new Collection about the liberation of Utrecht in WOII
 3. He adds an object with the following metadata
     - image: https://data.spinque.com/iiif/2/https%3A%2F%2Fimages.memorix.nl%2Fniod%2Fthumb%2F1000x1000%2F9236648b-6507-e27b-f3fa-68a5227efc18.jpg/full/full/0/default.jpg
@@ -110,13 +136,53 @@ Scenario {#scenario}
 
 ### Part 2: requesting services
 
+For scholarly Communication, the sequence is the same but the artefact is a publication.
+
+<div class="mermaid">
+sequenceDiagram
+    actor Bob
+    actor DA as Demo App
+    actor BP as Bob's data pod
+    actor BO as Bob's orchestrator
+    actor SCR as Solid CRS
+    actor SD as Dashboard
+    actor RSH as Registry Service Hub
+    actor DR as NDE Dataset Registry API
+    actor ASH as Archival Service Hub
+    actor MA as meemoo's archive
+
+    autonumber
+    Bob ->> DA: logs into data pod
+    DA  ->> BP: initializes data pod with event log
+    Bob ->> DA: views artefact, the content of the inbox and the event log
+    BO ->> BP: append creation event to the event log
+    BO ->> Bob: suggest offer to Registry Service Hub
+    BO ->> RSH: post as:Offer to inbox
+    RSH ->> DR: post metadata
+    DR ->> RSH: metadata added
+    RSH ->> BP: post as:Announce to inbox
+    BO ->> BP: append event log
+    Bob ->> DA: sees changes reflected
+
+    BO ->> Bob: suggest offer to Archival Service Hub
+    BO ->> ASH: post as:Offer to inbox
+    ASH ->> MA: put bag onto FTP
+    MA ->> MA: archival process & set ARCHIVED_ON_DISK event 
+    ASH ->> MA: poll ARCHIVED_ON_DISK event
+    ASH ->> BP: post as:Announce to inbox
+    BO ->> BP: append event log
+    Bob ->> DA: sees changes reflected
+</div>
+
 #### Invoking the registration service
 
 1. [=Bob=] turns to the [=demo app=] of the artefact exchange network
 2. [=Bob=] logs into the data pod for the first time
     - a event log resource is added to the pod
 3. [=Bob=] can view the artefact + inbox and event log
-5. [=Bob=]'s Orchestrator receives the `as:Create` activity and suggests to Bob that he should offer the artefact to the [=Registry Service Hub=].
+5. [=Bob=]'s Orchestrator receives the `as:Create` activity
+    - appends the creation event to the event log
+    - suggests to Bob that he should offer the artefact metadata to the [=Registry Service Hub=].
 4. [=Bob=] sends a new notification with an `as:Offer` activity to the [=Registry Service Hub=]
     - Select the [=Registry Service Hub=] as target from the list
     - Add a short note
@@ -126,40 +192,23 @@ Scenario {#scenario}
 7. [=Bob=]'s Orchestrator appends the event log
 8. [=Bob=] sees in the event log with the demo app that the registration is complete
 
+
 #### Invoking the archival service
 
 1. [=Bob=] turns to the [=demo app=] of the artefact exchange network
-2.  poll Mediahaven API for `ARCHIVED_ON_DISK` premis event to send an Announce
+5. [=Bob=]'s Orchestrator suggests to Bob that he should offer the image artefact with metadata to the [=Archival Service Hub=].
+4. [=Bob=] sends a new notification with an `as:Offer` activity to the [=Archival Service Hub=]
+    - Select the [=Archival Service Hub=] as target from the list
+    - Add a short note
+5. The [=Archival Service Hub=] receives the notification
+    - downloads the artefact
+    - wraps the image artefact in a bagit and adds it to meemoo's SFTP
+6. The [=Archival Service Hub=] polls meemoo's Mediahaven API for `ARCHIVED_ON_DISK` premis event
+    - when found, it sends a notification with `as:Announce` to [=Bob=]
+7. [=Bob=]'s Orchestrator appends the event log
+8. [=Bob=] sees in the event log with the demo app that the registration is complete
 
+Issue(1): how to get to aggregation of artefacts
 
-
-Ideas
- - echte archivering via meemoo qas en UGent dieparchief
-   - TIFF archiveren via erfgoed use case solid crs
-   - publicatie via mellon use case
-==> mediahaven-qas API pollen voor ARCHIVED_ON_DISK premis event
- - registratie 
-    - datasetbeschrijving https://datasetregister.netwerkdigitaalerfgoed.nl/viaurl.php
-    - orchestrator -> suggestie: wil je image niet archiveren?
-        - image -> 
-
-1. solid crs -> artefact
-2. creatie activity -> orchestrator
-3. orchestrator -> advies registratie
-4. manuele registratie activity -> registry offer naar registry service
-5. register dienst -> execute -> announce registration -> pod
-5. orchestrator advies manuele archivatie image -> pod
-6. manuele archivatie activity -> meemoo service
-7. meemoo service -> announce -> pod
-
-
-
-
-
-
-open vragen:
- - @ruben: wat is ruben's manier om aan de aggregatie te geraken
- - @miel: wat is miel's manier of aan de aggregatie te geraken
-
-        mapped to as:content
-
+ <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+ <script>mermaid.initialize({startOnLoad:true});</script>

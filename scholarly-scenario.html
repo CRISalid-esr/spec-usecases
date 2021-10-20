@@ -1885,7 +1885,7 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Scholarly use cases</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-10-19">19 October 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-10-20">20 October 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt class="editor">Editor:
@@ -1895,7 +1895,7 @@ dfn > a.self-link::before      { content: "#"; }
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 19 October 2021,
+In addition, as of 20 October 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1914,7 +1914,7 @@ Parts of this work may be from another specification document.  If so, those par
     <li><a href="#alice-can-send-a-notification-to-a-servicehub"><span class="secno">3</span> <span class="content">Alice can send a notification to a ServiceHub</span></a>
     <li><a href="#alice-can-see-an-overview-of-all-notifications-and-events-of-her-pod"><span class="secno">4</span> <span class="content">Alice can see an overview of all notifications and events of her pod</span></a>
     <li><a href="#registration-hub-accepts-offers-from-alice"><span class="secno">5</span> <span class="content">Registration hub accepts Offers from Alice</span></a>
-    <li><a href="#archivation-hub-accepts-services"><span class="secno">6</span> <span class="content">Archivation hub accepts services</span></a>
+    <li><a href="#archival-hub-accepts-services"><span class="secno">6</span> <span class="content">Archival hub accepts services</span></a>
     <li><a href="#orchestrator-suggests-services"><span class="secno">7</span> <span class="content">Orchestrator suggests Services</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
@@ -2116,11 +2116,11 @@ artefact</p>
        <p>Append to the Event Log of Alice</p>
      </ul>
    </ul>
-   <h2 class="heading settled" data-level="6" id="archivation-hub-accepts-services"><span class="secno">6. </span><span class="content">Archivation hub accepts services</span><a class="self-link" href="#archivation-hub-accepts-services"></a></h2>
+   <h2 class="heading settled" data-level="6" id="archival-hub-accepts-services"><span class="secno">6. </span><span class="content">Archival hub accepts services</span><a class="self-link" href="#archival-hub-accepts-services"></a></h2>
    <p><img src="images/spec-usecases_scholarly_6.svg"></p>
    <ul>
     <li data-md>
-     <p>Archivation orchestrator accepts <code>as:Offer</code> from Alice for archivation of data</p>
+     <p>Archival Hub orchestrator accepts <code>as:Offer</code> from Alice for archivation of data</p>
      <ul>
       <li data-md>
        <p>Triggers an <code>as:Accept</code></p>
@@ -2129,17 +2129,15 @@ artefact</p>
      <p>Alice’s Orchestrator will update the Event Log on Alice Pod based on
   this trigger</p>
     <li data-md>
-     <p>Archivation will be triggered by the Archivator Orchestrator:</p>
+     <p>Archivation will be triggered by the Archival Hub Orchestrator:</p>
      <ul>
       <li data-md>
-       <p>Download the artefact from Alice’s pod</p>
+       <p>Send the Alice artefact to Robust Links</p>
       <li data-md>
-       <p>Create a BagIt to upload in Meemoo</p>
-      <li data-md>
-       <p>Poll Meemoo to see if the data is archived</p>
+       <p>Poll Robust Links to check if data is archived</p>
      </ul>
     <li data-md>
-     <p>When the archivation results in a new ArchivedUrl, the Archivator Orchestrator will
+     <p>When the archivation results in a new ArchivedUrl, the Archival Hub Orchestrator will
  trigger an <code>as:Announce</code> to Alice’s Pod</p>
     <li data-md>
      <p>Alice’s Orchestrator will update the Event Log on Alice Pod based

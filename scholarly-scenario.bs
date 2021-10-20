@@ -101,19 +101,18 @@ Abstract: TODO
     - Alice's Orchestrator will be triggered by the notification
         - Append to the Event Log of Alice
 
-# Archivation hub accepts services
+# Archival hub accepts services
 
 <img src="images/spec-usecases_scholarly_6.svg"/>
 
-- Archivation orchestrator accepts `as:Offer` from Alice for archivation of data
+- Archival Hub orchestrator accepts `as:Offer` from Alice for archivation of data
     - Triggers an `as:Accept`
 - Alice's Orchestrator will update the Event Log on Alice Pod based on 
   this trigger
-- Archivation will be triggered by the Archivator Orchestrator:
-    - Download the artefact from Alice's pod
-    - Create a BagIt to upload in Meemoo
-    - Poll Meemoo to see if the data is archived
-- When the archivation results in a new ArchivedUrl, the Archivator Orchestrator will 
+- Archivation will be triggered by the Archival Hub Orchestrator:
+    - Send the Alice artefact to Robust Links
+    - Poll Robust Links to check if data is archived
+- When the archivation results in a new ArchivedUrl, the Archival Hub Orchestrator will 
  trigger an `as:Announce` to Alice's Pod
 
 - Alice's Orchestrator will update the Event Log on Alice Pod based 

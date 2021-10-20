@@ -68,14 +68,11 @@ Abstract: TODO
 
 <img src="images/spec-usecases_scholarly_3.svg"/>
 
-- Alice select an artefact 
-- Alice can send a new notification for this artefact
-    - Select a ServiceHub target from a list
-        - The list of ServiceHub-s is available from a FOAF-registry file
-    - Optionally add a short note 
-        - mapped to `as:content`
-- It will trigger an:
-    - `as:Offer` to the Service Hub target 
+- Alice use her Alice Dashboard to select an artefact 
+- Alice's Dashboard can send an notification to a Service Hub
+    - Alice can in the dashboard select a Service Hub from a list
+        - The dashboard reads this list of Service Hub from a FOAF-registry
+    - Alice's dashboard will send the `as:Offer` to Alice's orchestrator
 - Alice's Orchestrator will append to the Event Log of the Alice pod
 - Alice's Orchestrator will forward the notification to the Service Hub
 
@@ -85,36 +82,41 @@ Abstract: TODO
 
 <img src="images/spec-usecases_scholarly_5.svg"/>
 
-    - Registration agency is e.g. an institutional repository
-    - The Registration orchestrator 
-        - Automatic accepts offers 
-        - Forwards accepted messages to a registration manager
-    - Registration manager adds a record in the collection system
-        - Sees an overview of accepted offers
-        - Can read the artefact URL
-        - Does some (semi-)manual work in the institutional repository to add the
-    artefact
-        - Can send a `as:Announce` response back to Alice
-    - The Registrator orchestrator
-        - Forwards the notifiction to Alice
-        - Append to the Registrator Event Log 
-    - Alice's Orchestrator will be triggered by the notification
-        - Append to the Event Log of Alice
+- Registration hub is e.g. an institutional repository
+- Alice selects an artefact for registration and send it to the institutional repository as `as:Offer`
+      (not in the diagram: see section 3 for an example workflow)
+- The Registration orchestrator 
+    - Poll the inbox of the institutional repository and finds an `as:Offer` from Alice
+    - Automatic accepts this offer and sends an `as:Accept` to Alice's Pod 
+    - Automatic does a pre-registration of Alice's artefact into
+          the institutional repository
+- Alice's orchestrator will update Alice's Event Log with the `as:Accept` notification
+- Registration manager manually updates Alice deposited artefact in the institutional repository
+- Registration manager can go to a Registration Dashboard to send a notification 
+      back to Alice with the result of the registration process
+    - Via the registration dashboard an `as:Accounce` is send to the Registration
+          orchestrator
+- The Registration orchestrator
+    - Forwards the `as:Announce` notification to Alice
+    - Appends to the institutional repository Event Log 
+- Alice's Orchestrator will update Alice's Event Log with the `as:Accounce` notification
 
 # Archival hub accepts services
 
 <img src="images/spec-usecases_scholarly_6.svg"/>
 
+- Alice selects an artefact for archivation and send it to the Archival Hub as `as:Offer`
+      (not in the diagram: see section 3 for an example workflow)
 - Archival Hub orchestrator accepts `as:Offer` from Alice for archivation of data
-    - Triggers an `as:Accept`
-- Alice's Orchestrator will update the Event Log on Alice Pod based on 
-  this trigger
-- Archivation will be triggered by the Archival Hub Orchestrator:
+    - Poll the inbox of the Archival Hub pod and finds an `as:Offer` from Alice
+    - Automatic accepts this offer and sends an `as:Accept` to Alice's Pod 
+- Alice's orchestrator will update Alice's Event Log with the `as:Accept` notification
+- Archival Hub orchestrator will start the archivation process:
     - Send the Alice artefact to Robust Links
     - Poll Robust Links to check if data is archived
-- When the archivation results in a new ArchivedUrl, the Archival Hub Orchestrator will 
- trigger an `as:Announce` to Alice's Pod
-
+- The Archival Hub orchestrator
+    - Send a `as:Announce` notifiction to Alice
+    - Appends to the Registrator Event Log of the Archival Hub pod
 - Alice's Orchestrator will update the Event Log on Alice Pod based 
  on this trigger
 

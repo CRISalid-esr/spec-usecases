@@ -2046,28 +2046,18 @@ Parts of this work may be from another specification document.  If so, those par
    <p><img src="images/spec-usecases_scholarly_3.svg"></p>
    <ul>
     <li data-md>
-     <p>Alice select an artefact</p>
+     <p>Alice use her Alice Dashboard to select an artefact</p>
     <li data-md>
-     <p>Alice can send a new notification for this artefact</p>
+     <p>Alice’s Dashboard can send an notification to a Service Hub</p>
      <ul>
       <li data-md>
-       <p>Select a ServiceHub target from a list</p>
+       <p>Alice can in the dashboard select a Service Hub from a list</p>
        <ul>
         <li data-md>
-         <p>The list of ServiceHub-s is available from a FOAF-registry file</p>
+         <p>The dashboard reads this list of Service Hub from a FOAF-registry</p>
        </ul>
       <li data-md>
-       <p>Optionally add a short note</p>
-       <ul>
-        <li data-md>
-         <p>mapped to <code>as:content</code></p>
-       </ul>
-     </ul>
-    <li data-md>
-     <p>It will trigger an:</p>
-     <ul>
-      <li data-md>
-       <p><code>as:Offer</code> to the Service Hub target</p>
+       <p>Alice’s dashboard will send the <code>as:Offer</code> to Alice’s orchestrator</p>
      </ul>
     <li data-md>
      <p>Alice’s Orchestrator will append to the Event Log of the Alice pod</p>
@@ -2079,57 +2069,60 @@ Parts of this work may be from another specification document.  If so, those par
    <p><img src="images/spec-usecases_scholarly_5.svg"></p>
    <ul>
     <li data-md>
-     <p>Registration agency is e.g. an institutional repository</p>
+     <p>Registration hub is e.g. an institutional repository</p>
+    <li data-md>
+     <p>Alice selects an artefact for registration and send it to the institutional repository as <code>as:Offer</code> (not in the diagram: see section 3 for an example workflow)</p>
     <li data-md>
      <p>The Registration orchestrator</p>
      <ul>
       <li data-md>
-       <p>Automatic accepts offers</p>
+       <p>Poll the inbox of the institutional repository and finds an <code>as:Offer</code> from Alice</p>
       <li data-md>
-       <p>Forwards accepted messages to a registration manager</p>
+       <p>Automatic accepts this offer and sends an <code>as:Accept</code> to Alice’s Pod</p>
+      <li data-md>
+       <p>Automatic does a pre-registration of Alice’s artefact into
+  the institutional repository</p>
      </ul>
     <li data-md>
-     <p>Registration manager adds a record in the collection system</p>
+     <p>Alice’s orchestrator will update Alice’s Event Log with the <code>as:Accept</code> notification</p>
+    <li data-md>
+     <p>Registration manager manually updates Alice deposited artefact in the institutional repository</p>
+    <li data-md>
+     <p>Registration manager can go to a Registration Dashboard to send a notification
+  back to Alice with the result of the registration process</p>
      <ul>
       <li data-md>
-       <p>Sees an overview of accepted offers</p>
-      <li data-md>
-       <p>Can read the artefact URL</p>
-      <li data-md>
-       <p>Does some (semi-)manual work in the institutional repository to add the
-artefact</p>
-      <li data-md>
-       <p>Can send a <code>as:Announce</code> response back to Alice</p>
+       <p>Via the registration dashboard an <code>as:Accounce</code> is send to the Registration
+  orchestrator</p>
      </ul>
     <li data-md>
-     <p>The Registrator orchestrator</p>
+     <p>The Registration orchestrator</p>
      <ul>
       <li data-md>
-       <p>Forwards the notifiction to Alice</p>
+       <p>Forwards the <code>as:Announce</code> notification to Alice</p>
       <li data-md>
-       <p>Append to the Registrator Event Log</p>
+       <p>Appends to the institutional repository Event Log</p>
      </ul>
     <li data-md>
-     <p>Alice’s Orchestrator will be triggered by the notification</p>
-     <ul>
-      <li data-md>
-       <p>Append to the Event Log of Alice</p>
-     </ul>
+     <p>Alice’s Orchestrator will update Alice’s Event Log with the <code>as:Accounce</code> notification</p>
    </ul>
    <h2 class="heading settled" data-level="6" id="archival-hub-accepts-services"><span class="secno">6. </span><span class="content">Archival hub accepts services</span><a class="self-link" href="#archival-hub-accepts-services"></a></h2>
    <p><img src="images/spec-usecases_scholarly_6.svg"></p>
    <ul>
     <li data-md>
+     <p>Alice selects an artefact for archivation and send it to the Archival Hub as <code>as:Offer</code> (not in the diagram: see section 3 for an example workflow)</p>
+    <li data-md>
      <p>Archival Hub orchestrator accepts <code>as:Offer</code> from Alice for archivation of data</p>
      <ul>
       <li data-md>
-       <p>Triggers an <code>as:Accept</code></p>
+       <p>Poll the inbox of the Archival Hub pod and finds an <code>as:Offer</code> from Alice</p>
+      <li data-md>
+       <p>Automatic accepts this offer and sends an <code>as:Accept</code> to Alice’s Pod</p>
      </ul>
     <li data-md>
-     <p>Alice’s Orchestrator will update the Event Log on Alice Pod based on
-  this trigger</p>
+     <p>Alice’s orchestrator will update Alice’s Event Log with the <code>as:Accept</code> notification</p>
     <li data-md>
-     <p>Archivation will be triggered by the Archival Hub Orchestrator:</p>
+     <p>Archival Hub orchestrator will start the archivation process:</p>
      <ul>
       <li data-md>
        <p>Send the Alice artefact to Robust Links</p>
@@ -2137,8 +2130,13 @@ artefact</p>
        <p>Poll Robust Links to check if data is archived</p>
      </ul>
     <li data-md>
-     <p>When the archivation results in a new ArchivedUrl, the Archival Hub Orchestrator will
- trigger an <code>as:Announce</code> to Alice’s Pod</p>
+     <p>The Archival Hub orchestrator</p>
+     <ul>
+      <li data-md>
+       <p>Send a <code>as:Announce</code> notifiction to Alice</p>
+      <li data-md>
+       <p>Appends to the Registrator Event Log of the Archival Hub pod</p>
+     </ul>
     <li data-md>
      <p>Alice’s Orchestrator will update the Event Log on Alice Pod based
  on this trigger</p>

@@ -73,33 +73,33 @@ Abstract: TODO
     - Alice can in the dashboard select a Service Hub from a list
         - The dashboard reads this list of Service Hub from a FOAF-registry
     - Alice's dashboard will send the `as:Offer` to Alice's orchestrator
-- Alice's Orchestrator will append to the Event Log of the Alice pod
+- Alice's Orchestrator will append to the Event Log of the Alice's pod
 - Alice's Orchestrator will forward the notification to the Service Hub
 
 # Alice can see an overview of all notifications and events of her pod
 
 # Registration hub accepts Offers from Alice
 
-<img src="images/spec-usecases_scholarly_5.svg"/>
+<img src="images/spec-usecases_scholarly_5_b.svg"/>
 
 - Registration hub is e.g. an institutional repository
-- Alice selects an artefact for registration and send it to the institutional repository as `as:Offer`
-      (not in the diagram: see section 3 for an example workflow)
-- The Registration orchestrator 
-    - Poll the inbox of the institutional repository and finds an `as:Offer` from Alice
-    - Automatic accepts this offer and sends an `as:Accept` to Alice's Pod 
-    - Automatic does a pre-registration of Alice's artefact into
-          the institutional repository
-- Alice's orchestrator will update Alice's Event Log with the `as:Accept` notification
+
+- Alice selects an artefact for registration and prepares an `as:Offer` for the 
+  registration hub (institutional repository). 
+- Her dashboard sends this `as:Offer` to the Alice orchestrator
+- Alice's orchestrator:
+    - Forwards the `as:Offer` to the institutional repository
+    - Appends the `as:Offer` to Alice's Event Log of Alice's pod    
+- A process in the institutional repository has it own internal processing to:
+    - Poll the inbox of the institutional repository and find an `as:Offer` from Alice
+    - Automatic accepts this offer and send an `as:Accept` to Alice's Pod 
+    - Append the `as:Accept` to the Repository Event Log
+    - Automatic a registration of Alice's artefact into the institutional repository
 - Registration manager manually updates Alice deposited artefact in the institutional repository
-- Registration manager can go to a Registration Dashboard to send a notification 
-      back to Alice with the result of the registration process
-    - Via the registration dashboard an `as:Accounce` is send to the Registration
-          orchestrator
-- The Registration orchestrator
-    - Forwards the `as:Announce` notification to Alice
-    - Appends to the institutional repository Event Log 
-- Alice's Orchestrator will update Alice's Event Log with the `as:Accounce` notification
+- Registration manager sends an `as:Announce` back to Alice with the result of the registration process
+- A process in the institutional repository append the `as:Announce` to the Repository Event Log
+- Alice's orchestrator will update Alice's Event Log with the `as:Accept` notification
+- Alice's Orchestrator will update Alice's Event Log with the `as:Announce` notification
 
 # Archival hub accepts services
 

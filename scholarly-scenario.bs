@@ -103,20 +103,23 @@ Abstract: TODO
 
 # Archival hub accepts services
 
-<img src="images/spec-usecases_scholarly_6.svg"/>
+<img src="images/spec-usecases_scholarly_6_b.svg"/>
 
-- Alice selects an artefact for archivation and send it to the Archival Hub as `as:Offer`
-      (not in the diagram: see section 3 for an example workflow)
-- Archival Hub orchestrator accepts `as:Offer` from Alice for archivation of data
-    - Poll the inbox of the Archival Hub pod and finds an `as:Offer` from Alice
+- Alice selects an artefact for registration and prepares an `as:Offer` for the 
+  Archival Hub
+- Her dashboard sends this `as:Offer` to the Alice orchestrator
+- Alice's orchestrator:
+    - Forwards the `as:Offer` to the Archival Hub
+    - Appends the `as:Offer` to Alice's Event Log of Alice's pod    
+- Archival Hub accepts `as:Offer` from Alice for archivation of data
     - Automatic accepts this offer and sends an `as:Accept` to Alice's Pod 
-- Alice's orchestrator will update Alice's Event Log with the `as:Accept` notification
-- Archival Hub orchestrator will start the archivation process:
+- Archival Hub will start the archivation process:
     - Send the Alice artefact to Robust Links
     - Poll Robust Links to check if data is archived
-- The Archival Hub orchestrator
-    - Send a `as:Announce` notifiction to Alice
-    - Appends to the Registrator Event Log of the Archival Hub pod
+- The Archival Hub:
+    - Send a `as:Announce` notification to Alice
+    - Appends to the Archival Hub Event Log 
+- Alice's orchestrator will update Alice's Event Log with the `as:Accept` notification
 - Alice's Orchestrator will update the Event Log on Alice Pod based 
  on this trigger
 

@@ -2107,22 +2107,29 @@ Parts of this work may be from another specification document.  If so, those par
      <p>Alice’s Orchestrator will update Alice’s Event Log with the <code>as:Announce</code> notification</p>
    </ul>
    <h2 class="heading settled" data-level="6" id="archival-hub-accepts-services"><span class="secno">6. </span><span class="content">Archival hub accepts services</span><a class="self-link" href="#archival-hub-accepts-services"></a></h2>
-   <p><img src="images/spec-usecases_scholarly_6.svg"></p>
+   <p><img src="images/spec-usecases_scholarly_6_b.svg"></p>
    <ul>
     <li data-md>
-     <p>Alice selects an artefact for archivation and send it to the Archival Hub as <code>as:Offer</code> (not in the diagram: see section 3 for an example workflow)</p>
+     <p>Alice selects an artefact for registration and prepares an <code>as:Offer</code> for the
+  Archival Hub</p>
     <li data-md>
-     <p>Archival Hub orchestrator accepts <code>as:Offer</code> from Alice for archivation of data</p>
+     <p>Her dashboard sends this <code>as:Offer</code> to the Alice orchestrator</p>
+    <li data-md>
+     <p>Alice’s orchestrator:</p>
      <ul>
       <li data-md>
-       <p>Poll the inbox of the Archival Hub pod and finds an <code>as:Offer</code> from Alice</p>
+       <p>Forwards the <code>as:Offer</code> to the Archival Hub</p>
+      <li data-md>
+       <p>Appends the <code>as:Offer</code> to Alice’s Event Log of Alice’s pod</p>
+     </ul>
+    <li data-md>
+     <p>Archival Hub accepts <code>as:Offer</code> from Alice for archivation of data</p>
+     <ul>
       <li data-md>
        <p>Automatic accepts this offer and sends an <code>as:Accept</code> to Alice’s Pod</p>
      </ul>
     <li data-md>
-     <p>Alice’s orchestrator will update Alice’s Event Log with the <code>as:Accept</code> notification</p>
-    <li data-md>
-     <p>Archival Hub orchestrator will start the archivation process:</p>
+     <p>Archival Hub will start the archivation process:</p>
      <ul>
       <li data-md>
        <p>Send the Alice artefact to Robust Links</p>
@@ -2130,13 +2137,15 @@ Parts of this work may be from another specification document.  If so, those par
        <p>Poll Robust Links to check if data is archived</p>
      </ul>
     <li data-md>
-     <p>The Archival Hub orchestrator</p>
+     <p>The Archival Hub:</p>
      <ul>
       <li data-md>
-       <p>Send a <code>as:Announce</code> notifiction to Alice</p>
+       <p>Send a <code>as:Announce</code> notification to Alice</p>
       <li data-md>
-       <p>Appends to the Registrator Event Log of the Archival Hub pod</p>
+       <p>Appends to the Archival Hub Event Log</p>
      </ul>
+    <li data-md>
+     <p>Alice’s orchestrator will update Alice’s Event Log with the <code>as:Accept</code> notification</p>
     <li data-md>
      <p>Alice’s Orchestrator will update the Event Log on Alice Pod based
  on this trigger</p>

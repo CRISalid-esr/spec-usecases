@@ -14,7 +14,11 @@ sequenceDiagram
     DA  ->> BP: initializes data pod with event log
     Bob ->> DA: views artefact, the content of the inbox and the event log
     BO ->> BP: append creation event to the event log
-    BO ->> Bob: suggest offer to Registry Service Hub
+    
+    BO ->> DA: suggest offer to Registry Service Hub
+    DA ->> Bob: display suggestion
+    Bob ->> DA: initalize offer to Registry Service Hub
+    
     BO ->> RSH: post as:Offer to inbox
     RSH ->> DR: post metadata
     DR ->> RSH: metadata added
@@ -22,7 +26,10 @@ sequenceDiagram
     BO ->> BP: append event log
     Bob ->> DA: sees changes reflected
 
-    BO ->> Bob: suggest offer to Archival Service Hub
+    BO ->> DA: suggest offer to Archival Service Hub
+    DA ->> Bob: display suggestion
+    Bob ->> DA: initalize offer to Archival Service Hub
+    
     BO ->> ASH: post as:Offer to inbox
     ASH ->> MA: put bag onto FTP
     MA ->> MA: archival process & set ARCHIVED_ON_DISK event 

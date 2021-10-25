@@ -23,11 +23,13 @@ Scenario {#scenario}
 ### Maintainers
 
 <dfn>Bob</dfn>: Collection maintainer at a cultural heritage institution
+
 - [=Bob=] has a WebID
 - [=Bob=] has a data pod URI
 - [=Bob=] has an inbox URI
 
 <dfn>Alice</dfn>: academic scholar
+
 - [=Alice=] has a WebID
 - [=Alice=] has a data pod URI
 - [=Alice=] has an inbox URI
@@ -47,6 +49,7 @@ Scenario {#scenario}
 
 <dfn>Alice's Orchestrator</dfn>
  - the [=Orchestrator=] has an personal Inbox as API
+
 <dfn>Bob's Orchestrator</dfn>
  - the [=Orchestrator=] has an personal Inbox as API
     

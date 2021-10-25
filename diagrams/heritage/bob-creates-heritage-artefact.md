@@ -1,8 +1,8 @@
 ```mermaid
 sequenceDiagram
         actor Bob
-        actor BP as Bob's data pod
         participant CRS as Solid CRS
+        actor BP as Bob's data pod
 
         autonumber
         Bob ->> CRS: logs in

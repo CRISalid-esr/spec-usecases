@@ -36,14 +36,14 @@ Scenario {#scenario}
 
 ### Solid Apps
 
-- <dfn>Solid CRS</dfn>: https://solid-crs.netwerkdigitaalerfgoed.nl/
-    - collection management system for small digital heritage organizations
-- <dfn>Scolarly Dashboard</dfn>: 
-    - application to upload and describe publications
-- <dfn>Demo app</dfn>: http://bellow2.ugent.be/public/
-    - create, send and receive notifications between different pods and services
-    - illustrate network
-    - introspect event logs
+<dfn>Solid CRS</dfn>: https://solid-crs.netwerkdigitaalerfgoed.nl/
+ - collection management system for small digital heritage organizations
+<dfn>Scolarly Dashboard</dfn>: 
+ - application to upload and describe publications
+<dfn>Demo app</dfn>: http://bellow2.ugent.be/public/
+ - create, send and receive notifications between different pods and services
+ - illustrate network
+ - introspect event logs
 
 ### Orchestrators
 

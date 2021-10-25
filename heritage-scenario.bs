@@ -95,7 +95,8 @@ Scenario {#scenario}
         schema:width       <https://pod.inrupt.com/mvs/heritage-objects/data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-width> .
 ```
 
-5. The new artefact triggers an `as:Create` activity about the artefact. A [[ldn|Linked Data Notification]] containing the activity is posted to [=Bob=]'s inbox.
+5. The new artefact triggers an `as:Create` activity about the artefact. 
+6. A [[ldn|Linked Data Notification]] containing the activity is posted to [=Bob=]'s inbox.
 
 ### Part 2: requesting services
 

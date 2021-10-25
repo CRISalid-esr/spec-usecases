@@ -28,18 +28,14 @@ Scenario {#scenario}
 - [=Bob=] has a data pod URI
 - [=Bob=] has an inbox URI
 
-<dfn>Alice</dfn>: academic scholar
-
-- [=Alice=] has a WebID
-- [=Alice=] has a data pod URI
-- [=Alice=] has an inbox URI
-
 ### Solid Apps
 
 <dfn>Solid CRS</dfn>: https://solid-crs.netwerkdigitaalerfgoed.nl/
  - collection management system for small digital heritage organizations
+
 <dfn>Scolarly Dashboard</dfn>: 
  - application to upload and describe publications
+
 <dfn>Demo app</dfn>: http://bellow2.ugent.be/public/
  - create, send and receive notifications between different pods and services
  - illustrate network
@@ -64,9 +60,9 @@ Scenario {#scenario}
 
 <img width="900px" src="images/heritage/bob-creates-heritage-artefact.svg"/>
 
-1. Bob logs into [=Solid CRS=] with his Web ID
-    - Bob chooses his data pod
-2. Bob creates a new Collection about the liberation of Utrecht in WOII
+1. [=Bob=] logs into [=Solid CRS=] with his Web ID
+    - [=Bob=] chooses his data pod
+2. [=Bob=] creates a new Collection about the liberation of Utrecht in WOII
 3. He adds an object with the following metadata
     - image: https://data.spinque.com/iiif/2/https%3A%2F%2Fimages.memorix.nl%2Fniod%2Fthumb%2F1000x1000%2F9236648b-6507-e27b-f3fa-68a5227efc18.jpg/full/full/0/default.jpg
     - license: unknown

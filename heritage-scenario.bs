@@ -11,9 +11,11 @@ Markup Shorthands: markdown yes
 
 Introduction {#intro}
 =====================
-notification patronen
-Solid CRS inhoud van pod → register
-duplicatie door een afnemende dienst?
+
+This document describes the scenario for the first ErfgoedPod demo. 
+The goal is to illustrate the components and architecture of the decentralized artefact exchange network 
+in combination with the
+the collection registration system [Solid CRS](https://www.youtube.com/watch?v=XJgl8EcQqf8), developed by Digita for the "Solid for small heritage institutions" project.
 
 Scenario {#scenario}
 =====================

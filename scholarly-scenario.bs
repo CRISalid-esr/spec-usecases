@@ -10,9 +10,9 @@ Abstract: TODO
 
 # Alice creates a scholary artefact
 
-<img src="images/spec-usecases_scholarly_1.svg"/>
+<img width="900px" src="images/alice-creates-scholarly-artefact.svg"/>
 
-- Alice logins into her dashboard
+- Alice login into her dashboard
 - She creates a new artefact stub
     - Adds some metadata:
         - Title
@@ -59,14 +59,14 @@ Abstract: TODO
       
 # Bob want to know about Alices artefacts
 
-<img src="images/spec-usecases_scholarly_2.svg"/>
+<img width="600px" src="images/bob-wants-to-know-about-alices-artefacts.svg"/>
 
-- Bob's orchestrator receives Announces from Alice's Event log
-- Bob's orchestrator sends an notification to Bob's inbox
+- Bob's orchestrator discover a new `as:Announce` in Alice's Event log
+- Bob's orchestrator sends a message to Bob's inbox about this event
 
 # Alice can send a notification to a ServiceHub
 
-<img src="images/spec-usecases_scholarly_3.svg"/>
+<img width="900px" src="images/alice-can-send-notication-to-servicehub.svg"/>
 
 - Alice use her Alice Dashboard to select an artefact 
 - Alice's Dashboard can send an notification to a Service Hub
@@ -78,9 +78,17 @@ Abstract: TODO
 
 # Alice can see an overview of all notifications and events of her pod
 
+<img width="600px" src="images/alice-can-see-overview-of-notifications-and-events-of-pod.svg"/>
+
+- Alice login into her dashboard
+- Alice can get an overview of all messages in her inbox and
+ events from her Event Log
+     - Alice's dashboard will get all notifications from both
+       resources and present it to Alice
+
 # Registration hub accepts Offers from Alice
 
-<img src="images/spec-usecases_scholarly_5_b.svg"/>
+<img width="900px" src="images/registration-hub-accepts-offers-from-alice.svg"/>
 
 - Registration hub is e.g. an institutional repository
 
@@ -88,13 +96,14 @@ Abstract: TODO
   registration hub (institutional repository). 
 - Her dashboard sends this `as:Offer` to the Alice orchestrator
 - Alice's orchestrator:
-    - Forwards the `as:Offer` to the institutional repository
     - Appends the `as:Offer` to Alice's Event Log of Alice's pod    
+    - Forwards the `as:Offer` to the institutional repository
 - A process in the institutional repository has it own internal processing to:
     - Poll the inbox of the institutional repository and find an `as:Offer` from Alice
     - Automatic accepts this offer and send an `as:Accept` to Alice's Pod 
     - Append the `as:Accept` to the Repository Event Log
     - Automatic a registration of Alice's artefact into the institutional repository
+    - All this processing can be implemented with an Orchestrator but doesn't have to
 - Registration manager manually updates Alice deposited artefact in the institutional repository
 - Registration manager sends an `as:Announce` back to Alice with the result of the registration process
 - A process in the institutional repository append the `as:Announce` to the Repository Event Log
@@ -103,25 +112,27 @@ Abstract: TODO
 
 # Archival hub accepts services
 
-<img src="images/spec-usecases_scholarly_6_b.svg"/>
+<img width="900px" src="images/archival-hub-accepts-services.svg"/>
 
-- Alice selects an artefact for registration and prepares an `as:Offer` for the 
+- Alice selects an artefact for archivation and prepares an `as:Offer` for the 
   Archival Hub
 - Her dashboard sends this `as:Offer` to the Alice orchestrator
 - Alice's orchestrator:
     - Forwards the `as:Offer` to the Archival Hub
     - Appends the `as:Offer` to Alice's Event Log of Alice's pod    
-- Archival Hub accepts `as:Offer` from Alice for archivation of data
-    - Automatic accepts this offer and sends an `as:Accept` to Alice's Pod 
-- Archival Hub will start the archivation process:
-    - Send the Alice artefact to Robust Links
-    - Poll Robust Links to check if data is archived
-- The Archival Hub:
-    - Send a `as:Announce` notification to Alice
-    - Appends to the Archival Hub Event Log 
+- A process at the Archival Hub has it own internal processing to:
+    - Accepts `as:Offer` from Alice and send an `as:Accept` to Alice's Pod 
+    - Start an archivation process:
+        - Send the Alice artefact to Robust Links
+        - Poll Robust Links to check the archival status
+    - When the artefact is archived at Robust Links:
+        - Send an `as:Announce` notification to Alice
+        - Appends the `as:Announce` to the Archival Hub Event Log 
+    - All this processing can be implemented with an Orchestrator but doesn't have to
 - Alice's orchestrator will update Alice's Event Log with the `as:Accept` notification
 - Alice's Orchestrator will update the Event Log on Alice Pod based 
  on this trigger
+
 
 # Orchestrator suggests Services
 

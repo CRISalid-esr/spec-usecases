@@ -6,9 +6,13 @@ sequenceDiagram
     participant pod as Alice's POD
     participant robust as Robust links
     participant orchArc as Archival hub orchestrator
+    participant arc as Archival hub
 
     alice->>dashboard: Send offer notification to archival hub
-    dashboard->>orchArc: Send offer notification
+    dashboard->>orch: Send offer notification
+    orch->>arc: Forward offer notification
+    orch->>pod: Append Event Log
+    orchArc->>arc: Poll archival hub inbox
     orchArc->>pod: Send automatic accept notification
     orch->>pod: Read inbox
     orch->>pod: Append Event Log
@@ -16,5 +20,5 @@ sequenceDiagram
     orchArc->>robust: Poll to check if archivation complete
     orchArc->>pod: Send announce notification
     orch->>pod: Read inbox
-    orch->>pod: Append Event Log   
+    orch->>pod: Append Event Log  
 ```

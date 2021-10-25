@@ -14,8 +14,12 @@ sequenceDiagram
     orchReg->>pod: Send automatic accept notification
     orch->>pod: Read inbox
     orch->>pod: Append Event Log
+    orchReg->>pod: Import artefact metadata
+    orchReg->>podReg: Upload artefact metadata
+    manager->>dashReg: Reads todo list
+    manager->>podReg: Manually updates registration metadata
     manager->>dashReg: Send announce notification
-    dashReg->>orchReg: Send announte notification
+    dashReg->>orchReg: Send announce notification
     orchReg->>pod: Forward announce notification
     orchReg->>podReg: Append Event Log
     orch->>pod: Read inbox

@@ -1885,7 +1885,7 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Scholarly use cases</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-10-21">21 October 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-10-25">25 October 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt class="editor">Editor:
@@ -1895,7 +1895,7 @@ dfn > a.self-link::before      { content: "#"; }
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 21 October 2021,
+In addition, as of 25 October 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1926,10 +1926,10 @@ Parts of this work may be from another specification document.  If so, those par
   </nav>
   <main>
    <h2 class="heading settled" data-level="1" id="alice-creates-a-scholary-artefact"><span class="secno">1. </span><span class="content">Alice creates a scholary artefact</span><a class="self-link" href="#alice-creates-a-scholary-artefact"></a></h2>
-   <p><img src="images/spec-usecases_scholarly_1.svg"></p>
+   <p><img src="images/alice-creates-scholarly-artefact.svg" width="900px"></p>
    <ul>
     <li data-md>
-     <p>Alice logins into her dashboard</p>
+     <p>Alice login into her dashboard</p>
     <li data-md>
      <p>She creates a new artefact stub</p>
      <ul>
@@ -2035,15 +2035,15 @@ Parts of this work may be from another specification document.  If so, those par
      </ul>
    </ul>
    <h2 class="heading settled" data-level="2" id="bob-want-to-know-about-alices-artefacts"><span class="secno">2. </span><span class="content">Bob want to know about Alices artefacts</span><a class="self-link" href="#bob-want-to-know-about-alices-artefacts"></a></h2>
-   <p><img src="images/spec-usecases_scholarly_2.svg"></p>
+   <p><img src="images/bob-wants-to-know-about-alices-artefacts.svg" width="600px"></p>
    <ul>
     <li data-md>
-     <p>Bob’s orchestrator receives Announces from Alice’s Event log</p>
+     <p>Bob’s orchestrator discover a new <code>as:Announce</code> in Alice’s Event log</p>
     <li data-md>
-     <p>Bob’s orchestrator sends an notification to Bob’s inbox</p>
+     <p>Bob’s orchestrator sends a message to Bob’s inbox about this event</p>
    </ul>
    <h2 class="heading settled" data-level="3" id="alice-can-send-a-notification-to-a-servicehub"><span class="secno">3. </span><span class="content">Alice can send a notification to a ServiceHub</span><a class="self-link" href="#alice-can-send-a-notification-to-a-servicehub"></a></h2>
-   <p><img src="images/spec-usecases_scholarly_3.svg"></p>
+   <p><img src="images/alice-can-send-notication-to-servicehub.svg" width="900px"></p>
    <ul>
     <li data-md>
      <p>Alice use her Alice Dashboard to select an artefact</p>
@@ -2065,8 +2065,21 @@ Parts of this work may be from another specification document.  If so, those par
      <p>Alice’s Orchestrator will forward the notification to the Service Hub</p>
    </ul>
    <h2 class="heading settled" data-level="4" id="alice-can-see-an-overview-of-all-notifications-and-events-of-her-pod"><span class="secno">4. </span><span class="content">Alice can see an overview of all notifications and events of her pod</span><a class="self-link" href="#alice-can-see-an-overview-of-all-notifications-and-events-of-her-pod"></a></h2>
+   <p><img src="images/alice-can-see-overview-of-notifications-and-events-of-pod.svg" width="600px"></p>
+   <ul>
+    <li data-md>
+     <p>Alice login into her dashboard</p>
+    <li data-md>
+     <p>Alice can get an overview of all messages in her inbox and
+ events from her Event Log</p>
+     <ul>
+      <li data-md>
+       <p>Alice’s dashboard will get all notifications from both
+   resources and present it to Alice</p>
+     </ul>
+   </ul>
    <h2 class="heading settled" data-level="5" id="registration-hub-accepts-offers-from-alice"><span class="secno">5. </span><span class="content">Registration hub accepts Offers from Alice</span><a class="self-link" href="#registration-hub-accepts-offers-from-alice"></a></h2>
-   <p><img src="images/spec-usecases_scholarly_5_b.svg"></p>
+   <p><img src="images/registration-hub-accepts-offers-from-alice.svg" width="900px"></p>
    <ul>
     <li data-md>
      <p>Registration hub is e.g. an institutional repository</p>
@@ -2079,9 +2092,9 @@ Parts of this work may be from another specification document.  If so, those par
      <p>Alice’s orchestrator:</p>
      <ul>
       <li data-md>
-       <p>Forwards the <code>as:Offer</code> to the institutional repository</p>
-      <li data-md>
        <p>Appends the <code>as:Offer</code> to Alice’s Event Log of Alice’s pod</p>
+      <li data-md>
+       <p>Forwards the <code>as:Offer</code> to the institutional repository</p>
      </ul>
     <li data-md>
      <p>A process in the institutional repository has it own internal processing to:</p>
@@ -2094,6 +2107,8 @@ Parts of this work may be from another specification document.  If so, those par
        <p>Append the <code>as:Accept</code> to the Repository Event Log</p>
       <li data-md>
        <p>Automatic a registration of Alice’s artefact into the institutional repository</p>
+      <li data-md>
+       <p>All this processing can be implemented with an Orchestrator but doesn’t have to</p>
      </ul>
     <li data-md>
      <p>Registration manager manually updates Alice deposited artefact in the institutional repository</p>
@@ -2107,10 +2122,10 @@ Parts of this work may be from another specification document.  If so, those par
      <p>Alice’s Orchestrator will update Alice’s Event Log with the <code>as:Announce</code> notification</p>
    </ul>
    <h2 class="heading settled" data-level="6" id="archival-hub-accepts-services"><span class="secno">6. </span><span class="content">Archival hub accepts services</span><a class="self-link" href="#archival-hub-accepts-services"></a></h2>
-   <p><img src="images/spec-usecases_scholarly_6_b.svg"></p>
+   <p><img src="images/archival-hub-accepts-services.svg" width="900px"></p>
    <ul>
     <li data-md>
-     <p>Alice selects an artefact for registration and prepares an <code>as:Offer</code> for the
+     <p>Alice selects an artefact for archivation and prepares an <code>as:Offer</code> for the
   Archival Hub</p>
     <li data-md>
      <p>Her dashboard sends this <code>as:Offer</code> to the Alice orchestrator</p>
@@ -2123,26 +2138,28 @@ Parts of this work may be from another specification document.  If so, those par
        <p>Appends the <code>as:Offer</code> to Alice’s Event Log of Alice’s pod</p>
      </ul>
     <li data-md>
-     <p>Archival Hub accepts <code>as:Offer</code> from Alice for archivation of data</p>
+     <p>A process at the Archival Hub has it own internal processing to:</p>
      <ul>
       <li data-md>
-       <p>Automatic accepts this offer and sends an <code>as:Accept</code> to Alice’s Pod</p>
-     </ul>
-    <li data-md>
-     <p>Archival Hub will start the archivation process:</p>
-     <ul>
+       <p>Accepts <code>as:Offer</code> from Alice and send an <code>as:Accept</code> to Alice’s Pod</p>
       <li data-md>
-       <p>Send the Alice artefact to Robust Links</p>
+       <p>Start an archivation process:</p>
+       <ul>
+        <li data-md>
+         <p>Send the Alice artefact to Robust Links</p>
+        <li data-md>
+         <p>Poll Robust Links to check the archival status</p>
+       </ul>
       <li data-md>
-       <p>Poll Robust Links to check if data is archived</p>
-     </ul>
-    <li data-md>
-     <p>The Archival Hub:</p>
-     <ul>
+       <p>When the artefact is archived at Robust Links:</p>
+       <ul>
+        <li data-md>
+         <p>Send an <code>as:Announce</code> notification to Alice</p>
+        <li data-md>
+         <p>Appends the <code>as:Announce</code> to the Archival Hub Event Log</p>
+       </ul>
       <li data-md>
-       <p>Send a <code>as:Announce</code> notification to Alice</p>
-      <li data-md>
-       <p>Appends to the Archival Hub Event Log</p>
+       <p>All this processing can be implemented with an Orchestrator but doesn’t have to</p>
      </ul>
     <li data-md>
      <p>Alice’s orchestrator will update Alice’s Event Log with the <code>as:Accept</code> notification</p>

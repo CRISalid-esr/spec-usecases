@@ -1,9 +1,9 @@
 <pre class='metadata'>
-Title: Demo scenario ErfgoedPod & ResearcherPod
+Title: Demo scenario ErfgoedPod
 Shortname: demo
 Level: 1
 Status: DREAM 
-URL: https://github.com/ErfgoedPod/demo
+URL: https://github.com/ErfgoedPod/spec-usecases
 Editor: Miel Vander Sande, [meemoo](https://meemoo.be), miel.vandersande@meemoo.be
 Abstract: A short description of your spec, one or two sentences.
 Markup Shorthands: markdown yes

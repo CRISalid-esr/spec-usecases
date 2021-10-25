@@ -47,9 +47,6 @@ Scenario {#scenario}
 
 ### Orchestrators
 
-<dfn>Alice's Orchestrator</dfn>
- - the [=Orchestrator=] has an personal Inbox as API
-
 <dfn>Bob's Orchestrator</dfn>
  - the [=Orchestrator=] has an personal Inbox as API
     

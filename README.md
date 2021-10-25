@@ -23,3 +23,10 @@ and open the `index.html` file:
 ```bash
 open index.html
 ```
+
+## Diagram
+
+The diagrams were made with:
+
+- Mermaid: https://mermaid.live/
+- DrawIO: https://app.diagrams.net

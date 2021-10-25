@@ -15,9 +15,6 @@ notification patronen
 Solid CRS inhoud van pod → register
 duplicatie door een afnemende dienst?
 
-
-
-
 Scenario {#scenario}
 =====================
 
@@ -65,31 +62,7 @@ Scenario {#scenario}
 
 ### Part 1: artefact creation 
 
-<div class="mermaid">
-sequenceDiagram
-    actor Bob
-    actor BO as Bob's orchestrator
-    actor BP as Bob's data pod
-    actor Alice
-    actor AP as Alice's data pod
-    actor AO as Alice's orchestrator
-    actor SCR as Solid CRS
-    actor SD as Dashboard
-    actor DA as Demo App
-    actor RSH as Registry Service Hub
-    actor ASH as Archival Service Hub
-
-    autonumber
-    Bob ->> CRS: logs in
-    Bob ->> CRS: creates collection
-    Bob ->>+ CRS: adds image with description to collection
-    Note right of CRS: New artefact created
-
-    CRS ->> BP: store new artefact
-    CRS ->> BP: post as:Create to inbox
-</div>
-
-#### Digital Heritage
+<img width="900px" src="images/heritage/bob-creates-heritage-artefact.svg"/>
 
 1. Bob logs into [=Solid CRS=] with his Web ID
     - Bob chooses his data pod
@@ -128,51 +101,9 @@ sequenceDiagram
 
 5. The new artefact triggers an `as:Create` activity about the artefact. A [[ldn|Linked Data Notification]] containing the activity is posted to [=Bob=]'s inbox.
 
-#### Scolarly Communication
-
-1. Alice logs into the scholarly dashboard with her Web ID
-2. ....
-3. The new artefact triggers an `as:Create` activity about the artefact. A [[ldn|Linked Data Notification]] containing the activity is posted to [=Alice=]'s inbox.
-
 ### Part 2: requesting services
 
-For scholarly Communication, the sequence is the same but the artefact is a publication.
-
-<div class="mermaid">
-sequenceDiagram
-    actor Bob
-    actor DA as Demo App
-    actor BP as Bob's data pod
-    actor BO as Bob's orchestrator
-    actor SCR as Solid CRS
-    actor SD as Dashboard
-    actor RSH as Registry Service Hub
-    actor DR as NDE Dataset Registry API
-    actor ASH as Archival Service Hub
-    actor MA as meemoo's archive
-
-    autonumber
-    Bob ->> DA: logs into data pod
-    DA  ->> BP: initializes data pod with event log
-    Bob ->> DA: views artefact, the content of the inbox and the event log
-    BO ->> BP: append creation event to the event log
-    BO ->> Bob: suggest offer to Registry Service Hub
-    BO ->> RSH: post as:Offer to inbox
-    RSH ->> DR: post metadata
-    DR ->> RSH: metadata added
-    RSH ->> BP: post as:Announce to inbox
-    BO ->> BP: append event log
-    Bob ->> DA: sees changes reflected
-
-    BO ->> Bob: suggest offer to Archival Service Hub
-    BO ->> ASH: post as:Offer to inbox
-    ASH ->> MA: put bag onto FTP
-    MA ->> MA: archival process & set ARCHIVED_ON_DISK event 
-    ASH ->> MA: poll ARCHIVED_ON_DISK event
-    ASH ->> BP: post as:Announce to inbox
-    BO ->> BP: append event log
-    Bob ->> DA: sees changes reflected
-</div>
+<img width="900px" src="images/heritage/bob-requests-service.svg"/>
 
 #### Invoking the registration service
 
@@ -209,6 +140,3 @@ sequenceDiagram
 8. [=Bob=] sees in the event log with the demo app that the registration is complete
 
 Issue(1): how to get to aggregation of artefacts
-
- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
- <script>mermaid.initialize({startOnLoad:true});</script>

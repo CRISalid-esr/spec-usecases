@@ -1927,7 +1927,7 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Demo scenario ErfgoedPod &amp; ResearcherPod</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-10-20">20 October 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-10-25">25 October 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1941,7 +1941,7 @@ dfn > a.self-link::before      { content: "#"; }
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 20 October 2021,
+In addition, as of 25 October 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1966,12 +1966,7 @@ Parts of this work may be from another specification document.  If so, those par
         <li><a href="#solid-apps"><span class="secno">2.1.2</span> <span class="content">Solid Apps</span></a>
         <li><a href="#orchestrators"><span class="secno">2.1.3</span> <span class="content">Orchestrators</span></a>
         <li><a href="#service-hubs"><span class="secno">2.1.4</span> <span class="content">Service hubs</span></a>
-        <li>
-         <a href="#part-1-artefact-creation"><span class="secno">2.1.5</span> <span class="content">Part 1: artefact creation</span></a>
-         <ol class="toc">
-          <li><a href="#digital-heritage"><span class="secno">2.1.5.1</span> <span class="content">Digital Heritage</span></a>
-          <li><a href="#scolarly-communication"><span class="secno">2.1.5.2</span> <span class="content">Scolarly Communication</span></a>
-         </ol>
+        <li><a href="#part-1-artefact-creation"><span class="secno">2.1.5</span> <span class="content">Part 1: artefact creation</span></a>
         <li>
          <a href="#part-2-requesting-services"><span class="secno">2.1.6</span> <span class="content">Part 2: requesting services</span></a>
          <ol class="toc">
@@ -2066,28 +2061,7 @@ duplicatie door een afnemende dienst?
      <p>wrapper service for the meemoo UGent GREB archive</p>
    </ul>
    <h4 class="heading settled" data-level="2.1.5" id="part-1-artefact-creation"><span class="secno">2.1.5. </span><span class="content">Part 1: artefact creation</span><a class="self-link" href="#part-1-artefact-creation"></a></h4>
-   <div class="mermaid">
-     sequenceDiagram
-    actor Bob
-    actor BO as Bob’s orchestrator
-    actor BP as Bob’s data pod
-    actor Alice
-    actor AP as Alice’s data pod
-    actor AO as Alice’s orchestrator
-    actor SCR as Solid CRS
-    actor SD as Dashboard
-    actor DA as Demo App
-    actor RSH as Registry Service Hub
-    actor ASH as Archival Service Hub 
-    <p>autonumber
-    Bob ->> CRS: logs in
-    Bob ->> CRS: creates collection
-    Bob ->>+ CRS: adds image with description to collection
-    Note right of CRS: New artefact created</p>
-    <p>CRS ->> BP: store new artefact
-    CRS ->> BP: post as:Create to inbox</p>
-   </div>
-   <h5 class="heading settled" data-level="2.1.5.1" id="digital-heritage"><span class="secno">2.1.5.1. </span><span class="content">Digital Heritage</span><a class="self-link" href="#digital-heritage"></a></h5>
+   <p><img src="images/heritage/bob-creates-heritage-artefact.svg" width="900px"></p>
    <ol>
     <li data-md>
      <p>Bob logs into <a data-link-type="dfn" href="#solid-crs" id="ref-for-solid-crs">Solid CRS</a> with his Web ID</p>
@@ -2144,50 +2118,8 @@ duplicatie door een afnemende dienst?
     <li data-md>
      <p>The new artefact triggers an <code>as:Create</code> activity about the artefact. A <a data-link-type="biblio" href="#biblio-ldn">Linked Data Notification</a> containing the activity is posted to <a data-link-type="dfn" href="#bob" id="ref-for-bob③">Bob</a>'s inbox.</p>
    </ol>
-   <h5 class="heading settled" data-level="2.1.5.2" id="scolarly-communication"><span class="secno">2.1.5.2. </span><span class="content">Scolarly Communication</span><a class="self-link" href="#scolarly-communication"></a></h5>
-   <ol>
-    <li data-md>
-     <p>Alice logs into the scholarly dashboard with her Web ID</p>
-    <li data-md>
-     <p>....</p>
-    <li data-md>
-     <p>The new artefact triggers an <code>as:Create</code> activity about the artefact. A <a data-link-type="biblio" href="#biblio-ldn">Linked Data Notification</a> containing the activity is posted to <a data-link-type="dfn" href="#alice" id="ref-for-alice③">Alice</a>'s inbox.</p>
-   </ol>
    <h4 class="heading settled" data-level="2.1.6" id="part-2-requesting-services"><span class="secno">2.1.6. </span><span class="content">Part 2: requesting services</span><a class="self-link" href="#part-2-requesting-services"></a></h4>
-   <p>For scholarly Communication, the sequence is the same but the artefact is a publication.</p>
-   <div class="mermaid">
-     sequenceDiagram
-    actor Bob
-    actor DA as Demo App
-    actor BP as Bob’s data pod
-    actor BO as Bob’s orchestrator
-    actor SCR as Solid CRS
-    actor SD as Dashboard
-    actor RSH as Registry Service Hub
-    actor DR as NDE Dataset Registry API
-    actor ASH as Archival Service Hub
-    actor MA as meemoo’s archive 
-    <p>autonumber
-    Bob ->> DA: logs into data pod
-    DA  ->> BP: initializes data pod with event log
-    Bob ->> DA: views artefact, the content of the inbox and the event log
-    BO ->> BP: append creation event to the event log
-    BO ->> Bob: suggest offer to Registry Service Hub
-    BO ->> RSH: post as:Offer to inbox
-    RSH ->> DR: post metadata
-    DR ->> RSH: metadata added
-    RSH ->> BP: post as:Announce to inbox
-    BO ->> BP: append event log
-    Bob ->> DA: sees changes reflected</p>
-    <p>BO ->> Bob: suggest offer to Archival Service Hub
-    BO ->> ASH: post as:Offer to inbox
-    ASH ->> MA: put bag onto FTP
-    MA ->> MA: archival process &amp; set ARCHIVED_ON_DISK event 
-    ASH ->> MA: poll ARCHIVED_ON_DISK event
-    ASH ->> BP: post as:Announce to inbox
-    BO ->> BP: append event log
-    Bob ->> DA: sees changes reflected</p>
-   </div>
+   <p><img src="images/heritage/bob-requests-service.svg" width="900px"></p>
    <h5 class="heading settled" data-level="2.1.6.1" id="invoking-the-registration-service"><span class="secno">2.1.6.1. </span><span class="content">Invoking the registration service</span><a class="self-link" href="#invoking-the-registration-service"></a></h5>
    <ol>
     <li data-md>
@@ -2263,8 +2195,6 @@ duplicatie door een afnemende dienst?
      <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑦">Bob</a> sees in the event log with the demo app that the registration is complete</p>
    </ol>
    <p class="issue" id="issue-03c50d26"><a class="self-link" href="#issue-03c50d26"></a> how to get to aggregation of artefacts</p>
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({startOnLoad:true});</script>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -2444,7 +2374,7 @@ duplicatie door een afnemende dienst?
    <b><a href="#bob">#bob</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-bob">2.1.1. Maintainers</a> <a href="#ref-for-bob①">(2)</a> <a href="#ref-for-bob②">(3)</a>
-    <li><a href="#ref-for-bob③">2.1.5.1. Digital Heritage</a>
+    <li><a href="#ref-for-bob③">2.1.5. Part 1: artefact creation</a>
     <li><a href="#ref-for-bob④">2.1.6.1. Invoking the registration service</a> <a href="#ref-for-bob⑤">(2)</a> <a href="#ref-for-bob⑥">(3)</a> <a href="#ref-for-bob⑦">(4)</a> <a href="#ref-for-bob⑧">(5)</a> <a href="#ref-for-bob⑨">(6)</a> <a href="#ref-for-bob①⓪">(7)</a> <a href="#ref-for-bob①①">(8)</a>
     <li><a href="#ref-for-bob①②">2.1.6.2. Invoking the archival service</a> <a href="#ref-for-bob①③">(2)</a> <a href="#ref-for-bob①④">(3)</a> <a href="#ref-for-bob①⑤">(4)</a> <a href="#ref-for-bob①⑥">(5)</a> <a href="#ref-for-bob①⑦">(6)</a>
    </ul>
@@ -2453,13 +2383,12 @@ duplicatie door een afnemende dienst?
    <b><a href="#alice">#alice</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-alice">2.1.1. Maintainers</a> <a href="#ref-for-alice①">(2)</a> <a href="#ref-for-alice②">(3)</a>
-    <li><a href="#ref-for-alice③">2.1.5.2. Scolarly Communication</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="solid-crs">
    <b><a href="#solid-crs">#solid-crs</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-solid-crs">2.1.5.1. Digital Heritage</a>
+    <li><a href="#ref-for-solid-crs">2.1.5. Part 1: artefact creation</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="demo-app">

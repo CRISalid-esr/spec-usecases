@@ -12,7 +12,7 @@
  *   - .toc for the Table of Contents (<ol class="toc">)
  *     + <span class="secno"> for the section numbers
  *   - #toc for the Table of Contents (<nav id="toc">)
- *   - ul.index for Indices (<a href="#ref">term</a><span>, in §N.M</span>)
+ *   - ul.index for Indices (<a href="#ref">term</a><span>, in § N.M</span>)
  *   - table.index for Index Tables (e.g. for properties or elements)
  *
  * Structural Markup
@@ -598,7 +598,6 @@
 	a[href]:focus,
 	a[href]:hover {
 		text-decoration-thickness: 2px;
-		text-decoratin
 	}
 	a[href]:active {
 		color: #c00;
@@ -1488,7 +1487,7 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version c6f50773a, updated Fri Apr 16 16:45:47 2021 -0700" name="generator">
+  <meta content="Bikeshed version d7036035b, updated Fri Oct 8 17:07:11 2021 -0700" name="generator">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1730,6 +1729,16 @@ figcaption:not(.no-marker)::before {
 
 .dfn-paneled { cursor: pointer; }
 </style>
+<style>/* style-issues */
+
+a[href].issue-return {
+    float: right;
+    float: inline-end;
+    color: var(--issueheading-text);
+    font-weight: bold;
+    text-decoration: none;
+}
+</style>
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1917,7 +1926,7 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Mellon Orchestrator use cases</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-05-11">11 May 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-10-19">19 October 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Issue Tracking:
@@ -1933,7 +1942,7 @@ dfn > a.self-link::before      { content: "#"; }
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 11 May 2021,
+In addition, as of 19 October 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -2457,43 +2466,43 @@ to the <strong>Lifecycle Event Log</strong></p>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
-   <li><a href="#actor">Actor</a><span>, in §2</span>
-   <li><a href="#app">App</a><span>, in §2</span>
-   <li><a href="#artefact">Artefact</a><span>, in §2</span>
-   <li><a href="#artefact-lifecycle-event-log">Artefact Lifecycle Event Log</a><span>, in §2</span>
-   <li><a href="#autonomous-agent">Autonomous Agent</a><span>, in §2</span>
-   <li><a href="#dashboard">Dashboard</a><span>, in §2</span>
-   <li><a href="#data-pod">Data Pod</a><span>, in §2</span>
-   <li><a href="#human-agent">Human Agent</a><span>, in §2</span>
-   <li><a href="#inbox">Inbox</a><span>, in §2</span>
-   <li><a href="#maintainer">Maintainer</a><span>, in §2</span>
-   <li><a href="#orchestrator">Orchestrator</a><span>, in §2</span>
-   <li><a href="#policy">Policy</a><span>, in §2</span>
-   <li><a href="#service-hub">Service Hub</a><span>, in §2</span>
+   <li><a href="#actor">Actor</a><span>, in § 2</span>
+   <li><a href="#app">App</a><span>, in § 2</span>
+   <li><a href="#artefact">Artefact</a><span>, in § 2</span>
+   <li><a href="#artefact-lifecycle-event-log">Artefact Lifecycle Event Log</a><span>, in § 2</span>
+   <li><a href="#autonomous-agent">Autonomous Agent</a><span>, in § 2</span>
+   <li><a href="#dashboard">Dashboard</a><span>, in § 2</span>
+   <li><a href="#data-pod">Data Pod</a><span>, in § 2</span>
+   <li><a href="#human-agent">Human Agent</a><span>, in § 2</span>
+   <li><a href="#inbox">Inbox</a><span>, in § 2</span>
+   <li><a href="#maintainer">Maintainer</a><span>, in § 2</span>
+   <li><a href="#orchestrator">Orchestrator</a><span>, in § 2</span>
+   <li><a href="#policy">Policy</a><span>, in § 2</span>
+   <li><a href="#service-hub">Service Hub</a><span>, in § 2</span>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-ldn">[LDN]
-   <dd>Sarven Capadisli; Amy Guy. <a href="https://www.w3.org/TR/ldn/">Linked Data Notifications</a>. 2 May 2017. REC. URL: <a href="https://www.w3.org/TR/ldn/">https://www.w3.org/TR/ldn/</a>
+   <dd>Sarven Capadisli; Amy Guy. <a href="https://www.w3.org/TR/ldn/"><cite>Linked Data Notifications</cite></a>. 2 May 2017. REC. URL: <a href="https://www.w3.org/TR/ldn/">https://www.w3.org/TR/ldn/</a>
    <dt id="biblio-ldp">[LDP]
-   <dd>Steve Speicher; John Arwe; Ashok Malhotra. <a href="https://www.w3.org/TR/ldp/">Linked Data Platform 1.0</a>. 26 February 2015. REC. URL: <a href="https://www.w3.org/TR/ldp/">https://www.w3.org/TR/ldp/</a>
+   <dd>Steve Speicher; John Arwe; Ashok Malhotra. <a href="https://www.w3.org/TR/ldp/"><cite>Linked Data Platform 1.0</cite></a>. 26 February 2015. REC. URL: <a href="https://www.w3.org/TR/ldp/">https://www.w3.org/TR/ldp/</a>
    <dt id="biblio-rfc2119">[RFC2119]
-   <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
+   <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
-   <div class="issue"> Need a better name for the App<a href="#issue-1551ac7d"> ↵ </a></div>
-   <div class="issue"> Are the Rules and Inbox necesearily part of the Data Pod or can they exist as separate resources?<a href="#issue-dce4218e"> ↵ </a></div>
-   <div class="issue"> This all assumes that the ServiceHub service doesn’t send a 4** (for any reason, metadata, privileges, etc)<a href="#issue-e66a7ca7"> ↵ </a></div>
+   <div class="issue"> Need a better name for the App <a class="issue-return" href="#issue-1551ac7d" title="Jump to section">↵</a></div>
+   <div class="issue"> Are the Rules and Inbox necesearily part of the Data Pod or can they exist as separate resources? <a class="issue-return" href="#issue-dce4218e" title="Jump to section">↵</a></div>
+   <div class="issue"> This all assumes that the ServiceHub service doesn’t send a 4** (for any reason, metadata, privileges, etc) <a class="issue-return" href="#issue-e66a7ca7" title="Jump to section">↵</a></div>
    <div class="issue"> We need to determine what is required for an Orchestrator to be able to understand in which phase of an
 artefact lifecycle it is dealing with. Also we will need some kind of typology for an artefact type itself,
-eg paper, dataset, software, etc.<a href="#issue-63a5faeb"> ↵ </a></div>
+eg paper, dataset, software, etc. <a class="issue-return" href="#issue-63a5faeb" title="Jump to section">↵</a></div>
    <div class="issue"> Herbert: This would typically be triggered by a notification sent from the Orchestrator to the Inbox
 as a result of the execution of the Policy "once an artefact has entered the scholarly realm it should be certified".
 The Maintainer can then decide whether or not to request review and where. I think it would be good to add this
-to the pic as it nicely connects to the previous cases + illustrates policy<a href="#issue-1a0a0c9f"> ↵ </a></div>
-   <div class="issue"> Is this a verbatim copy of the AS2 notification or a processed version?<a href="#issue-d5c06278"> ↵ </a></div>
+to the pic as it nicely connects to the previous cases + illustrates policy <a class="issue-return" href="#issue-1a0a0c9f" title="Jump to section">↵</a></div>
+   <div class="issue"> Is this a verbatim copy of the AS2 notification or a processed version? <a class="issue-return" href="#issue-d5c06278" title="Jump to section">↵</a></div>
   </div>
   <aside class="dfn-panel" data-for="actor">
    <b><a href="#actor">#actor</a></b><b>Referenced in:</b>

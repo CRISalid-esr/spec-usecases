@@ -8,8 +8,8 @@ sequenceDiagram
         Bob ->> CRS: logs in
         Bob ->> CRS: creates collection
         Bob ->>+ CRS: adds image with description to collection
-        CRS ->> CRS: New artefact created
+        CRS ->> CRS: created new RDF description of the artefact
 
-        CRS ->> BP: store new artefact
+        CRS ->> BP: store artefact and RDF description
         CRS ->> BP: post as:Create to inbox
 ```

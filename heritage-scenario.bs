@@ -58,7 +58,7 @@ Scenario {#scenario}
 - wrapper service for the meemoo UGent GREB archive
 
 
-### Part 1: artefact creation 
+## Part 1: artefact creation 
 
 <img width="900px" src="images/heritage/bob-creates-heritage-artefact.svg"/>
 
@@ -100,11 +100,11 @@ Scenario {#scenario}
 5. The new artefact triggers an `as:Create` activity about the artefact. 
 6. A [[ldn|Linked Data Notification]] containing the activity is posted to [=Bob=]'s inbox.
 
-### Part 2: requesting services
+## Part 2: requesting services
 
 <img width="900px" src="images/heritage/bob-requests-service.svg"/>
 
-#### Invoking the registration service
+### Invoking the registration service
 
 1. [=Bob=] turns to the [=demo app=] of the artefact exchange network
 2. [=Bob=] logs into the data pod for the first time
@@ -123,7 +123,7 @@ Scenario {#scenario}
 8. [=Bob=] sees in the event log with the demo app that the registration is complete
 
 
-#### Invoking the archival service
+### Invoking the archival service
 
 1. [=Bob=] turns to the [=demo app=] of the artefact exchange network
 5. [=Bob=]'s Orchestrator suggests to Bob that he should offer the image artefact with metadata to the [=Archival Service Hub=].

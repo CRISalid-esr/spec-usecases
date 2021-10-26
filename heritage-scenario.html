@@ -1963,16 +1963,17 @@ Parts of this work may be from another specification document.  If so, those par
        <a href="#pre-conditions"><span class="secno">2.1</span> <span class="content">Pre-conditions</span></a>
        <ol class="toc">
         <li><a href="#maintainers"><span class="secno">2.1.1</span> <span class="content">Maintainers</span></a>
-        <li><a href="#solid-apps"><span class="secno">2.1.2</span> <span class="content">Solid Apps</span></a>
+        <li><a href="#solid-pods"><span class="secno">2.1.2</span> <span class="content">Solid Pods</span></a>
         <li><a href="#orchestrators"><span class="secno">2.1.3</span> <span class="content">Orchestrators</span></a>
-        <li><a href="#service-hubs"><span class="secno">2.1.4</span> <span class="content">Service hubs</span></a>
-        <li><a href="#part-1-artefact-creation"><span class="secno">2.1.5</span> <span class="content">Part 1: artefact creation</span></a>
-        <li>
-         <a href="#part-2-requesting-services"><span class="secno">2.1.6</span> <span class="content">Part 2: requesting services</span></a>
-         <ol class="toc">
-          <li><a href="#invoking-the-registration-service"><span class="secno">2.1.6.1</span> <span class="content">Invoking the registration service</span></a>
-          <li><a href="#invoking-the-archival-service"><span class="secno">2.1.6.2</span> <span class="content">Invoking the archival service</span></a>
-         </ol>
+        <li><a href="#solid-apps"><span class="secno">2.1.4</span> <span class="content">Solid Apps</span></a>
+        <li><a href="#service-hubs"><span class="secno">2.1.5</span> <span class="content">Service hubs</span></a>
+       </ol>
+      <li><a href="#part-1-artefact-creation"><span class="secno">2.2</span> <span class="content">Part 1: artefact creation</span></a>
+      <li>
+       <a href="#part-2-requesting-services"><span class="secno">2.3</span> <span class="content">Part 2: requesting services</span></a>
+       <ol class="toc">
+        <li><a href="#invoking-the-registration-service"><span class="secno">2.3.1</span> <span class="content">Invoking the registration service</span></a>
+        <li><a href="#invoking-the-archival-service"><span class="secno">2.3.2</span> <span class="content">Invoking the archival service</span></a>
        </ol>
      </ol>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
@@ -1999,42 +2000,49 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
    <h2 class="heading settled" data-level="2" id="scenario"><span class="secno">2. </span><span class="content">Scenario</span><a class="self-link" href="#scenario"></a></h2>
    <h3 class="heading settled" data-level="2.1" id="pre-conditions"><span class="secno">2.1. </span><span class="content">Pre-conditions</span><a class="self-link" href="#pre-conditions"></a></h3>
    <h4 class="heading settled" data-level="2.1.1" id="maintainers"><span class="secno">2.1.1. </span><span class="content">Maintainers</span><a class="self-link" href="#maintainers"></a></h4>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="bob">Bob</dfn>: Collection maintainer at a cultural heritage institution</p>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="bob">Bob</dfn>: collection maintainer at a cultural heritage institution</p>
    <ul>
     <li data-md>
      <p><a data-link-type="dfn" href="#bob" id="ref-for-bob">Bob</a> has a WebID</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①">Bob</a> has a data pod URI</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①">Bob</a> has the data pod URI of his institution</p>
     <li data-md>
      <p><a data-link-type="dfn" href="#bob" id="ref-for-bob②">Bob</a> has an inbox URI</p>
    </ul>
-   <h4 class="heading settled" data-level="2.1.2" id="solid-apps"><span class="secno">2.1.2. </span><span class="content">Solid Apps</span><a class="self-link" href="#solid-apps"></a></h4>
+   <h4 class="heading settled" data-level="2.1.2" id="solid-pods"><span class="secno">2.1.2. </span><span class="content">Solid Pods</span><a class="self-link" href="#solid-pods"></a></h4>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="institutions-pod">Institution’s Pod</dfn>: https://solid-crs.netwerkdigitaalerfgoed.nl/</p>
+   <ul>
+    <li data-md>
+     <p>data pod containing all digital heritage files of <a data-link-type="dfn" href="#bob" id="ref-for-bob③">Bob</a>'s institution</p>
+    <li data-md>
+     <p>contains an inbox</p>
+   </ul>
+   <h4 class="heading settled" data-level="2.1.3" id="orchestrators"><span class="secno">2.1.3. </span><span class="content">Orchestrators</span><a class="self-link" href="#orchestrators"></a></h4>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="institutions-orchestrator">Institution’s Orchestrator</dfn>: takes care of the communication (sending notifications) on behalf of <a data-link-type="dfn" href="#bob" id="ref-for-bob④">Bob</a>.</p>
+   <ul>
+    <li data-md>
+     <p>it has an personal inbox as API</p>
+    <li data-md>
+     <p>it knows the location of <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod">Institution’s Pod</a> and its inbox</p>
+   </ul>
+   <h4 class="heading settled" data-level="2.1.4" id="solid-apps"><span class="secno">2.1.4. </span><span class="content">Solid Apps</span><a class="self-link" href="#solid-apps"></a></h4>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="solid-crs">Solid CRS</dfn>: https://solid-crs.netwerkdigitaalerfgoed.nl/</p>
    <ul>
     <li data-md>
      <p>collection management system for small digital heritage organizations</p>
-   </ul>
-   <p><dfn data-dfn-type="dfn" data-noexport id="scolarly-dashboard">Scolarly Dashboard<a class="self-link" href="#scolarly-dashboard"></a></dfn>:</p>
-   <ul>
     <li data-md>
-     <p>application to upload and describe publications</p>
+     <p>manages the artefacts (collections of digital heritage objects) in the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod①">Institution’s Pod</a></p>
    </ul>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="demo-app">Demo app</dfn>: http://bellow2.ugent.be/public/</p>
    <ul>
     <li data-md>
-     <p>create, send and receive notifications between different pods and services</p>
+     <p>opercreate, send and receive notifications between different pods and services</p>
     <li data-md>
      <p>illustrate network</p>
     <li data-md>
      <p>introspect event logs</p>
    </ul>
-   <h4 class="heading settled" data-level="2.1.3" id="orchestrators"><span class="secno">2.1.3. </span><span class="content">Orchestrators</span><a class="self-link" href="#orchestrators"></a></h4>
-   <p><dfn data-dfn-type="dfn" data-noexport id="bobs-orchestrator">Bob’s Orchestrator<a class="self-link" href="#bobs-orchestrator"></a></dfn></p>
-   <ul>
-    <li data-md>
-     <p>the <a data-link-type="dfn">Orchestrator</a> has an personal Inbox as API</p>
-   </ul>
-   <h4 class="heading settled" data-level="2.1.4" id="service-hubs"><span class="secno">2.1.4. </span><span class="content">Service hubs</span><a class="self-link" href="#service-hubs"></a></h4>
+   <h4 class="heading settled" data-level="2.1.5" id="service-hubs"><span class="secno">2.1.5. </span><span class="content">Service hubs</span><a class="self-link" href="#service-hubs"></a></h4>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="registry-service-hub">Registry Service Hub</dfn></p>
    <ul>
     <li data-md>
@@ -2045,17 +2053,17 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
     <li data-md>
      <p>wrapper service for the meemoo UGent GREB archive</p>
    </ul>
-   <h4 class="heading settled" data-level="2.1.5" id="part-1-artefact-creation"><span class="secno">2.1.5. </span><span class="content">Part 1: artefact creation</span><a class="self-link" href="#part-1-artefact-creation"></a></h4>
+   <h3 class="heading settled" data-level="2.2" id="part-1-artefact-creation"><span class="secno">2.2. </span><span class="content">Part 1: artefact creation</span><a class="self-link" href="#part-1-artefact-creation"></a></h3>
    <p><img src="images/heritage/bob-creates-heritage-artefact.svg" width="900px"></p>
    <ol>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob③">Bob</a> logs into <a data-link-type="dfn" href="#solid-crs" id="ref-for-solid-crs">Solid CRS</a> with his Web ID</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑤">Bob</a> logs into <a data-link-type="dfn" href="#solid-crs" id="ref-for-solid-crs">Solid CRS</a> with his Web ID</p>
      <ul>
       <li data-md>
-       <p><a data-link-type="dfn" href="#bob" id="ref-for-bob④">Bob</a> chooses his data pod</p>
+       <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑥">Bob</a> chooses the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod②">Institution’s Pod</a></p>
      </ul>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑤">Bob</a> creates a new Collection about the liberation of Utrecht in WOII</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑦">Bob</a> creates a new Collection about the liberation of Utrecht in WOII</p>
     <li data-md>
      <p>He adds an object with the following metadata</p>
      <ul>
@@ -2079,7 +2087,7 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
        <p>Date: 1945-05-07</p>
      </ul>
     <li data-md>
-     <p>This results in a new artefact of type <code>schema:CreativeWork</code> in the data pod:</p>
+     <p>This results in a new artefact of type <code>schema:CreativeWork</code> in the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod③">Institution’s Pod</a>:</p>
    </ol>
 <pre>@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: &lt;http://schema.org/> .
@@ -2103,32 +2111,32 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
     <li data-md>
      <p>The new artefact triggers an <code>as:Create</code> activity about the artefact.</p>
     <li data-md>
-     <p>A <a data-link-type="biblio" href="#biblio-ldn">Linked Data Notification</a> containing the activity is posted to <a data-link-type="dfn" href="#bob" id="ref-for-bob⑥">Bob</a>'s inbox.</p>
+     <p>A <a data-link-type="biblio" href="#biblio-ldn">Linked Data Notification</a> containing the activity is posted to <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod④">Institution’s Pod</a>'s inbox.</p>
    </ol>
-   <h4 class="heading settled" data-level="2.1.6" id="part-2-requesting-services"><span class="secno">2.1.6. </span><span class="content">Part 2: requesting services</span><a class="self-link" href="#part-2-requesting-services"></a></h4>
+   <h3 class="heading settled" data-level="2.3" id="part-2-requesting-services"><span class="secno">2.3. </span><span class="content">Part 2: requesting services</span><a class="self-link" href="#part-2-requesting-services"></a></h3>
    <p><img src="images/heritage/bob-requests-service.svg" width="900px"></p>
-   <h5 class="heading settled" data-level="2.1.6.1" id="invoking-the-registration-service"><span class="secno">2.1.6.1. </span><span class="content">Invoking the registration service</span><a class="self-link" href="#invoking-the-registration-service"></a></h5>
+   <h4 class="heading settled" data-level="2.3.1" id="invoking-the-registration-service"><span class="secno">2.3.1. </span><span class="content">Invoking the registration service</span><a class="self-link" href="#invoking-the-registration-service"></a></h4>
    <ol>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑦">Bob</a> turns to the <a data-link-type="dfn" href="#demo-app" id="ref-for-demo-app">demo app</a> of the artefact exchange network</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑧">Bob</a> turns to the <a data-link-type="dfn" href="#demo-app" id="ref-for-demo-app">demo app</a> of the artefact exchange network</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑧">Bob</a> logs into the data pod for the first time</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑨">Bob</a> logs into the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod⑤">Institution’s Pod</a> for the first time</p>
      <ul>
       <li data-md>
        <p>a event log resource is added to the pod</p>
      </ul>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑨">Bob</a> can view the artefact + inbox and event log</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⓪">Bob</a> can view the artefact + inbox and event log</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⓪">Bob</a>'s Orchestrator receives the <code>as:Create</code> activity</p>
+     <p><a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator">Institution’s Orchestrator</a> receives the <code>as:Create</code> activity</p>
      <ul>
       <li data-md>
        <p>appends the creation event to the event log</p>
       <li data-md>
-       <p>suggests to Bob that he should offer the artefact metadata to the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub">Registry Service Hub</a>.</p>
+       <p>suggests to <a data-link-type="dfn" href="#bob" id="ref-for-bob①①">Bob</a> that he should offer the artefact metadata to the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub">Registry Service Hub</a>.</p>
      </ul>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①①">Bob</a> sends a new notification with an <code>as:Offer</code> activity to the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub①">Registry Service Hub</a></p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①②">Bob</a> sends a new notification with an <code>as:Offer</code> activity to the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub①">Registry Service Hub</a></p>
      <ul>
       <li data-md>
        <p>Select the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub②">Registry Service Hub</a> as target from the list</p>
@@ -2142,20 +2150,20 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
        <p>posts the metadata to the Dataset Registry API https://datasetregister.netwerkdigitaalerfgoed.nl/viaurl.php</p>
      </ul>
     <li data-md>
-     <p>The <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub④">Registry Service Hub</a> sends a notification with <code>as:Announce</code> to <a data-link-type="dfn" href="#bob" id="ref-for-bob①②">Bob</a></p>
+     <p>The <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub④">Registry Service Hub</a> sends a notification with <code>as:Announce</code> to <a data-link-type="dfn" href="#bob" id="ref-for-bob①③">Bob</a></p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①③">Bob</a>'s Orchestrator appends the event log</p>
+     <p><a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator①">Institution’s Orchestrator</a> appends the event log</p>
     <li data-md>
      <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①④">Bob</a> sees in the event log with the demo app that the registration is complete</p>
    </ol>
-   <h5 class="heading settled" data-level="2.1.6.2" id="invoking-the-archival-service"><span class="secno">2.1.6.2. </span><span class="content">Invoking the archival service</span><a class="self-link" href="#invoking-the-archival-service"></a></h5>
+   <h4 class="heading settled" data-level="2.3.2" id="invoking-the-archival-service"><span class="secno">2.3.2. </span><span class="content">Invoking the archival service</span><a class="self-link" href="#invoking-the-archival-service"></a></h4>
    <ol>
     <li data-md>
      <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑤">Bob</a> turns to the <a data-link-type="dfn" href="#demo-app" id="ref-for-demo-app①">demo app</a> of the artefact exchange network</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑥">Bob</a>'s Orchestrator suggests to Bob that he should offer the image artefact with metadata to the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub">Archival Service Hub</a>.</p>
+     <p><a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator②">Institution’s Orchestrator</a> suggests to Bob that he should offer the image artefact with metadata to the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub">Archival Service Hub</a>.</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑦">Bob</a> sends a new notification with an <code>as:Offer</code> activity to the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub①">Archival Service Hub</a></p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑥">Bob</a> sends a new notification with an <code>as:Offer</code> activity to the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub①">Archival Service Hub</a></p>
      <ul>
       <li data-md>
        <p>Select the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub②">Archival Service Hub</a> as target from the list</p>
@@ -2174,12 +2182,12 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
      <p>The <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub④">Archival Service Hub</a> polls meemoo’s Mediahaven API for <code>ARCHIVED_ON_DISK</code> premis event</p>
      <ul>
       <li data-md>
-       <p>when found, it sends a notification with <code>as:Announce</code> to <a data-link-type="dfn" href="#bob" id="ref-for-bob①⑧">Bob</a></p>
+       <p>when found, it sends a notification with <code>as:Announce</code> to <a data-link-type="dfn" href="#bob" id="ref-for-bob①⑦">Bob</a></p>
      </ul>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑨">Bob</a>'s Orchestrator appends the event log</p>
+     <p><a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator③">Institution’s Orchestrator</a> appends the event log</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob②⓪">Bob</a> sees in the event log with the demo app that the registration is complete</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑧">Bob</a> sees in the event log with the demo app that the registration is complete</p>
    </ol>
    <p class="issue" id="issue-03c50d26"><a class="self-link" href="#issue-03c50d26"></a> how to get to aggregation of artefacts</p>
   </main>
@@ -2332,13 +2340,13 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
-   <li><a href="#archival-service-hub">Archival Service Hub</a><span>, in § 2.1.4</span>
+   <li><a href="#archival-service-hub">Archival Service Hub</a><span>, in § 2.1.5</span>
    <li><a href="#bob">Bob</a><span>, in § 2.1.1</span>
-   <li><a href="#bobs-orchestrator">Bob’s Orchestrator</a><span>, in § 2.1.3</span>
-   <li><a href="#demo-app">Demo app</a><span>, in § 2.1.2</span>
-   <li><a href="#registry-service-hub">Registry Service Hub</a><span>, in § 2.1.4</span>
-   <li><a href="#scolarly-dashboard">Scolarly Dashboard</a><span>, in § 2.1.2</span>
-   <li><a href="#solid-crs">Solid CRS</a><span>, in § 2.1.2</span>
+   <li><a href="#demo-app">Demo app</a><span>, in § 2.1.4</span>
+   <li><a href="#institutions-orchestrator">Institution’s Orchestrator</a><span>, in § 2.1.3</span>
+   <li><a href="#institutions-pod">Institution’s Pod</a><span>, in § 2.1.2</span>
+   <li><a href="#registry-service-hub">Registry Service Hub</a><span>, in § 2.1.5</span>
+   <li><a href="#solid-crs">Solid CRS</a><span>, in § 2.1.4</span>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
@@ -2359,34 +2367,52 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
    <b><a href="#bob">#bob</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-bob">2.1.1. Maintainers</a> <a href="#ref-for-bob①">(2)</a> <a href="#ref-for-bob②">(3)</a>
-    <li><a href="#ref-for-bob③">2.1.5. Part 1: artefact creation</a> <a href="#ref-for-bob④">(2)</a> <a href="#ref-for-bob⑤">(3)</a> <a href="#ref-for-bob⑥">(4)</a>
-    <li><a href="#ref-for-bob⑦">2.1.6.1. Invoking the registration service</a> <a href="#ref-for-bob⑧">(2)</a> <a href="#ref-for-bob⑨">(3)</a> <a href="#ref-for-bob①⓪">(4)</a> <a href="#ref-for-bob①①">(5)</a> <a href="#ref-for-bob①②">(6)</a> <a href="#ref-for-bob①③">(7)</a> <a href="#ref-for-bob①④">(8)</a>
-    <li><a href="#ref-for-bob①⑤">2.1.6.2. Invoking the archival service</a> <a href="#ref-for-bob①⑥">(2)</a> <a href="#ref-for-bob①⑦">(3)</a> <a href="#ref-for-bob①⑧">(4)</a> <a href="#ref-for-bob①⑨">(5)</a> <a href="#ref-for-bob②⓪">(6)</a>
+    <li><a href="#ref-for-bob③">2.1.2. Solid Pods</a>
+    <li><a href="#ref-for-bob④">2.1.3. Orchestrators</a>
+    <li><a href="#ref-for-bob⑤">2.2. Part 1: artefact creation</a> <a href="#ref-for-bob⑥">(2)</a> <a href="#ref-for-bob⑦">(3)</a>
+    <li><a href="#ref-for-bob⑧">2.3.1. Invoking the registration service</a> <a href="#ref-for-bob⑨">(2)</a> <a href="#ref-for-bob①⓪">(3)</a> <a href="#ref-for-bob①①">(4)</a> <a href="#ref-for-bob①②">(5)</a> <a href="#ref-for-bob①③">(6)</a> <a href="#ref-for-bob①④">(7)</a>
+    <li><a href="#ref-for-bob①⑤">2.3.2. Invoking the archival service</a> <a href="#ref-for-bob①⑥">(2)</a> <a href="#ref-for-bob①⑦">(3)</a> <a href="#ref-for-bob①⑧">(4)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="institutions-pod">
+   <b><a href="#institutions-pod">#institutions-pod</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-institutions-pod">2.1.3. Orchestrators</a>
+    <li><a href="#ref-for-institutions-pod①">2.1.4. Solid Apps</a>
+    <li><a href="#ref-for-institutions-pod②">2.2. Part 1: artefact creation</a> <a href="#ref-for-institutions-pod③">(2)</a> <a href="#ref-for-institutions-pod④">(3)</a>
+    <li><a href="#ref-for-institutions-pod⑤">2.3.1. Invoking the registration service</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="institutions-orchestrator">
+   <b><a href="#institutions-orchestrator">#institutions-orchestrator</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-institutions-orchestrator">2.3.1. Invoking the registration service</a> <a href="#ref-for-institutions-orchestrator①">(2)</a>
+    <li><a href="#ref-for-institutions-orchestrator②">2.3.2. Invoking the archival service</a> <a href="#ref-for-institutions-orchestrator③">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="solid-crs">
    <b><a href="#solid-crs">#solid-crs</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-solid-crs">2.1.5. Part 1: artefact creation</a>
+    <li><a href="#ref-for-solid-crs">2.2. Part 1: artefact creation</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="demo-app">
    <b><a href="#demo-app">#demo-app</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-demo-app">2.1.6.1. Invoking the registration service</a>
-    <li><a href="#ref-for-demo-app①">2.1.6.2. Invoking the archival service</a>
+    <li><a href="#ref-for-demo-app">2.3.1. Invoking the registration service</a>
+    <li><a href="#ref-for-demo-app①">2.3.2. Invoking the archival service</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="registry-service-hub">
    <b><a href="#registry-service-hub">#registry-service-hub</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-registry-service-hub">2.1.6.1. Invoking the registration service</a> <a href="#ref-for-registry-service-hub①">(2)</a> <a href="#ref-for-registry-service-hub②">(3)</a> <a href="#ref-for-registry-service-hub③">(4)</a> <a href="#ref-for-registry-service-hub④">(5)</a>
+    <li><a href="#ref-for-registry-service-hub">2.3.1. Invoking the registration service</a> <a href="#ref-for-registry-service-hub①">(2)</a> <a href="#ref-for-registry-service-hub②">(3)</a> <a href="#ref-for-registry-service-hub③">(4)</a> <a href="#ref-for-registry-service-hub④">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="archival-service-hub">
    <b><a href="#archival-service-hub">#archival-service-hub</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-archival-service-hub">2.1.6.2. Invoking the archival service</a> <a href="#ref-for-archival-service-hub①">(2)</a> <a href="#ref-for-archival-service-hub②">(3)</a> <a href="#ref-for-archival-service-hub③">(4)</a> <a href="#ref-for-archival-service-hub④">(5)</a>
+    <li><a href="#ref-for-archival-service-hub">2.3.2. Invoking the archival service</a> <a href="#ref-for-archival-service-hub①">(2)</a> <a href="#ref-for-archival-service-hub②">(3)</a> <a href="#ref-for-archival-service-hub③">(4)</a> <a href="#ref-for-archival-service-hub④">(5)</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */

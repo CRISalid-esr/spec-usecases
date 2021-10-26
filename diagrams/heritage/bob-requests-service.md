@@ -1,40 +1,48 @@
 ```mermaid
 sequenceDiagram
     actor Bob
-    participant DA as Demo App
-    participant BP as Bob's data pod
-    participant BO as Bob's orchestrator
+    participant DA as Dashboard
+    participant BP as Institution's data pod
+    participant BO as Institution's orchestrator
     participant RSH as Registry Service Hub
     participant DR as NDE Dataset Registry API
     participant ASH as Archival Service Hub
     participant MA as meemoo's archive
 
     autonumber
-    Bob ->> DA: logs into data pod
-    DA  ->> BP: initializes data pod with event log
-    Bob ->> DA: views artefact, the content of the inbox and the event log
-    BO ->> BP: append creation event to the event log
+    Bob ->> DA: logs in
+    DA ->> DP: BP
+    DA  ->> BP: initializes event log
+    Bob ->> DA: views the available artefacts, the inbox and the event log
     
     BO ->> DA: suggest offer to Registry Service Hub
     DA ->> Bob: display suggestion
+    Bob ->> DA: select artefact
+    Bob ->> DA: select service hub
     Bob ->> DA: initalize offer to Registry Service Hub
     
-    BO ->> RSH: post as:Offer to inbox
+    BO ->> RSH: send offer notification
+    BO ->> BP: append event log with offer
     RSH ->> DR: post metadata
     DR ->> RSH: metadata added
-    RSH ->> BP: post as:Announce to inbox
-    BO ->> BP: append event log
+    RSH ->> BP: send announce notification
+    BO ->> DP: read inbox
+    BO ->> BP: append event log with announce
     Bob ->> DA: sees changes reflected
 
     BO ->> DA: suggest offer to Archival Service Hub
     DA ->> Bob: display suggestion
+    Bob ->> DA: select artefact
+    Bob ->> DA: select service hub
     Bob ->> DA: initalize offer to Archival Service Hub
     
-    BO ->> ASH: post as:Offer to inbox
+    BO ->> ASH: send offer notification
+    BO ->> BP: append event log with offer
     ASH ->> MA: put bag onto FTP
     MA ->> MA: archival process & set ARCHIVED_ON_DISK event 
     ASH ->> MA: poll ARCHIVED_ON_DISK event
-    ASH ->> BP: post as:Announce to inbox
+    ASH ->> BP: send announce notification
+    BO ->> DP: read inbox
     BO ->> BP: append event log
     Bob ->> DA: sees changes reflected
 ```

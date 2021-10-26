@@ -2,7 +2,8 @@
 sequenceDiagram
         actor Bob
         participant CRS as Solid CRS
-        participant BP as Bob's data pod
+        participant BO as Institution's orchestrator
+        participant BP as Institution's data pod
 
         autonumber
         Bob ->> CRS: logs in
@@ -11,5 +12,6 @@ sequenceDiagram
         CRS ->> CRS: created new RDF description of the artefact
 
         CRS ->> BP: store artefact and RDF description
-        CRS ->> BP: post as:Create to inbox
+        CRS ->> BO: send create notification
+        BO ->> BP: update Event Log with creation
 ```

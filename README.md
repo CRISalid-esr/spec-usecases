@@ -6,7 +6,7 @@
 
 [Renderend Scholarly Use Cases](https://mellonscholarlycommunication.github.io/spec-usecases/scholarly-scenario.html)
 
-[Renderend Erfgoed Use Cases](https://mellonscholarlycommunication.github.io/spec-usecases/demo-scenario.html)
+[Renderend Erfgoed Use Cases](https://mellonscholarlycommunication.github.io/spec-usecases/heritage-scenario.html)
 
 ## Generate HTML
 

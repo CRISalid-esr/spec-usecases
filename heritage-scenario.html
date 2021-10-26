@@ -1,7 +1,7 @@
 <!doctype html><html lang="en">
  <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-  <title>Demo scenario ErfgoedPod &amp; ResearcherPod</title>
+  <title>Demo scenario ErfgoedPod</title>
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 <style data-fill-with="stylesheet">/******************************************************************************
  *                   Style sheet for the W3C specifications                   *
@@ -1488,7 +1488,7 @@ Possible extra rowspan handling
 	}
 </style>
   <meta content="Bikeshed version d7036035b, updated Fri Oct 8 17:07:11 2021 -0700" name="generator">
-  <link href="https://github.com/ErfgoedPod/demo" rel="canonical">
+  <link href="https://github.com/ErfgoedPod/spec-usecases" rel="canonical">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1926,12 +1926,12 @@ dfn > a.self-link::before      { content: "#"; }
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"></p>
-   <h1 class="p-name no-ref" id="title">Demo scenario ErfgoedPod &amp; ResearcherPod</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-10-25">25 October 2021</time></span></h2>
+   <h1 class="p-name no-ref" id="title">Demo scenario ErfgoedPod</h1>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-10-26">26 October 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
-     <dd><a class="u-url" href="https://github.com/ErfgoedPod/demo">https://github.com/ErfgoedPod/demo</a>
+     <dd><a class="u-url" href="https://github.com/ErfgoedPod/spec-usecases">https://github.com/ErfgoedPod/spec-usecases</a>
      <dt>Issue Tracking:
      <dd><a href="#issues-index">Inline In Spec</a>
      <dt class="editor">Editor:
@@ -1941,7 +1941,7 @@ dfn > a.self-link::before      { content: "#"; }
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 25 October 2021,
+In addition, as of 26 October 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1992,9 +1992,10 @@ Parts of this work may be from another specification document.  If so, those par
   </nav>
   <main>
    <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
-    notification patronen
-Solid CRS inhoud van pod → register
-duplicatie door een afnemende dienst? 
+   <p>This document describes the scenario for the first ErfgoedPod demo.
+The goal is to illustrate the components and architecture of the decentralized artefact exchange network 
+in combination with the
+the collection registration system <a href="https://www.youtube.com/watch?v=XJgl8EcQqf8">Solid CRS</a>, developed by Digita for the "Solid for small heritage institutions" project.</p>
    <h2 class="heading settled" data-level="2" id="scenario"><span class="secno">2. </span><span class="content">Scenario</span><a class="self-link" href="#scenario"></a></h2>
    <h3 class="heading settled" data-level="2.1" id="pre-conditions"><span class="secno">2.1. </span><span class="content">Pre-conditions</span><a class="self-link" href="#pre-conditions"></a></h3>
    <h4 class="heading settled" data-level="2.1.1" id="maintainers"><span class="secno">2.1.1. </span><span class="content">Maintainers</span><a class="self-link" href="#maintainers"></a></h4>
@@ -2007,45 +2008,29 @@ duplicatie door een afnemende dienst?
     <li data-md>
      <p><a data-link-type="dfn" href="#bob" id="ref-for-bob②">Bob</a> has an inbox URI</p>
    </ul>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="alice">Alice</dfn>: academic scholar</p>
-   <ul>
-    <li data-md>
-     <p><a data-link-type="dfn" href="#alice" id="ref-for-alice">Alice</a> has a WebID</p>
-    <li data-md>
-     <p><a data-link-type="dfn" href="#alice" id="ref-for-alice①">Alice</a> has a data pod URI</p>
-    <li data-md>
-     <p><a data-link-type="dfn" href="#alice" id="ref-for-alice②">Alice</a> has an inbox URI</p>
-   </ul>
    <h4 class="heading settled" data-level="2.1.2" id="solid-apps"><span class="secno">2.1.2. </span><span class="content">Solid Apps</span><a class="self-link" href="#solid-apps"></a></h4>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="solid-crs">Solid CRS</dfn>: https://solid-crs.netwerkdigitaalerfgoed.nl/</p>
    <ul>
     <li data-md>
-     <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="solid-crs">Solid CRS</dfn>: https://solid-crs.netwerkdigitaalerfgoed.nl/</p>
-     <ul>
-      <li data-md>
-       <p>collection management system for small digital heritage organizations</p>
-     </ul>
+     <p>collection management system for small digital heritage organizations</p>
+   </ul>
+   <p><dfn data-dfn-type="dfn" data-noexport id="scolarly-dashboard">Scolarly Dashboard<a class="self-link" href="#scolarly-dashboard"></a></dfn>:</p>
+   <ul>
     <li data-md>
-     <p><dfn data-dfn-type="dfn" data-noexport id="scolarly-dashboard">Scolarly Dashboard<a class="self-link" href="#scolarly-dashboard"></a></dfn>:</p>
-     <ul>
-      <li data-md>
-       <p>application to upload and describe publications</p>
-     </ul>
+     <p>application to upload and describe publications</p>
+   </ul>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="demo-app">Demo app</dfn>: http://bellow2.ugent.be/public/</p>
+   <ul>
     <li data-md>
-     <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="demo-app">Demo app</dfn>: http://bellow2.ugent.be/public/</p>
-     <ul>
-      <li data-md>
-       <p>create, send and receive notifications between different pods and services</p>
-      <li data-md>
-       <p>illustrate network</p>
-      <li data-md>
-       <p>introspect event logs</p>
-     </ul>
+     <p>create, send and receive notifications between different pods and services</p>
+    <li data-md>
+     <p>illustrate network</p>
+    <li data-md>
+     <p>introspect event logs</p>
    </ul>
    <h4 class="heading settled" data-level="2.1.3" id="orchestrators"><span class="secno">2.1.3. </span><span class="content">Orchestrators</span><a class="self-link" href="#orchestrators"></a></h4>
-   <p><dfn data-dfn-type="dfn" data-noexport id="alices-orchestrator">Alice’s Orchestrator<a class="self-link" href="#alices-orchestrator"></a></dfn></p>
+   <p><dfn data-dfn-type="dfn" data-noexport id="bobs-orchestrator">Bob’s Orchestrator<a class="self-link" href="#bobs-orchestrator"></a></dfn></p>
    <ul>
-    <li data-md>
-     <p>the <a data-link-type="dfn">Orchestrator</a> has an personal Inbox as API <dfn data-dfn-type="dfn" data-noexport id="bobs-orchestrator">Bob’s Orchestrator<a class="self-link" href="#bobs-orchestrator"></a></dfn></p>
     <li data-md>
      <p>the <a data-link-type="dfn">Orchestrator</a> has an personal Inbox as API</p>
    </ul>
@@ -2064,13 +2049,13 @@ duplicatie door een afnemende dienst?
    <p><img src="images/heritage/bob-creates-heritage-artefact.svg" width="900px"></p>
    <ol>
     <li data-md>
-     <p>Bob logs into <a data-link-type="dfn" href="#solid-crs" id="ref-for-solid-crs">Solid CRS</a> with his Web ID</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob③">Bob</a> logs into <a data-link-type="dfn" href="#solid-crs" id="ref-for-solid-crs">Solid CRS</a> with his Web ID</p>
      <ul>
       <li data-md>
-       <p>Bob chooses his data pod</p>
+       <p><a data-link-type="dfn" href="#bob" id="ref-for-bob④">Bob</a> chooses his data pod</p>
      </ul>
     <li data-md>
-     <p>Bob creates a new Collection about the liberation of Utrecht in WOII</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑤">Bob</a> creates a new Collection about the liberation of Utrecht in WOII</p>
     <li data-md>
      <p>He adds an object with the following metadata</p>
      <ul>
@@ -2116,24 +2101,26 @@ duplicatie door een afnemende dienst?
 </pre>
    <ol start="5">
     <li data-md>
-     <p>The new artefact triggers an <code>as:Create</code> activity about the artefact. A <a data-link-type="biblio" href="#biblio-ldn">Linked Data Notification</a> containing the activity is posted to <a data-link-type="dfn" href="#bob" id="ref-for-bob③">Bob</a>'s inbox.</p>
+     <p>The new artefact triggers an <code>as:Create</code> activity about the artefact.</p>
+    <li data-md>
+     <p>A <a data-link-type="biblio" href="#biblio-ldn">Linked Data Notification</a> containing the activity is posted to <a data-link-type="dfn" href="#bob" id="ref-for-bob⑥">Bob</a>'s inbox.</p>
    </ol>
    <h4 class="heading settled" data-level="2.1.6" id="part-2-requesting-services"><span class="secno">2.1.6. </span><span class="content">Part 2: requesting services</span><a class="self-link" href="#part-2-requesting-services"></a></h4>
    <p><img src="images/heritage/bob-requests-service.svg" width="900px"></p>
    <h5 class="heading settled" data-level="2.1.6.1" id="invoking-the-registration-service"><span class="secno">2.1.6.1. </span><span class="content">Invoking the registration service</span><a class="self-link" href="#invoking-the-registration-service"></a></h5>
    <ol>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob④">Bob</a> turns to the <a data-link-type="dfn" href="#demo-app" id="ref-for-demo-app">demo app</a> of the artefact exchange network</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑦">Bob</a> turns to the <a data-link-type="dfn" href="#demo-app" id="ref-for-demo-app">demo app</a> of the artefact exchange network</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑤">Bob</a> logs into the data pod for the first time</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑧">Bob</a> logs into the data pod for the first time</p>
      <ul>
       <li data-md>
        <p>a event log resource is added to the pod</p>
      </ul>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑥">Bob</a> can view the artefact + inbox and event log</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑨">Bob</a> can view the artefact + inbox and event log</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑦">Bob</a>'s Orchestrator receives the <code>as:Create</code> activity</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⓪">Bob</a>'s Orchestrator receives the <code>as:Create</code> activity</p>
      <ul>
       <li data-md>
        <p>appends the creation event to the event log</p>
@@ -2141,7 +2128,7 @@ duplicatie door een afnemende dienst?
        <p>suggests to Bob that he should offer the artefact metadata to the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub">Registry Service Hub</a>.</p>
      </ul>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑧">Bob</a> sends a new notification with an <code>as:Offer</code> activity to the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub①">Registry Service Hub</a></p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①①">Bob</a> sends a new notification with an <code>as:Offer</code> activity to the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub①">Registry Service Hub</a></p>
      <ul>
       <li data-md>
        <p>Select the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub②">Registry Service Hub</a> as target from the list</p>
@@ -2155,20 +2142,20 @@ duplicatie door een afnemende dienst?
        <p>posts the metadata to the Dataset Registry API https://datasetregister.netwerkdigitaalerfgoed.nl/viaurl.php</p>
      </ul>
     <li data-md>
-     <p>The <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub④">Registry Service Hub</a> sends a notification with <code>as:Announce</code> to <a data-link-type="dfn" href="#bob" id="ref-for-bob⑨">Bob</a></p>
+     <p>The <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub④">Registry Service Hub</a> sends a notification with <code>as:Announce</code> to <a data-link-type="dfn" href="#bob" id="ref-for-bob①②">Bob</a></p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⓪">Bob</a>'s Orchestrator appends the event log</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①③">Bob</a>'s Orchestrator appends the event log</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①①">Bob</a> sees in the event log with the demo app that the registration is complete</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①④">Bob</a> sees in the event log with the demo app that the registration is complete</p>
    </ol>
    <h5 class="heading settled" data-level="2.1.6.2" id="invoking-the-archival-service"><span class="secno">2.1.6.2. </span><span class="content">Invoking the archival service</span><a class="self-link" href="#invoking-the-archival-service"></a></h5>
    <ol>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①②">Bob</a> turns to the <a data-link-type="dfn" href="#demo-app" id="ref-for-demo-app①">demo app</a> of the artefact exchange network</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑤">Bob</a> turns to the <a data-link-type="dfn" href="#demo-app" id="ref-for-demo-app①">demo app</a> of the artefact exchange network</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①③">Bob</a>'s Orchestrator suggests to Bob that he should offer the image artefact with metadata to the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub">Archival Service Hub</a>.</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑥">Bob</a>'s Orchestrator suggests to Bob that he should offer the image artefact with metadata to the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub">Archival Service Hub</a>.</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①④">Bob</a> sends a new notification with an <code>as:Offer</code> activity to the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub①">Archival Service Hub</a></p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑦">Bob</a> sends a new notification with an <code>as:Offer</code> activity to the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub①">Archival Service Hub</a></p>
      <ul>
       <li data-md>
        <p>Select the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub②">Archival Service Hub</a> as target from the list</p>
@@ -2187,12 +2174,12 @@ duplicatie door een afnemende dienst?
      <p>The <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub④">Archival Service Hub</a> polls meemoo’s Mediahaven API for <code>ARCHIVED_ON_DISK</code> premis event</p>
      <ul>
       <li data-md>
-       <p>when found, it sends a notification with <code>as:Announce</code> to <a data-link-type="dfn" href="#bob" id="ref-for-bob①⑤">Bob</a></p>
+       <p>when found, it sends a notification with <code>as:Announce</code> to <a data-link-type="dfn" href="#bob" id="ref-for-bob①⑧">Bob</a></p>
      </ul>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑥">Bob</a>'s Orchestrator appends the event log</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑨">Bob</a>'s Orchestrator appends the event log</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑦">Bob</a> sees in the event log with the demo app that the registration is complete</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob②⓪">Bob</a> sees in the event log with the demo app that the registration is complete</p>
    </ol>
    <p class="issue" id="issue-03c50d26"><a class="self-link" href="#issue-03c50d26"></a> how to get to aggregation of artefacts</p>
   </main>
@@ -2345,8 +2332,6 @@ duplicatie door een afnemende dienst?
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
-   <li><a href="#alice">Alice</a><span>, in § 2.1.1</span>
-   <li><a href="#alices-orchestrator">Alice’s Orchestrator</a><span>, in § 2.1.3</span>
    <li><a href="#archival-service-hub">Archival Service Hub</a><span>, in § 2.1.4</span>
    <li><a href="#bob">Bob</a><span>, in § 2.1.1</span>
    <li><a href="#bobs-orchestrator">Bob’s Orchestrator</a><span>, in § 2.1.3</span>
@@ -2374,15 +2359,9 @@ duplicatie door een afnemende dienst?
    <b><a href="#bob">#bob</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-bob">2.1.1. Maintainers</a> <a href="#ref-for-bob①">(2)</a> <a href="#ref-for-bob②">(3)</a>
-    <li><a href="#ref-for-bob③">2.1.5. Part 1: artefact creation</a>
-    <li><a href="#ref-for-bob④">2.1.6.1. Invoking the registration service</a> <a href="#ref-for-bob⑤">(2)</a> <a href="#ref-for-bob⑥">(3)</a> <a href="#ref-for-bob⑦">(4)</a> <a href="#ref-for-bob⑧">(5)</a> <a href="#ref-for-bob⑨">(6)</a> <a href="#ref-for-bob①⓪">(7)</a> <a href="#ref-for-bob①①">(8)</a>
-    <li><a href="#ref-for-bob①②">2.1.6.2. Invoking the archival service</a> <a href="#ref-for-bob①③">(2)</a> <a href="#ref-for-bob①④">(3)</a> <a href="#ref-for-bob①⑤">(4)</a> <a href="#ref-for-bob①⑥">(5)</a> <a href="#ref-for-bob①⑦">(6)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="alice">
-   <b><a href="#alice">#alice</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-alice">2.1.1. Maintainers</a> <a href="#ref-for-alice①">(2)</a> <a href="#ref-for-alice②">(3)</a>
+    <li><a href="#ref-for-bob③">2.1.5. Part 1: artefact creation</a> <a href="#ref-for-bob④">(2)</a> <a href="#ref-for-bob⑤">(3)</a> <a href="#ref-for-bob⑥">(4)</a>
+    <li><a href="#ref-for-bob⑦">2.1.6.1. Invoking the registration service</a> <a href="#ref-for-bob⑧">(2)</a> <a href="#ref-for-bob⑨">(3)</a> <a href="#ref-for-bob①⓪">(4)</a> <a href="#ref-for-bob①①">(5)</a> <a href="#ref-for-bob①②">(6)</a> <a href="#ref-for-bob①③">(7)</a> <a href="#ref-for-bob①④">(8)</a>
+    <li><a href="#ref-for-bob①⑤">2.1.6.2. Invoking the archival service</a> <a href="#ref-for-bob①⑥">(2)</a> <a href="#ref-for-bob①⑦">(3)</a> <a href="#ref-for-bob①⑧">(4)</a> <a href="#ref-for-bob①⑨">(5)</a> <a href="#ref-for-bob②⓪">(6)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="solid-crs">

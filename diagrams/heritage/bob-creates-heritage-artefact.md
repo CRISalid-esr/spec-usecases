@@ -2,7 +2,7 @@
 sequenceDiagram
         actor Bob
         participant CRS as Solid CRS
-        actor BP as Bob's data pod
+        participant BP as Bob's data pod
 
         autonumber
         Bob ->> CRS: logs in

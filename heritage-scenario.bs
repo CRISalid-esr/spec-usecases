@@ -32,8 +32,7 @@ Scenario {#scenario}
 
 ### Solid Pods
 
-<dfn>Institution's Pod</dfn>: https://solid-crs.netwerkdigitaalerfgoed.nl/
- - data pod containing all digital heritage files of [=Bob=]'s institution
+<dfn>Institution's Pod</dfn>: data pod containing all digital heritage files of [=Bob=]'s institution
  - contains an inbox
 
 ### Orchestrators
@@ -45,14 +44,15 @@ Scenario {#scenario}
 
 ### Solid Apps
 
-<dfn>Solid CRS</dfn>: https://solid-crs.netwerkdigitaalerfgoed.nl/
- - collection management system for small digital heritage organizations
+<dfn>Solid CRS</dfn>: collection management system for small digital heritage organizations
+ - hosted at https://solid-crs.netwerkdigitaalerfgoed.nl/
  - manages the artefacts (collections of digital heritage objects) in the [=Institution's Pod=]
 
-<dfn>Demo app</dfn>: http://bellow2.ugent.be/public/
- - opercreate, send and receive notifications between different pods and services
- - illustrate network
+<dfn>Demo Dashboard</dfn>: demo frontend to illustrate communication between different pods and services
+ - create, send and receive notifications
+ - illustrate network of actors
  - introspect event logs
+ - demo hosted at http://bellow2.ugent.be/public/
 
 ### Service hubs
 
@@ -111,7 +111,7 @@ Scenario {#scenario}
 
 ### Invoking the registration service
 
-1. [=Bob=] turns to the [=demo app=] of the artefact exchange network
+1. [=Bob=] turns to the [=demo dashboard=] of the artefact exchange network
 2. [=Bob=] logs into the [=Institution's Pod=] for the first time
     - a event log resource is added to the pod
 3. [=Bob=] can view the artefact + inbox and event log
@@ -125,12 +125,12 @@ Scenario {#scenario}
     - posts the metadata to the Dataset Registry API https://datasetregister.netwerkdigitaalerfgoed.nl/viaurl.php
 6. The [=Registry Service Hub=] sends a notification with `as:Announce` to [=Bob=]
 7. [=Institution's Orchestrator=] appends the event log
-8. [=Bob=] sees in the event log with the demo app that the registration is complete
+8. [=Bob=] sees in the event log with the [=demo dashboard=] that the registration is complete
 
 
 ### Invoking the archival service
 
-1. [=Bob=] turns to the [=demo app=] of the artefact exchange network
+1. [=Bob=] turns to the [=demo dashboard=] of the artefact exchange network
 5. [=Institution's Orchestrator=] suggests to Bob that he should offer the image artefact with metadata to the [=Archival Service Hub=].
 4. [=Bob=] sends a new notification with an `as:Offer` activity to the [=Archival Service Hub=]
     - Select the [=Archival Service Hub=] as target from the list
@@ -141,6 +141,6 @@ Scenario {#scenario}
 6. The [=Archival Service Hub=] polls meemoo's Mediahaven API for `ARCHIVED_ON_DISK` premis event
     - when found, it sends a notification with `as:Announce` to [=Bob=]
 7. [=Institution's Orchestrator=] appends the event log
-8. [=Bob=] sees in the event log with the demo app that the registration is complete
+8. [=Bob=] sees in the event log with the [=demo dashboard=] that the registration is complete
 
 Issue(1): how to get to aggregation of artefacts

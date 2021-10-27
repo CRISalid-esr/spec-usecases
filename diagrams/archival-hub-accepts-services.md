@@ -1,5 +1,6 @@
 ```mermaid
 sequenceDiagram
+    autonumber
     actor alice as Alice
     participant dashboard as Alice's dashboard
     participant orch as Alice's orchestrator

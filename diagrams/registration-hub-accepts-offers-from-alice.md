@@ -1,5 +1,6 @@
 ```mermaid
 sequenceDiagram
+    autonumber
     participant dashboard as Alice's dashboard
     participant orch as Alice's orchestrator
     participant pod as Alice's POD

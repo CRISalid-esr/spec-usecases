@@ -1,5 +1,6 @@
 ```mermaid
 sequenceDiagram
+    autonumber
     participant dashboard as Alice's dashboard
     participant orch as Alice's orchestrator
     participant pod as Alice's POD
@@ -14,8 +15,10 @@ sequenceDiagram
     orchReg->>pod: Send automatic accept notification
     orch->>pod: Read inbox
     orch->>pod: Append Event Log
-    orchReg->>pod: Import artefact metadata
-    orchReg->>podReg: Upload artefact metadata
+    orchReg->>pod: Fetch artefact
+    orchReg->>pod: Follow Signposting describedBy
+    orchReg->>pod: Import and transform artefact metadata
+    orchReg->>podReg: Upload draft registration record
     manager->>dashReg: Reads todo list
     manager->>podReg: Manually updates registration metadata
     manager->>dashReg: Send announce notification

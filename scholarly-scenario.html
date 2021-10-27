@@ -1885,7 +1885,7 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Scholarly use cases</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-10-25">25 October 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-10-27">27 October 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt class="editor">Editor:
@@ -1895,7 +1895,7 @@ dfn > a.self-link::before      { content: "#"; }
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 25 October 2021,
+In addition, as of 27 October 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -2038,10 +2038,11 @@ Parts of this work may be from another specification document.  If so, those par
    <p><img src="images/bob-wants-to-know-about-alices-artefacts.svg" width="600px"></p>
    <ul>
     <li data-md>
-     <p>Bob’s orchestrator discover a new <code>as:Announce</code> in Alice’s Event log</p>
+     <p>Bob’s orchestrator discover a new <code>as:Announce</code> in Alice’s outbox</p>
     <li data-md>
      <p>Bob’s orchestrator sends a message to Bob’s inbox about this event</p>
    </ul>
+   <p class="note" role="note"><span>NOTE:</span> This is not a topic in scope of Mellon value chains and may be skipped for now</p>
    <h2 class="heading settled" data-level="3" id="alice-can-send-a-notification-to-a-servicehub"><span class="secno">3. </span><span class="content">Alice can send a notification to a ServiceHub</span><a class="self-link" href="#alice-can-send-a-notification-to-a-servicehub"></a></h2>
    <p><img src="images/alice-can-send-notication-to-servicehub.svg" width="900px"></p>
    <ul>
@@ -2107,6 +2108,16 @@ Parts of this work may be from another specification document.  If so, those par
        <p>Append the <code>as:Accept</code> to the Repository Event Log</p>
       <li data-md>
        <p>Automatic a registration of Alice’s artefact into the institutional repository</p>
+       <ul>
+        <li data-md>
+         <p>The instutional repository contacts Alice’s pod to retrieve the artefact</p>
+        <li data-md>
+         <p>From the artefact an Signposting link to describedBy can be found</p>
+        <li data-md>
+         <p>The describedBy contains descriptive metadta in linked data format</p>
+        <li data-md>
+         <p>This linked data can be converted in a draft metadata record for the institutional repository</p>
+       </ul>
       <li data-md>
        <p>All this processing can be implemented with an Orchestrator but doesn’t have to</p>
      </ul>

@@ -61,8 +61,10 @@ Abstract: TODO
 
 <img width="600px" src="images/bob-wants-to-know-about-alices-artefacts.svg"/>
 
-- Bob's orchestrator discover a new `as:Announce` in Alice's Event log
+- Bob's orchestrator discover a new `as:Announce` in Alice's outbox
 - Bob's orchestrator sends a message to Bob's inbox about this event
+
+NOTE: This is not a topic in scope of Mellon value chains and may be skipped for now
 
 # Alice can send a notification to a ServiceHub
 
@@ -103,6 +105,10 @@ Abstract: TODO
     - Automatic accepts this offer and send an `as:Accept` to Alice's Pod 
     - Append the `as:Accept` to the Repository Event Log
     - Automatic a registration of Alice's artefact into the institutional repository
+        - The instutional repository contacts Alice's pod to retrieve the artefact
+        - From the artefact an Signposting link to describedBy can be found
+        - The describedBy contains descriptive metadta in linked data format
+        - This linked data can be converted in a draft metadata record for the institutional repository
     - All this processing can be implemented with an Orchestrator but doesn't have to
 - Registration manager manually updates Alice deposited artefact in the institutional repository
 - Registration manager sends an `as:Announce` back to Alice with the result of the registration process

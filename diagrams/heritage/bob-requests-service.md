@@ -20,7 +20,7 @@ sequenceDiagram
     Bob ->> DA: select artefact
     Bob ->> DA: select service hub
     Bob ->> DA: initalize offer to Registry Service Hub
-    
+    DA ->> BO: create offer
     BO ->> RSH: send offer notification
     BO ->> BP: append event log with offer
     RSH ->> DR: post metadata
@@ -35,7 +35,7 @@ sequenceDiagram
     Bob ->> DA: select artefact
     Bob ->> DA: select service hub
     Bob ->> DA: initalize offer to Archival Service Hub
-    
+    DA ->> BO: create offer
     BO ->> ASH: send offer notification
     BO ->> BP: append event log with offer
     ASH ->> MA: put bag onto FTP

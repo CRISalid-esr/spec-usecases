@@ -1,9 +1,9 @@
 <pre class='metadata'>
-Title: Demo scenario ErfgoedPod & ResearcherPod
+Title: Demo scenario ErfgoedPod
 Shortname: demo
 Level: 1
 Status: DREAM 
-URL: https://github.com/ErfgoedPod/demo
+URL: https://github.com/ErfgoedPod/spec-usecases
 Editor: Miel Vander Sande, [meemoo](https://meemoo.be), miel.vandersande@meemoo.be
 Abstract: A short description of your spec, one or two sentences.
 Markup Shorthands: markdown yes
@@ -11,12 +11,11 @@ Markup Shorthands: markdown yes
 
 Introduction {#intro}
 =====================
-notification patronen
-Solid CRS inhoud van pod → register
-duplicatie door een afnemende dienst?
 
-
-
+This document describes the scenario for the first ErfgoedPod demo. 
+The goal is to illustrate the components and architecture of the decentralized artefact exchange network 
+in combination with the
+the collection registration system [Solid CRS](https://www.youtube.com/watch?v=XJgl8EcQqf8), developed by Digita for the "Solid for small heritage institutions" project.
 
 Scenario {#scenario}
 =====================
@@ -25,34 +24,35 @@ Scenario {#scenario}
 
 ### Maintainers
 
-<dfn>Bob</dfn>: Collection maintainer at a cultural heritage institution
+<dfn>Bob</dfn>: collection maintainer at a cultural heritage institution
+
 - [=Bob=] has a WebID
-- [=Bob=] has a data pod URI
+- [=Bob=] has the data pod URI of his institution
 - [=Bob=] has an inbox URI
 
-<dfn>Alice</dfn>: academic scholar
-- [=Alice=] has a WebID
-- [=Alice=] has a data pod URI
-- [=Alice=] has an inbox URI
+### Solid Pods
 
-### Solid Apps
-
-- <dfn>Solid CRS</dfn>: https://solid-crs.netwerkdigitaalerfgoed.nl/
-    - collection management system for small digital heritage organizations
-- <dfn>Scolarly Dashboard</dfn>: 
-    - application to upload and describe publications
-- <dfn>Demo app</dfn>: http://bellow2.ugent.be/public/
-    - create, send and receive notifications between different pods and services
-    - illustrate network
-    - introspect event logs
+<dfn>Institution's Pod</dfn>: https://solid-crs.netwerkdigitaalerfgoed.nl/
+ - data pod containing all digital heritage files of [=Bob=]'s institution
+ - contains an inbox
 
 ### Orchestrators
 
-<dfn>Alice's Orchestrator</dfn>
- - the [=Orchestrator=] has an personal Inbox as API
-<dfn>Bob's Orchestrator</dfn>
- - the [=Orchestrator=] has an personal Inbox as API
-    
+<dfn>Institution's Orchestrator</dfn>: takes care of the communication (sending notifications) on behalf of [=Bob=].
+ - it has an personal inbox as API
+ - it knows the location of [=Institution's Pod=] and its inbox
+
+
+### Solid Apps
+
+<dfn>Solid CRS</dfn>: https://solid-crs.netwerkdigitaalerfgoed.nl/
+ - collection management system for small digital heritage organizations
+ - manages the artefacts (collections of digital heritage objects) in the [=Institution's Pod=]
+
+<dfn>Demo app</dfn>: http://bellow2.ugent.be/public/
+ - opercreate, send and receive notifications between different pods and services
+ - illustrate network
+ - introspect event logs
 
 ### Service hubs
 
@@ -63,37 +63,13 @@ Scenario {#scenario}
 - wrapper service for the meemoo UGent GREB archive
 
 
-### Part 1: artefact creation 
+## Part 1: artefact creation 
 
-<div class="mermaid">
-sequenceDiagram
-    actor Bob
-    actor BO as Bob's orchestrator
-    actor BP as Bob's data pod
-    actor Alice
-    actor AP as Alice's data pod
-    actor AO as Alice's orchestrator
-    actor SCR as Solid CRS
-    actor SD as Dashboard
-    actor DA as Demo App
-    actor RSH as Registry Service Hub
-    actor ASH as Archival Service Hub
+<img width="900px" src="images/heritage/bob-creates-heritage-artefact.svg"/>
 
-    autonumber
-    Bob ->> CRS: logs in
-    Bob ->> CRS: creates collection
-    Bob ->>+ CRS: adds image with description to collection
-    Note right of CRS: New artefact created
-
-    CRS ->> BP: store new artefact
-    CRS ->> BP: post as:Create to inbox
-</div>
-
-#### Digital Heritage
-
-1. Bob logs into [=Solid CRS=] with his Web ID
-    - Bob chooses his data pod
-2. Bob creates a new Collection about the liberation of Utrecht in WOII
+1. [=Bob=] logs into [=Solid CRS=] with his Web ID
+    - [=Bob=] chooses the [=Institution's Pod=]
+2. [=Bob=] creates a new Collection about the liberation of Utrecht in WOII
 3. He adds an object with the following metadata
     - image: https://data.spinque.com/iiif/2/https%3A%2F%2Fimages.memorix.nl%2Fniod%2Fthumb%2F1000x1000%2F9236648b-6507-e27b-f3fa-68a5227efc18.jpg/full/full/0/default.jpg
     - license: unknown
@@ -104,7 +80,7 @@ sequenceDiagram
     - collection: "Nieuwe collectie"
     - Location: [Utrecht](http://www.wikidata.org/entity/Q39297398)
     - Date: 1945-05-07
-4. This results in a new artefact of type `schema:CreativeWork` in the data pod: 
+4. This results in a new artefact of type `schema:CreativeWork` in the [=Institution's Pod=]: 
 
 ```
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -126,77 +102,36 @@ sequenceDiagram
         schema:width       <https://pod.inrupt.com/mvs/heritage-objects/data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-width> .
 ```
 
-5. The new artefact triggers an `as:Create` activity about the artefact. A [[ldn|Linked Data Notification]] containing the activity is posted to [=Bob=]'s inbox.
+5. The new artefact triggers an `as:Create` activity about the artefact. 
+6. A [[ldn|Linked Data Notification]] containing the activity is posted to [=Institution's Pod=]'s inbox.
 
-#### Scolarly Communication
+## Part 2: requesting services
 
-1. Alice logs into the scholarly dashboard with her Web ID
-2. ....
-3. The new artefact triggers an `as:Create` activity about the artefact. A [[ldn|Linked Data Notification]] containing the activity is posted to [=Alice=]'s inbox.
+<img width="900px" src="images/heritage/bob-requests-service.svg"/>
 
-### Part 2: requesting services
-
-For scholarly Communication, the sequence is the same but the artefact is a publication.
-
-<div class="mermaid">
-sequenceDiagram
-    actor Bob
-    actor DA as Demo App
-    actor BP as Bob's data pod
-    actor BO as Bob's orchestrator
-    actor SCR as Solid CRS
-    actor SD as Dashboard
-    actor RSH as Registry Service Hub
-    actor DR as NDE Dataset Registry API
-    actor ASH as Archival Service Hub
-    actor MA as meemoo's archive
-
-    autonumber
-    Bob ->> DA: logs into data pod
-    DA  ->> BP: initializes data pod with event log
-    Bob ->> DA: views artefact, the content of the inbox and the event log
-    BO ->> BP: append creation event to the event log
-    BO ->> Bob: suggest offer to Registry Service Hub
-    BO ->> RSH: post as:Offer to inbox
-    RSH ->> DR: post metadata
-    DR ->> RSH: metadata added
-    RSH ->> BP: post as:Announce to inbox
-    BO ->> BP: append event log
-    Bob ->> DA: sees changes reflected
-
-    BO ->> Bob: suggest offer to Archival Service Hub
-    BO ->> ASH: post as:Offer to inbox
-    ASH ->> MA: put bag onto FTP
-    MA ->> MA: archival process & set ARCHIVED_ON_DISK event 
-    ASH ->> MA: poll ARCHIVED_ON_DISK event
-    ASH ->> BP: post as:Announce to inbox
-    BO ->> BP: append event log
-    Bob ->> DA: sees changes reflected
-</div>
-
-#### Invoking the registration service
+### Invoking the registration service
 
 1. [=Bob=] turns to the [=demo app=] of the artefact exchange network
-2. [=Bob=] logs into the data pod for the first time
+2. [=Bob=] logs into the [=Institution's Pod=] for the first time
     - a event log resource is added to the pod
 3. [=Bob=] can view the artefact + inbox and event log
-5. [=Bob=]'s Orchestrator receives the `as:Create` activity
+5. [=Institution's Orchestrator=] receives the `as:Create` activity
     - appends the creation event to the event log
-    - suggests to Bob that he should offer the artefact metadata to the [=Registry Service Hub=].
+    - suggests to [=Bob=] that he should offer the artefact metadata to the [=Registry Service Hub=].
 4. [=Bob=] sends a new notification with an `as:Offer` activity to the [=Registry Service Hub=]
     - Select the [=Registry Service Hub=] as target from the list
     - Add a short note
 5. The [=Registry Service Hub=] receives the notification
     - posts the metadata to the Dataset Registry API https://datasetregister.netwerkdigitaalerfgoed.nl/viaurl.php
 6. The [=Registry Service Hub=] sends a notification with `as:Announce` to [=Bob=]
-7. [=Bob=]'s Orchestrator appends the event log
+7. [=Institution's Orchestrator=] appends the event log
 8. [=Bob=] sees in the event log with the demo app that the registration is complete
 
 
-#### Invoking the archival service
+### Invoking the archival service
 
 1. [=Bob=] turns to the [=demo app=] of the artefact exchange network
-5. [=Bob=]'s Orchestrator suggests to Bob that he should offer the image artefact with metadata to the [=Archival Service Hub=].
+5. [=Institution's Orchestrator=] suggests to Bob that he should offer the image artefact with metadata to the [=Archival Service Hub=].
 4. [=Bob=] sends a new notification with an `as:Offer` activity to the [=Archival Service Hub=]
     - Select the [=Archival Service Hub=] as target from the list
     - Add a short note
@@ -205,10 +140,7 @@ sequenceDiagram
     - wraps the image artefact in a bagit and adds it to meemoo's SFTP
 6. The [=Archival Service Hub=] polls meemoo's Mediahaven API for `ARCHIVED_ON_DISK` premis event
     - when found, it sends a notification with `as:Announce` to [=Bob=]
-7. [=Bob=]'s Orchestrator appends the event log
+7. [=Institution's Orchestrator=] appends the event log
 8. [=Bob=] sees in the event log with the demo app that the registration is complete
 
 Issue(1): how to get to aggregation of artefacts
-
- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
- <script>mermaid.initialize({startOnLoad:true});</script>

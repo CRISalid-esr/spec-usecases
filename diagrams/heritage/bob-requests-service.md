@@ -11,7 +11,7 @@ sequenceDiagram
 
     autonumber
     Bob ->> DA: logs in
-    DA ->> DP: BP
+    DA ->> BP: connects
     DA  ->> BP: initializes event log
     Bob ->> DA: views the available artefacts, the inbox and the event log
     
@@ -26,7 +26,7 @@ sequenceDiagram
     RSH ->> DR: post metadata
     DR ->> RSH: metadata added
     RSH ->> BP: send announce notification
-    BO ->> DP: read inbox
+    BO ->> BP: read inbox
     BO ->> BP: append event log with announce
     Bob ->> DA: sees changes reflected
 
@@ -42,7 +42,7 @@ sequenceDiagram
     MA ->> MA: archival process & set ARCHIVED_ON_DISK event 
     ASH ->> MA: poll ARCHIVED_ON_DISK event
     ASH ->> BP: send announce notification
-    BO ->> DP: read inbox
+    BO ->> BP: read inbox
     BO ->> BP: append event log
     Bob ->> DA: sees changes reflected
 ```

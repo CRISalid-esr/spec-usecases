@@ -2005,20 +2005,18 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
      <p><a data-link-type="dfn" href="#bob" id="ref-for-bob">Bob</a> has a WebID</p>
     <li data-md>
      <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①">Bob</a> has the URI of his <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod">Institution’s Pod</a></p>
-    <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob②">Bob</a> has an inbox URI</p>
    </ul>
    <h4 class="heading settled" data-level="2.1.2" id="solid-pods"><span class="secno">2.1.2. </span><span class="content">Solid Pods</span><a class="self-link" href="#solid-pods"></a></h4>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="institutions-pod">Institution’s Pod</dfn>: data pod containing all digital heritage files of <a data-link-type="dfn" href="#bob" id="ref-for-bob③">Bob</a>'s institution</p>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="institutions-pod">Institution’s Pod</dfn>: data pod containing all digital heritage files of <a data-link-type="dfn" href="#bob" id="ref-for-bob②">Bob</a>'s institution</p>
    <ul>
     <li data-md>
-     <p>contains an inbox</p>
+     <p>contains an inbox for <a data-link-type="dfn" href="#bob" id="ref-for-bob③">Bob</a></p>
    </ul>
    <h4 class="heading settled" data-level="2.1.3" id="orchestrators"><span class="secno">2.1.3. </span><span class="content">Orchestrators</span><a class="self-link" href="#orchestrators"></a></h4>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="institutions-orchestrator">Institution’s Orchestrator</dfn>: takes care of the communication (sending notifications) on behalf of <a data-link-type="dfn" href="#bob" id="ref-for-bob④">Bob</a>.</p>
    <ul>
     <li data-md>
-     <p>it has an personal inbox as API</p>
+     <p>it has an personal inbox as API (eg. to control the Orchestrator)</p>
     <li data-md>
      <p>it knows the location of <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod①">Institution’s Pod</a> and its inbox</p>
    </ul>
@@ -2033,13 +2031,13 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="demo-dashboard">Demo Dashboard</dfn>: demo frontend to illustrate communication between different pods and services</p>
    <ul>
     <li data-md>
+     <p>demo hosted at http://bellow2.ugent.be/public/</p>
+    <li data-md>
      <p>create, send and receive notifications</p>
     <li data-md>
      <p>illustrate network of actors</p>
     <li data-md>
      <p>introspect event logs</p>
-    <li data-md>
-     <p>demo hosted at http://bellow2.ugent.be/public/</p>
    </ul>
    <h4 class="heading settled" data-level="2.1.5" id="service-hubs"><span class="secno">2.1.5. </span><span class="content">Service hubs</span><a class="self-link" href="#service-hubs"></a></h4>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="registry-service-hub">Registry Service Hub</dfn></p>
@@ -2365,8 +2363,8 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
   <aside class="dfn-panel" data-for="bob">
    <b><a href="#bob">#bob</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-bob">2.1.1. Maintainers</a> <a href="#ref-for-bob①">(2)</a> <a href="#ref-for-bob②">(3)</a>
-    <li><a href="#ref-for-bob③">2.1.2. Solid Pods</a>
+    <li><a href="#ref-for-bob">2.1.1. Maintainers</a> <a href="#ref-for-bob①">(2)</a>
+    <li><a href="#ref-for-bob②">2.1.2. Solid Pods</a> <a href="#ref-for-bob③">(2)</a>
     <li><a href="#ref-for-bob④">2.1.3. Orchestrators</a>
     <li><a href="#ref-for-bob⑤">2.2. Part 1: artefact creation</a> <a href="#ref-for-bob⑥">(2)</a> <a href="#ref-for-bob⑦">(3)</a>
     <li><a href="#ref-for-bob⑧">2.3.1. Invoking the registration service</a> <a href="#ref-for-bob⑨">(2)</a> <a href="#ref-for-bob①⓪">(3)</a> <a href="#ref-for-bob①①">(4)</a> <a href="#ref-for-bob①②">(5)</a> <a href="#ref-for-bob①③">(6)</a> <a href="#ref-for-bob①④">(7)</a>

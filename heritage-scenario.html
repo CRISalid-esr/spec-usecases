@@ -2060,7 +2060,7 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
        <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑥">Bob</a> chooses the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod③">Institution’s Pod</a></p>
      </ul>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑦">Bob</a> creates a new Collection about the liberation of Utrecht in WOII</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑦">Bob</a> creates a new Collection "Utrecht WOII" about Utrecht in WOII.</p>
     <li data-md>
      <p>He adds an object with the following metadata</p>
      <ul>
@@ -2084,25 +2084,37 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
        <p>Date: 1945-05-07</p>
      </ul>
     <li data-md>
-     <p>This results in a new artefact of type <code>schema:CreativeWork</code>:</p>
+     <p>This results in a new artefact <a href="https://pod.inrupt.com/mvs/heritage-collections/catalog#collection-d241c975-42fa-41ab-9ff9-3918ee22085a">https://pod.inrupt.com/mvs/heritage-collections/catalog#collection-d241c975-42fa-41ab-9ff9-3918ee22085a</a> of type <code>schema:Dataset</code>:</p>
    </ol>
 <pre>@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: &lt;http://schema.org/> .
+@prefix collections: &lt;https://pod.inrupt.com/mvs/heritage-collections/catalog#> . 
+@prefix objects: &lt;https://pod.inrupt.com/mvs/heritage-objects/> .
 
-&lt;https://pod.inrupt.com/mvs/heritage-objects/data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a>
-        schema:height      &lt;https://pod.inrupt.com/mvs/heritage-objects/data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-height> ;
-        schema:isPartOf    &lt;https://pod.inrupt.com/mvs/heritage-collections/catalog#collection-d241c975-42fa-41ab-9ff9-3918ee22085a> ;
-        schema:weight      &lt;https://pod.inrupt.com/mvs/heritage-objects/data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-weight> ;
+collections:collection-d241c975-42fa-41ab-9ff9-3918ee22085a
+        schema:name  "Utrecht WOII"@nl ;
+        schema:description  "Utrecht in WOII"@nl ;
+        schema:distribution  collections:distribution-16008f15-9f8e-4acc-9e9a-f60f53e1a8a2 ;
+        rdf:type             schema:Dataset .
+
+collections:distribution-d92aeb56-5f23-44ca-afd9-ec46ed0c6ee3
+        rdf:type                        schema:DataDownload ;
+        schema:contentUrl  objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb .
+
+objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a
+        schema:height      objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-height ;
+        schema:isPartOf    collections:collection-d241c975-42fa-41ab-9ff9-3918ee22085a ;
+        schema:weight      objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-weight ;
         schema:locationCreated  &lt;http://www.wikidata.org/entity/Q39297398> ;
         schema:dateCreated  "1945-05-07" ;
         schema:name        "Bevrijding Utrecht."@nl ;
         schema:description  "Bevrijding Utrecht. Overweg Burgemeester Reigerstraat."@nl ;
         rdf:type                        schema:CreativeWork ;
-        schema:mainEntityOfPage  &lt;https://pod.inrupt.com/mvs/heritage-objects/data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-digital> ;
+        schema:mainEntityOfPage  objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-digital ;
         schema:additionalType  &lt;https://data.niod.nl/WO2_Thesaurus/events/9314> ;
-        schema:depth       &lt;https://pod.inrupt.com/mvs/heritage-objects/data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-depth> ;
+        schema:depth       objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-depth ;
         schema:identifier  "1" ;
-        schema:width       &lt;https://pod.inrupt.com/mvs/heritage-objects/data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-width> .
+        schema:width       objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-width .
 </pre>
    <ol start="5">
     <li data-md>
@@ -2170,7 +2182,7 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
    <h4 class="heading settled" data-level="2.3.2" id="invoking-the-archival-service"><span class="secno">2.3.2. </span><span class="content">Invoking the archival service</span><a class="self-link" href="#invoking-the-archival-service"></a></h4>
    <ol start="21">
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑦">Bob</a> turns to the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard⑨">demo dashboard</a> of the artefact exchange network</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑦">Bob</a> turns to the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard⑨">demo dashboard</a> of the artefact exchange network.</p>
      <ul>
       <li data-md>
        <p><a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator⑦">Institution’s Orchestrator</a> suggests to Bob that he should offer the image artefact with metadata to the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub">Archival Service Hub</a>.</p>

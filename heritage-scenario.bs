@@ -3,7 +3,7 @@ Title: Demo scenario ErfgoedPod
 Shortname: demo
 Level: 1
 Status: DREAM 
-URL: https://github.com/ErfgoedPod/spec-usecases
+URL: https://mellonscholarlycommunication.github.io/spec-usecases/heritage-scenario.html
 Editor: Miel Vander Sande, [meemoo](https://meemoo.be), miel.vandersande@meemoo.be
 Abstract: This document describes the scenario for the first ErfgoedPod demo. 
 Markup Shorthands: markdown yes
@@ -70,7 +70,7 @@ Scenario {#scenario}
     - [=Bob=] chooses the [=Institution's Pod=]
 2. [=Bob=] creates a new Collection about the liberation of Utrecht in WOII
 3. He adds an object with the following metadata
-    - image: https://data.spinque.com/iiif/2/https%3A%2F%2Fimages.memorix.nl%2Fniod%2Fthumb%2F1000x1000%2F9236648b-6507-e27b-f3fa-68a5227efc18.jpg/full/full/0/default.jpg
+    - image: [](https://images.memorix.nl/niod/thumb/1000x1000/9236648b-6507-e27b-f3fa-68a5227efc18.jpg)
     - license: unknown
     - object number: 74541
     - type: [Bevrijding Utrecht](https://data.niod.nl/WO2_Thesaurus/events/9314)
@@ -122,14 +122,14 @@ Scenario {#scenario}
 8. The [=Institution's Orchestrator=] suggests to [=Bob=] that he should offer the artefact metadata to the [=Registry Service Hub=].
 9. [=Bob=] sees the suggestions in the [=demo dashboard=] and decides to follow through.
 
-10. In the [=demo dashboard=], [=Bob=] selects the object from {{#part1}} as artefact.
-11. [=Bob=] selects the [=Registry Service Hub=] as target from the list
+10. In the [=demo dashboard=], [=Bob=] selects the object from [[#part1]] as artefact.
+11. [=Bob=] selects the [=Registry Service Hub=] as target from the list.
 12. [=Bob=] initializes the offer.
 13. [=demo dashboard=] creates a new notification with an `as:Offer` 
     - adds a short note
 14. The [=Institution's Orchestrator=] forwards the notification to the [=Registry Service Hub=].
 15. The [=Registry Service Hub=] receives the notification
-    - posts the metadata to the Dataset Registry API https://datasetregister.netwerkdigitaalerfgoed.nl/viaurl.php
+    - posts the metadata to the [Dataset Registry API](https://datasetregister.netwerkdigitaalerfgoed.nl/api/)
 16. The [=Registry Service Hub=] sends a notification with `as:Announce` to the [=Institution's Pod=]'s inbox.
 17. The [=Institution's Orchestrator=] reads the `as:Announce` activity from the inbox.
 18. [=Institution's Orchestrator=] appends the registration event (ie. the `as:Announce`) to the event log in the [=Institution's Pod=].

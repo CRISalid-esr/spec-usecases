@@ -27,17 +27,16 @@ Scenario {#scenario}
 
 - [=Bob=] has a WebID
 - [=Bob=] has the URI of his [=Institution's Pod=]
-- [=Bob=] has an inbox URI
 
 ### Solid Pods
 
 <dfn>Institution's Pod</dfn>: data pod containing all digital heritage files of [=Bob=]'s institution
- - contains an inbox
+ - contains an inbox for [=Bob=]
 
 ### Orchestrators
 
 <dfn>Institution's Orchestrator</dfn>: takes care of the communication (sending notifications) on behalf of [=Bob=].
- - it has an personal inbox as API
+ - it has an personal inbox as API (eg. to control the Orchestrator)
  - it knows the location of [=Institution's Pod=] and its inbox
 
 
@@ -48,10 +47,11 @@ Scenario {#scenario}
  - manages the artefacts (collections of digital heritage objects) in the [=Institution's Pod=]
 
 <dfn>Demo Dashboard</dfn>: demo frontend to illustrate communication between different pods and services
+ - demo hosted at http://bellow2.ugent.be/public/
  - create, send and receive notifications
  - illustrate network of actors
  - introspect event logs
- - demo hosted at http://bellow2.ugent.be/public/
+
 
 ### Service hubs
 

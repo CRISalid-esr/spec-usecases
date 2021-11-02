@@ -5,15 +5,14 @@ Level: 1
 Status: DREAM 
 URL: https://github.com/ErfgoedPod/spec-usecases
 Editor: Miel Vander Sande, [meemoo](https://meemoo.be), miel.vandersande@meemoo.be
-Abstract: A short description of your spec, one or two sentences.
+Abstract: This document describes the scenario for the first ErfgoedPod demo. 
 Markup Shorthands: markdown yes
 </pre>
 
 Introduction {#intro}
 =====================
 
-This document describes the scenario for the first ErfgoedPod demo. 
-The goal is to illustrate the components and architecture of the decentralized artefact exchange network 
+The goal of the ErfgoedPod demo is to illustrate the components and architecture of the decentralized artefact exchange network 
 in combination with the
 the collection registration system [Solid CRS](https://www.youtube.com/watch?v=XJgl8EcQqf8), developed by Digita for the "Solid for small heritage institutions" project.
 
@@ -27,7 +26,7 @@ Scenario {#scenario}
 <dfn>Bob</dfn>: collection maintainer at a cultural heritage institution
 
 - [=Bob=] has a WebID
-- [=Bob=] has the data pod URI of his institution
+- [=Bob=] has the URI of his [=Institution's Pod=]
 - [=Bob=] has an inbox URI
 
 ### Solid Pods

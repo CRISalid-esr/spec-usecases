@@ -14,7 +14,10 @@ sequenceDiagram
     DA ->> BP: connects
     DA  ->> BP: initializes event log
     Bob ->> DA: views the available artefacts, the inbox and the event log
-    
+    Bob ->> DA: connect to orchestrator
+    DA ->> BO: connects
+
+    BO ->> BP: read inbox
     BO ->> DA: suggest offer to Registry Service Hub
     DA ->> Bob: display suggestion
     Bob ->> DA: select artefact
@@ -22,7 +25,6 @@ sequenceDiagram
     Bob ->> DA: initalize offer to Registry Service Hub
     DA ->> BO: create offer
     BO ->> RSH: send offer notification
-    BO ->> BP: append event log with offer
     RSH ->> DR: post metadata
     DR ->> RSH: metadata added
     RSH ->> BP: send announce notification
@@ -32,12 +34,10 @@ sequenceDiagram
 
     BO ->> DA: suggest offer to Archival Service Hub
     DA ->> Bob: display suggestion
-    Bob ->> DA: select artefact
     Bob ->> DA: select service hub
     Bob ->> DA: initalize offer to Archival Service Hub
     DA ->> BO: create offer
     BO ->> ASH: send offer notification
-    BO ->> BP: append event log with offer
     ASH ->> MA: put bag onto FTP
     MA ->> MA: archival process & set ARCHIVED_ON_DISK event 
     ASH ->> MA: poll ARCHIVED_ON_DISK event

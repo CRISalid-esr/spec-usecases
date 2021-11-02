@@ -1968,9 +1968,9 @@ Parts of this work may be from another specification document.  If so, those par
         <li><a href="#solid-apps"><span class="secno">2.1.4</span> <span class="content">Solid Apps</span></a>
         <li><a href="#service-hubs"><span class="secno">2.1.5</span> <span class="content">Service hubs</span></a>
        </ol>
-      <li><a href="#part-1-artefact-creation"><span class="secno">2.2</span> <span class="content">Part 1: artefact creation</span></a>
+      <li><a href="#part1"><span class="secno">2.2</span> <span class="content">Part 1: artefact creation</span></a>
       <li>
-       <a href="#part-2-requesting-services"><span class="secno">2.3</span> <span class="content">Part 2: requesting services</span></a>
+       <a href="#part2"><span class="secno">2.3</span> <span class="content">Part 2: requesting services</span></a>
        <ol class="toc">
         <li><a href="#invoking-the-registration-service"><span class="secno">2.3.1</span> <span class="content">Invoking the registration service</span></a>
         <li><a href="#invoking-the-archival-service"><span class="secno">2.3.2</span> <span class="content">Invoking the archival service</span></a>
@@ -2026,7 +2026,7 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
     <li data-md>
      <p>hosted at <a href="https://solid-crs.netwerkdigitaalerfgoed.nl/"></a></p>
     <li data-md>
-     <p>manages the artefacts (collections of digital heritage objects) in the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod②">Institution’s Pod</a></p>
+     <p>creates and manages the artefacts (collections of digital heritage objects) in the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod②">Institution’s Pod</a></p>
    </ul>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="demo-dashboard">Demo Dashboard</dfn>: demo frontend to illustrate communication between different pods and services</p>
    <ul>
@@ -2035,9 +2035,9 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
     <li data-md>
      <p>create, send and receive notifications</p>
     <li data-md>
-     <p>illustrate network of actors</p>
+     <p>illustrate the network toplogy and the performed interactions between actors</p>
     <li data-md>
-     <p>introspect event logs</p>
+     <p>introspect the event logs of artefacts (what happened when)</p>
    </ul>
    <h4 class="heading settled" data-level="2.1.5" id="service-hubs"><span class="secno">2.1.5. </span><span class="content">Service hubs</span><a class="self-link" href="#service-hubs"></a></h4>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="registry-service-hub">Registry Service Hub</dfn></p>
@@ -2048,9 +2048,9 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="archival-service-hub">Archival Service Hub</dfn></p>
    <ul>
     <li data-md>
-     <p>wrapper service for the meemoo UGent GREB archive</p>
+     <p>wrapper service for the meemoo UGent GREB archive or a stub</p>
    </ul>
-   <h3 class="heading settled" data-level="2.2" id="part-1-artefact-creation"><span class="secno">2.2. </span><span class="content">Part 1: artefact creation</span><a class="self-link" href="#part-1-artefact-creation"></a></h3>
+   <h3 class="heading settled" data-level="2.2" id="part1"><span class="secno">2.2. </span><span class="content">Part 1: artefact creation</span><a class="self-link" href="#part1"></a></h3>
    <p><img src="images/heritage/bob-creates-heritage-artefact.svg" width="900px"></p>
    <ol>
     <li data-md>
@@ -2084,7 +2084,7 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
        <p>Date: 1945-05-07</p>
      </ul>
     <li data-md>
-     <p>This results in a new artefact of type <code>schema:CreativeWork</code> in the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod④">Institution’s Pod</a>:</p>
+     <p>This results in a new artefact of type <code>schema:CreativeWork</code>:</p>
    </ol>
 <pre>@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: &lt;http://schema.org/> .
@@ -2106,40 +2106,52 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
 </pre>
    <ol start="5">
     <li data-md>
+     <p><a data-link-type="dfn" href="#solid-crs" id="ref-for-solid-crs①">Solid CRS</a> stores the artefact in the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod④">Institution’s Pod</a>.</p>
+    <li data-md>
      <p>The new artefact triggers an <code>as:Create</code> activity about the artefact.</p>
     <li data-md>
      <p>A <a data-link-type="biblio" href="#biblio-ldn">Linked Data Notification</a> containing the activity is posted to <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod⑤">Institution’s Pod</a>'s inbox.</p>
    </ol>
-   <h3 class="heading settled" data-level="2.3" id="part-2-requesting-services"><span class="secno">2.3. </span><span class="content">Part 2: requesting services</span><a class="self-link" href="#part-2-requesting-services"></a></h3>
+   <h3 class="heading settled" data-level="2.3" id="part2"><span class="secno">2.3. </span><span class="content">Part 2: requesting services</span><a class="self-link" href="#part2"></a></h3>
    <p><img src="images/heritage/bob-requests-service.svg" width="900px"></p>
    <h4 class="heading settled" data-level="2.3.1" id="invoking-the-registration-service"><span class="secno">2.3.1. </span><span class="content">Invoking the registration service</span><a class="self-link" href="#invoking-the-registration-service"></a></h4>
    <ol>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑧">Bob</a> turns to the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard">demo dashboard</a> of the artefact exchange network</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑧">Bob</a> turns to the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard">demo dashboard</a> of the artefact exchange network and logs in with his WebID.</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑨">Bob</a> logs into the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod⑥">Institution’s Pod</a> for the first time</p>
-     <ul>
-      <li data-md>
-       <p>a event log resource is added to the pod</p>
-     </ul>
+     <p>The <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard①">demo dashboard</a> connects the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod⑥">Institution’s Pod</a> for the first time</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⓪">Bob</a> can view the artefact + inbox and event log</p>
+     <p>The <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard②">demo dashboard</a> prepares the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod⑦">Institution’s Pod</a> for network participation by creating an event log resource. This log tracks all lifecycle events of an artefact.</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator">Institution’s Orchestrator</a> receives the <code>as:Create</code> activity</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob⑨">Bob</a> can view the artefact + inbox and event log</p>
+    <li data-md>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⓪">Bob</a> enters the inbox URI of the <a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator">Institution’s Orchestrator</a> in the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard③">demo dashboard</a></p>
+    <li data-md>
+     <p>The <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard④">demo dashboard</a> connects to the <a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator①">Institution’s Orchestrator</a> by informing it about the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod⑧">Institution’s Pod</a>'s inbox.</p>
+    <li data-md>
+     <p>The <a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator②">Institution’s Orchestrator</a> reads the <code>as:Create</code> activity from the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod⑨">Institution’s Pod</a>'s inbox</p>
      <ul>
       <li data-md>
        <p>appends the creation event to the event log</p>
-      <li data-md>
-       <p>suggests to <a data-link-type="dfn" href="#bob" id="ref-for-bob①①">Bob</a> that he should offer the artefact metadata to the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub">Registry Service Hub</a>.</p>
      </ul>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①②">Bob</a> sends a new notification with an <code>as:Offer</code> activity to the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub①">Registry Service Hub</a></p>
+     <p>The <a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator③">Institution’s Orchestrator</a> suggests to <a data-link-type="dfn" href="#bob" id="ref-for-bob①①">Bob</a> that he should offer the artefact metadata to the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub">Registry Service Hub</a>.</p>
+    <li data-md>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①②">Bob</a> sees the suggestions in the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard⑤">demo dashboard</a> and decides to follow through.</p>
+    <li data-md>
+     <p>In the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard⑥">demo dashboard</a>, <a data-link-type="dfn" href="#bob" id="ref-for-bob①③">Bob</a> selects the object from <code class="idl"><a data-link-type="idl">#part1</a></code> as artefact.</p>
+    <li data-md>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①④">Bob</a> selects the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub①">Registry Service Hub</a> as target from the list</p>
+    <li data-md>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑤">Bob</a> initializes the offer.</p>
+    <li data-md>
+     <p><a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard⑦">demo dashboard</a> creates a new notification with an <code>as:Offer</code></p>
      <ul>
       <li data-md>
-       <p>Select the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub②">Registry Service Hub</a> as target from the list</p>
-      <li data-md>
-       <p>Add a short note</p>
+       <p>adds a short note</p>
      </ul>
+    <li data-md>
+     <p>The <a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator④">Institution’s Orchestrator</a> forwards the notification to the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub②">Registry Service Hub</a>.</p>
     <li data-md>
      <p>The <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub③">Registry Service Hub</a> receives the notification</p>
      <ul>
@@ -2147,26 +2159,36 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
        <p>posts the metadata to the Dataset Registry API https://datasetregister.netwerkdigitaalerfgoed.nl/viaurl.php</p>
      </ul>
     <li data-md>
-     <p>The <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub④">Registry Service Hub</a> sends a notification with <code>as:Announce</code> to <a data-link-type="dfn" href="#bob" id="ref-for-bob①③">Bob</a></p>
+     <p>The <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub④">Registry Service Hub</a> sends a notification with <code>as:Announce</code> to the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod①⓪">Institution’s Pod</a>'s inbox.</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator①">Institution’s Orchestrator</a> appends the event log</p>
+     <p>The <a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator⑤">Institution’s Orchestrator</a> reads the <code>as:Announce</code> activity from the inbox.</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①④">Bob</a> sees in the event log with the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard①">demo dashboard</a> that the registration is complete</p>
+     <p><a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator⑥">Institution’s Orchestrator</a> appends the registration event (ie. the <code>as:Announce</code>) to the event log in the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod①①">Institution’s Pod</a>.</p>
+    <li data-md>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑥">Bob</a> sees in the event log with the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard⑧">demo dashboard</a> that the registration is complete</p>
    </ol>
    <h4 class="heading settled" data-level="2.3.2" id="invoking-the-archival-service"><span class="secno">2.3.2. </span><span class="content">Invoking the archival service</span><a class="self-link" href="#invoking-the-archival-service"></a></h4>
-   <ol>
+   <ol start="21">
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑤">Bob</a> turns to the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard②">demo dashboard</a> of the artefact exchange network</p>
-    <li data-md>
-     <p><a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator②">Institution’s Orchestrator</a> suggests to Bob that he should offer the image artefact with metadata to the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub">Archival Service Hub</a>.</p>
-    <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑥">Bob</a> sends a new notification with an <code>as:Offer</code> activity to the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub①">Archival Service Hub</a></p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑦">Bob</a> turns to the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard⑨">demo dashboard</a> of the artefact exchange network</p>
      <ul>
       <li data-md>
-       <p>Select the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub②">Archival Service Hub</a> as target from the list</p>
+       <p><a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator⑦">Institution’s Orchestrator</a> suggests to Bob that he should offer the image artefact with metadata to the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub">Archival Service Hub</a>.</p>
+     </ul>
+    <li data-md>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑧">Bob</a> sees the suggestions in the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard①⓪">demo dashboard</a> and decides to follow through.</p>
+    <li data-md>
+     <p>In the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard①①">demo dashboard</a>, <a data-link-type="dfn" href="#bob" id="ref-for-bob①⑨">Bob</a> selects the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub①">Archival Service Hub</a> as target from the list</p>
+    <li data-md>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob②⓪">Bob</a> initializes the offer.</p>
+    <li data-md>
+     <p><a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard①②">demo dashboard</a> creates a new notification with an <code>as:Offer</code> activity</p>
+     <ul>
       <li data-md>
        <p>Add a short note</p>
      </ul>
+    <li data-md>
+     <p>The <a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator⑧">Institution’s Orchestrator</a> forwards the notification to the <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub②">Archival Service Hub</a>.</p>
     <li data-md>
      <p>The <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub③">Archival Service Hub</a> receives the notification</p>
      <ul>
@@ -2176,15 +2198,17 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
        <p>wraps the image artefact in a bagit and adds it to meemoo’s SFTP</p>
      </ul>
     <li data-md>
+     <p>The meemoo archival process starts.</p>
+    <li data-md>
      <p>The <a data-link-type="dfn" href="#archival-service-hub" id="ref-for-archival-service-hub④">Archival Service Hub</a> polls meemoo’s Mediahaven API for <code>ARCHIVED_ON_DISK</code> premis event</p>
-     <ul>
-      <li data-md>
-       <p>when found, it sends a notification with <code>as:Announce</code> to <a data-link-type="dfn" href="#bob" id="ref-for-bob①⑦">Bob</a></p>
-     </ul>
     <li data-md>
-     <p><a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator③">Institution’s Orchestrator</a> appends the event log</p>
+     <p>When found, it sends a notification with <code>as:Announce</code> to the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod①②">Institution’s Pod</a>'s inbox.</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑧">Bob</a> sees in the event log with the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard③">demo dashboard</a> that the registration is complete</p>
+     <p>The <a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator⑨">Institution’s Orchestrator</a> reads the <code>as:Announce</code> activity from the inbox.</p>
+    <li data-md>
+     <p><a data-link-type="dfn" href="#institutions-orchestrator" id="ref-for-institutions-orchestrator①⓪">Institution’s Orchestrator</a> appends the archival event (ie. the <code>as:Announce</code>) to the event log in the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod①③">Institution’s Pod</a>.</p>
+    <li data-md>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob②①">Bob</a> sees in the event log with the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard①③">demo dashboard</a> that the registration is complete</p>
    </ol>
    <p class="issue" id="issue-03c50d26"><a class="self-link" href="#issue-03c50d26"></a> how to get to aggregation of artefacts</p>
   </main>
@@ -2367,8 +2391,8 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
     <li><a href="#ref-for-bob②">2.1.2. Solid Pods</a> <a href="#ref-for-bob③">(2)</a>
     <li><a href="#ref-for-bob④">2.1.3. Orchestrators</a>
     <li><a href="#ref-for-bob⑤">2.2. Part 1: artefact creation</a> <a href="#ref-for-bob⑥">(2)</a> <a href="#ref-for-bob⑦">(3)</a>
-    <li><a href="#ref-for-bob⑧">2.3.1. Invoking the registration service</a> <a href="#ref-for-bob⑨">(2)</a> <a href="#ref-for-bob①⓪">(3)</a> <a href="#ref-for-bob①①">(4)</a> <a href="#ref-for-bob①②">(5)</a> <a href="#ref-for-bob①③">(6)</a> <a href="#ref-for-bob①④">(7)</a>
-    <li><a href="#ref-for-bob①⑤">2.3.2. Invoking the archival service</a> <a href="#ref-for-bob①⑥">(2)</a> <a href="#ref-for-bob①⑦">(3)</a> <a href="#ref-for-bob①⑧">(4)</a>
+    <li><a href="#ref-for-bob⑧">2.3.1. Invoking the registration service</a> <a href="#ref-for-bob⑨">(2)</a> <a href="#ref-for-bob①⓪">(3)</a> <a href="#ref-for-bob①①">(4)</a> <a href="#ref-for-bob①②">(5)</a> <a href="#ref-for-bob①③">(6)</a> <a href="#ref-for-bob①④">(7)</a> <a href="#ref-for-bob①⑤">(8)</a> <a href="#ref-for-bob①⑥">(9)</a>
+    <li><a href="#ref-for-bob①⑦">2.3.2. Invoking the archival service</a> <a href="#ref-for-bob①⑧">(2)</a> <a href="#ref-for-bob①⑨">(3)</a> <a href="#ref-for-bob②⓪">(4)</a> <a href="#ref-for-bob②①">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="institutions-pod">
@@ -2378,27 +2402,28 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
     <li><a href="#ref-for-institutions-pod①">2.1.3. Orchestrators</a>
     <li><a href="#ref-for-institutions-pod②">2.1.4. Solid Apps</a>
     <li><a href="#ref-for-institutions-pod③">2.2. Part 1: artefact creation</a> <a href="#ref-for-institutions-pod④">(2)</a> <a href="#ref-for-institutions-pod⑤">(3)</a>
-    <li><a href="#ref-for-institutions-pod⑥">2.3.1. Invoking the registration service</a>
+    <li><a href="#ref-for-institutions-pod⑥">2.3.1. Invoking the registration service</a> <a href="#ref-for-institutions-pod⑦">(2)</a> <a href="#ref-for-institutions-pod⑧">(3)</a> <a href="#ref-for-institutions-pod⑨">(4)</a> <a href="#ref-for-institutions-pod①⓪">(5)</a> <a href="#ref-for-institutions-pod①①">(6)</a>
+    <li><a href="#ref-for-institutions-pod①②">2.3.2. Invoking the archival service</a> <a href="#ref-for-institutions-pod①③">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="institutions-orchestrator">
    <b><a href="#institutions-orchestrator">#institutions-orchestrator</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-institutions-orchestrator">2.3.1. Invoking the registration service</a> <a href="#ref-for-institutions-orchestrator①">(2)</a>
-    <li><a href="#ref-for-institutions-orchestrator②">2.3.2. Invoking the archival service</a> <a href="#ref-for-institutions-orchestrator③">(2)</a>
+    <li><a href="#ref-for-institutions-orchestrator">2.3.1. Invoking the registration service</a> <a href="#ref-for-institutions-orchestrator①">(2)</a> <a href="#ref-for-institutions-orchestrator②">(3)</a> <a href="#ref-for-institutions-orchestrator③">(4)</a> <a href="#ref-for-institutions-orchestrator④">(5)</a> <a href="#ref-for-institutions-orchestrator⑤">(6)</a> <a href="#ref-for-institutions-orchestrator⑥">(7)</a>
+    <li><a href="#ref-for-institutions-orchestrator⑦">2.3.2. Invoking the archival service</a> <a href="#ref-for-institutions-orchestrator⑧">(2)</a> <a href="#ref-for-institutions-orchestrator⑨">(3)</a> <a href="#ref-for-institutions-orchestrator①⓪">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="solid-crs">
    <b><a href="#solid-crs">#solid-crs</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-solid-crs">2.2. Part 1: artefact creation</a>
+    <li><a href="#ref-for-solid-crs">2.2. Part 1: artefact creation</a> <a href="#ref-for-solid-crs①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="demo-dashboard">
    <b><a href="#demo-dashboard">#demo-dashboard</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-demo-dashboard">2.3.1. Invoking the registration service</a> <a href="#ref-for-demo-dashboard①">(2)</a>
-    <li><a href="#ref-for-demo-dashboard②">2.3.2. Invoking the archival service</a> <a href="#ref-for-demo-dashboard③">(2)</a>
+    <li><a href="#ref-for-demo-dashboard">2.3.1. Invoking the registration service</a> <a href="#ref-for-demo-dashboard①">(2)</a> <a href="#ref-for-demo-dashboard②">(3)</a> <a href="#ref-for-demo-dashboard③">(4)</a> <a href="#ref-for-demo-dashboard④">(5)</a> <a href="#ref-for-demo-dashboard⑤">(6)</a> <a href="#ref-for-demo-dashboard⑥">(7)</a> <a href="#ref-for-demo-dashboard⑦">(8)</a> <a href="#ref-for-demo-dashboard⑧">(9)</a>
+    <li><a href="#ref-for-demo-dashboard⑨">2.3.2. Invoking the archival service</a> <a href="#ref-for-demo-dashboard①⓪">(2)</a> <a href="#ref-for-demo-dashboard①①">(3)</a> <a href="#ref-for-demo-dashboard①②">(4)</a> <a href="#ref-for-demo-dashboard①③">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="registry-service-hub">

@@ -43,11 +43,11 @@ Scenario {#scenario}
 ### Solid Apps
 
 <dfn>Solid CRS</dfn>: collection management system for small digital heritage organizations
- - hosted at https://solid-crs.netwerkdigitaalerfgoed.nl/
+ - hosted at [](https://solid-crs.netwerkdigitaalerfgoed.nl/)
  - manages the artefacts (collections of digital heritage objects) in the [=Institution's Pod=]
 
 <dfn>Demo Dashboard</dfn>: demo frontend to illustrate communication between different pods and services
- - demo hosted at http://bellow2.ugent.be/public/
+ - demo hosted at [](http://bellow2.ugent.be/public/)
  - create, send and receive notifications
  - illustrate network of actors
  - introspect event logs

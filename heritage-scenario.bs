@@ -43,11 +43,11 @@ Scenario {#scenario}
 ### Solid Apps
 
 <dfn>Solid CRS</dfn>: collection management system for small digital heritage organizations
- - hosted at [](https://solid-crs.netwerkdigitaalerfgoed.nl/)
+ - hosted at [https://solid-crs.netwerkdigitaalerfgoed.nl/](https://solid-crs.netwerkdigitaalerfgoed.nl/)
  - creates and manages the artefacts (collections of digital heritage objects) in the [=Institution's Pod=]
 
 <dfn>Demo Dashboard</dfn>: demo frontend to illustrate communication between different pods and services
- - demo hosted at [](http://bellow2.ugent.be/public/)
+ - demo hosted at [http://bellow2.ugent.be/public/](http://bellow2.ugent.be/public/)
  - create, send and receive notifications
  - illustrate the network toplogy and the performed interactions between actors
  - introspect the event logs of artefacts (what happened when)
@@ -70,7 +70,7 @@ Scenario {#scenario}
     - [=Bob=] chooses the [=Institution's Pod=]
 2. [=Bob=] creates a new Collection about the liberation of Utrecht in WOII
 3. He adds an object with the following metadata
-    - image: [](https://images.memorix.nl/niod/thumb/1000x1000/9236648b-6507-e27b-f3fa-68a5227efc18.jpg)
+    - image: [https://images.memorix.nl/niod/thumb/1000x1000/9236648b-6507-e27b-f3fa-68a5227efc18.jpg](https://images.memorix.nl/niod/thumb/1000x1000/9236648b-6507-e27b-f3fa-68a5227efc18.jpg)
     - license: unknown
     - object number: 74541
     - type: [Bevrijding Utrecht](https://data.niod.nl/WO2_Thesaurus/events/9314)

@@ -1488,7 +1488,7 @@ Possible extra rowspan handling
 	}
 </style>
   <meta content="Bikeshed version d7036035b, updated Fri Oct 8 17:07:11 2021 -0700" name="generator">
-  <link href="https://github.com/ErfgoedPod/spec-usecases" rel="canonical">
+  <link href="https://mellonscholarlycommunication.github.io/spec-usecases/heritage-scenario.html" rel="canonical">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1931,7 +1931,7 @@ dfn > a.self-link::before      { content: "#"; }
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
-     <dd><a class="u-url" href="https://github.com/ErfgoedPod/spec-usecases">https://github.com/ErfgoedPod/spec-usecases</a>
+     <dd><a class="u-url" href="https://mellonscholarlycommunication.github.io/spec-usecases/heritage-scenario.html">https://mellonscholarlycommunication.github.io/spec-usecases/heritage-scenario.html</a>
      <dt>Issue Tracking:
      <dd><a href="#issues-index">Inline In Spec</a>
      <dt class="editor">Editor:
@@ -2024,14 +2024,14 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="solid-crs">Solid CRS</dfn>: collection management system for small digital heritage organizations</p>
    <ul>
     <li data-md>
-     <p>hosted at <a href="https://solid-crs.netwerkdigitaalerfgoed.nl/"></a></p>
+     <p>hosted at <a href="https://solid-crs.netwerkdigitaalerfgoed.nl/">https://solid-crs.netwerkdigitaalerfgoed.nl/</a></p>
     <li data-md>
      <p>creates and manages the artefacts (collections of digital heritage objects) in the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod②">Institution’s Pod</a></p>
    </ul>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="demo-dashboard">Demo Dashboard</dfn>: demo frontend to illustrate communication between different pods and services</p>
    <ul>
     <li data-md>
-     <p>demo hosted at <a href="http://bellow2.ugent.be/public/"></a></p>
+     <p>demo hosted at <a href="http://bellow2.ugent.be/public/">http://bellow2.ugent.be/public/</a></p>
     <li data-md>
      <p>create, send and receive notifications</p>
     <li data-md>
@@ -2065,7 +2065,7 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
      <p>He adds an object with the following metadata</p>
      <ul>
       <li data-md>
-       <p>image: https://data.spinque.com/iiif/2/https%3A%2F%2Fimages.memorix.nl%2Fniod%2Fthumb%2F1000x1000%2F9236648b-6507-e27b-f3fa-68a5227efc18.jpg/full/full/0/default.jpg</p>
+       <p>image: <a href="https://images.memorix.nl/niod/thumb/1000x1000/9236648b-6507-e27b-f3fa-68a5227efc18.jpg">https://images.memorix.nl/niod/thumb/1000x1000/9236648b-6507-e27b-f3fa-68a5227efc18.jpg</a></p>
       <li data-md>
        <p>license: unknown</p>
       <li data-md>
@@ -2139,9 +2139,9 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
     <li data-md>
      <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①②">Bob</a> sees the suggestions in the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard⑤">demo dashboard</a> and decides to follow through.</p>
     <li data-md>
-     <p>In the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard⑥">demo dashboard</a>, <a data-link-type="dfn" href="#bob" id="ref-for-bob①③">Bob</a> selects the object from <code class="idl"><a data-link-type="idl">#part1</a></code> as artefact.</p>
+     <p>In the <a data-link-type="dfn" href="#demo-dashboard" id="ref-for-demo-dashboard⑥">demo dashboard</a>, <a data-link-type="dfn" href="#bob" id="ref-for-bob①③">Bob</a> selects the object from <a href="#part1">§ 2.2 Part 1: artefact creation</a> as artefact.</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①④">Bob</a> selects the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub①">Registry Service Hub</a> as target from the list</p>
+     <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①④">Bob</a> selects the <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub①">Registry Service Hub</a> as target from the list.</p>
     <li data-md>
      <p><a data-link-type="dfn" href="#bob" id="ref-for-bob①⑤">Bob</a> initializes the offer.</p>
     <li data-md>
@@ -2156,7 +2156,7 @@ the collection registration system <a href="https://www.youtube.com/watch?v=XJgl
      <p>The <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub③">Registry Service Hub</a> receives the notification</p>
      <ul>
       <li data-md>
-       <p>posts the metadata to the Dataset Registry API https://datasetregister.netwerkdigitaalerfgoed.nl/viaurl.php</p>
+       <p>posts the metadata to the <a href="https://datasetregister.netwerkdigitaalerfgoed.nl/api/">Dataset Registry API</a></p>
      </ul>
     <li data-md>
      <p>The <a data-link-type="dfn" href="#registry-service-hub" id="ref-for-registry-service-hub④">Registry Service Hub</a> sends a notification with <code>as:Announce</code> to the <a data-link-type="dfn" href="#institutions-pod" id="ref-for-institutions-pod①⓪">Institution’s Pod</a>'s inbox.</p>

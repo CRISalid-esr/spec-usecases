@@ -68,7 +68,7 @@ Scenario {#scenario}
 
 1. [=Bob=] logs into [=Solid CRS=] with his Web ID
     - [=Bob=] chooses the [=Institution's Pod=]
-2. [=Bob=] creates a new Collection about the liberation of Utrecht in WOII
+2. [=Bob=] creates a new Collection "Utrecht WOII" about Utrecht in WOII.
 3. He adds an object with the following metadata
     - image: [https://images.memorix.nl/niod/thumb/1000x1000/9236648b-6507-e27b-f3fa-68a5227efc18.jpg](https://images.memorix.nl/niod/thumb/1000x1000/9236648b-6507-e27b-f3fa-68a5227efc18.jpg)
     - license: unknown
@@ -79,26 +79,38 @@ Scenario {#scenario}
     - collection: "Nieuwe collectie"
     - Location: [Utrecht](http://www.wikidata.org/entity/Q39297398)
     - Date: 1945-05-07
-4. This results in a new artefact of type `schema:CreativeWork`: 
+4. This results in a new artefact [https://pod.inrupt.com/mvs/heritage-collections/catalog#collection-d241c975-42fa-41ab-9ff9-3918ee22085a](https://pod.inrupt.com/mvs/heritage-collections/catalog#collection-d241c975-42fa-41ab-9ff9-3918ee22085a) of type `schema:Dataset`: 
 
 ```
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <http://schema.org/> .
+@prefix collections: <https://pod.inrupt.com/mvs/heritage-collections/catalog#> . 
+@prefix objects: <https://pod.inrupt.com/mvs/heritage-objects/> .
 
-<https://pod.inrupt.com/mvs/heritage-objects/data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a>
-        schema:height      <https://pod.inrupt.com/mvs/heritage-objects/data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-height> ;
-        schema:isPartOf    <https://pod.inrupt.com/mvs/heritage-collections/catalog#collection-d241c975-42fa-41ab-9ff9-3918ee22085a> ;
-        schema:weight      <https://pod.inrupt.com/mvs/heritage-objects/data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-weight> ;
+collections:collection-d241c975-42fa-41ab-9ff9-3918ee22085a
+        schema:name  "Utrecht WOII"@nl ;
+        schema:description  "Utrecht in WOII"@nl ;
+        schema:distribution  collections:distribution-16008f15-9f8e-4acc-9e9a-f60f53e1a8a2 ;
+        rdf:type             schema:Dataset .
+
+collections:distribution-d92aeb56-5f23-44ca-afd9-ec46ed0c6ee3
+        rdf:type                        schema:DataDownload ;
+        schema:contentUrl  objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb .
+
+objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a
+        schema:height      objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-height ;
+        schema:isPartOf    collections:collection-d241c975-42fa-41ab-9ff9-3918ee22085a ;
+        schema:weight      objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-weight ;
         schema:locationCreated  <http://www.wikidata.org/entity/Q39297398> ;
         schema:dateCreated  "1945-05-07" ;
         schema:name        "Bevrijding Utrecht."@nl ;
         schema:description  "Bevrijding Utrecht. Overweg Burgemeester Reigerstraat."@nl ;
         rdf:type                        schema:CreativeWork ;
-        schema:mainEntityOfPage  <https://pod.inrupt.com/mvs/heritage-objects/data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-digital> ;
+        schema:mainEntityOfPage  objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-digital ;
         schema:additionalType  <https://data.niod.nl/WO2_Thesaurus/events/9314> ;
-        schema:depth       <https://pod.inrupt.com/mvs/heritage-objects/data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-depth> ;
+        schema:depth       objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-depth ;
         schema:identifier  "1" ;
-        schema:width       <https://pod.inrupt.com/mvs/heritage-objects/data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-width> .
+        schema:width       objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-width .
 ```
 
 5. [=Solid CRS=] stores the artefact in the [=Institution's Pod=].
@@ -138,7 +150,7 @@ Scenario {#scenario}
 
 ### Invoking the archival service
 
-21. [=Bob=] turns to the [=demo dashboard=] of the artefact exchange network
+21. [=Bob=] turns to the [=demo dashboard=] of the artefact exchange network.
      - [=Institution's Orchestrator=] suggests to Bob that he should offer the image artefact with metadata to the [=Archival Service Hub=].
 22. [=Bob=] sees the suggestions in the [=demo dashboard=] and decides to follow through.
 23. In the [=demo dashboard=], [=Bob=] selects the [=Archival Service Hub=] as target from the list

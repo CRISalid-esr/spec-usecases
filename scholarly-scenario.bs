@@ -162,3 +162,17 @@ E.g.
 - *Discovery Hub* request to Offer new artefacts to be included
     in the index    
     - Can be automated
+
+<img width="900px" src="images/orchestrator-suggests-next-step.svg"/>
+
+In the demonstrator one use case can be demonstrated:
+
+- Alice's Pod receives an `as:Announce` from a Registration Hub with a subtype 
+  `RegistrationAction`.
+- Alice's Orchestrator:
+    - Appends the as:Offer to Alice’s Event Log of Alice’s pod
+    - Creates an `as:Note` which suggests Alice an archivation action as next
+     step.
+        - Alice's Orchestrator sends this `as:Note` as an `as:Create` to 
+          the inbox of Alice's pod
+- Alice reads the note and decides if she wants to do the suggestion action.

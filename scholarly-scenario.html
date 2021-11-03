@@ -1885,7 +1885,7 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Scholarly use cases</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-10-27">27 October 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-11-03">3 November 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt class="editor">Editor:
@@ -1895,7 +1895,7 @@ dfn > a.self-link::before      { content: "#"; }
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 27 October 2021,
+In addition, as of 3 November 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -2222,6 +2222,28 @@ in the index</p>
       <li data-md>
        <p>Can be automated</p>
      </ul>
+   </ul>
+   <p><img src="images/orchestrator-suggests-next-step.svg" width="900px"></p>
+   <p>In the demonstrator one use case can be demonstrated:</p>
+   <ul>
+    <li data-md>
+     <p>Alice’s Pod receives an <code>as:Announce</code> from a Registration Hub with a subtype <code>RegistrationAction</code>.</p>
+    <li data-md>
+     <p>Alice’s Orchestrator:</p>
+     <ul>
+      <li data-md>
+       <p>Appends the as:Offer to Alice’s Event Log of Alice’s pod</p>
+      <li data-md>
+       <p>Creates an <code>as:Note</code> which suggests Alice an archivation action as next
+ step.</p>
+       <ul>
+        <li data-md>
+         <p>Alice’s Orchestrator sends this <code>as:Note</code> as an <code>as:Create</code> to
+  the inbox of Alice’s pod</p>
+       </ul>
+     </ul>
+    <li data-md>
+     <p>Alice reads the note and decides if she wants to do the suggestion action.</p>
    </ul>
   </main>
   <div data-fill-with="conformance">

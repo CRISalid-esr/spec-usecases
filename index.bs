@@ -5,7 +5,6 @@ Level: 1
 Status: DREAM
 Status Text: Oh bot
 Editor: Patrick Hochstenbach, UGent, patrick.hochstenbach@ugent.be
-Editor: Herbert Van de Sompel, [DANS + Ghent University](https://dans.knaw.nl/nl/), hvdesomp@gmail.com
 Markup Shorthands: markdown yes
 Abstract:
 
@@ -412,3 +411,8 @@ of the **Data Pod**
 
 - The possible use cases for the **Orchestrator** in Scenario 9 are functionally equivalent to
 [Scenario 2](#scenario-2-author-requests-review-with-possible-endorsement-via-repository)
+
+# Acknowledgement
+
+We thank Herbert Van de Sompel, [DANS + Ghent University](https://dans.knaw.nl/nl/), hvdesomp@gmail.com
+for the valuable input during this project.

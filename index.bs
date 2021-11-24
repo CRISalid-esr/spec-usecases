@@ -5,6 +5,7 @@ Level: 1
 Status: DREAM
 Status Text: Oh bot
 Editor: Patrick Hochstenbach, UGent, patrick.hochstenbach@ugent.be
+Editor: Herbert Van de Sompel, [DANS + Ghent University](https://dans.knaw.nl/nl/), hvdesomp@gmail.com
 Markup Shorthands: markdown yes
 Abstract:
 

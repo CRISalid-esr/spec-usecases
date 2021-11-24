@@ -3,7 +3,9 @@ Title: Scholarly use cases
 Shortname: orchestrator
 Level: 2
 Status: DREAM
-Editor: Patrick Hochstenbach
+Editor: Patrick Hochstenbach, [IDLab - Ghent University](https://knows.idlab.ugent.be), patrick.hochstenbach@ugent.be
+Editor: Ruben Dedecker, [IDLab - Ghent University](https://knows.idlab.ugent.be), ruben.dedecker@ugent.be
+Editor: Herbert Van de Sompel, [DANS + Ghent University](https://dans.knaw.nl/nl/), hvdesomp@gmail.com
 Markup Shorthands: markdown yes
 Abstract: TODO
 </pre>

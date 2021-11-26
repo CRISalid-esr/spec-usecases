@@ -414,5 +414,5 @@ of the **Data Pod**
 
 # Acknowledgement
 
-We thank Herbert Van de Sompel, [DANS + Ghent University](https://dans.knaw.nl/nl/), hvdesomp@gmail.com
+We thank Herbert Van de Sompel, [DANS + Ghent University](https://dans.knaw.nl/nl/), hvdsomp@gmail.com
 for the valuable input during this project.

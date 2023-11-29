@@ -1,0 +1,169 @@
+<pre class='metadata'>
+Title: Cas d'utilisation universitaire
+Shortname: orchestrator
+Level: 2
+Status: DREAM
+Editor: Patrick Hochstenbach, [IDLab - Ghent University](https://knows.idlab.ugent.be), patrick.hochstenbach@ugent.be
+Editor: Ruben Dedecker, [IDLab - Ghent University](https://knows.idlab.ugent.be), ruben.dedecker@ugent.be
+Markup Shorthands: markdown yes
+Abstract: TODO
+</pre>
+
+# Alice crée un artefact universitaire
+
+<img width="900px" src="images/alice-creates-scholarly-artefact.svg"/>
+
+- Alice se connecte à son tableau de bord
+- Elle crée un nouvel artefact d'ébauche
+    - Ajoute des métadonnées :
+        - Titre
+        - Auteur(s)
+            - en tant qu'identifiants Web
+        - Sujets
+            - basés sur une ontologie
+        - Résumé
+        - Statut
+            - Privé
+            - Public
+        - Statut ..ensemble de
+            - [ ] Enregistré
+            - [ ] Certifié
+            - [ ] Archivé
+- L'artefact entraînera la création d'une nouvelle page d'atterrissage sur le pod
+    - Avec toutes les métadonnées descriptives
+    - Avec des métadonnées techniques
+        - Date de création
+        - Date de dernière mise à jour
+        - Fichiers
+            - Nombre de fichiers
+            - Tailles
+            - Noms
+            - Types
+    - Cela déclenchera un `as:Create` concernant l'artefact
+
+- Alice peut téléverser un ou plusieurs fichiers pour cet artefact
+    - Cela déclenchera un `as:Update` concernant l'artefact
+
+- Alice peut supprimer un ou plusieurs fichiers dans cet artefact
+    - Cela déclenchera un `as:Update` concernant l'artefact
+
+- Alice peut modifier les métadonnées pour cet artefact
+    - Cela déclenchera un `up:Update` concernant l'artefact
+
+- Alice peut supprimer l'artefact
+    - Cela déclenchera un `as:Delete` concernant l'artefact
+
+- Alice peut indiquer que l'artefact est prêt à être consulté
+    - Cela déclenchera un `as:Announce` concernant l'artefact
+    - Cela déclenchera une mise à jour du journal d'événements d'Alice par son orchestrator 
+
+# Bob souhaite en savoir plus sur les artefacts d'Alice
+
+<img width="600px" src="images/bob-wants-to-know-about-alices-artefacts.svg"/>
+
+- L'orchestrateur de Bob découvre un nouveau `as:Announce` dans la boîte de réception d'Alice
+- L'orchestrateur de Bob envoie un message à la boîte de réception de Bob concernant cet événement
+
+NOTE : Il ne s'agit pas d'un sujet relevant des chaînes de valeur de Mellon et peut être ignoré pour le moment
+
+# Alice peut envoyer une notification à un ServiceHub
+
+<img width="900px" src="images/alice-can-send-notication-to-servicehub.svg"/>
+
+- Alice utilise son tableau de bord Alice pour sélectionner un artefact
+- Le tableau de bord d'Alice peut envoyer une notification à un Service Hub
+    - Alice peut dans le tableau de bord sélectionner un Service Hub dans une liste
+        - Le tableau de bord lit cette liste de Service Hub à partir d'un registre FOAF
+    - Le tableau de bord d'Alice enverra l'`as:Offer` à l'orchestrateur d'Alice
+- L'orchestrateur d'Alice ajoutera au journal des événements du pod d'Alice
+- L'orchestrateur d'Alice transmettra la notification au Service Hub
+
+# Alice peut voir un aperçu de toutes les notifications et événements de son pod
+
+<img width="600px" src="images/alice-can-see-overview-of-notifications-and-events-of-pod.svg"/>
+
+- Alice se connecte à son tableau de bord
+- Alice peut obtenir un aperçu de tous les messages dans sa boîte de réception et événements de son journal des événements
+     - Le tableau de bord d'Alice obtiendra toutes les notifications à la fois des ressources et les présentera à Alice
+
+# Le hub d'inscription accepte les offres d'Alice
+
+<img width="900px" src="images/registration-hub-accepts-offers-from-alice.svg"/>
+
+- Le hub d'inscription est par exemple un référentiel institutionnel- Alice sélectionne un artefact pour l'enregistrement et prépare une `as:Offer` pour le centre d'enregistrement (dépôt institutionnel).
+- Son tableau de bord envoie cette `as:Offer` à l'orchestrateur d'Alice.
+- L'orchestrateur d'Alice :
+    - Ajoute la `as:Offer` au journal d'événements d'Alice dans le pod d'Alice.
+    - Transmet la `as:Offer` au dépôt institutionnel.
+- Un processus dans le dépôt institutionnel a son propre traitement interne pour :
+    - Examiner la boîte de réception du dépôt institutionnel et trouver une `as:Offer` d'Alice.
+    - Accepter automatiquement cette offre et envoyer un `as:Accept` au Pod d'Alice.
+    - Ajouter le `as:Accept` au journal d'événements du dépôt.
+    - Enregistrer automatiquement un artefact d'Alice dans le dépôt institutionnel.
+        - Le dépôt institutionnel contacte le pod d'Alice pour récupérer l'artefact.
+        - À partir de l'artefact, un lien de signalisation vers describedBy peut être trouvé.
+        - Le describedBy contient des métadonnées descriptives au format de données liées.
+        - Ces données liées peuvent être converties en un enregistrement de métadonnées provisoire pour le dépôt institutionnel.
+    - Tout ce traitement peut être implémenté avec un orchestrateur mais ce n'est pas obligatoire.
+- Le gestionnaire d'enregistrement met à jour manuellement l'artefact déposé par Alice dans le dépôt institutionnel.
+- Le gestionnaire d'enregistrement envoie un `as:Announce` à Alice avec le résultat du processus d'enregistrement.
+- Un processus dans le dépôt institutionnel ajoute le `as:Announce` au journal d'événements du dépôt.
+- L'orchestrateur d'Alice mettra à jour le journal d'événements d'Alice avec la notification `as:Accept`.
+- L'orchestrateur d'Alice mettra à jour le journal d'événements d'Alice avec la notification `as:Announce`.
+
+# Le centre archivistique accepte les services
+
+<img width="900px" src="images/archival-hub-accepts-services.svg"/>- Alice sélectionne un artefact pour l'archivage et prépare une `as:Offer` pour le Hub d'archivage
+- Son tableau de bord envoie cette `as:Offer` à l'orchestrateur d'Alice
+- L'orchestrateur d'Alice :
+    - Transfère la `as:Offer` au Hub d'archivage
+    - Ajoute la `as:Offer` au journal des événements du pod d'Alice    
+- Un processus au sein du Hub d'archivage a son propre traitement interne pour :
+    - Accepter la `as:Offer` d'Alice et envoyer un `as:Accept` au Pod d'Alice
+    - Démarrer un processus d'archivage :
+        - Envoyer l'artefact d'Alice à Robust Links
+        - Interroger Robust Links pour vérifier le statut d'archivage
+    - Lorsque l'artefact est archivé chez Robust Links :
+        - Envoyer une notification `as:Announce` à Alice
+        - Ajouter la `as:Announce` au journal des événements du Hub d'archivage
+    - Tout ce traitement peut être implémenté avec un Orchestrateur mais ce n'est pas obligatoire
+- L'orchestrateur d'Alice mettra à jour le journal des événements d'Alice avec la notification `as:Accept`
+- L'Orchestrator d'Alice mettra à jour le journal des événements sur le Pod d'Alice en fonction de ce déclencheur
+
+
+# L'orchestrateur suggère des Services
+
+- En fonction de l'état des métadonnées
+- En fonction des politiques universitaires
+
+Par exemple:
+
+- La *Bibliothèque* demande d'offrir de nouveaux artefacts enregistrés à 
+    être enregistrés dans le référentiel institutionnel
+    - Peut être automatisé
+- La *Faculté* demande d'offrir de nouveaux artefacts enregistrés à 
+    un registre de la faculté
+    - Peut être automatisé
+- L'*Université* demande d'offrir de nouveaux artefacts enregistrés à
+    un service de Plan de Gestion des Données
+        Par exemple : https://dmponline.be
+    - Nécessite une intervention manuelle d'Alice
+- La *Conférence* demande d'offrir un artefact sur un sujet
+    - Nécessite une intervention manuelle d'Alice
+- Le *Discovery Hub* demande d'offrir de nouveaux artefacts à inclure
+    dans l'index    
+    - Peut être automatisé
+
+<img width="900px" src="images/orchestrator-suggests-next-step.svg"/>
+
+Dans le démonstrateur, un cas d'utilisation peut être démontré:- Le Pod d'Alice reçoit une `as:Announce` d'un Hub d'enregistrement avec un sous-type `RegistrationAction`.
+- L'orchestrateur d'Alice :
+    - Ajoute la `as:Announce` au journal d'événements d'Alice sur le Pod d'Alice
+    - Crée une `as:Note` suggérant à Alice une action d'archivage comme étape suivante.
+        - L'orchestrateur d'Alice envoie cette `as:Note` comme un `as:Create` dans la boîte de réception du Pod d'Alice.
+- Alice lit la note et décide si elle souhaite suivre la suggestion.
+
+# Remerciements
+
+Nous remercions Herbert Van de Sompel, [DANS + Ghent University](https://dans.knaw.nl/nl/), hvdsomp@gmail.com
+pour sa précieuse contribution pendant ce projet.

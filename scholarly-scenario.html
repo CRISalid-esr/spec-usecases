@@ -1,7 +1,7 @@
 <!doctype html><html lang="en">
  <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-  <title>Scholarly use cases</title>
+  <title>Cas d’utilisation universitaire</title>
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 <style data-fill-with="stylesheet">/******************************************************************************
  *                   Style sheet for the W3C specifications                   *
@@ -1269,7 +1269,7 @@ Possible extra rowspan handling
 	ul.index ul,
 	ul.index dl { font-size: smaller; }
 	@media not print {
-		ul.index li span:not(.dfn-paneled) {
+		ul.index li a + span {
 			white-space: nowrap;
 			color: transparent; }
 		ul.index li a:hover + span,
@@ -1487,9 +1487,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version bbc364800, updated Mon Nov 15 13:57:55 2021 -0800" name="generator">
+  <meta content="Bikeshed version d9bd89757, updated Thu Mar 23 10:06:53 2023 -0700" name="generator">
+  <meta content="8267272b98b6eff89b7778276eedc68d3a98ddf4" name="document-revision">
 <style>/* style-autolinks */
-
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
     font-size: inherit;
@@ -1549,7 +1549,8 @@ pre .property::before, pre .property::after {
 
 [data-link-type=biblio] {
     white-space: pre;
-}</style>
+}
+</style>
 <style>/* style-colors */
 
 /* Any --*-text not paired with a --*-bg is assumed to have a transparent bg */
@@ -1658,9 +1659,9 @@ pre .property::before, pre .property::after {
     --outdated-shadow: red;
 
     --editedrec-bg: darkorange;
-}</style>
+}
+</style>
 <style>/* style-counters */
-
 body {
     counter-reset: example figure issue;
 }
@@ -1687,9 +1688,9 @@ figcaption {
 }
 figcaption:not(.no-marker)::before {
     content: "Figure " counter(figure) " ";
-}</style>
+}
+</style>
 <style>/* style-issues */
-
 a[href].issue-return {
     float: right;
     float: inline-end;
@@ -1699,7 +1700,6 @@ a[href].issue-return {
 }
 </style>
 <style>/* style-md-lists */
-
 /* This is a weird hack for me not yet following the commonmark spec
    regarding paragraph and lists. */
 [data-md] > :first-child {
@@ -1707,7 +1707,8 @@ a[href].issue-return {
 }
 [data-md] > :last-child {
     margin-bottom: 0;
-}</style>
+}
+</style>
 <style>/* style-selflinks */
 
 :root {
@@ -1734,6 +1735,14 @@ a.self-link:hover {
 }
 .heading > a.self-link {
     font-size: 83%;
+}
+.example > a.self-link,
+.note > a.self-link,
+.issue > a.self-link {
+    /* These blocks are overflow:auto, so positioning outside
+       doesn't work. */
+    left: auto;
+    right: 0;
 }
 li > a.self-link {
     left: calc(-1 * (3.5rem - 26px) - 2em);
@@ -1873,6 +1882,7 @@ dfn > a.self-link::before      { content: "#"; }
        which is quite common in practice... */
     img { background: white; }
 }
+
 @media (prefers-color-scheme: dark) {
     :root {
         --selflink-text: black;
@@ -1884,10 +1894,12 @@ dfn > a.self-link::before      { content: "#"; }
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"></p>
-   <h1 class="p-name no-ref" id="title">Scholarly use cases</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2021-11-24">24 November 2021</time></span></h2>
+   <h1 class="p-name no-ref" id="title">Cas d’utilisation universitaire</h1>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2023-12-22">22 December 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
+     <dt>Issue Tracking:
+     <dd><a href="https://github.com/CRISalid-esr/spec-usecases/issues/">GitHub</a>
      <dt class="editor">Editors:
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:patrick.hochstenbach@ugent.be">Patrick Hochstenbach</a> (<span class="p-org org"><a href="https://knows.idlab.ugent.be">IDLab - Ghent University</a></span>)
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:ruben.dedecker@ugent.be">Ruben Dedecker</a> (<span class="p-org org"><a href="https://knows.idlab.ugent.be">IDLab - Ghent University</a></span>)
@@ -1896,7 +1908,7 @@ dfn > a.self-link::before      { content: "#"; }
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 24 November 2021,
+In addition, as of 22 December 2023,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1910,14 +1922,14 @@ Parts of this work may be from another specification document.  If so, those par
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
-    <li><a href="#alice-creates-a-scholary-artefact"><span class="secno">1</span> <span class="content">Alice creates a scholary artefact</span></a>
-    <li><a href="#bob-want-to-know-about-alices-artefacts"><span class="secno">2</span> <span class="content">Bob want to know about Alices artefacts</span></a>
-    <li><a href="#alice-can-send-a-notification-to-a-servicehub"><span class="secno">3</span> <span class="content">Alice can send a notification to a ServiceHub</span></a>
-    <li><a href="#alice-can-see-an-overview-of-all-notifications-and-events-of-her-pod"><span class="secno">4</span> <span class="content">Alice can see an overview of all notifications and events of her pod</span></a>
-    <li><a href="#registration-hub-accepts-offers-from-alice"><span class="secno">5</span> <span class="content">Registration hub accepts Offers from Alice</span></a>
-    <li><a href="#archival-hub-accepts-services"><span class="secno">6</span> <span class="content">Archival hub accepts services</span></a>
-    <li><a href="#orchestrator-suggests-services"><span class="secno">7</span> <span class="content">Orchestrator suggests Services</span></a>
-    <li><a href="#acknowledgement"><span class="secno">8</span> <span class="content">Acknowledgement</span></a>
+    <li><a href="#alice-cre-un-artefact-universitaire"><span class="secno">1</span> <span class="content">Alice crée un artefact universitaire</span></a>
+    <li><a href="#bob-souhaite-en-savoir-plus-sur-les-artefacts-dalice"><span class="secno">2</span> <span class="content">Bob souhaite en savoir plus sur les artefacts d’Alice</span></a>
+    <li><a href="#alice-peut-envoyer-une-notification--un-servicehub"><span class="secno">3</span> <span class="content">Alice peut envoyer une notification à un ServiceHub</span></a>
+    <li><a href="#alice-peut-voir-un-aperu-de-toutes-les-notifications-et-vnements-de-son-pod"><span class="secno">4</span> <span class="content">Alice peut voir un aperçu de toutes les notifications et événements de son pod</span></a>
+    <li><a href="#le-hub-dinscription-accepte-les-offres-dalice"><span class="secno">5</span> <span class="content">Le hub d’inscription accepte les offres d’Alice</span></a>
+    <li><a href="#le-centre-archivistique-accepte-les-services"><span class="secno">6</span> <span class="content">Le centre archivistique accepte les services</span></a>
+    <li><a href="#lorchestrateur-suggre-des-services"><span class="secno">7</span> <span class="content">L’orchestrateur suggère des Services</span></a>
+    <li><a href="#remerciements"><span class="secno">8</span> <span class="content">Remerciements</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
@@ -1927,329 +1939,315 @@ Parts of this work may be from another specification document.  If so, those par
    </ol>
   </nav>
   <main>
-   <h2 class="heading settled" data-level="1" id="alice-creates-a-scholary-artefact"><span class="secno">1. </span><span class="content">Alice creates a scholary artefact</span><a class="self-link" href="#alice-creates-a-scholary-artefact"></a></h2>
+   <h2 class="heading settled" data-level="1" id="alice-cre-un-artefact-universitaire"><span class="secno">1. </span><span class="content">Alice crée un artefact universitaire</span><a class="self-link" href="#alice-cre-un-artefact-universitaire"></a></h2>
    <p><img src="images/alice-creates-scholarly-artefact.svg" width="900px"></p>
    <ul>
     <li data-md>
-     <p>Alice login into her dashboard</p>
+     <p>Alice se connecte à son tableau de bord</p>
     <li data-md>
-     <p>She creates a new artefact stub</p>
+     <p>Elle crée un nouvel artefact d’ébauche</p>
      <ul>
       <li data-md>
-       <p>Adds some metadata:</p>
+       <p>Ajoute des métadonnées :</p>
        <ul>
         <li data-md>
-         <p>Title</p>
+         <p>Titre</p>
         <li data-md>
-         <p>Author(s)</p>
+         <p>Auteur(s)</p>
          <ul>
           <li data-md>
-           <p>as WebIds</p>
+           <p>en tant qu’identifiants Web</p>
          </ul>
         <li data-md>
-         <p>Subjects</p>
+         <p>Sujets</p>
          <ul>
           <li data-md>
-           <p>ontology based</p>
+           <p>basés sur une ontologie</p>
          </ul>
         <li data-md>
-         <p>Abstract</p>
+         <p>Résumé</p>
         <li data-md>
-         <p>Status</p>
+         <p>Statut</p>
          <ul>
           <li data-md>
-           <p>Private</p>
+           <p>Privé</p>
           <li data-md>
            <p>Public</p>
          </ul>
         <li data-md>
-         <p>Status ..set of</p>
+         <p>Statut ..ensemble de</p>
          <ul>
           <li data-md>
-           <p>[ ] Registered</p>
+           <p>[ ] Enregistré</p>
           <li data-md>
-           <p>[ ] Certified</p>
+           <p>[ ] Certifié</p>
           <li data-md>
-           <p>[ ] Archived</p>
+           <p>[ ] Archivé</p>
          </ul>
        </ul>
      </ul>
     <li data-md>
-     <p>The artefact will result in a new landing page on the pod</p>
+     <p>L’artefact entraînera la création d’une nouvelle page d’atterrissage sur le pod</p>
      <ul>
       <li data-md>
-       <p>With all the descriptive metadata</p>
+       <p>Avec toutes les métadonnées descriptives</p>
       <li data-md>
-       <p>With technical metadata</p>
+       <p>Avec des métadonnées techniques</p>
        <ul>
         <li data-md>
-         <p>Creation date</p>
+         <p>Date de création</p>
         <li data-md>
-         <p>Last update date</p>
+         <p>Date de dernière mise à jour</p>
         <li data-md>
-         <p>Files</p>
+         <p>Fichiers</p>
          <ul>
           <li data-md>
-           <p>Number of files</p>
+           <p>Nombre de fichiers</p>
           <li data-md>
-           <p>Sizes</p>
+           <p>Tailles</p>
           <li data-md>
-           <p>Names</p>
+           <p>Noms</p>
           <li data-md>
            <p>Types</p>
          </ul>
        </ul>
       <li data-md>
-       <p>It will trigger an <code>as:Create</code> about the artefact</p>
+       <p>Cela déclenchera un <code>as:Create</code> concernant l’artefact</p>
      </ul>
     <li data-md>
-     <p>Alice can upload one or more files for this artefact</p>
+     <p>Alice peut téléverser un ou plusieurs fichiers pour cet artefact</p>
      <ul>
       <li data-md>
-       <p>It will trigger an <code>as:Update</code> about the artefact</p>
+       <p>Cela déclenchera un <code>as:Update</code> concernant l’artefact</p>
      </ul>
     <li data-md>
-     <p>Alice can delete one or more files in this artefact</p>
+     <p>Alice peut supprimer un ou plusieurs fichiers dans cet artefact</p>
      <ul>
       <li data-md>
-       <p>It will trigger an <code>as:Update</code> about the artefact</p>
+       <p>Cela déclenchera un <code>as:Update</code> concernant l’artefact</p>
      </ul>
     <li data-md>
-     <p>Alice can edit the metadata for this artefact</p>
+     <p>Alice peut modifier les métadonnées pour cet artefact</p>
      <ul>
       <li data-md>
-       <p>It will trigger an <code>up:Update</code> about the artefact</p>
+       <p>Cela déclenchera un <code>up:Update</code> concernant l’artefact</p>
      </ul>
     <li data-md>
-     <p>Alice can delete the artefact</p>
+     <p>Alice peut supprimer l’artefact</p>
      <ul>
       <li data-md>
-       <p>It will trigger an <code>as:Delete</code> about the artefact</p>
+       <p>Cela déclenchera un <code>as:Delete</code> concernant l’artefact</p>
      </ul>
     <li data-md>
-     <p>Alice can say the artefact is ready for view</p>
+     <p>Alice peut indiquer que l’artefact est prêt à être consulté</p>
      <ul>
       <li data-md>
-       <p>It will trigger an <code>as:Announce</code> about the artefact</p>
+       <p>Cela déclenchera un <code>as:Announce</code> concernant l’artefact</p>
       <li data-md>
-       <p>It will trigger an update of the Alice’s event log by her
-  orchestrator</p>
+       <p>Cela déclenchera une mise à jour du journal d’événements d’Alice par son orchestrator</p>
      </ul>
    </ul>
-   <h2 class="heading settled" data-level="2" id="bob-want-to-know-about-alices-artefacts"><span class="secno">2. </span><span class="content">Bob want to know about Alices artefacts</span><a class="self-link" href="#bob-want-to-know-about-alices-artefacts"></a></h2>
+   <h2 class="heading settled" data-level="2" id="bob-souhaite-en-savoir-plus-sur-les-artefacts-dalice"><span class="secno">2. </span><span class="content">Bob souhaite en savoir plus sur les artefacts d’Alice</span><a class="self-link" href="#bob-souhaite-en-savoir-plus-sur-les-artefacts-dalice"></a></h2>
    <p><img src="images/bob-wants-to-know-about-alices-artefacts.svg" width="600px"></p>
    <ul>
     <li data-md>
-     <p>Bob’s orchestrator discover a new <code>as:Announce</code> in Alice’s outbox</p>
+     <p>L’orchestrateur de Bob découvre un nouveau <code>as:Announce</code> dans la boîte de réception d’Alice</p>
     <li data-md>
-     <p>Bob’s orchestrator sends a message to Bob’s inbox about this event</p>
+     <p>L’orchestrateur de Bob envoie un message à la boîte de réception de Bob concernant cet événement</p>
    </ul>
-   <p class="note" role="note"><span>NOTE:</span> This is not a topic in scope of Mellon value chains and may be skipped for now</p>
-   <h2 class="heading settled" data-level="3" id="alice-can-send-a-notification-to-a-servicehub"><span class="secno">3. </span><span class="content">Alice can send a notification to a ServiceHub</span><a class="self-link" href="#alice-can-send-a-notification-to-a-servicehub"></a></h2>
+   <p>NOTE : Il ne s’agit pas d’un sujet relevant des chaînes de valeur de Mellon et peut être ignoré pour le moment</p>
+   <h2 class="heading settled" data-level="3" id="alice-peut-envoyer-une-notification--un-servicehub"><span class="secno">3. </span><span class="content">Alice peut envoyer une notification à un ServiceHub</span><a class="self-link" href="#alice-peut-envoyer-une-notification--un-servicehub"></a></h2>
    <p><img src="images/alice-can-send-notication-to-servicehub.svg" width="900px"></p>
    <ul>
     <li data-md>
-     <p>Alice use her Alice Dashboard to select an artefact</p>
+     <p>Alice utilise son tableau de bord Alice pour sélectionner un artefact</p>
     <li data-md>
-     <p>Alice’s Dashboard can send an notification to a Service Hub</p>
+     <p>Le tableau de bord d’Alice peut envoyer une notification à un Service Hub</p>
      <ul>
       <li data-md>
-       <p>Alice can in the dashboard select a Service Hub from a list</p>
+       <p>Alice peut dans le tableau de bord sélectionner un Service Hub dans une liste</p>
        <ul>
         <li data-md>
-         <p>The dashboard reads this list of Service Hub from a FOAF-registry</p>
+         <p>Le tableau de bord lit cette liste de Service Hub à partir d’un registre FOAF</p>
        </ul>
       <li data-md>
-       <p>Alice’s dashboard will send the <code>as:Offer</code> to Alice’s orchestrator</p>
+       <p>Le tableau de bord d’Alice enverra l'<code>as:Offer</code> à l’orchestrateur d’Alice</p>
      </ul>
     <li data-md>
-     <p>Alice’s Orchestrator will append to the Event Log of the Alice’s pod</p>
+     <p>L’orchestrateur d’Alice ajoutera au journal des événements du pod d’Alice</p>
     <li data-md>
-     <p>Alice’s Orchestrator will forward the notification to the Service Hub</p>
+     <p>L’orchestrateur d’Alice transmettra la notification au Service Hub</p>
    </ul>
-   <h2 class="heading settled" data-level="4" id="alice-can-see-an-overview-of-all-notifications-and-events-of-her-pod"><span class="secno">4. </span><span class="content">Alice can see an overview of all notifications and events of her pod</span><a class="self-link" href="#alice-can-see-an-overview-of-all-notifications-and-events-of-her-pod"></a></h2>
+   <h2 class="heading settled" data-level="4" id="alice-peut-voir-un-aperu-de-toutes-les-notifications-et-vnements-de-son-pod"><span class="secno">4. </span><span class="content">Alice peut voir un aperçu de toutes les notifications et événements de son pod</span><a class="self-link" href="#alice-peut-voir-un-aperu-de-toutes-les-notifications-et-vnements-de-son-pod"></a></h2>
    <p><img src="images/alice-can-see-overview-of-notifications-and-events-of-pod.svg" width="600px"></p>
    <ul>
     <li data-md>
-     <p>Alice login into her dashboard</p>
+     <p>Alice se connecte à son tableau de bord</p>
     <li data-md>
-     <p>Alice can get an overview of all messages in her inbox and
- events from her Event Log</p>
+     <p>Alice peut obtenir un aperçu de tous les messages dans sa boîte de réception et événements de son journal des événements</p>
      <ul>
       <li data-md>
-       <p>Alice’s dashboard will get all notifications from both
-   resources and present it to Alice</p>
+       <p>Le tableau de bord d’Alice obtiendra toutes les notifications à la fois des ressources et les présentera à Alice</p>
      </ul>
    </ul>
-   <h2 class="heading settled" data-level="5" id="registration-hub-accepts-offers-from-alice"><span class="secno">5. </span><span class="content">Registration hub accepts Offers from Alice</span><a class="self-link" href="#registration-hub-accepts-offers-from-alice"></a></h2>
+   <h2 class="heading settled" data-level="5" id="le-hub-dinscription-accepte-les-offres-dalice"><span class="secno">5. </span><span class="content">Le hub d’inscription accepte les offres d’Alice</span><a class="self-link" href="#le-hub-dinscription-accepte-les-offres-dalice"></a></h2>
    <p><img src="images/registration-hub-accepts-offers-from-alice.svg" width="900px"></p>
    <ul>
     <li data-md>
-     <p>Registration hub is e.g. an institutional repository</p>
+     <p>Le hub d’inscription est par exemple un référentiel institutionnel- Alice sélectionne un artefact pour l’enregistrement et prépare une <code>as:Offer</code> pour le centre d’enregistrement (dépôt institutionnel).</p>
     <li data-md>
-     <p>Alice selects an artefact for registration and prepares an <code>as:Offer</code> for the
-  registration hub (institutional repository).</p>
+     <p>Son tableau de bord envoie cette <code>as:Offer</code> à l’orchestrateur d’Alice.</p>
     <li data-md>
-     <p>Her dashboard sends this <code>as:Offer</code> to the Alice orchestrator</p>
-    <li data-md>
-     <p>Alice’s orchestrator:</p>
+     <p>L’orchestrateur d’Alice :</p>
      <ul>
       <li data-md>
-       <p>Appends the <code>as:Offer</code> to Alice’s Event Log of Alice’s pod</p>
+       <p>Ajoute la <code>as:Offer</code> au journal d’événements d’Alice dans le pod d’Alice.</p>
       <li data-md>
-       <p>Forwards the <code>as:Offer</code> to the institutional repository</p>
+       <p>Transmet la <code>as:Offer</code> au dépôt institutionnel.</p>
      </ul>
     <li data-md>
-     <p>A process in the institutional repository has it own internal processing to:</p>
+     <p>Un processus dans le dépôt institutionnel a son propre traitement interne pour :</p>
      <ul>
       <li data-md>
-       <p>Poll the inbox of the institutional repository and find an <code>as:Offer</code> from Alice</p>
+       <p>Examiner la boîte de réception du dépôt institutionnel et trouver une <code>as:Offer</code> d’Alice.</p>
       <li data-md>
-       <p>Automatic accepts this offer and send an <code>as:Accept</code> to Alice’s Pod</p>
+       <p>Accepter automatiquement cette offre et envoyer un <code>as:Accept</code> au Pod d’Alice.</p>
       <li data-md>
-       <p>Append the <code>as:Accept</code> to the Repository Event Log</p>
+       <p>Ajouter le <code>as:Accept</code> au journal d’événements du dépôt.</p>
       <li data-md>
-       <p>Automatic a registration of Alice’s artefact into the institutional repository</p>
+       <p>Enregistrer automatiquement un artefact d’Alice dans le dépôt institutionnel.</p>
        <ul>
         <li data-md>
-         <p>The instutional repository contacts Alice’s pod to retrieve the artefact</p>
+         <p>Le dépôt institutionnel contacte le pod d’Alice pour récupérer l’artefact.</p>
         <li data-md>
-         <p>From the artefact an Signposting link to describedBy can be found</p>
+         <p>À partir de l’artefact, un lien de signalisation vers describedBy peut être trouvé.</p>
         <li data-md>
-         <p>The describedBy contains descriptive metadta in linked data format</p>
+         <p>Le describedBy contient des métadonnées descriptives au format de données liées.</p>
         <li data-md>
-         <p>This linked data can be converted in a draft metadata record for the institutional repository</p>
+         <p>Ces données liées peuvent être converties en un enregistrement de métadonnées provisoire pour le dépôt institutionnel.</p>
        </ul>
       <li data-md>
-       <p>All this processing can be implemented with an Orchestrator but doesn’t have to</p>
+       <p>Tout ce traitement peut être implémenté avec un orchestrateur mais ce n’est pas obligatoire.</p>
      </ul>
     <li data-md>
-     <p>Registration manager manually updates Alice deposited artefact in the institutional repository</p>
+     <p>Le gestionnaire d’enregistrement met à jour manuellement l’artefact déposé par Alice dans le dépôt institutionnel.</p>
     <li data-md>
-     <p>Registration manager sends an <code>as:Announce</code> back to Alice with the result of the registration process</p>
+     <p>Le gestionnaire d’enregistrement envoie un <code>as:Announce</code> à Alice avec le résultat du processus d’enregistrement.</p>
     <li data-md>
-     <p>A process in the institutional repository append the <code>as:Announce</code> to the Repository Event Log</p>
+     <p>Un processus dans le dépôt institutionnel ajoute le <code>as:Announce</code> au journal d’événements du dépôt.</p>
     <li data-md>
-     <p>Alice’s orchestrator will update Alice’s Event Log with the <code>as:Accept</code> notification</p>
+     <p>L’orchestrateur d’Alice mettra à jour le journal d’événements d’Alice avec la notification <code>as:Accept</code>.</p>
     <li data-md>
-     <p>Alice’s Orchestrator will update Alice’s Event Log with the <code>as:Announce</code> notification</p>
+     <p>L’orchestrateur d’Alice mettra à jour le journal d’événements d’Alice avec la notification <code>as:Announce</code>.</p>
    </ul>
-   <h2 class="heading settled" data-level="6" id="archival-hub-accepts-services"><span class="secno">6. </span><span class="content">Archival hub accepts services</span><a class="self-link" href="#archival-hub-accepts-services"></a></h2>
-   <p><img src="images/archival-hub-accepts-services.svg" width="900px"></p>
+   <h2 class="heading settled" data-level="6" id="le-centre-archivistique-accepte-les-services"><span class="secno">6. </span><span class="content">Le centre archivistique accepte les services</span><a class="self-link" href="#le-centre-archivistique-accepte-les-services"></a></h2>
+   <p><img src="images/archival-hub-accepts-services.svg" width="900px">- Alice sélectionne un artefact pour l’archivage et prépare une <code>as:Offer</code> pour le Hub d’archivage</p>
    <ul>
     <li data-md>
-     <p>Alice selects an artefact for archivation and prepares an <code>as:Offer</code> for the
-  Archival Hub</p>
+     <p>Son tableau de bord envoie cette <code>as:Offer</code> à l’orchestrateur d’Alice</p>
     <li data-md>
-     <p>Her dashboard sends this <code>as:Offer</code> to the Alice orchestrator</p>
-    <li data-md>
-     <p>Alice’s orchestrator:</p>
+     <p>L’orchestrateur d’Alice :</p>
      <ul>
       <li data-md>
-       <p>Forwards the <code>as:Offer</code> to the Archival Hub</p>
+       <p>Transfère la <code>as:Offer</code> au Hub d’archivage</p>
       <li data-md>
-       <p>Appends the <code>as:Offer</code> to Alice’s Event Log of Alice’s pod</p>
+       <p>Ajoute la <code>as:Offer</code> au journal des événements du pod d’Alice</p>
      </ul>
     <li data-md>
-     <p>A process at the Archival Hub has it own internal processing to:</p>
+     <p>Un processus au sein du Hub d’archivage a son propre traitement interne pour :</p>
      <ul>
       <li data-md>
-       <p>Accepts <code>as:Offer</code> from Alice and send an <code>as:Accept</code> to Alice’s Pod</p>
+       <p>Accepter la <code>as:Offer</code> d’Alice et envoyer un <code>as:Accept</code> au Pod d’Alice</p>
       <li data-md>
-       <p>Start an archivation process:</p>
+       <p>Démarrer un processus d’archivage :</p>
        <ul>
         <li data-md>
-         <p>Send the Alice artefact to Robust Links</p>
+         <p>Envoyer l’artefact d’Alice à Robust Links</p>
         <li data-md>
-         <p>Poll Robust Links to check the archival status</p>
+         <p>Interroger Robust Links pour vérifier le statut d’archivage</p>
        </ul>
       <li data-md>
-       <p>When the artefact is archived at Robust Links:</p>
+       <p>Lorsque l’artefact est archivé chez Robust Links :</p>
        <ul>
         <li data-md>
-         <p>Send an <code>as:Announce</code> notification to Alice</p>
+         <p>Envoyer une notification <code>as:Announce</code> à Alice</p>
         <li data-md>
-         <p>Appends the <code>as:Announce</code> to the Archival Hub Event Log</p>
+         <p>Ajouter la <code>as:Announce</code> au journal des événements du Hub d’archivage</p>
        </ul>
       <li data-md>
-       <p>All this processing can be implemented with an Orchestrator but doesn’t have to</p>
+       <p>Tout ce traitement peut être implémenté avec un Orchestrateur mais ce n’est pas obligatoire</p>
      </ul>
     <li data-md>
-     <p>Alice’s orchestrator will update Alice’s Event Log with the <code>as:Accept</code> notification</p>
+     <p>L’orchestrateur d’Alice mettra à jour le journal des événements d’Alice avec la notification <code>as:Accept</code></p>
     <li data-md>
-     <p>Alice’s Orchestrator will update the Event Log on Alice Pod based
- on this trigger</p>
+     <p>L’Orchestrator d’Alice mettra à jour le journal des événements sur le Pod d’Alice en fonction de ce déclencheur</p>
    </ul>
-   <h2 class="heading settled" data-level="7" id="orchestrator-suggests-services"><span class="secno">7. </span><span class="content">Orchestrator suggests Services</span><a class="self-link" href="#orchestrator-suggests-services"></a></h2>
+   <h2 class="heading settled" data-level="7" id="lorchestrateur-suggre-des-services"><span class="secno">7. </span><span class="content">L’orchestrateur suggère des Services</span><a class="self-link" href="#lorchestrateur-suggre-des-services"></a></h2>
    <ul>
     <li data-md>
-     <p>Based on status of the metadata</p>
+     <p>En fonction de l’état des métadonnées</p>
     <li data-md>
-     <p>Based on univesity policies</p>
+     <p>En fonction des politiques universitaires</p>
    </ul>
-   <p>E.g.</p>
+   <p>Par exemple:</p>
    <ul>
     <li data-md>
-     <p><em>Library</em> request to Offer New registered artefacts to
-be registered at the institutional repository</p>
+     <p>La <em>Bibliothèque</em> demande d’offrir de nouveaux artefacts enregistrés à
+être enregistrés dans le référentiel institutionnel</p>
      <ul>
       <li data-md>
-       <p>Can be automated</p>
+       <p>Peut être automatisé</p>
      </ul>
     <li data-md>
-     <p><em>Faculty</em> request to Offer New registerd artefacts to
-a faculty registry</p>
+     <p>La <em>Faculté</em> demande d’offrir de nouveaux artefacts enregistrés à
+un registre de la faculté</p>
      <ul>
       <li data-md>
-       <p>Can be automated</p>
+       <p>Peut être automatisé</p>
      </ul>
     <li data-md>
-     <p><em>University</em> request to Offer New registered artefacts to
-a Data Management Plan service
-    E.g. https://dmponline.be</p>
+     <p>L'<em>Université</em> demande d’offrir de nouveaux artefacts enregistrés à
+un service de Plan de Gestion des Données
+    Par exemple : https://dmponline.be</p>
      <ul>
       <li data-md>
-       <p>Requires manual intervention by Alice</p>
+       <p>Nécessite une intervention manuelle d’Alice</p>
      </ul>
     <li data-md>
-     <p><em>Conference</em> request to Offer an artefact about a topic</p>
+     <p>La <em>Conférence</em> demande d’offrir un artefact sur un sujet</p>
      <ul>
       <li data-md>
-       <p>Requires manual intervation by Alice</p>
+       <p>Nécessite une intervention manuelle d’Alice</p>
      </ul>
     <li data-md>
-     <p><em>Discovery Hub</em> request to Offer new artefacts to be included
-in the index</p>
+     <p>Le <em>Discovery Hub</em> demande d’offrir de nouveaux artefacts à inclure
+dans l’index</p>
      <ul>
       <li data-md>
-       <p>Can be automated</p>
+       <p>Peut être automatisé</p>
      </ul>
    </ul>
    <p><img src="images/orchestrator-suggests-next-step.svg" width="900px"></p>
-   <p>In the demonstrator one use case can be demonstrated:</p>
+   <p>Dans le démonstrateur, un cas d’utilisation peut être démontré:- Le Pod d’Alice reçoit une <code>as:Announce</code> d’un Hub d’enregistrement avec un sous-type <code>RegistrationAction</code>.</p>
    <ul>
     <li data-md>
-     <p>Alice’s Pod receives an <code>as:Announce</code> from a Registration Hub with a subtype <code>RegistrationAction</code>.</p>
-    <li data-md>
-     <p>Alice’s Orchestrator:</p>
+     <p>L’orchestrateur d’Alice :</p>
      <ul>
       <li data-md>
-       <p>Appends the as:Announce to Alice’s Event Log of Alice’s pod</p>
+       <p>Ajoute la <code>as:Announce</code> au journal d’événements d’Alice sur le Pod d’Alice</p>
       <li data-md>
-       <p>Creates an <code>as:Note</code> which suggests Alice an archivation action as next
- step.</p>
+       <p>Crée une <code>as:Note</code> suggérant à Alice une action d’archivage comme étape suivante.</p>
        <ul>
         <li data-md>
-         <p>Alice’s Orchestrator sends this <code>as:Note</code> as an <code>as:Create</code> to
-  the inbox of Alice’s pod</p>
+         <p>L’orchestrateur d’Alice envoie cette <code>as:Note</code> comme un <code>as:Create</code> dans la boîte de réception du Pod d’Alice.</p>
        </ul>
      </ul>
     <li data-md>
-     <p>Alice reads the note and decides if she wants to do the suggestion action.</p>
+     <p>Alice lit la note et décide si elle souhaite suivre la suggestion.</p>
    </ul>
-   <h2 class="heading settled" data-level="8" id="acknowledgement"><span class="secno">8. </span><span class="content">Acknowledgement</span><a class="self-link" href="#acknowledgement"></a></h2>
-   <p>We thank Herbert Van de Sompel, <a href="https://dans.knaw.nl/nl/">DANS + Ghent University</a>, hvdesomp@gmail.com
-for the valuable input during this project.</p>
+   <h2 class="heading settled" data-level="8" id="remerciements"><span class="secno">8. </span><span class="content">Remerciements</span><a class="self-link" href="#remerciements"></a></h2>
+   <p>Nous remercions Herbert Van de Sompel, <a href="https://dans.knaw.nl/nl/">DANS + Ghent University</a>, hvdsomp@gmail.com
+pour sa précieuse contribution pendant ce projet.</p>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -2260,13 +2258,13 @@ for the valuable input during this project.</p>
             However, for readability,
             these words do not appear in all uppercase letters in this specification. </p>
    <p> All of the text of this specification is normative
-            except sections explicitly marked as non-normative, examples, and notes. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a> </p>
+            except sections explicitly marked as non-normative, examples, and notes. <a data-link-type="biblio" href="#biblio-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">[RFC2119]</a> </p>
    <p> Examples in this specification are introduced with the words “for example”
             or are set apart from the normative text with <code>class="example"</code>, like this: </p>
    <div class="example" id="example-example"><a class="self-link" href="#example-example"></a> This is an example of an informative example. </div>
    <p> Informative notes begin with the word “Note”
             and are set apart from the normative text with <code>class="note"</code>, like this: </p>
-   <p class="note" role="note"> Note, this is an informative note. </p>
+   <p class="note" role="note"> Note, this is an informative note.</p>
   </div>
 <script>
 (function() {

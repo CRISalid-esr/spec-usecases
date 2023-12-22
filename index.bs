@@ -1,10 +1,12 @@
 <pre class='metadata'>
-Title: COAR Notify / Orchestrator use cases
+Title: Cas d'utilisation de COAR Notify / Orchestrator
 Shortname: orchestrator
 Level: 1
 Status: DREAM
 Status Text: Oh bot
 Editor: Patrick Hochstenbach, UGent, patrick.hochstenbach@ugent.be
+!Translation: David Reymond [IMSIC - Université de Toulon](http://www.univ-tln.fr), david.reymond@univ-tln.fr
+
 Markup Shorthands: markdown yes
 Abstract:
 
@@ -12,407 +14,373 @@ Abstract:
 
 <p>
 <class class="note">
-In this document all the COAR Notify examples are listed as main sections with a
-short description of the use-cases annotated with possible local implementation notes.
+Dans ce document, tous les exemples de COAR Notify sont répertoriés en tant que sections principales avec une description brève des cas d'utilisation annotés avec des notes d'implémentation locale possibles.
 </class>
 </p>
 
 <p>
 <class class="note">
-In each main section is divided in subsections to provide examples how a Mellon/Orchestrator setup
-might respond to incoming and outgoing notification messages.
+Chaque section principale est divisée en sous-sections pour fournir des exemples de la manière dont une configuration Mellon/Orchestrator pourrait répondre aux messages de notification entrants et sortants.
 </class>
 </p>
 
-# Scenario 1 : Author requests review with possible endorsement (via overlay journal)
+# Scénario 1 : L'auteur demande une évaluation avec une possible approbation (via un journal superposé)
 
-From [COAR](https://notify.coar-repositories.org/scenarios/1/):
-<i>The corresponding author requests a review from an overlay journal for one of their papers, held in a repository. The overlay journal notifies the repository of any successful reviews and endorsements.</i>
+À partir de [COAR](https://notify.coar-repositories.org/scenarios/1/):
+<i>L'auteur correspondant demande une évaluation à partir d'un journal superposé pour l'un de ses articles, conservé dans un dépôt. Le journal superposé informe le dépôt des évaluations et approbations réussies.</i>
 
 <p>
 <class class="note">
-The *repository* is interpreted as the **Data Pod** in the examples below.
+Le *dépôt* est interprété comme le **Data Pod** dans les exemples ci-dessous.
 </class>
 </p>
 
 <p>
 <class class="note">
-The *journal* is interpreted as the **Certification Service** in the examples below.
+Le *journal* est interprété comme le **Service de certification** dans les exemples ci-dessous.
 </class>
 </p>
 
 <img src="images/scenario-1.svg" width="80%">
 
-- The **Maintainer** starts a review process at a *Certification Service*
-    - It is not specified how this process should be started
-    - It is assumed that the certification service knows or discovers the location of the Scholarly inbox of the maintainer
-- The **Certification Service** starts a review workflow and sends after a while an `Announce` AS2 notification to the (Scholarly) **Inbox**
-of the **Data Pod**
-    - The `Announce` contains as `object` a link to the published review
-    - The `Announce` contains as `object` a link to an artefact on the data pod
-    - It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the certification service
-    - The scholarly inbox MAY be the main inbox of the data pod or a specialized inbox created for the orchestrator
-    - The data pod may MAY shape validation mechanisms in place and return HTTP 4** codes when an unknown
-    notification shape was submitted to the inbox
-- The **Certification Service** starts an endorsement workflow and sends an `Announce` AS2 notification to the (Scholarly) **Inbox**
-    - In the use cases below, it is assumed that the same assumptions can be made
-      for any `Announce` notification that is send by a certification service
+- Le **Responsable** lance un processus de révision auprès d'un *Service de Certification*
+    - Il n'est pas précisé comment ce processus doit être démarré
+    - On suppose que le service de certification connaît ou découvre l'emplacement de la boîte de réception Scholarly du responsable.
+- Le **Service de Certification** lance un flux de révision et envoie après un certain temps une notification `Annonce` AS2 à la boîte de réception (Scholarly) du **Data Pod**
+    - L'`Annonce` contient comme `objet` un lien vers la révision publiée
+    - L'`Annonce` contient comme `objet` un lien vers un artefact sur le data pod
+    - On suppose que le data pod répondra avec un code HTTP 200 ou 202 à la soumission à la boîte de réception par le service de certification
+    - La boîte de réception Scholarly PEUT être la boîte de réception principale du data pod ou une boîte de réception spécialisée créée pour l'orchestrateur
+    - Le data pod peut AVOIR des mécanismes de validation en place et retourner des codes HTTP 4** lorsque qu'une forme de notification inconnue a été soumise à la boîte de réception
+- Le **Service de Certification** lance un flux de certification et envoie une notification `Annonce` AS2 à la boîte de réception (Scholarly) 
+    - Dans les cas d'utilisation ci-dessous, on suppose que les mêmes hypothèses peuvent être faites pour toute notification `Annonce` envoyée par un service de certification
 
-## Orchestrator reads the inbox of a data pod and updates an event log
+## L'orchestrateur lit la boîte de réception d'un data pod et met à jour un journal d'événements
 
 <img src="images/scenario-1-a.svg" width="80%">
+- L'**Orchestrator** interroge la **boîte de réception** (académique) du **Data Pod**
+- L'**Orchestrator** répertorie les notifications entrantes
+    - L'orchestrateur PEUT filtrer la liste de la boîte de réception pour les formes de ressources
+    - L'orchestrateur PEUT ignorer les notifications non fiables ou invalides
+    - L'orchestrateur PEUT filtrer les notifications concernant des ressources qui n'existent plus dans le data pod
+    - L'orchestrateur DOIT traiter chaque notification une seule fois
+    - L'orchestrateur PEUT avoir seulement la permission de lecture de la boîte de réception
+    - Dans un scénario de boîte de réception partagée, plusieurs applications ainsi que le gestionnaire PEUVENT vouloir agir sur les notifications entrantes
+- L'**Orchestrator** sélectionne la notification qu'il souhaite traiter
+- L'**Orchestrator** met à jour le **Journal des événements du cycle de vie de l'artefact** avec la notification
+    - L'orchestrateur PEUT stocker une version traitée de la notification `Announce` dans le journal des événements
+    - L'`@id` de la notification stockée DOIT être unique dans tous les journaux d'événements du data pod
+    - Le temps de mise à jour de l'événement DOIT être l'heure d'écriture de la ressource du journal des événements
+    - Le journal des événements du cycle de vie de l'artefact DOIT être accessible en lecture publique
 
-- The **Orchestrator** polls the (scholarly) **Inbox** of the **Data Pod**
-- The **Orchestrator** lists incoming notifications
-    - The orchestrator MAY filter the inbox list for resource shapes
-    - The orchestrator MAY ignore untrusted , invalid notifications
-    - The orchestrator MAY filter out notifications about resources that don't exist (anymore) in the data pod
-    - The orchestrator SHALL processes each notification only once
-    - The orchestrator MAY only have read permission to the inbox
-    - In a shared inbox scenario, multiple applications plus the maintainer MAY want to act on incoming notifications
-- The **Orchestrator** selected the notification it wants to process
-- The **Orchestrator** updates the **Artefact Lifecycle Event Log** with the notification
-    - The orchestrator MAY store a processed version of the `Announce` notification in the event log
-    - The stored notification `@id` MUST be unique in all event logs of the data pod
-    - The event update time SHALL be the time of writing the event log resource
-    - The artefact lifecycle event log SHALL be public readable
+Problème : Quels sont les exigences sur la forme du journal des événements.
 
-Issue: What are the requirement on the shape of the event log.
+Problème : Un orchestrateur déclenché par une mise à jour des artefacts du data pod par un autre mécanisme est exclu de cette discussion.
 
-Issue: An orchestrator that is triggered by an update to the data pod artefacts by some other mechanism is left out of this discussion.
-
-## A client App reads the event log and updates the artefact
+## Une application cliente lit le journal des événements et met à jour l'artefact
 
 <img src="images/scenario-1-b.svg" width="80%">
 
-- The **App** polls the **Artefact Lifecycle Event Log** of the **Data Pod**
-     - The app knows that the event log is a trusted append only resource for relevant notifications
-       that should be processed
-         - The app doesn't need to redo the work of the orchestrator to clean the data pod (scholarly) inbox
-     - The app MAY filter the event log for shapes
-     - The app MAY filter out self-referencing notifications
-         - This is for cases where any update to the data pod could trigger an event log update
-- The **App** list new events events not yet processed
-- The **App** discovers the `Announce` event
-- The **App** is configured by the maintainer to automatically update the artefact metadata with a review link
-     - The app MAY send a notification to the Scholarly inbox to update the orchestrator of this fact
+- L'**application** interroge le **journal d'événements du cycle de vie de l'artefact** du **Data Pod**
+   - L'application sait que le journal d'événements est une ressource de confiance en lecture seule pour les notifications pertinentes qui doivent être traitées
+     - L'application n'a pas besoin de refaire le travail de l'orchestrateur pour nettoyer la boîte de réception du pod de données (scientifique)
+   - L'application PEUT filtrer le journal d'événements pour les formes
+   - L'application PEUT filtrer les notifications auto-référencées
+     - Cela concerne les cas où toute mise à jour du pod de données pourrait déclencher une mise à jour du journal d'événements
+- L'**application** répertorie les nouveaux événements non encore traités
+- L'**application** découvre l'événement `Annonce`
+- L'**application** est configurée par le responsable pour mettre automatiquement à jour les métadonnées de l'artefact avec un lien de révision
+   - L'application PEUT envoyer une notification à la boîte de réception scientifique pour informer l'orchestrateur de ce fait
 
-## A maintainer uses the dashboard to read the event log and updates the artefacts
+## Un responsable utilise le tableau de bord pour lire le journal d'événements et mettre à jour les artefacts
 
 <img src="images/scenario-1-c.svg" width="80%">
 
-- The **Maintainer** opens the (Scholarly) **Dashboard** and list new events
-    - The dashboard knows that the event log is a trusted append only resource for relevant notifications
-      that should be processed
-        - The dashboard doesn't need to redo the work of the orchestrator to clean the data pod (scholarly) inbox
-    - The dashboard MAY filter the event log for shapes
-    - The dashboard MAY filter out self-referencing notifications
-        - This is for cases where any update to the data pod could trigger an event log update
-- The **Maintainer** discovers the `Announce` event
-- The **Dashboard** suggest to update the artefact metadata in the **Data Pod** with the review link
-- The **Maintainer** approves and the **Dashboard** updates the artefact metadata
+- Le **responsable** ouvre le tableau de bord (scientifique) et répertorie les nouveaux événements
+  - Le tableau de bord sait que le journal d'événements est une ressource de confiance en lecture seule pour les notifications pertinentes qui doivent être traitées
+    - Le tableau de bord n'a pas besoin de refaire le travail de l'orchestrateur pour nettoyer la boîte de réception du pod de données (scientifique)
+  - Le tableau de bord PEUT filtrer le journal d'événements pour les formes
+  - Le tableau de bord PEUT filtrer les notifications auto-référencées
+    - Cela concerne les cas où toute mise à jour du pod de données pourrait déclencher une mise à jour du journal d'événements
+- Le **responsable** découvre l'événement `Annonce`
+- Le **tableau de bord** suggère de mettre à jour les métadonnées de l'artefact dans le **Data Pod** avec le lien de révision
+- Le **responsable** approuve et le **tableau de bord** met à jour les métadonnées de l'artefact
 
-## The orchstrator use policies to update service hubs
+## L'orchestrateur utilise des politiques pour mettre à jour les centres de services
 
-<img src="images/scenario-1-d.svg" width="80%">
+<img src="images/scenario-1-d.svg" width="80%">- L'**Orchestrator** a pour politique de mettre à jour une gamme de **Service Hubs**
+    - Il peut s'agir du même Orchestrator qui traite la boîte de réception ou d'un orchestrator institutionnel
+    - L'orchestrateur utilise le journal des événements comme une ressource d'ajout de confiance pour les Notifications pertinentes qui doivent être traitées
+- L'**Orchestrator** peut interroger un journal des événements local
+- L'**Orchestrator** découvre l'événement `Annonce`
+- L'**Orchestrator** associe la notification à un ensemble de politiques et notifie les services pertinents
 
-- The **Orchestrator** has a policy to update a range of **Service Hubs**
-    - This can be the same Orchestrator that processes the inbox or an institutional orchestrator
-    - The orchestrator uses the event log as a trusted append only resource for relevant Notifications
-      that should be processed
-- The **Orchestrator** can poll a local event log
-- The **Orchestrator** discovers the `Announce` event
-- The **Orchestrator** matches the notification to a set of policies and notifies relevant services
+# Scénario 2 : L'auteur demande une révision avec une possible approbation (via le dépôt)
 
-# Scenario 2: Author requests review with possible endorsement (via repository)
-
-From [COAR](https://notify.coar-repositories.org/scenarios/2/):
-<i>Initiated by the corresponding author, a repository requests a review for one of its resources from a trusted review service. No acknowledgement is sent by the overlay journal, but it notifies the repository of any successful reviews and endorsements.</i>
+À partir de [COAR](https://notify.coar-repositories.org/scenarios/2/):
+<i>Initié par l'auteur correspondant, un dépôt demande une révision pour l'une de ses ressources à un service de révision de confiance. Aucun accusé de réception n'est envoyé par la revue en superposition, mais elle notifie le dépôt de toute révision réussie et approbations.</i>
 
 <p>
 <class class="note">
-The *repository* is interpreted as the **Data Pod** in the examples below.
+Le *dépôt* est interprété comme le **Data Pod** dans les exemples ci-dessous.
 </class>
 </p>
 
 <p>
 <class class="note">
-The *journal* is interpreted as the **Certification Service** in the examples below.
+Le *journal* est interprété comme le **Service de Certification** dans les exemples ci-dessous.
 </class>
 </p>
 
 <img src="images/scenario-2.svg" width="80%">
+- Dans le **Tableau de bord**, un **Responsable** a initié une demande de révision en utilisant une notification AS2 `Offer` à la boîte de réception du **Service de Certification**
+    - Le service de certification DOIT répondre avec un code HTTP 200 ou 202 à l'`Offer`
+    - Le service de certification PEUT valider l'`Offer` et retourner des messages d'erreur 4**
+    - L'`Offer` DOIT contenir l'emplacement de la boîte de réception (Scholarly) au Data Pod
+    - Le Tableau de bord PEUT envoyer une copie carbone de l'Offer à la boîte de réception (Scholarly)
+    - Les notifications AS2 PEUVENT nécessiter des signatures ou d'autres mesures de sécurité qui établissent une communication de confiance entre le Tableau de bord et le Service de Certification
+- Le **Service de Certification** lance un flux de révision et envoie après un certain temps une notification AS2 `Announce` à la boîte de réception (Scholarly) du **Data Pod**
+    - L'`Announce` contient comme `object` un lien vers la révision publiée
+    - L'`Announce` contient comme `object` un lien vers un artefact sur le data pod
+    - On suppose que le data pod répondra avec un code HTTP 200 ou 202 à la soumission de la boîte de réception par le service de certification
+    - La boîte de réception Scholarly PEUT être la boîte de réception principale du data pod ou une boîte de réception spécialisée créée pour l'orchestrateur
+    - Le data pod PEUT avoir des mécanismes de validation en place et retourner des codes HTTP 4** lorsqu'une forme de notification inconnue a été soumise à la boîte de réception
+- Le **Service de Certification** lance un flux d'approbation et envoie une notification AS2 `Announce` à la boîte de réception (Scholarly)**
+    - Dans les cas d'utilisation ci-dessous, on suppose que les mêmes hypothèses peuvent être faites pour toute notification `Announce` envoyée par un service de certification
 
-- In the **Dashboard** a **Maintainer** initiated a request for review using an `Offer` AS2 notification to the inbox of the **Certification Service**
-    - The certification service SHALL respond with a HTTP 200 or 202 to the `Offer`
-    - The certification service MAY validate the `Offer` and return 4** error messages
-    - The `Offer` MUST contain the location of the (Scholarly) Inbox at the Data Pod
-    - The Dashboard MAY send a carbon copy of the Offer to the (Scholarly) Inbox
-    - The AS2 notifications MAY need signatures or other security measures that establish a trusted communication between the Dashboard and the Certificaton Service
-- The **Certification Service** starts a review workflow and sends after a while an `Announce` AS2 notification to the (Scholarly) **Inbox**
-of the **Data Pod**
-    - The `Announce` contains as `object` a link to the published review
-    - The `Announce` contains as `object` a link to an artefact on the data pod
-    - It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the certification service
-    - The scholarly inbox MAY be the main inbox of the data pod or a specialized inbox created for the orchestrator
-    - The data pod may MAY shape validation mechanisms in place and return HTTP 4** codes when an unknown
-    notification shape was submitted to the inbox
-- The **Certification Service** starts an endorsement workflow and sends an `Announce` AS2 notification to the (Scholarly) **Inbox**
-    - In the use cases below, it is assumed that the same assumptions can be made
-      for any `Announce` notification that is send by a certification service
+## L'orchestrateur lit la boîte de réception d'un data pod et met à jour un journal d'événements
 
-## Orchestrator reads the inbox of a data pod and updates an event log
+<img src="images/scenario-2-a.svg" width="80%">- Le **Tableau de bord** envoie un déclencheur à l'**Orchestrator** pour envoyer une notification `Offer` AS2 au **Service de Certification**
+- L'**Orchestrator** interroge la **Boîte de réception** (académique) du **Data Pod**
+- L'**Orchestrator** liste les notifications entrantes
+    - L'orchestrateur PEUT filtrer la liste de la boîte de réception pour des formes de ressources
+    - L'orchestrateur PEUT ignorer les notifications non fiables, invalides
+    - L'orchestrateur PEUT filtrer les notifications concernant des ressources qui n'existent plus dans le data pod
+    - L'orchestrateur DOIT traiter chaque notification une seule fois
+    - L'orchestrateur PEUT avoir uniquement la permission de lecture de la boîte de réception
+    - Dans un scénario de boîte de réception partagée, plusieurs applications ainsi que le mainteneur PEUVENT vouloir agir sur les notifications entrantes
+- L'**Orchestrator** sélectionne la notification qu'il souhaite traiter
+    - L'orchestrateur PEUT ignorer les notifications `Offer` si elles sont trouvées dans la boîte de réception
+        - Il PEUT s'agir d'une politique du mainteneur de ne pas ajouter les demandes `Offer` locales au journal d'événements
+- L'**Orchestrator** met à jour le **Journal des événements du cycle de vie de l'artefact** avec la notification
+    - L'orchestrateur PEUT stocker une version traitée de la notification `Announce` dans le journal d'événements
+    - La notification stockée `@id` DOIT être unique dans tous les journaux d'événements du data pod
+    - L'heure de mise à jour de l'événement DOIT être l'heure d'écriture de la ressource du journal d'événements
+    - Le journal d'événements du cycle de vie de l'artefact DOIT être lisible par le public
+- L'**Orchestrator** peut interroger un journal d'événements local
+- L'**Orchestrator** découvre l'événement `Announce`
+- L'**Orchestrator** associe la notification à un ensemble de politiques et notifie les services pertinents
 
-<img src="images/scenario-2-a.svg" width="80%">
+# Scénario 3 : Une revue de journal superposé annonce la revue et la validation d'un pré-imprimé à un service d'agrégation 'aval' 
 
-- The **Dashoard** sends a trigger to the **Orchestrator** to send an `Offer` AS2 Notification to the **Certification Service**
-- The **Orchestrator** polls the (scholarly) **Inbox** of the **Data Pod**
-- The **Orchestrator** lists incoming notifications
-    - The orchestrator MAY filter the inbox list for resource shapes
-    - The orchestrator MAY ignore untrusted , invalid notifications
-    - The orchestrator MAY filter out notifications about resources that don't exist (anymore) in the data pod
-    - The orchestrator SHALL processes each notification only once
-    - The orchestrator MAY only have read permission to the inbox
-    - In a shared inbox scenario, multiple applications plus the maintainer MAY want to act on incoming notifications
-- The **Orchestrator** selected the notification it wants to process
-    - The orchstrator MAY ignore `Offer` notifications if they are found in the inbox
-        - It MAY be a policy of the maintainer not to add local `Offer` requests to the event log
-- The **Orchestrator** updates the **Artefact Lifecycle Event Log** with the notification
-    - The orchestrator MAY store a processed version of the `Announce` notification in the event log
-    - The stored notification `@id` MUST be unique in all event logs of the data pod
-    - The event update time SHALL be the time of writing the event log resource
-    - The artefact lifecycle event log SHALL be public readable
-- The **Orchestrator** can poll a local event log
-- The **Orchestrator** discovers the `Announce` event
-- The **Orchestrator** matches the notification to a set of policies and notifies relevant services
-
-# Scenario 3 : Overlay Journal Announces Review and Endorsement of Pre-print to Aggregator
-
-From [COAR](https://notify.coar-repositories.org/scenarios/3/):
-<i>An overlay journal announces that it has reviewed and endorsed a pre-print to a 'downstream' aggregation service.</i>
-
-<p>
+A partir de [COAR](https://notify.coar-repositories.org/scenarios/3/):
+<i>Un journal superposé annonce qu'il a examiné et approuvé un pré-imprimé à un service d'agrégation 'aval'.</i><p>
 <class class="note">
-The *journal* is interpreted as the **Certification Service** in the examples below.
+Le *journal* est interprété comme le **Service de Certification** dans les exemples ci-dessous.
 </class>
 </p>
 
 <p>
 <class class="note">
-The *aggregator* is interpreted as the **Awareness Service** in the examples below.
+L'*agrégateur* est interprété comme le **Service de Sensibilisation** dans les exemples ci-dessous.
 </class>
 </p>
 
 <img src="images/scenario-3.svg" width="80%">
 
-- The **Certification Service** completes a review workflow and sends an `Announce` AS2 notification to the inbox of the **Awareness Service**
-- The **Certification Service** completes a endorsement workflow and sends an `Announce` AS2 notification to the inbox of the **Awareness Service**
+- Le **Service de Certification** complète un flux de travail de révision et envoie une notification `Annonce` AS2 à la boîte de réception du **Service de Sensibilisation**
+- Le **Service de Certification** complète un flux de travail de recommandation et envoie une notification `Annonce` AS2 à la boîte de réception du **Service de Sensibilisation**
 
-## Pod doesn't receive a notification
+## Le Pod ne reçoit pas de notification
 
-- The **Orchestrator** stays idle
+- L'**Orchestrator** reste inactif
 
-# Scenario 4 : Overlay Journal Endorses Pre-print (Initiated by Author)
+# Scénario 4 : Journal Recommande le Preprint (Initié par l'Auteur)
 
-From [COAR](https://notify.coar-repositories.org/scenarios/4/):
-<i>An author initiates a process for review and endorsement of their pre-print by filling in a form on the journal system. The information submitted includes the repository URI of the pre-print, a citeable PID (if available) and a link to the file.</i>
+Issu de [COAR](https://notify.coar-repositories.org/scenarios/4/):
+<i>Un auteur lance un processus de révision et de recommandation de son preprint en complétant un formulaire sur le système de journal. Les informations soumises incluent l'URI du dépôt du preprint, un PID citable (si disponible) et un lien vers le fichier.</i>
 
 <p>
 <class class="note">
-The *repository* is interpreted as the **Data Pod** in the examples below.
+Le *dépôt* est interprété comme le **Data Pod** dans les exemples ci-dessous.
 </class>
 </p>
 
 <p>
 <class class="note">
-The *journal* is interpreted as the **Certification Service** in the examples below.
+Le *journal* est interprété comme le **Service de Certification** dans les exemples ci-dessous.
 </class>
 </p>
 
 <img src="images/scenario-4.svg" width="80%">
 
-- The **Maintainer** starts a endorsement process at a **Certification Service**
-    - It is not specified how this process should be started
-    - It is assumed that the certification service knows or discovers the location of the (Scholarly) inbox of the maintainer
-- The **Certification Service** starts a endorsement workflow and sends after a while an `Announce` AS2 notification to the (Scholarly) **Inbox**
-of the **Data Pod**
-    - The `Announce` contains as `object` a link to the published review
-    - The `Announce` contains as `object` a link to an artefact on the data pod
-    - It is assumed that the data pod will respond with a HTTP 200 or 202 to inbox submission by the certification service
-    - The scholarly inbox MAY be the main inbox of the data pod or a specialized inbox created for the orchestrator
-    - The data pod may MAY shape validation mechanisms in place and return HTTP 4** codes when an unknown
-    notification shape was submitted to the inbox
+- Le **Mainteneur** lance un processus d'approbation auprès d'un **Service de Certification**
+    - Il n'est pas spécifié comment ce processus doit être lancé
+    - Il est supposé que le service de certification connaisse ou découvre l'emplacement de la boîte de réception (scholaire) du mainteneur
+- Le **Service de Certification** lance un flux d'approbation et envoie après un certain temps une notification AS2 `Annonce` à la boîte de réception (scholaire) du **Data Pod**
+    - L'`Annonce` contient comme `objet` un lien vers la revue publiée
+    - L'`Annonce` contient comme `objet` un lien vers un artefact sur le data pod
+    - Il est supposé que le data pod répondra par un HTTP 200 ou 202 à la soumission de la boîte de réception par le service de certification
+    - La boîte de réception scolaire PEUT être la boîte de réception principale du data pod ou une boîte de réception spécialisée créée pour l'orchestrateur
+    - Le data pod peut avoir des mécanismes de validation en place et renvoyer des codes HTTP 4** lorsqu'une forme de notification inconnue a été soumise à la boîte de réception
 
-## See Scenario 1
+## Voir le scénario 1
 
-- The possible use cases for the **Orchestrator** in Scenario 4 are equivalent to
-[Scenario 1](#scenario-1--author-requests-review-with-possible-endorsement-via-overlay-journal)
+- Les cas d'utilisation possibles pour l'**Orchestrateur** dans le Scénario 4 sont équivalents à [Scénario 1](#scenario-1--author-requests-review-with-possible-endorsement-via-overlay-journal)
 
-# Scenario 5: Repository requests review (on behalf of corresponding author)
+# Scénario 5 : Le dépôt demande une revue (au nom de l'auteur correspondant)
 
-From [COAR](https://notify.coar-repositories.org/scenarios/5/):
-*Initiated by the corresponding author, a repository requests a review for one of its resources from a trusted review service.*
+À partir de [COAR](https://notify.coar-repositories.org/scenarios/5/):
+*Initié par l'auteur correspondant, un dépôt demande une revue pour l'une de ses ressources à un service de revue de confiance.*
 
 <p>
 <class class="note">
-The *repository* is interpreted as the **Data Pod** in the examples below.
+Le *dépôt* est interprété comme le **Data Pod** dans les exemples ci-dessous.
 </class>
 </p>
 
 <p>
 <class class="note">
-The *journal* is interpreted as the **Certification Service** in the examples below.
+Le *journal* est interprété comme le **Service de Certification** dans les exemples ci-dessous.
 </class>
 </p>
 
 <img src="images/scenario-5.svg" width="80%">
+- Le **Maintainer** démarre via le **Tableau de bord** un processus de révision en envoyant une notification `Offre` AS2 à un **Service de Certification**
+- Le flux de travail de révision du **Service de Certification** évalue l'offre et envoie un `Accepter` AS2 à la **Boîte de réception** du **Data Pod**
+- Les flux de travail de révision du **Service de Certification** créent une révision et envoient un `Annonce` AS2 à la **Boîte de réception** du **Data Pod**
 
-- The **Maintainer** starts via the **Dashboard** a review process by sending an `Offer` AS2 notification to a **Certification Service**
-- The **Certification Service** review workflow evaluates the offer and sends an `Accept` AS2 to the **Inbox** of the **Data Pod**
-- The **Certification Service** review workflows creates a review and sends an `Announce` AS2 to the **Inbox** of the **Data Pod**
+## Voir Scénario 2
 
-## See Scenario 2
+- Les cas d'utilisation possibles pour l'**Orchestrator** dans le Scénario 2 sont fonctionnellement équivalents à [Scénario 2](#scenario-2-author-requests-review-with-possible-endorsement-via-repository)
 
-- The possible use cases for the **Orchestrator** in Scenario 2 are functionally equivalent to
-[Scenario 2](#scenario-2-author-requests-review-with-possible-endorsement-via-repository)
+# Scénario 6 : L'auteur soumet à un journal superposé en utilisant un dépôt pour héberger la ressource et les révisions
 
-# Scenario 6: Author submits to overlay journal using repository to host resource and reviews
-
-From [COAR](https://notify.coar-repositories.org/scenarios/6/):
-*The corresponding author submits a paper to an overlay journal. The journal deposits the paper in a repository and arranges reviews. The reviews are deposited in the repository.*
+À partir de [COAR](https://notify.coar-repositories.org/scenarios/6/):
+*Le correspondant de l'auteur soumet un article à un journal superposé. Le journal dépose l'article dans un dépôt et organise des révisions. Les révisions sont déposées dans le dépôt.*
 
 <p>
 <class class="note">
-In the examples below the repository is interpreted as **Registration Service**.
+Dans les exemples ci-dessous, le dépôt est interprété comme **Service d'Enregistrement**.
 </class>
 <p>
 
 <p>
 <class class="note">
-The repository MAY request from a **Maintainer** a review for a manuscript.
+Le dépôt PEUT demander à un **Maintainer** de réviser un manuscrit.
 </class>
 <p>
 
 <p>
 <class class="note">
-The *journal* is interpreted as the **Certification Service** in the examples below.
+Le *journal* est interprété comme le **Service de Certification** dans les exemples ci-dessous.
 </class>
 </p>
 
 <img src="images/scenario-6.svg" width="80%">
 
-- The **Certification Service** request that a **Registration Service** ingests a manuscript by sending an `Offer` AS2 notification
-- The **Registration Servic** ingest workflow accepts the manuscript and sends an `Accounce` AS2 notification to the **Certification Service**
-- Reviewers are invited to submit reviews to the **Registration Service**
-    - How this is done is not specified
-- The **Registration Service** notifies the **Certification Service** of a new review by sending an `Announce` AS2 notification
-- The **Certification Service** starts an endorsement workflow and notifies the **Registration Service** with an `Announce` AS notification on success
+- Le **Service de Certification** demande qu'un **Service d'Enregistrement** ingère un manuscrit en envoyant une notification `Offer` AS2
+- Le flux d'ingestion du manuscrit du **Service d'Enregistrement** accepte le manuscrit et envoie une notification `Accounce` AS2 au **Service de Certification**
+- Les évaluateurs sont invités à soumettre des évaluations au **Service d'Enregistrement**
+    - La manière de le faire n'est pas spécifiée
+- Le **Service d'Enregistrement** notifie le **Service de Certification** d'une nouvelle évaluation en envoyant une notification `Announce` AS2
+- Le **Service de Certification** lance un flux de validation et notifie le **Service d'Enregistrement** avec une notification `Announce` AS en cas de succès
 
-## Registration Service request review from maintainer. Orchestrator is triggered to send out AS2 notifications
+## Le Service d'Enregistrement demande une évaluation au responsable. L'orchestrateur est déclenché pour envoyer des notifications AS2
 
 <img src="images/scenario-6-a.svg" width="80%">
 
 <class class="note">
-This scenario investigates how a reviewer can be invited to submit a review for a manuscript
-in a **Registration Service**.
-</class>
+Ce scénario examine comment un évaluateur peut être invité à soumettre une évaluation pour un manuscrit dans un **Service d'Enregistrement**.
+</class>- Le **Service d'Inscription** découvre la boîte de réception (Scholarly) d'un **Responsable**
+- Le **Service d'Inscription** invite un **Responsable** à soumettre une évaluation en envoyant une notification `Offre` AS2
+- Le **Responsable** est notifié de l'offre
+    - Cela peut être fait de plusieurs manières :
+        - L'orchestrateur réalise des actions pour notifier le responsable de l'offre (par exemple, envoyer un e-mail)
+        - Le tableau de bord interroge la boîte de réception (scholaire) et présente des tâches au responsable
+- Le **Responsable** accepte la tâche dans le **Tableau de bord**
+- Le **Tableau de bord** envoie un déclencheur à l'**Orchestrateur** pour accepter l'offre
+- L'**Orchestrateur** met à jour le **Journal des Événements**
+- L'**Orchestrateur** envoie une notification `Accepter` AS2 au **Service d'Inscription**
+- Le **Responsable** soumet via le **Tableau de bord** une évaluation
+- Le **Tableau de bord** envoie un déclencheur à l'**Orchestrateur** pour annoncer l'évaluation
+- L'**Orchestrateur** met à jour le **Journal des Événements**
+- L'**Orchestrateur** envoie une notification `Annonce` AS2 au **Service d'Inscription**
 
-- The **Registration Service** discovers the (Scholarly) Inbox of a **Maintainer**
-- The **Registration Service** invites a **Maintainer** to submit a review by sending an `Offer` AS2 notification
-- The **Maintainer** is notified about the offer
-    - This can be done in many ways:
-        - The orchestrator does actions to notify the maintainer about the offer (e.g. sending an email)
-        - The dashboard polls the (scholarly)inbox and presents tasks to the maintainer
-- The **Maintainer** accepts the task in the **Dashboard**
-- The **Dashboard** sends a trigger to the **Orchestrator** to accept the Offer
-- The **Orchestrator** updates the **Event Log**
-- The **Orchestrator** sends an `Accept` AS2 notification to the **Registration Service**
-- The **Maintainer** submits via the **Dashboard** a review
-- The **Dashboard** send a trigger to the **Orchestrator** to announce the review
-- The **Orchestrator** updates the **Event Log**
-- The **Orchestrator** sends an `Announce` AS2 notification to the **Registration Service**
+# Scénario 7 : Le Service d'Évaluation Annonce l'Évaluation d'une Prépublication à un Agrégateur
 
-# Scenario 7: Review Service Announces Review of Pre-print to Aggregator
-
-From [COAR](https://notify.coar-repositories.org/scenarios/7/):
-<i>A review service announces that it has reviewed and endorsed a pre-print to a 'downstream' aggregation service.</i>
+Depuis [COAR](https://notify.coar-repositories.org/scenarios/7/):
+<i>Un service d'évaluation annonce qu'il a évalué et approuvé une prépublication à un service d'agrégation "aval".</i>
 
 <p>
 <class class="note">
-The *review service* is interpreted as the **Certification Service** in the examples below.
+Le *service d'évaluation* est interprété comme le **Service de Certification** dans les exemples ci-dessous.
 </class>
 </p>
 
 <p>
 <class class="note">
-The *aggregator* is interpreted as the **Awareness Service** in the examples below.
+L'*agrégateur* est interprété comme le **Service de Sensibilisation** dans les exemples ci-dessous.
 </class>
 </p>
 
 <img src="images/scenario-7.svg" width="80%">
 
-- A **Certification Service*** publishes a review and endorsement
-- A **Certification Service*** sends an `Announce` AS2 notification to an **Awareness Service**
+- Un **Service de Certification** publie une évaluation et une approbation
+- Un **Service de Certification** envoie une notification `Annonce` AS2 à un **Service de Sensibilisation**
 
-## Pod doesn't receive a notification
+## Le Pod ne reçoit pas de notification
 
-- The **Orchestrator** stays idle
+- L'**Orchestrateur** reste inactif
 
-# Scenario 8: Review Service Announces Review of Pre-print to Repository
+# Scénario 8 : Le Service d'Évaluation Annonce l'Évaluation d'une Prépublication à un Dépôt
 
-From [COAR](https://notify.coar-repositories.org/scenarios/7/):
-<i>A review service announces that it has reviewed and endorsed a pre-print to the repository.</i>
+Depuis [COAR](https://notify.coar-repositories.org/scenarios/7/):
+<i>Un service de révision annonce qu'il a examiné et approuvé une prépublication dans le référentiel.</i>
 
 <class class="note">
-The *repository* is interpreted as the **Data Pod** in the examples below.
+    Le *référentiel* est interprété comme le **Data Pod** dans les exemples ci-dessous.
 </class>
 
 <p>
 <class class="note">
-The *review service* is interpreted as the **Certification Service** in the examples below.
+    Le *service de révision* est interprété comme le **Service de certification** dans les exemples ci-dessous.
 </class>
 </p>
 
 <img src="images/scenario-8.svg" width="80%">
 
-- A **Certification Service** publishes a review and endorsement
-- A **Certification Service** sends an `Announce` AS2 notification to (Scholarly) **Inbox** of the **Data Pod**
+- Un **Service de certification** publie un examen et une approbation
+- Un **Service de certification** envoie une notification `Annonce` AS2 à la **Boîte de réception** (Scholarly) du **Data Pod**
 
-## See Scenario 1
+## Voir le scénario 1
 
-- The possible use cases for the **Orchestrator** in Scenario 8 are functionally equivalent to
-[Scenario 1](#scenario-1--author-requests-review-with-possible-endorsement-via-overlay-journal)
+- Les cas d'utilisation possibles pour l'**Orchestrator** dans le scénario 8 sont fonctionnellement équivalents à [Scénario 1](#scenario-1--author-requests-review-with-possible-endorsement-via-overlay-journal)
 
-# Scenario 9: Author requests reviews from review service, via repository
+# Scénario 9 : L'auteur demande des révisions au service de révision, via le référentiel
 
-From [COAR](https://notify.coar-repositories.org/scenarios/9/):
-<i>A review service announces that it has reviewed and endorsed a pre-print to the repository.</i>
+Depuis [COAR](https://notify.coar-repositories.org/scenarios/9/):
+<i>Un service de révision annonce qu'il a examiné et approuvé une prépublication dans le référentiel.</i>
 
 <p>
 <class class="note">
-The *repository* is interpreted as the **Data Pod** in the examples below.
+    Le *référentiel* est interprété comme le **Data Pod** dans les exemples ci-dessous.
 </class>
 </p>
 
 <p>
 <class class="note">
-The *review service* is interpreted as the **Certification Service** in the examples below.
+    Le *service de révision* est interprété comme le **Service de certification** dans les exemples ci-dessous.
 </class>
 </p>
 
 <img src="images/scenario-9.svg" width="80%">
 
-- In the **Dashboard** a **Maintainer** initiated a request for review using an `Offer` AS2 notification to the inbox of the **Certification Service**
-- The **Certification Service** starts a review workflow and sends after a while an `Announce` AS2 notification to the (Scholarly) **Inbox**
-of the **Data Pod**
-- The **Certification Service** starts an endorsement workflow and sends an `Announce` AS2 notification to the (Scholarly) **Inbox**
+- Dans le **Tableau de bord**, un **Responsable** a initié une demande de révision en utilisant une notification `Offre` AS2 dans la boîte de réception du **Service de certification**
+- Le **Service de certification** lance un flux de travail de révision et envoie après un certain temps une notification `Annonce` AS2 à la **Boîte de réception** (Scholarly) du **Data Pod**
+- Le **Service de certification** lance un flux de travail d'approbation et envoie une notification `Annonce` AS2 à la **Boîte de réception** (Scholarly)- Les cas d'utilisation possibles de l'**Orchestrator** dans le scénario 9 sont fonctionnellement équivalents à [Scénario 2](#scenario-2-author-requests-review-with-possible-endorsement-via-repository)
 
-## See Scenario 2
+# Remerciements
 
-- The possible use cases for the **Orchestrator** in Scenario 9 are functionally equivalent to
-[Scenario 2](#scenario-2-author-requests-review-with-possible-endorsement-via-repository)
-
-# Acknowledgement
-
-We thank Herbert Van de Sompel, [DANS + Ghent University](https://dans.knaw.nl/nl/), hvdsomp@gmail.com
-for the valuable input during this project.
+Nous remercions Herbert Van de Sompel, [DANS + Université de Gand](https://dans.knaw.nl/nl/), hvdsomp@gmail.com
+pour sa précieuse contribution à ce projet.

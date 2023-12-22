@@ -1,5 +1,5 @@
 <pre class='metadata'>
-Title: Mellon Orchestrator use cases
+Title : Cas d'utilisation de l'orchestrateur Mellon
 Shortname: orchestrator
 Level: 2
 Status: DREAM
@@ -9,198 +9,137 @@ Markup Shorthands: markdown yes
 Abstract: TODO
 </pre>
 
-# Mellon Orchestrator use cases
+# Cas d'utilisation de l'orchestrateur Mellon
 
-# Glossary
+# Glossaire
 
-Copied from [Orchestrator for a decentralized Digital Heritage Network](https://erfgoedpod.github.io/orchestrator/):
+Copié depuis [Orchestrator for a decentralized Digital Heritage Network](https://erfgoedpod.github.io/orchestrator/) :: 
+<dfn export>Acteur</dfn>
+:: Une entité (personne, application ou service) qui participe au réseau.
+: <dfn export>Agent humain</dfn>
+:: Une personne qui agit directement en tant qu'[=Acteur=] sur le réseau.
+: <dfn export>Agent autonome</dfn>
+:: Une instance logicielle intelligente qui agit au nom d'un [=Acteur=] sans aucune interférence de ce dernier.
+: <dfn export>Mainteneur</dfn>
+:: Un [=Agent humain=] qui peut effectuer manuellement des actions (voir [[#actions]]) sur le réseau à l'aide d'une application [=Tableau de bord=].
+:: Généralement une personne employée par une organisation (par exemple, une institution du patrimoine culturel) pour maintenir les données et ensembles de données possédés par cette organisation.
+: <dfn export>Pod de données</dfn>
+:: Tel que défini par [[solid-protocol]], un <a href="https://solidproject.org/TR/protocol#data-pod">Pod de données</a> est un endroit pour stocker des documents, avec des mécanismes de contrôle d'accès.
+: <dfn>Boîte de réception</dfn>
+:: Une ressource [[!LDP]] où d'autres acteurs peuvent POSTER des notifications de données liées [[!LDN]] afin de notifier l'acteur d'un changement dans le cycle de vie d'un artefact.
+: <dfn>Journal d'événements du cycle de vie de l'artefact</dfn>
+:: Une ressource HTTP servie par un acteur (par exemple, en tant que ressource dans le [=Pod de données=]) qui représente un journal d'événements du cycle de vie auxquels les artefacts connus de l'acteur ont participé.
+:: Les artefacts sont considérés comme connus lorsqu'ils résident dans le [=Pod de données=] de l'acteur ou si l'acteur en a pris connaissance via [[!LDN]].
+: <dfn export>Concentrateur de services</dfn>
+:: Un [=Acteur=] qui fournit un service à d'autres acteurs dans le réseau. Il s'agit d'une <a href="https://solidproject.org/TR/protocol#solid-app">application Solid</a> et sert une [=Boîte de réception=].
+: <dfn export>Politique</dfn>
+:: Un ensemble de règles métier lisibles par machine qui indiquent à l'[=Orchestrator=] quelles actions entreprendre en réponse à un déclencheur tel que des notifications entrantes, des changements perçus dans les données, ou une invocation manuelle par un [=Acteur=].
+: <dfn export>Tableau de bord</dfn>Une application utilisateur et une <a href="https://solidproject.org/TR/protocol#solid-app">application Solid</a> qui permet aux utilisateurs d'interagir avec le contenu du [=Data Pod=], de l'[=Orchestrator=] ou d'autres [=Acteurs=] dans le réseau du patrimoine numérique.
 
-: <dfn export>Actor</dfn>
-:: A entity (person, application or service) that participates in the network.
-: <dfn export>Human Agent</dfn>
-:: A person that operates directly as an [=Actor=] on the network.
-: <dfn export>Autonomous Agent</dfn>
-:: An intelligent software instance that operates on an [=Actor=]'s behalf but without any interference of that [=Actor=].
-: <dfn export>Maintainer</dfn>
-:: A [=Human Agent=] that can manually perform actions (see [[#actions]]) on the network using a [=Dashboard=] application.
-:: Usually a person employed by an organisation (e.g., a Cultural Heritage Institution) to maintain data and datasets owned by that organisation.
-: <dfn export>Data Pod</dfn>
-:: As defined by [[solid-protocol]], a <a href="https://solidproject.org/TR/protocol#data-pod">Data Pod</a> is a place for storing documents, with mechanisms for controlling who can access what.
-: <dfn>Inbox</dfn>
-:: An [[!LDP]] resource where others can POST Linked Data Notifications [[!LDN]] in order to notify the actor of a change an artefact's lifecycle.
-: <dfn>Artefact Lifecycle Event Log</dfn>
-:: An HTTP resource served by an actor (e.g., as a resource in the [=Data Pod=]) that represents a log of lifecycle events that artefacts known by the actor were involved in..
-:: Artefacts are considered known when they reside in the actor's [=Data Pod=] or if the actor has been made aware via [[!LDN]].
-: <dfn export>Service Hub</dfn>
-:: An [=Actor=] that provides a service to other actors in the network. It is a <a href="https://solidproject.org/TR/protocol#solid-app">Solid app</a> and serves an [=Inbox=].
-: <dfn export>Policy</dfn>
-:: A set of machine-readable business rules that instruct the [=Orchestrator=] on what actions to take in response to a trigger such as incoming notifications, perceived changes in the data, or manual invocation by an [=Actor=].
-: <dfn export>Dashboard</dfn>
-:: A user application and <a href="https://solidproject.org/TR/protocol#solid-app">Solid app</a> that enables users to interact with the contents of the [=Data Pod=], the [=Orchestrator=], or other [=Actors=] in the Digital Heritage Network.
-
-New added terminology:
+Nouvelle terminologie ajoutée :
 
 : <dfn export>Artefact</dfn>
-:: An HTTP resource on a [=Data Pod=] that the subject of (Scholarly) Communication (e.g. a publication,
-a review, a nanopublication, a dataset)
+:: Une ressource HTTP sur un [=Data Pod=] qui est l'objet de la Communication (Scholaire) (par exemple une publication, une critique, une nanopublication, un ensemble de données)
 : <dfn export>Orchestrator</dfn>
-:: An Orchestrator is an [=Autonomous Agent=] dedicated to an [=Actor=] that hosts a [=Data Pod=] with associated
-[=Inbox=] and [=Artefact Lifecycle Event Log=]. It interprets and executes business rules described in a [=Policy=].
-The Orchestrator watches the [=Inbox=] for possible triggers, records the actions it takes to the to the
-[=Artefact Lifecycle Event Log=], and communications with other Actors.
+:: Un Orchestrator est un [=Agent Autonome=] dédié à un [=Acteur=] qui héberge un [=Data Pod=] avec une [=Boîte de Réception=] et un [=Artefact Lifecycle Event Log=] associés. Il interprète et exécute les règles métier décrites dans une [=Politique=]. L'Orchestrator surveille la [=Boîte de Réception=] pour d'éventuels déclencheurs, enregistre les actions qu'il entreprend dans le [=Artefact Lifecycle Event Log=] et communique avec d'autres Acteurs.
 : <dfn export>App</dfn>
-:: An App is an [=Autonomous Agent=] dedicated to an [=Actor=] that hosts a [=Data Pod=]. The App can write to the
-[=Data Pod=] unsupervised by the [=Human Agent=] and is not limited to the [=Inbox=] or [=Artefact Lifecycle Event Log=].
+:: Une App est un [=Agent Autonome=] dédié à un [=Acteur=] qui héberge un [=Data Pod=]. L'App peut écrire dans le [=Data Pod=] sans surveillance de l'=Agent Humain=] et n'est pas limitée à la [=Boîte de Réception=] ou au [=Artefact Lifecycle Event Log=].
 
-Issue: Need a better name for the App
+Problème : Besoin d'un meilleur nom pour l'App
 
-# Difference between the Dashboard, App and Orchestrator
+# Différence entre le Tableau de Bord, l'App et l'Orchestrator
 
-In the following discussion three agents communicate with the **Data Pod** with different privileges: the **Orchestrator**,
-the **Dashboard** and the **App**. While in real applications these agents could overlap or might not be required at all (in
-some cases), in this document they are treated as separate entities to help the discussion. Some reasons why
-these Actors could be treated as separate entities:
+Dans la discussion suivante, trois agents communiquent avec le **Data Pod** avec des privilèges différents : l'**Orchestrator**, le **Tableau de Bord** et l'**App**. Bien que dans des applications réelles, ces agents puissent se chevaucher ou ne pas être nécessaires du tout (dans certains cas), dans ce document, ils sont traités comme des entités distinctes pour faciliter la discussion. Quelques raisons pour lesquelles ces Acteurs pourraient être considérés comme des entités distinctes :
 
-- privileges needed to access the **Data Pod**
-- requirements needed to receive direct feedback from a **Human Agent**
-- requirements needed to permanently be **online**
-- requirements needed to understand the **Scholarly Communication Notification protocol** and **Policies**
+- privilèges nécessaires pour accéder au **Data Pod**
+- exigences nécessaires pour recevoir des retours directs d'un **Agent Humain**
+- exigences pour être **en ligne** en permanence
+- exigences pour comprendre le protocole de **Notification de Communication Scholaire** et les **Politiques**
 
-With this regard:
-
-: App
-:: The App is a headless Autonomous Agent that doesn't need a Human Agent to execute write operations on the Data Pod.
-It is a trusted application for the Maintainer <s>that could in principle update any artifact on the Data Pod</s>. This application
-could run as a background service on the computer of the maintainer and be online as long as the computer is connected
-to a network.
-: Dashboard
-:: The Dashboard is an Agent that responds to feedback from an Human Agent. Typically this Dashboard runs in a browser
-can be in an online or offline modus when a browser is running on the computer of the maintainer with one of the browser
-tabs opened with the dashboard application.
-: Orchestrator
-:: The Orchestrator is an Autonomous Agent that can read the (Scholarly) **Inbox** of the **Data Pod** and append to
-the **Artefact Lifecycle Event Log**. Guided by policies expressed as business rules, the **Orchestrator** also communicates with the Scholar Community network using
-the **Scholarly Communication Notification protocol** implementing **Policies**.
+À cet égard :: Application
+:: L'application est un Agent autonome sans interface utilisateur qui n'a pas besoin d'un agent humain pour exécuter des opérations d'écriture sur le Data Pod. Il s'agit d'une application de confiance pour le Maintainer <s>qui pourrait en principe mettre à jour tout artefact sur le Data Pod</s>. Cette application pourrait fonctionner en arrière-plan sur l'ordinateur du mainteneur et rester connectée tant que l'ordinateur est connecté à un réseau.
+: Tableau de bord
+:: Le tableau de bord est un Agent qui répond aux retours d'information d'un agent humain. Habituellement, ce tableau de bord s'exécute dans un navigateur en mode en ligne ou hors ligne lorsque le navigateur est ouvert sur l'ordinateur du mainteneur avec l'application du tableau de bord ouverte dans un des onglets du navigateur.
+: Orchestrateur
+:: L'orchestrateur est un Agent autonome qui peut lire la **boîte de réception** (scholaire) du **Data Pod** et ajouter au **Journal d'événements du cycle de vie de l'artefact**. Guidé par des politiques exprimées sous forme de règles d'entreprise, l'**Orchestrateur** communique également avec le réseau de la communauté universitaire en utilisant le **protocole de notification de communication scolaire** implémentant des **Politiques**.
 
 <img src="images/mellon-orchestrator-solar.svg" width="40%">
 
-The three Actors can be seen as a mini solar system with the **Data Pod** as the Sun. The **App** is a fully trusted agent that runs very near to
-the data pod (in level of trust). The **Orchestrator** has very limited access rights to the data pod. The main
-task of the Orchestrator is to update the event log and execute policies in order to talk the Scholarly Communication Notification
-protocol (read/send messages from/to the corrrect Service Hubs).
-The **Dashboard** sits in between, it has control over the **Data Pod** but might (always) need user input to update the pod.
-Communication between the App/DashBoard and the Orchestrator happens via the Data Pod's Inbox.
-
-The networks below demonstrates the CRUD privileges imagined for the different actors in this document. The first
-network demonstrates a typical Solid setup where the Dashboard is a single page application that has direct access
-to the Data Pod and the App is more a background process running in the same computer as the Maintainer.
+Les trois Agents peuvent être vus comme un mini système solaire avec le **Data Pod** comme le Soleil. L'**Application** est un agent entièrement digne de confiance qui s'exécute très près du data pod (en termes de confiance). L'**Orchestrateur** a des droits d'accès très limités au data pod. La tâche principale de l'orchestrateur est de mettre à jour le journal des événements et d'exécuter des politiques afin de communiquer via le protocole de notification de communication scolaire (lire/envoyer des messages vers/depuis les centres de services corrects).
+Le **Tableau de bord** se situe entre les deux, il a le contrôle sur le **Data Pod** mais nécessite peut-être (toujours) une intervention de l'utilisateur pour mettre à jour le pod. La communication entre l'**Application/Tableau de bord** et l'**Orchestrateur** se fait via la boîte de réception du Data Pod.Les réseaux ci-dessous illustrent les privilèges CRUD envisagés pour les différents acteurs de ce document. Le premier réseau représente une configuration typique de Solid dans laquelle le tableau de bord est une application monopage ayant un accès direct au Data Pod, et l'application est davantage un processus en arrière-plan s'exécutant sur le même ordinateur que le Maintainer.
 
 <div><img src="images/mellon-crud-app.svg" width="80%"></div>
-<i>CRUD operations in case the DashBoard is single-page application and the App a background task</i>
+<i>Opérations CRUD dans le cas où le tableau de bord est une application monopage et l'application un processus en arrière-plan</i>
 
-Issue: Are the Rules and Inbox necesearily part of the Data Pod or can they exist as separate resources?
+Question : Les Règles et la Boîte de réception font-elles partie nécessairement du Data Pod, ou peuvent-elles exister en tant que ressources distinctes ?
 
-The second network demonstrates a more classic setup with a browser Dashboard controlled by a server App which uses a
-Data Pod as backend storage.
+Le deuxième réseau illustre une configuration plus classique avec un tableau de bord de navigateur contrôlé par une application serveur qui utilise un Data Pod comme stockage backend.
 
 <div><img src="images/mellon-crud.svg" width="80%"></div>
-<i>CRUD operations in case the Dashoard and App is a classic client/server application</i>
+<i>Opérations CRUD dans le cas où le tableau de bord et l'application sont une application client/serveur classique</i>
 
-# Communication between Data Pod and Scholarly Community network
+# Communication entre le Data Pod et le réseau de la communauté savante
 
-A2 Notifications can be sent from the researcher environment to **Service Hub** environments.
-For instance, in case of a request to review an artefact that resides in the **Data Pod**, an
-appropriate notification can be sent to a review **Service Hub**. The **Service Hub** can respond,
-for example, accepting or rejecting the review request, and, in the latter case, to relay
-the result of the review.
+Les notifications A2 peuvent être envoyées de l'environnement du chercheur vers les environnements **Service Hub**.
+Par exemple, en cas de demande de révision d'un artefact se trouvant dans le **Data Pod**, une notification appropriée peut être envoyée à un **Service Hub** de révision. Le **Service Hub** peut répondre, par exemple, en acceptant ou en refusant la demande de révision et, dans ce dernier cas, transmettre le résultat de la révision.
 
-The **Orchestrator** sends notifications in response to triggers that result from the execution of
-Policies - implemented as business rules - that are associated with the **Data Pod**. The **Orchestrator**
-receives notifications in response to the ones it sent. The **Orchestrator** records information
-contained in both outgoing and incoming notifications in the **Artefact Lifecycle Event Log**.
+Le **Orchestrator** envoie des notifications en réponse à des déclencheurs résultant de l'exécution de Politiques - mises en œuvre en tant que règles métier - associées au **Data Pod**. Le **Orchestrator** reçoit des notifications en réponse à celles qu'il a envoyées. Le **Orchestrator** enregistre les informations contenues dans les notifications sortantes et entrantes dans le **Journal des événements du cycle de vie de l'artefact**.Les notifications AS2 sont considérées comme une approche de haut niveau pour coordonner automatiquement l'exécution distribuée des fonctions cruciales de la communication savante. Les notifications garantissent simplement que les fonctions respectives sont exécutées conformément aux politiques, mais n'essaient pas d'automatiser l'accomplissement réel de la fonction elle-même. Par exemple, lorsqu'une "Offre" est envoyée à un service de révision, nous n'envisageons pas que le message contienne toutes les étapes pour automatiser entièrement le processus de soumission. Il pourrait contenir suffisamment de métadonnées pour des flux de travaux simples. En général, une communication hors bande pourrait être nécessaire pour effectuer toutes les étapes requises.
 
-The AS2 notifications are regarded as a high-level approach to automatically coordinate the distributed
-execution of the crucial functions of scholarly communication. The notifications merely ensure that the
-respective functions are in effect executed as prescribed by Policies, but do not attempt to
-automate the actual fullfilment of the function itself. For instance, when an `Offer` is sent to a Review Service
-we don't envision that message contains all the steps to fully automate the submission process.
-It could contain enough metadata for simple workflows. In general out of band communication
-could be needed to perform all required steps.
+Toutes les notifications AS2 sont envoyées à tous les **Acteurs** du réseau sous la forme de [Notifications de Données Liées](https://www.w3.org/TR/ldn/).
 
-All AS2 notifications are send to all **Actors** in the network in the form of [Linked Data Notifications](https://www.w3.org/TR/ldn/).
+Dans ce document d'utilisation, nous utilisons 5 types de notifications AS2 conformes au projet [COAR Notify](https://notify.coar-repositories.org/patterns/):
 
-In this use case document we use 5 types AS2 notifications in line with the
-[COAR Notify](https://notify.coar-repositories.org/patterns/) project.
+: **Offre**
+	::La notification "Offre" est utilisée lorsqu'un système offre l'une de ses ressources à un autre système pour effectuer une activité.
 
-: **Offer**
-:: The `Offer` notification is used when one system offers one of its resources to
-an other system to conduct some activity.
+: **Annuler**
+	::La notification "Annuler" est utilisée pour annuler une offre faite dans une notification précédente.
 
-: **Undo**
-:: The `Undo` notification is used to retract an offer made in a previous notification.
+: **Accepter**
+	::La notification "Accepter" est une réponse à une "Offre" faite dans une notification précédente. Elle indique que l'offre est acceptée.
 
-: **Accept**
-:: The `Accept` notification is a response to an `Offer` made in a previous notification.
-It indicates that the offer is accepted.
+: **Rejeter**
+	::La notification "Rejeter" est une réponse à une "Offre" faite dans une notification précédente. Elle indique que l'offre est rejetée.
 
-: **Reject**
-:: The `Reject` notificaion is a response to an `Offer` made in a previous notification.
-It indicates that the offer is rejected.
+: **Annonce**
+	::La notification "Annonce" est utilisée pour annoncer le résultat d'une activité : typiquement pour annoncer la disponibilité d'un nouvel artefact (scientifique).
 
-: **Announce**
-:: The `Announce` notification is used to announce the outcome of an activity: typically
-to announce the availability of a new (scholarly) artefact.
+# Le Data Pod envoie des notifications à un Concentrateur de Services
 
-# Data Pod sends notifications to a Service Hub
+Examinons deux exemples de la façon dont les notifications AS2 peuvent être envoyées en dehors de l'environnement des chercheurs et générer certains schémas de communication à partir de ces exemples.
 
-Let's provide two examples how AS2 notifications can be sent out of the researcher environment
-and generate some communication patterns out of these examples.
+## Le mainteneur annonce un artefact (terminé) dans le Data Pod
 
-## Maintainer Announces a (finished) artefact in the Data Pod
+<img src="images/mellon-scenario-1.svg" width="80%">- Le **Responsable** décide, après beaucoup de travail, qu'un artefact sur le **Data Pod** est prêt à entrer dans le domaine scolaire
+- Le **Responsable** utilise le **Tableau de bord** pour envoyer une notification `Annonce` à la **Boîte de réception** (scolaire) du **Data Pod**
+- L'**Orchestrator** interroge la **Boîte de réception** (scolaire) du **Data Pod** et découvre l'`Annonce` du **Responsable**
+    - Nous supposons que l'**Orchestrator** a la capacité de filtrer toutes les notifications fiables de la **Boîte de réception** (validation, signatures, correspondance de forme, etc.)
+- L'**Orchestrator** met à jour le **Journal des événements du cycle de vie**
+- L'**Orchestrator** a une liste de **Politiques** sur ce qu'il faut faire lorsqu'une nouvelle `Annonce` d'un type spécifique arrive et envoie une ou plusieurs notifications AS2 à un ou plusieurs **Hubs de service** en conséquence
 
-<img src="images/mellon-scenario-1.svg" width="80%">
+Problème : Tout ceci suppose que le service ServiceHub ne renvoie pas un code 4** (pour toute raison, métadonnées, privilèges, etc.)
 
-- The **Maintainer** decides, after a lot of work, that one artefact on the **Data Pod** is ready enter the scholarly realm
-- The **Maintainer** uses the **Dashboard** to send an `Announce` Notification to the (Scholarly) **Inbox** of the **Data Pod**
-- The **Orchestrator** polls the (Scholarly) **Inbox** of the **Data Pod** and discovers the `Announce` from the **Maintainer**
-    - We assume that the **Orchestrator** has capabilities to filter out all trusted notifications from the **Inbox** (validation,
-    signatures, shape matching, etc etc)
-- The **Orchestrator** updates the **Lifecycle Event Log**
-- The **Orchestrator** has a list of **Policies** what to do when a new `Announce` of a specific type arrives and
-sends one or more AS2 notifications to one or more **Service Hubs** accordingly
+Problème : Nous devons déterminer ce qui est nécessaire pour qu'un Orchestrator puisse comprendre dans quelle phase du cycle de vie d'un artefact il se trouve. Nous aurons également besoin d'une sorte de typologie pour un type d'artefact lui-même, par exemple, article, ensemble de données, logiciel, etc.
 
-Issue: This all assumes that the ServiceHub service doesn't send a 4** (for any reason, metadata, privileges, etc)
-
-Issue: We need to determine what is required for an Orchestrator to be able to understand in which phase of an
-artefact lifecycle it is dealing with. Also we will need some kind of typology for an artefact type itself,
-eg paper, dataset, software, etc.
-
-## Maintainer Offers an artefact in the Data Pod to a Service Hub
+## Le Responsable offre un artefact dans le Data Pod à un Hub de service
 
 <img src="images/mellon-scenario-2.svg" width="80%">
 
-- The **Maintainer** decides to send one artefact to an **Certificaton Service** to request a review
+- Le **Responsable** décide d'envoyer un artefact à un **Service de certification** pour demander un examen
 
-Issue: Herbert: This would typically be triggered by a notification sent from the Orchestrator to the Inbox
-as a result of the execution of the Policy "once an artefact has entered the scholarly realm it should be certified".
-The Maintainer can then decide whether or not to request review and where. I think it would be good to add this
-to the pic as it nicely connects to the previous cases + illustrates policy
+Problème : Herbert : Cela serait généralement déclenché par une notification envoyée par l'Orchestrator à la Boîte de réception à la suite de l'exécution de la politique "une fois qu'un artefact est entré dans le domaine scolaire, il doit être certifié". Le Responsable peut alors décider s'il souhaite demander un examen et où. Je pense qu'il serait bon d'ajouter cela à l'image car cela se connecte bien aux cas précédents + illustre la politique- Le **Maintainer** prépare dans le **Dashboard** les métadonnées requises et envoie une notification `Offer` à la **Boîte de réception** (Scholarly) du **Data Pod**
+- L'**Orchestrator** interroge la **Boîte de réception** (Scholarly) du **Data Pod** et découvre l'offre du **Maintainer**
+- L'**Orchestrator** met à jour le **Journal des événements du cycle de vie**
+- L'**Orchestrator** envoie l'offre au **Service de certification**
+    - Avec `@id` l'emplacement réseau du journal des événements `https://bob.pod.org/events/cb7b1aed`
 
-- The **Maintainer** prepares in the **Dashboard** the required metadata and sends an `Offer` Notification
-to the (Scholarly) **Inbox** of the **Data Pod**
-- The **Orchestrator** polls the (Scholarly) **Inbox** of the **Data Pod** and discovers the `Offer` from the **Maintainer**
-- The **Orchestrator** updates the **Lifecycle Event Log**
-- The **Orchestrator** sends the `Offer` to the **Certification Service**
-    - With `@id` the network location of the event log `https://bob.pod.org/events/cb7b1aed`
+## Politiques Possibles
 
-## Possible Policies
-
-Possible policies that can be available for these use cases (using a pseudo policy language).
+Des politiques possibles qui peuvent être disponibles pour ces cas d'utilisation (en utilisant un langage de politique pseudo).
 
 <div class="example">
 The pseudo policy language used there tries to match new Notifications to a Shape , constructing
 this shape with new properties, under specific conditions
-
 ```
 <SHAPE>
   <PROPERTIES>
@@ -210,122 +149,120 @@ this shape with new properties, under specific conditions
 
 </div>
 
-Add only `Announce` and `Accept` notifications from the **Maintainer** to the **Event Log**
+</div>
+
+Ajouter uniquement les notifications `Annonce` et `Accepter` du **Responsable** au **Journal des événements**
 
 <div class="example">
 ```
 mellon:AppendScholarlyRecord
-  a EventResource
-  a AppendResource
-  when
+  a RessourceÉvénement
+  a RessourceAjout
+  quand
     a Notification
-        isFrom(Maintainer)
-        inSet(Announce,Accept)
-        isOfType(Article,Review,Dataset)
+        isFrom(Responsable)
+        inSet(Annonce,Accepter)
+        isOfType(Article,Revue,Jeu de données)
 
 ```
 </div>
 
-Forward every `Announce` from the **Maintainer** to the institutional **Registation Service**
-and **Archiving Service**
+Transférer chaque `Annonce` du **Responsable** au **Service d'enregistrement** institutionnel
+et au **Service d'archivage**
 
 <div class="example">
 ```
-mellon:ForwardToCatalog
+mellon:TransférerAuCatalogue
   a Notification
-  rdfs:label "Register at my library catalog"
-  target:
-    id: http://my.institution.org
-    ldp:inbox: http://my.institution.org/inbox
-    type: System
-  when
+  rdfs:label "Enregistrer dans mon catalogue de bibliothèque"
+  cible:
+    id: http://mon.institution.org
+    ldp:inbox: http://mon.institution.org/inbox
+    type: Système
+  quand
     a Notification
-        isFrom(Maintainer)
-        inSet(Announce)
+        isFrom(Responsable)
+        inSet(Annonce)
 
-mellon:ForwardToArchive
+mellon:TransférerAuxArchives
   a Notification
-  rdfs:label "Add to our archive"
-  target:
+  rdfs:label "Ajouter à nos archives"
+  cible:
     id: http://dataforever.edu
     ldp:inbox: http://dataforever.edu/submission/new/inbox
-    type: System
-  when
+    type: Système
+  quand
     a Notification
-        isFrom(Maintainer)
-        inSet(Announce)
+        isFrom(Responsable)
+        inSet(Annonce)
 ```
 </div>
 
-Forward a notification from a **Maintainer** with a `cc` (e.g. an Offer) to an external *Service Hubs*.
+Transférer une notification d'un **Responsable** avec une `cc` (par exemple une Offre) à des *Services Hubs* externes.
 
 <div class="example">
 ```
-mellon:ForwardCC
+mellon:TransférerCC
   a Notification
-  rdfs:label "Forward messages with a cc"
-  target:
+  rdfs:label "Transférer les messages avec une cc"
+  cible:
     id: @cc
-  when
+  quand
     a Notification
-        isFrom(Maintainer)
+        isFrom(Responsable)
         has(cc)
-        notEqual(cc,Maintainer)
-```
+        notEqual(cc,Responsable)```
 </div>
 
-## Orchestrator side effects
+## Effets secondaires de l'orchestrateur
 
-Based on the **Policies**:
+Basé sur les **Politiques** :
 
-- <s>The **Orchestrator** polls the **Inbox** for new notifications</s>
-- The **Orchestrator** matches every new notificaton against the **Policies**
-    - This will result in zero or more matched policy shapes
-    - When the Shape matches an `mellon:EventLogRecord` then a new EventLog is created
-    - When the Shape matches an `mellon:ForwardMessage` then a new AS2 notification is sent.
+- <s>L'**Orchestrateur** interroge la **Boîte de réception** pour de nouvelles notifications</s>
+- L'**Orchestrateur** met en correspondance chaque nouvelle notification avec les **Politiques**
+    - Cela donnera lieu à aucune ou plusieurs formes de politique correspondantes
+    - Lorsque la forme correspond à un `mellon:EventLogRecord`, un nouveau journal d'événements est créé
+    - Lorsque la forme correspond à un `mellon:ForwardMessage`, une nouvelle notification AS2 est envoyée.
 
 
-# Service Hub sends notifications to Data Pod
+# Le centre de services envoie des notifications au Data Pod
 
-## Service Hub Announces a new resource about an artefact in the Data Pod
+## Le centre de services annonce une nouvelle ressource concernant un artefact dans le Data Pod
 
-### Service Hub Announce is a response to a previous Offer
+### L'annonce du centre de services est une réponse à une offre précédente
 
-For example, a **Maintainer** request that a journal reviews on of the publications
-that can be found on the **Data Pod**. In a previous step an `Offer` was sent to
-to journal as **Certification Service**. In response to the `offer` the journal sends
-an `Announce` to the (Scholarly) **Inbox** of the **Data Pod**.
+Par exemple, un **Responsable** demande qu'une revue de presse soit réalisée sur l'une des publications
+qui se trouve sur le **Data Pod**. À une étape antérieure, une `Offre` a été envoyée à
+la revue en tant que **Service de certification**. En réponse à l'`offre`, la revue envoie
+une `Annonce` à la **Boîte de réception** (scientifique) du **Data Pod**.
 
 <img src="images/mellon-scenario-3.svg" width="80%">
 
-- The **Orchestrator** finds in the (Scholarly) **Inbox** of the **Data Pod** an `Announce` notification
-- The `Announce` contains an `inReplyTo` property to a previous `Offer`
-- The **Orchestrator** validates the `Offer` against the **Event Log**
-- The **Orchestrator** updates the **Lifecycle Event Log** with the AS2 notification
+- L'**Orchestrateur** trouve dans la **Boîte de réception** (scientifique) du **Data Pod** une notification `Annonce`
+- L'`Annonce` contient une propriété `inReplyTo` faisant référence à une `Offre` précédente
+- L'**Orchestrateur** valide l'`Offre` par rapport au **Journal d'événements**
+- L'**Orchestrateur** met à jour le **Journal des événements du cycle de vie** avec la notification AS2
 
-Issue: Is this a verbatim copy of the AS2 notification or a processed version?
+Problème : S'agit-il d'une copie littérale de la notification AS2 ou d'une version traitée ?
 
-### Service Hub Announce is standalone
+### L'annonce du centre de services est autonome
 
-For example, an overlay journal adds an article it found in an **Data Pod**, via the WebID
-of the author, the journals sends an `Announce` notification to the (Scholarly) **Inbox**
-of the **Data Pod**.
+Par exemple, une revue en superposition ajoute un article trouvée dans un **Data Pod**, via l'identifiant WebID
+de l'auteur, la revue envoie une notification `Annonce` à la **Boîte de réception**
+(scientifique) du **Data Pod**.
 
 <img src="images/mellon-scenario-4.svg" width="80%">
+- L'**Orchestrator** trouve dans la boîte de réception (académique) du **Data Pod** une notification de type `Annonce`
+- L'`Annonce` ne comporte pas de propriété `inReplyTo` faisant référence à une `Offre` antérieure
+- L'**Orchestrator** ignore la notification mais ne la supprime pas de la **Boîte de réception** car elle concerne l'URI d'un artefact académique dans le **Data Pod**
+- Le **Maintainer** repère via le **Dashboard** l'`Annonce` autonome dans la boîte de réception (académique)
+- Le **Maintainer** envoie un `Accepter` avec un `inReplyTo` à l'`Annonce` dans la boîte de réception (académique)
+- L'**Orchestrator** trouve à la fois l'ancienne notification de type `Annonce` et la nouvelle notification de type `Accepter`
+- L'**Orchestrator** dispose d'une **Politique** selon laquelle lorsque les deux notifications correspondent, elles peuvent être enregistrées dans le **Journal des événements du cycle de vie**
 
-- The **Orchestrator** finds in the (Scholarly) **Inbox** of the **Data Pod** an `Announce` notification
-- The `Announce` doens't an `inReplyTo` property to a previous `Offer`
-- The **Orchestrator** ignores the notification but does not remove it from the **Inbox** because
-it pertains to the URI of a scholarly artefact in the **Data Pod**.
-- The **Maintainer** finds via the **Dashboard** the standalone `Announce` in the (Scholarly) **Inbox**
-- The **Maintainer** sends an `Accept` with an `inReplyTo` to the `Announce` to the (Scholarly) **Inbox**
-- The **Orchestrator** finds both the old `Announce` notification and new `Accept` notification
-- The **Orchestrator** has a **Policy** that when both notifications match, they can be written
-to the **Lifecycle Event Log**
+## Politiques Possibles
 
-## Possible Policies
+# Remerciements
 
-# Acknowledgement
-
-We thank Herbert Van de Sompel, [DANS + Ghent University](https://dans.knaw.nl/nl/), hvdsomp@gmail.com
-for the valuable input during this project.
+Nous remercions Herbert Van de Sompel, [DANS + Université de Gand](https://dans.knaw.nl/nl/), hvdsomp@gmail.com
+pour sa précieuse contribution à ce projet.

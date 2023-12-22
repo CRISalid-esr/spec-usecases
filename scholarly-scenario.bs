@@ -1,5 +1,5 @@
 <pre class='metadata'>
-Title: Scholarly use cases
+Title: Cas d'utilisation universitaire
 Shortname: orchestrator
 Level: 2
 Status: DREAM
@@ -9,176 +9,161 @@ Markup Shorthands: markdown yes
 Abstract: TODO
 </pre>
 
-# Alice creates a scholary artefact
+# Alice crée un artefact universitaire
 
 <img width="900px" src="images/alice-creates-scholarly-artefact.svg"/>
 
-- Alice login into her dashboard
-- She creates a new artefact stub
-    - Adds some metadata:
-        - Title
-        - Author(s)
-            - as WebIds
-        - Subjects
-            - ontology based
-        - Abstract
-        - Status
-            - Private
+- Alice se connecte à son tableau de bord
+- Elle crée un nouvel artefact d'ébauche
+    - Ajoute des métadonnées :
+        - Titre
+        - Auteur(s)
+            - en tant qu'identifiants Web
+        - Sujets
+            - basés sur une ontologie
+        - Résumé
+        - Statut
+            - Privé
             - Public
-        - Status ..set of   
-            - [ ] Registered
-            - [ ] Certified
-            - [ ] Archived
-- The artefact will result in a new landing page on the pod
-    - With all the descriptive metadata
-    - With technical metadata
-        - Creation date
-        - Last update date
-        - Files
-            - Number of files
-            - Sizes
-            - Names
+        - Statut ..ensemble de
+            - [ ] Enregistré
+            - [ ] Certifié
+            - [ ] Archivé
+- L'artefact entraînera la création d'une nouvelle page d'atterrissage sur le pod
+    - Avec toutes les métadonnées descriptives
+    - Avec des métadonnées techniques
+        - Date de création
+        - Date de dernière mise à jour
+        - Fichiers
+            - Nombre de fichiers
+            - Tailles
+            - Noms
             - Types
-    - It will trigger an `as:Create` about the artefact
+    - Cela déclenchera un `as:Create` concernant l'artefact
 
-- Alice can upload one or more files for this artefact
-    - It will trigger an `as:Update` about the artefact
+- Alice peut téléverser un ou plusieurs fichiers pour cet artefact
+    - Cela déclenchera un `as:Update` concernant l'artefact
 
-- Alice can delete one or more files in this artefact
-    - It will trigger an `as:Update` about the artefact
+- Alice peut supprimer un ou plusieurs fichiers dans cet artefact
+    - Cela déclenchera un `as:Update` concernant l'artefact
 
-- Alice can edit the metadata for this artefact
-    - It will trigger an `up:Update` about the artefact
+- Alice peut modifier les métadonnées pour cet artefact
+    - Cela déclenchera un `up:Update` concernant l'artefact
 
-- Alice can delete the artefact
-    - It will trigger an `as:Delete` about the artefact
+- Alice peut supprimer l'artefact
+    - Cela déclenchera un `as:Delete` concernant l'artefact
 
-- Alice can say the artefact is ready for view
-    - It will trigger an `as:Announce` about the artefact
-    - It will trigger an update of the Alice's event log by her
-      orchestrator 
-      
-# Bob want to know about Alices artefacts
+- Alice peut indiquer que l'artefact est prêt à être consulté
+    - Cela déclenchera un `as:Announce` concernant l'artefact
+    - Cela déclenchera une mise à jour du journal d'événements d'Alice par son orchestrator 
+
+# Bob souhaite en savoir plus sur les artefacts d'Alice
 
 <img width="600px" src="images/bob-wants-to-know-about-alices-artefacts.svg"/>
 
-- Bob's orchestrator discover a new `as:Announce` in Alice's outbox
-- Bob's orchestrator sends a message to Bob's inbox about this event
+- L'orchestrateur de Bob découvre un nouveau `as:Announce` dans la boîte de réception d'Alice
+- L'orchestrateur de Bob envoie un message à la boîte de réception de Bob concernant cet événement
 
-NOTE: This is not a topic in scope of Mellon value chains and may be skipped for now
+NOTE : Il ne s'agit pas d'un sujet relevant des chaînes de valeur de Mellon et peut être ignoré pour le moment
 
-# Alice can send a notification to a ServiceHub
+# Alice peut envoyer une notification à un ServiceHub
 
 <img width="900px" src="images/alice-can-send-notication-to-servicehub.svg"/>
 
-- Alice use her Alice Dashboard to select an artefact 
-- Alice's Dashboard can send an notification to a Service Hub
-    - Alice can in the dashboard select a Service Hub from a list
-        - The dashboard reads this list of Service Hub from a FOAF-registry
-    - Alice's dashboard will send the `as:Offer` to Alice's orchestrator
-- Alice's Orchestrator will append to the Event Log of the Alice's pod
-- Alice's Orchestrator will forward the notification to the Service Hub
+- Alice utilise son tableau de bord Alice pour sélectionner un artefact
+- Le tableau de bord d'Alice peut envoyer une notification à un Service Hub
+    - Alice peut dans le tableau de bord sélectionner un Service Hub dans une liste
+        - Le tableau de bord lit cette liste de Service Hub à partir d'un registre FOAF
+    - Le tableau de bord d'Alice enverra l'`as:Offer` à l'orchestrateur d'Alice
+- L'orchestrateur d'Alice ajoutera au journal des événements du pod d'Alice
+- L'orchestrateur d'Alice transmettra la notification au Service Hub
 
-# Alice can see an overview of all notifications and events of her pod
+# Alice peut voir un aperçu de toutes les notifications et événements de son pod
 
 <img width="600px" src="images/alice-can-see-overview-of-notifications-and-events-of-pod.svg"/>
 
-- Alice login into her dashboard
-- Alice can get an overview of all messages in her inbox and
- events from her Event Log
-     - Alice's dashboard will get all notifications from both
-       resources and present it to Alice
+- Alice se connecte à son tableau de bord
+- Alice peut obtenir un aperçu de tous les messages dans sa boîte de réception et événements de son journal des événements
+     - Le tableau de bord d'Alice obtiendra toutes les notifications à la fois des ressources et les présentera à Alice
 
-# Registration hub accepts Offers from Alice
+# Le hub d'inscription accepte les offres d'Alice
 
 <img width="900px" src="images/registration-hub-accepts-offers-from-alice.svg"/>
 
-- Registration hub is e.g. an institutional repository
+- Le hub d'inscription est par exemple un référentiel institutionnel- Alice sélectionne un artefact pour l'enregistrement et prépare une `as:Offer` pour le centre d'enregistrement (dépôt institutionnel).
+- Son tableau de bord envoie cette `as:Offer` à l'orchestrateur d'Alice.
+- L'orchestrateur d'Alice :
+    - Ajoute la `as:Offer` au journal d'événements d'Alice dans le pod d'Alice.
+    - Transmet la `as:Offer` au dépôt institutionnel.
+- Un processus dans le dépôt institutionnel a son propre traitement interne pour :
+    - Examiner la boîte de réception du dépôt institutionnel et trouver une `as:Offer` d'Alice.
+    - Accepter automatiquement cette offre et envoyer un `as:Accept` au Pod d'Alice.
+    - Ajouter le `as:Accept` au journal d'événements du dépôt.
+    - Enregistrer automatiquement un artefact d'Alice dans le dépôt institutionnel.
+        - Le dépôt institutionnel contacte le pod d'Alice pour récupérer l'artefact.
+        - À partir de l'artefact, un lien de signalisation vers describedBy peut être trouvé.
+        - Le describedBy contient des métadonnées descriptives au format de données liées.
+        - Ces données liées peuvent être converties en un enregistrement de métadonnées provisoire pour le dépôt institutionnel.
+    - Tout ce traitement peut être implémenté avec un orchestrateur mais ce n'est pas obligatoire.
+- Le gestionnaire d'enregistrement met à jour manuellement l'artefact déposé par Alice dans le dépôt institutionnel.
+- Le gestionnaire d'enregistrement envoie un `as:Announce` à Alice avec le résultat du processus d'enregistrement.
+- Un processus dans le dépôt institutionnel ajoute le `as:Announce` au journal d'événements du dépôt.
+- L'orchestrateur d'Alice mettra à jour le journal d'événements d'Alice avec la notification `as:Accept`.
+- L'orchestrateur d'Alice mettra à jour le journal d'événements d'Alice avec la notification `as:Announce`.
 
-- Alice selects an artefact for registration and prepares an `as:Offer` for the 
-  registration hub (institutional repository). 
-- Her dashboard sends this `as:Offer` to the Alice orchestrator
-- Alice's orchestrator:
-    - Appends the `as:Offer` to Alice's Event Log of Alice's pod    
-    - Forwards the `as:Offer` to the institutional repository
-- A process in the institutional repository has it own internal processing to:
-    - Poll the inbox of the institutional repository and find an `as:Offer` from Alice
-    - Automatic accepts this offer and send an `as:Accept` to Alice's Pod 
-    - Append the `as:Accept` to the Repository Event Log
-    - Automatic a registration of Alice's artefact into the institutional repository
-        - The instutional repository contacts Alice's pod to retrieve the artefact
-        - From the artefact an Signposting link to describedBy can be found
-        - The describedBy contains descriptive metadta in linked data format
-        - This linked data can be converted in a draft metadata record for the institutional repository
-    - All this processing can be implemented with an Orchestrator but doesn't have to
-- Registration manager manually updates Alice deposited artefact in the institutional repository
-- Registration manager sends an `as:Announce` back to Alice with the result of the registration process
-- A process in the institutional repository append the `as:Announce` to the Repository Event Log
-- Alice's orchestrator will update Alice's Event Log with the `as:Accept` notification
-- Alice's Orchestrator will update Alice's Event Log with the `as:Announce` notification
+# Le centre archivistique accepte les services
 
-# Archival hub accepts services
-
-<img width="900px" src="images/archival-hub-accepts-services.svg"/>
-
-- Alice selects an artefact for archivation and prepares an `as:Offer` for the 
-  Archival Hub
-- Her dashboard sends this `as:Offer` to the Alice orchestrator
-- Alice's orchestrator:
-    - Forwards the `as:Offer` to the Archival Hub
-    - Appends the `as:Offer` to Alice's Event Log of Alice's pod    
-- A process at the Archival Hub has it own internal processing to:
-    - Accepts `as:Offer` from Alice and send an `as:Accept` to Alice's Pod 
-    - Start an archivation process:
-        - Send the Alice artefact to Robust Links
-        - Poll Robust Links to check the archival status
-    - When the artefact is archived at Robust Links:
-        - Send an `as:Announce` notification to Alice
-        - Appends the `as:Announce` to the Archival Hub Event Log 
-    - All this processing can be implemented with an Orchestrator but doesn't have to
-- Alice's orchestrator will update Alice's Event Log with the `as:Accept` notification
-- Alice's Orchestrator will update the Event Log on Alice Pod based 
- on this trigger
+<img width="900px" src="images/archival-hub-accepts-services.svg"/>- Alice sélectionne un artefact pour l'archivage et prépare une `as:Offer` pour le Hub d'archivage
+- Son tableau de bord envoie cette `as:Offer` à l'orchestrateur d'Alice
+- L'orchestrateur d'Alice :
+    - Transfère la `as:Offer` au Hub d'archivage
+    - Ajoute la `as:Offer` au journal des événements du pod d'Alice    
+- Un processus au sein du Hub d'archivage a son propre traitement interne pour :
+    - Accepter la `as:Offer` d'Alice et envoyer un `as:Accept` au Pod d'Alice
+    - Démarrer un processus d'archivage :
+        - Envoyer l'artefact d'Alice à Robust Links
+        - Interroger Robust Links pour vérifier le statut d'archivage
+    - Lorsque l'artefact est archivé chez Robust Links :
+        - Envoyer une notification `as:Announce` à Alice
+        - Ajouter la `as:Announce` au journal des événements du Hub d'archivage
+    - Tout ce traitement peut être implémenté avec un Orchestrateur mais ce n'est pas obligatoire
+- L'orchestrateur d'Alice mettra à jour le journal des événements d'Alice avec la notification `as:Accept`
+- L'Orchestrator d'Alice mettra à jour le journal des événements sur le Pod d'Alice en fonction de ce déclencheur
 
 
-# Orchestrator suggests Services
+# L'orchestrateur suggère des Services
 
-- Based on status of the metadata
-- Based on univesity policies
+- En fonction de l'état des métadonnées
+- En fonction des politiques universitaires
 
-E.g.
+Par exemple:
 
-- *Library* request to Offer New registered artefacts to 
-    be registered at the institutional repository
-    - Can be automated
-- *Faculty* request to Offer New registerd artefacts to 
-    a faculty registry
-    - Can be automated
-- *University* request to Offer New registered artefacts to
-    a Data Management Plan service
-        E.g. https://dmponline.be
-    - Requires manual intervention by Alice
-- *Conference* request to Offer an artefact about a topic
-    - Requires manual intervation by Alice
-- *Discovery Hub* request to Offer new artefacts to be included
-    in the index    
-    - Can be automated
+- La *Bibliothèque* demande d'offrir de nouveaux artefacts enregistrés à 
+    être enregistrés dans le référentiel institutionnel
+    - Peut être automatisé
+- La *Faculté* demande d'offrir de nouveaux artefacts enregistrés à 
+    un registre de la faculté
+    - Peut être automatisé
+- L'*Université* demande d'offrir de nouveaux artefacts enregistrés à
+    un service de Plan de Gestion des Données
+        Par exemple : https://dmponline.be
+    - Nécessite une intervention manuelle d'Alice
+- La *Conférence* demande d'offrir un artefact sur un sujet
+    - Nécessite une intervention manuelle d'Alice
+- Le *Discovery Hub* demande d'offrir de nouveaux artefacts à inclure
+    dans l'index    
+    - Peut être automatisé
 
 <img width="900px" src="images/orchestrator-suggests-next-step.svg"/>
 
-In the demonstrator one use case can be demonstrated:
+Dans le démonstrateur, un cas d'utilisation peut être démontré:- Le Pod d'Alice reçoit une `as:Announce` d'un Hub d'enregistrement avec un sous-type `RegistrationAction`.
+- L'orchestrateur d'Alice :
+    - Ajoute la `as:Announce` au journal d'événements d'Alice sur le Pod d'Alice
+    - Crée une `as:Note` suggérant à Alice une action d'archivage comme étape suivante.
+        - L'orchestrateur d'Alice envoie cette `as:Note` comme un `as:Create` dans la boîte de réception du Pod d'Alice.
+- Alice lit la note et décide si elle souhaite suivre la suggestion.
 
-- Alice's Pod receives an `as:Announce` from a Registration Hub with a subtype 
-  `RegistrationAction`.
-- Alice's Orchestrator:
-    - Appends the as:Announce to Alice’s Event Log of Alice’s pod
-    - Creates an `as:Note` which suggests Alice an archivation action as next
-     step.
-        - Alice's Orchestrator sends this `as:Note` as an `as:Create` to 
-          the inbox of Alice's pod
-- Alice reads the note and decides if she wants to do the suggestion action.
+# Remerciements
 
-# Acknowledgement
-
-We thank Herbert Van de Sompel, [DANS + Ghent University](https://dans.knaw.nl/nl/), hvdsomp@gmail.com
-for the valuable input during this project.
+Nous remercions Herbert Van de Sompel, [DANS + Ghent University](https://dans.knaw.nl/nl/), hvdsomp@gmail.com
+pour sa précieuse contribution pendant ce projet.

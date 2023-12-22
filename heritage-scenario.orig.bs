@@ -1,0 +1,171 @@
+<pre class='metadata'>
+Title: Demo scenario ErfgoedPod
+Shortname: demo
+Level: 1
+Status: DREAM 
+URL: https://mellonscholarlycommunication.github.io/spec-usecases/heritage-scenario.html
+Editor: Miel Vander Sande, [meemoo](https://meemoo.be), miel.vandersande@meemoo.be
+Abstract: This document describes the scenario for the first ErfgoedPod demo. 
+Markup Shorthands: markdown yes
+</pre>
+
+Introduction {#intro}
+=====================
+
+The goal of the ErfgoedPod demo is to illustrate the components and architecture of the decentralized artefact exchange network 
+in combination with the
+the collection registration system [Solid CRS](https://www.youtube.com/watch?v=XJgl8EcQqf8), developed by Digita for the "Solid for small heritage institutions" project.
+
+Scenario {#scenario}
+=====================
+
+## Pre-conditions
+
+### Maintainers
+
+<dfn>Bob</dfn>: collection maintainer at a cultural heritage institution
+
+- [=Bob=] has a WebID
+- [=Bob=] has the URI of his [=Institution's Pod=]
+
+### Solid Pods
+
+<dfn>Institution's Pod</dfn>: data pod containing all digital heritage files of [=Bob=]'s institution
+ - contains an inbox for [=Bob=]
+
+### Orchestrators
+
+<dfn>Institution's Orchestrator</dfn>: takes care of the communication (sending notifications) on behalf of [=Bob=].
+ - it has an personal inbox as API (eg. to control the Orchestrator)
+ - it knows the location of [=Institution's Pod=] and its inbox
+
+
+### Solid Apps
+
+<dfn>Solid CRS</dfn>: collection management system for small digital heritage organizations
+ - hosted at [https://solid-crs.netwerkdigitaalerfgoed.nl/](https://solid-crs.netwerkdigitaalerfgoed.nl/)
+ - creates and manages the artefacts (collections of digital heritage objects) in the [=Institution's Pod=]
+
+<dfn>Demo Dashboard</dfn>: demo frontend to illustrate communication between different pods and services
+ - demo hosted at [http://bellow2.ugent.be/public/](http://bellow2.ugent.be/public/)
+ - create, send and receive notifications
+ - illustrate the network toplogy and the performed interactions between actors
+ - introspect the event logs of artefacts (what happened when)
+
+
+### Service hubs
+
+<dfn>Registry Service Hub</dfn>
+- wrapper service for the NDE [Dataset Registry](https://datasetregister.netwerkdigitaalerfgoed.nl/apidoc.php)
+
+<dfn>Archival Service Hub</dfn>
+- wrapper service for the meemoo UGent GREB archive or a stub
+
+
+## Part 1: artefact creation ## {#part1}
+
+<img width="900px" src="images/heritage/bob-creates-heritage-artefact.svg"/>
+
+1. [=Bob=] logs into [=Solid CRS=] with his Web ID
+    - [=Bob=] chooses the [=Institution's Pod=]
+2. [=Bob=] creates a new Collection "Utrecht WOII" about Utrecht in WOII.
+3. He adds an object with the following metadata
+    - image: [https://images.memorix.nl/niod/thumb/1000x1000/9236648b-6507-e27b-f3fa-68a5227efc18.jpg](https://images.memorix.nl/niod/thumb/1000x1000/9236648b-6507-e27b-f3fa-68a5227efc18.jpg)
+    - license: unknown
+    - object number: 74541
+    - type: [Bevrijding Utrecht](https://data.niod.nl/WO2_Thesaurus/events/9314)
+    - title: "Bevrijding Utrecht."
+    - description: "Bevrijding Utrecht. Overweg Burgemeester Reigerstraat."
+    - collection: "Nieuwe collectie"
+    - Location: [Utrecht](http://www.wikidata.org/entity/Q39297398)
+    - Date: 1945-05-07
+4. This results in a new artefact [https://pod.inrupt.com/mvs/heritage-collections/catalog#collection-d241c975-42fa-41ab-9ff9-3918ee22085a](https://pod.inrupt.com/mvs/heritage-collections/catalog#collection-d241c975-42fa-41ab-9ff9-3918ee22085a) of type `schema:Dataset`: 
+
+```
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix collections: <https://pod.inrupt.com/mvs/heritage-collections/catalog#> . 
+@prefix objects: <https://pod.inrupt.com/mvs/heritage-objects/> .
+
+collections:collection-d241c975-42fa-41ab-9ff9-3918ee22085a
+        schema:name  "Utrecht WOII"@nl ;
+        schema:description  "Utrecht in WOII"@nl ;
+        schema:distribution  collections:distribution-16008f15-9f8e-4acc-9e9a-f60f53e1a8a2 ;
+        rdf:type             schema:Dataset .
+
+collections:distribution-d92aeb56-5f23-44ca-afd9-ec46ed0c6ee3
+        rdf:type                        schema:DataDownload ;
+        schema:contentUrl  objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb .
+
+objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a
+        schema:height      objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-height ;
+        schema:isPartOf    collections:collection-d241c975-42fa-41ab-9ff9-3918ee22085a ;
+        schema:weight      objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-weight ;
+        schema:locationCreated  <http://www.wikidata.org/entity/Q39297398> ;
+        schema:dateCreated  "1945-05-07" ;
+        schema:name        "Bevrijding Utrecht."@nl ;
+        schema:description  "Bevrijding Utrecht. Overweg Burgemeester Reigerstraat."@nl ;
+        rdf:type                        schema:CreativeWork ;
+        schema:mainEntityOfPage  objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-digital ;
+        schema:additionalType  <https://data.niod.nl/WO2_Thesaurus/events/9314> ;
+        schema:depth       objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-depth ;
+        schema:identifier  "1" ;
+        schema:width       objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-width .
+```
+
+5. [=Solid CRS=] stores the artefact in the [=Institution's Pod=].
+6. The new artefact triggers an `as:Create` activity about the artefact. 
+7. A [[ldn|Linked Data Notification]] containing the activity is posted to [=Institution's Pod=]'s inbox.
+
+## Part 2: requesting services ## {#part2}
+
+<img width="900px" src="images/heritage/bob-requests-service.svg"/>
+
+### Invoking the registration service
+
+1. [=Bob=] turns to the [=demo dashboard=] of the artefact exchange network and logs in with his WebID.
+2. The [=demo dashboard=] connects the [=Institution's Pod=] for the first time
+3. The [=demo dashboard=] prepares the [=Institution's Pod=] for network participation by creating an event log resource. This log tracks all lifecycle events of an artefact.
+4. [=Bob=] can view the artefact + inbox and event log
+5. [=Bob=] enters the inbox URI of the [=Institution's Orchestrator=] in the [=demo dashboard=]
+6. The [=demo dashboard=] connects to the [=Institution's Orchestrator=] by informing it about the [=Institution's Pod=]'s inbox.
+7. The [=Institution's Orchestrator=] reads the `as:Create` activity from the [=Institution's Pod=]'s inbox 
+    - appends the creation event to the event log
+8. The [=Institution's Orchestrator=] suggests to [=Bob=] that he should offer the artefact metadata to the [=Registry Service Hub=].
+9. [=Bob=] sees the suggestions in the [=demo dashboard=] and decides to follow through.
+
+10. In the [=demo dashboard=], [=Bob=] selects the object from [[#part1]] as artefact.
+11. [=Bob=] selects the [=Registry Service Hub=] as target from the list.
+12. [=Bob=] initializes the offer.
+13. [=demo dashboard=] creates a new notification with an `as:Offer` 
+    - adds a short note
+14. The [=Institution's Orchestrator=] forwards the notification to the [=Registry Service Hub=].
+15. The [=Registry Service Hub=] receives the notification
+    - posts the metadata to the [Dataset Registry API](https://datasetregister.netwerkdigitaalerfgoed.nl/api/)
+16. The [=Registry Service Hub=] sends a notification with `as:Announce` to the [=Institution's Pod=]'s inbox.
+17. The [=Institution's Orchestrator=] reads the `as:Announce` activity from the inbox.
+18. [=Institution's Orchestrator=] appends the registration event (ie. the `as:Announce`) to the event log in the [=Institution's Pod=].
+19. [=Bob=] sees in the event log with the [=demo dashboard=] that the registration is complete
+
+
+### Invoking the archival service
+
+21. [=Bob=] turns to the [=demo dashboard=] of the artefact exchange network.
+     - [=Institution's Orchestrator=] suggests to Bob that he should offer the image artefact with metadata to the [=Archival Service Hub=].
+22. [=Bob=] sees the suggestions in the [=demo dashboard=] and decides to follow through.
+23. In the [=demo dashboard=], [=Bob=] selects the [=Archival Service Hub=] as target from the list
+24. [=Bob=] initializes the offer.
+25. [=demo dashboard=] creates a new notification with an `as:Offer` activity 
+- Add a short note
+26. The [=Institution's Orchestrator=] forwards the notification to the [=Archival Service Hub=].
+27. The [=Archival Service Hub=] receives the notification
+    - downloads the artefact
+    - wraps the image artefact in a bagit and adds it to meemoo's SFTP
+28. The meemoo archival process starts.
+29. The [=Archival Service Hub=] polls meemoo's Mediahaven API for `ARCHIVED_ON_DISK` premis event
+30. When found, it sends a notification with `as:Announce` to the [=Institution's Pod=]'s inbox.
+31. The [=Institution's Orchestrator=] reads the `as:Announce` activity from the inbox.
+32. [=Institution's Orchestrator=] appends the archival event (ie. the `as:Announce`) to the event log in the [=Institution's Pod=].
+33. [=Bob=] sees in the event log with the [=demo dashboard=] that the registration is complete
+
+Issue(1): how to get to aggregation of artefacts

@@ -1,5 +1,5 @@
 <pre class='metadata'>
-Title: Demo scenario ErfgoedPod
+Title: Scénario de démo ErfgoedPod
 Shortname: demo
 Level: 1
 Status: DREAM 
@@ -12,74 +12,69 @@ Markup Shorthands: markdown yes
 Introduction {#intro}
 =====================
 
-The goal of the ErfgoedPod demo is to illustrate the components and architecture of the decentralized artefact exchange network 
-in combination with the
-the collection registration system [Solid CRS](https://www.youtube.com/watch?v=XJgl8EcQqf8), developed by Digita for the "Solid for small heritage institutions" project.
+L'objectif de la démonstration ErfgoedPod est d'illustrer les composants et l'architecture du réseau d'échange d'artefacts décentralisé, en combinaison avec le système d'enregistrement de collection [Solid CRS](https://www.youtube.com/watch?v=XJgl8EcQqf8), développé par Digita pour le projet "Solid for small heritage institutions".
 
-Scenario {#scenario}
+Scénario {#scenario}
 =====================
 
-## Pre-conditions
+## Pré-conditions
 
-### Maintainers
+### Mainteneurs
 
-<dfn>Bob</dfn>: collection maintainer at a cultural heritage institution
+<dfn>Bob</dfn> : responsable de collection dans une institution du patrimoine culturel
 
-- [=Bob=] has a WebID
-- [=Bob=] has the URI of his [=Institution's Pod=]
+- [=Bob=] a un WebID
+- [=Bob=] a l'URI de son [=Pod d'institution=]
 
-### Solid Pods
+### Pods Solid
 
-<dfn>Institution's Pod</dfn>: data pod containing all digital heritage files of [=Bob=]'s institution
- - contains an inbox for [=Bob=]
+<dfn>Pod d'institution</dfn> : pod de données contenant tous les fichiers du patrimoine numérique de l'institution de [=Bob=]
+ - contient une boîte de réception pour [=Bob=]
 
-### Orchestrators
+### Orchestrateurs
 
-<dfn>Institution's Orchestrator</dfn>: takes care of the communication (sending notifications) on behalf of [=Bob=].
- - it has an personal inbox as API (eg. to control the Orchestrator)
- - it knows the location of [=Institution's Pod=] and its inbox
+<dfn>Orchestrateur d'institution</dfn> : s'occupe de la communication (envoi de notifications) au nom de [=Bob=].
+ - il a une boîte de réception personnelle en tant qu'API (par ex. pour contrôler l'orchestrateur)
+ - il connaît l'emplacement du [=Pod d'institution=] et de sa boîte de réception
 
+### Applications Solid
 
-### Solid Apps
-
-<dfn>Solid CRS</dfn>: collection management system for small digital heritage organizations
- - hosted at [https://solid-crs.netwerkdigitaalerfgoed.nl/](https://solid-crs.netwerkdigitaalerfgoed.nl/)
- - creates and manages the artefacts (collections of digital heritage objects) in the [=Institution's Pod=]
-
-<dfn>Demo Dashboard</dfn>: demo frontend to illustrate communication between different pods and services
- - demo hosted at [http://bellow2.ugent.be/public/](http://bellow2.ugent.be/public/)
- - create, send and receive notifications
- - illustrate the network toplogy and the performed interactions between actors
- - introspect the event logs of artefacts (what happened when)
+<dfn>Solid CRS</dfn> : système de gestion de collection pour les petites organisations de patrimoine numérique
+ - hébergé sur [https://solid-crs.netwerkdigitaalerfgoed.nl/](https://solid-crs.netwerkdigitaalerfgoed.nl/)
+ - crée et gère les artefacts (collections d'objets du patrimoine numérique) dans le [=Pod d'institution=] <dfn>Panneau de démonstration</dfn>: interface de démonstration pour illustrer la communication entre différents pods et services
+ - démonstration hébergée à [http://bellow2.ugent.be/public/](http://bellow2.ugent.be/public/)
+ - création, envoi et réception de notifications
+ - illustration de la topologie du réseau et des interactions effectuées entre les acteurs
+ - inspection des journaux d'événements des artefacts (ce qui s'est passé quand)
 
 
-### Service hubs
+### Concentrateurs de services
 
-<dfn>Registry Service Hub</dfn>
-- wrapper service for the NDE [Dataset Registry](https://datasetregister.netwerkdigitaalerfgoed.nl/apidoc.php)
+<dfn>Concentrateur de service de registre</dfn>
+- service enveloppe pour le Registre de données NDE [Dataset Registry](https://datasetregister.netwerkdigitaalerfgoed.nl/apidoc.php)
 
-<dfn>Archival Service Hub</dfn>
-- wrapper service for the meemoo UGent GREB archive or a stub
+<dfn>Concentrateur de service d'archivage</dfn>
+- service enveloppe pour les archives meemoo UGent GREB ou un gabarit
 
 
-## Part 1: artefact creation ## {#part1}
+## Partie 1: création d'artefact ## {#part1}
 
 <img width="900px" src="images/heritage/bob-creates-heritage-artefact.svg"/>
 
-1. [=Bob=] logs into [=Solid CRS=] with his Web ID
-    - [=Bob=] chooses the [=Institution's Pod=]
-2. [=Bob=] creates a new Collection "Utrecht WOII" about Utrecht in WOII.
-3. He adds an object with the following metadata
+1. [=Bob=] se connecte à [=Solid CRS=] avec son Web ID
+    - [=Bob=] choisit le [=Pod de l'Institution=]
+2. [=Bob=] crée une nouvelle collection "Utrecht WOII" sur Utrecht pendant la Seconde Guerre mondiale.
+3. Il ajoute un objet avec les métadonnées suivantes
     - image: [https://images.memorix.nl/niod/thumb/1000x1000/9236648b-6507-e27b-f3fa-68a5227efc18.jpg](https://images.memorix.nl/niod/thumb/1000x1000/9236648b-6507-e27b-f3fa-68a5227efc18.jpg)
-    - license: unknown
-    - object number: 74541
+    - licence: inconnue
+    - numéro d'objet: 74541
     - type: [Bevrijding Utrecht](https://data.niod.nl/WO2_Thesaurus/events/9314)
-    - title: "Bevrijding Utrecht."
+    - titre: "Bevrijding Utrecht."
     - description: "Bevrijding Utrecht. Overweg Burgemeester Reigerstraat."
-    - collection: "Nieuwe collectie"
-    - Location: [Utrecht](http://www.wikidata.org/entity/Q39297398)
+    - collection: "Nouvelle collection"
+    - Lieu: [Utrecht](http://www.wikidata.org/entity/Q39297398)
     - Date: 1945-05-07
-4. This results in a new artefact [https://pod.inrupt.com/mvs/heritage-collections/catalog#collection-d241c975-42fa-41ab-9ff9-3918ee22085a](https://pod.inrupt.com/mvs/heritage-collections/catalog#collection-d241c975-42fa-41ab-9ff9-3918ee22085a) of type `schema:Dataset`: 
+4. Cela donne lieu à un nouvel artefact [https://pod.inrupt.com/mvs/heritage-collections/catalog#collection-d241c975-42fa-41ab-9ff9-3918ee22085a (https://pod.inrupt.com/mvs/heritage-collections/catalog#collection-d241c975-42fa-41ab-9ff9-3918ee22085a) de type `schema:Dataset`:
 
 ```
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -113,59 +108,55 @@ objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f
         schema:width       objects:data-bbc0118e-7ba8-47ab-a532-fae62e2281fb#object-214e970e-48f2-48a1-a90f-add11f31a64a-width .
 ```
 
-5. [=Solid CRS=] stores the artefact in the [=Institution's Pod=].
-6. The new artefact triggers an `as:Create` activity about the artefact. 
-7. A [[ldn|Linked Data Notification]] containing the activity is posted to [=Institution's Pod=]'s inbox.
+5. [=Solid CRS=] stocke l'artefact dans le [=Pod de l'Institution=].
+6. Le nouvel artefact déclenche une activité `as:Create` concernant l'artefact.
+7. Une [[ldn|Linked Data Notification]] contenant l'activité est postée dans la boîte de réception du [=Pod de l'Institution=].
 
-## Part 2: requesting services ## {#part2}
+## Partie 2 : demande de services ## {#part2}
 
 <img width="900px" src="images/heritage/bob-requests-service.svg"/>
 
-### Invoking the registration service
+### Invocation du service d'enregistrement
 
-1. [=Bob=] turns to the [=demo dashboard=] of the artefact exchange network and logs in with his WebID.
-2. The [=demo dashboard=] connects the [=Institution's Pod=] for the first time
-3. The [=demo dashboard=] prepares the [=Institution's Pod=] for network participation by creating an event log resource. This log tracks all lifecycle events of an artefact.
-4. [=Bob=] can view the artefact + inbox and event log
-5. [=Bob=] enters the inbox URI of the [=Institution's Orchestrator=] in the [=demo dashboard=]
-6. The [=demo dashboard=] connects to the [=Institution's Orchestrator=] by informing it about the [=Institution's Pod=]'s inbox.
-7. The [=Institution's Orchestrator=] reads the `as:Create` activity from the [=Institution's Pod=]'s inbox 
-    - appends the creation event to the event log
-8. The [=Institution's Orchestrator=] suggests to [=Bob=] that he should offer the artefact metadata to the [=Registry Service Hub=].
-9. [=Bob=] sees the suggestions in the [=demo dashboard=] and decides to follow through.
-
-10. In the [=demo dashboard=], [=Bob=] selects the object from [[#part1]] as artefact.
-11. [=Bob=] selects the [=Registry Service Hub=] as target from the list.
-12. [=Bob=] initializes the offer.
-13. [=demo dashboard=] creates a new notification with an `as:Offer` 
-    - adds a short note
-14. The [=Institution's Orchestrator=] forwards the notification to the [=Registry Service Hub=].
-15. The [=Registry Service Hub=] receives the notification
-    - posts the metadata to the [Dataset Registry API](https://datasetregister.netwerkdigitaalerfgoed.nl/api/)
-16. The [=Registry Service Hub=] sends a notification with `as:Announce` to the [=Institution's Pod=]'s inbox.
-17. The [=Institution's Orchestrator=] reads the `as:Announce` activity from the inbox.
-18. [=Institution's Orchestrator=] appends the registration event (ie. the `as:Announce`) to the event log in the [=Institution's Pod=].
-19. [=Bob=] sees in the event log with the [=demo dashboard=] that the registration is complete
+1. [=Bob=] se tourne vers le [=tableau de bord de démonstration=] du réseau d'échange d'artefacts et se connecte avec son WebID.
+2. Le [=tableau de bord de démonstration=] connecte le [=Pod de l'Institution=] pour la première fois.
+3. Le [=tableau de bord de démonstration=] prépare le [=Pod de l'Institution=] à participer au réseau en créant une ressource de journal d'événements. Ce journal trace tous les événements du cycle de vie d'un artefact.
+4. [=Bob=] peut voir l'artefact dans la boîte de réception et le journal d'événements.
+5. [=Bob=] entre l'URI de la boîte de réception de l'[=Orchestrator de l'Institution=] dans le [=tableau de bord de démonstration=].
+6. Le [=tableau de bord de démonstration=] se connecte à l'[=Orchestrator de l'Institution=] en l'informant de la boîte de réception du [=Pod de l'Institution=].
+7. L'[=Orchestrator de l'Institution=] lit l'activité `as:Create` dans la boîte de réception du [=Pod de l'Institution=]
+    - ajoute l'événement de création au journal d'événements
+8. L'[=Orchestrator de l'Institution=] suggère à [=Bob=] qu'il devrait proposer les métadonnées de l'artefact au [=Hub de Services du Registre=].
+9. [=Bob=] voit les suggestions dans le [=tableau de bord de démonstration=] et décide de les suivre.10. Dans le tableau de démonstration, Bob sélectionne l'objet de la partie 1 en tant qu'artefact.
+11. Bob sélectionne le Hub de Service de Registre dans la liste comme cible.
+12. Bob initialise l'offre.
+13. Le tableau de démonstration crée une nouvelle notification avec un `as:Offer`
+    - ajoute une note courte
+14. L'Orchestrateur de l'Institution transfère la notification au Hub de Service de Registre.
+15. Le Hub de Service de Registre reçoit la notification
+    - publie les métadonnées sur l'API du Registre de Jeu de Données (https://datasetregister.netwerkdigitaalerfgoed.nl/api/)
+16. Le Hub de Service de Registre envoie une notification avec `as:Announce` dans la boîte de réception du Pod de l'Institution.
+17. L'Orchestrateur de l'Institution lit l'activité `as:Announce` dans la boîte de réception.
+18. L'Orchestrateur de l'Institution ajoute l'événement d'enregistrement (c.-à-d. le `as:Announce`) au journal d'événements dans le Pod de l'Institution.
+19. Bob voit dans le journal d'événements avec le tableau de démonstration que l'enregistrement est complet.
 
 
-### Invoking the archival service
+### Invocation du service d'archivage21. [=Bob=] se tourne vers le tableau de bord de démonstration du réseau d'échange d'artefacts.
+     - L'[=Orchestrator de l'Institution=] suggère à Bob qu'il devrait offrir l'artefact d'image avec les métadonnées au [=Hub de Service d'Archivage=].
+22. [=Bob=] voit les suggestions dans le tableau de bord de démonstration et décide de les suivre.
+23. Dans le tableau de bord de démonstration, [=Bob=] sélectionne le [=Hub de Service d'Archivage=] comme cible dans la liste.
+24. [=Bob=] initialise l'offre.
+25. Le tableau de bord de démonstration crée une nouvelle notification avec une activité `as:Offer`
+	- Ajouter une brève note
+26. L'[=Orchestrator de l'Institution=] transmet la notification au [=Hub de Service d'Archivage=].
+27. Le [=Hub de Service d'Archivage=] reçoit la notification
+	- télécharge l'artefact
+	- emballe l'artefact d'image dans un "bagit" et l'ajoute au SFTP de meemoo.
+28. Le processus d'archivage de meemoo démarre.
+29. Le [=Hub de Service d'Archivage=] interroge l'API Mediahaven de meemoo pour l'événement premis `ARCHIVED_ON_DISK`.
+30. Lorsqu'il est trouvé, il envoie une notification avec `as:Announce` dans la boîte de réception du [=Pod de l'Institution=].
+31. L'[=Orchestrator de l'Institution=] lit l'activité `as:Announce` dans la boîte de réception.
+32. L'[=Orchestrator de l'Institution=] ajoute l'événement d'archivage (c'est-à-dire le `as:Announce`) au journal des événements dans le [=Pod de l'Institution=].
+33. [=Bob=] voit dans le journal des événements avec le tableau de bord de démonstration que l'enregistrement est complet
 
-21. [=Bob=] turns to the [=demo dashboard=] of the artefact exchange network.
-     - [=Institution's Orchestrator=] suggests to Bob that he should offer the image artefact with metadata to the [=Archival Service Hub=].
-22. [=Bob=] sees the suggestions in the [=demo dashboard=] and decides to follow through.
-23. In the [=demo dashboard=], [=Bob=] selects the [=Archival Service Hub=] as target from the list
-24. [=Bob=] initializes the offer.
-25. [=demo dashboard=] creates a new notification with an `as:Offer` activity 
-- Add a short note
-26. The [=Institution's Orchestrator=] forwards the notification to the [=Archival Service Hub=].
-27. The [=Archival Service Hub=] receives the notification
-    - downloads the artefact
-    - wraps the image artefact in a bagit and adds it to meemoo's SFTP
-28. The meemoo archival process starts.
-29. The [=Archival Service Hub=] polls meemoo's Mediahaven API for `ARCHIVED_ON_DISK` premis event
-30. When found, it sends a notification with `as:Announce` to the [=Institution's Pod=]'s inbox.
-31. The [=Institution's Orchestrator=] reads the `as:Announce` activity from the inbox.
-32. [=Institution's Orchestrator=] appends the archival event (ie. the `as:Announce`) to the event log in the [=Institution's Pod=].
-33. [=Bob=] sees in the event log with the [=demo dashboard=] that the registration is complete
-
-Issue(1): how to get to aggregation of artefacts
+Problème (1) : comment parvenir à l'agrégation des artefacts
